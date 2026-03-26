@@ -1,0 +1,2 @@
+# Redirect www to apex
+https://www.oparc.in/* https://oparc.in/:splat 301
