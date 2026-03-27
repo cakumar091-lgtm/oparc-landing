@@ -15,18 +15,58 @@ window.addEventListener('scroll', function () {
   document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 10);
 });
 
-// Simple form submission feedback (works with Formspree or similar)
+// Contact form — submits to backend API
+var API_BASE = 'https://procuretrail.oparc.in/api/v1';
 var form = document.querySelector('.contact-form');
 if (form) {
   form.addEventListener('submit', function (e) {
-    var action = form.getAttribute('action');
-    // If Formspree not configured, prevent submit and show message
-    if (!action || action.includes('FORM_ID')) {
-      e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Please email kiren@oparc.in';
-      btn.disabled = true;
-      btn.style.opacity = '0.7';
-    }
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    var payload = {
+      name: form.querySelector('#name').value.trim(),
+      email: form.querySelector('#email').value.trim(),
+      organization: form.querySelector('#org').value.trim(),
+      message: form.querySelector('#message').value.trim()
+    };
+
+    fetch(API_BASE + '/public/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function (res) {
+      if (!res.ok) {
+        return res.json().then(function (err) {
+          throw new Error(err.detail || 'Something went wrong. Please try again.');
+        });
+      }
+      return res.json();
+    })
+    .then(function (data) {
+      // Show success message
+      form.innerHTML = '<div class="form-success">' +
+        '<h3>Check Your Email</h3>' +
+        '<p>We\'ve sent a confirmation link to <strong>' + payload.email + '</strong>. ' +
+        'Click the link to confirm your inquiry and we\'ll get back to you shortly.</p>' +
+        '</div>';
+    })
+    .catch(function (err) {
+      btn.textContent = originalText;
+      btn.disabled = false;
+      // Show error below button
+      var existing = form.querySelector('.form-error');
+      if (existing) existing.remove();
+      var errDiv = document.createElement('p');
+      errDiv.className = 'form-error';
+      errDiv.style.color = '#e74c3c';
+      errDiv.style.marginTop = '12px';
+      errDiv.style.fontSize = '14px';
+      errDiv.textContent = err.message;
+      btn.parentNode.appendChild(errDiv);
+    });
   });
 }
