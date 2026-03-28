@@ -1,0 +1,16 @@
+name: Sync iPad Repo
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  trigger-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger iPad repo sync
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.IPAD_SYNC_PAT }}
+          repository: cakumar091-lgtm/ipad-project1
+          event-type: source-updated
