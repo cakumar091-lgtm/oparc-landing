@@ -30,6 +30,7 @@ if (form) {
       name: form.querySelector('#name').value.trim(),
       email: form.querySelector('#email').value.trim(),
       organization: form.querySelector('#org').value.trim(),
+      phone: form.querySelector('#phone').value.trim(),
       inquiry_type: form.querySelector('#inquiry_type').value,
       message: form.querySelector('#message').value.trim()
     };
