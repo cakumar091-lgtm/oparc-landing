@@ -622,6 +622,14 @@ a:hover { color: var(--primary); }
   box-shadow: 0 0 0 3px rgba(201,162,39,.15);
 }
 .form-group textarea { resize: vertical; }
+.form-consent label {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.813rem; line-height: 1.6; color: var(--text-muted); cursor: pointer;
+}
+.form-consent input[type="checkbox"] {
+  margin-top: 4px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--primary);
+}
+.form-consent a { color: var(--primary); text-decoration: underline; }
 
 .form-success {
   text-align: center;
