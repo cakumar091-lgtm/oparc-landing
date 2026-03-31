@@ -47,6 +47,8 @@ if (form) {
       return res.json();
     })
     .then(function (data) {
+      // GA4: track contact form submission
+      if (window.gtag) gtag('event', 'contact_form_submit');
       // Show success message
       form.innerHTML = '<div class="form-success">' +
         '<h3>Check Your Email</h3>' +
@@ -70,3 +72,15 @@ if (form) {
     });
   });
 }
+
+// GA4 event tracking — CTA clicks
+document.querySelectorAll('a[href="#contact"]').forEach(function (el) {
+  el.addEventListener('click', function () {
+    if (window.gtag) gtag('event', 'cta_click_contact');
+  });
+});
+document.querySelectorAll('a[href*="procuretrail.oparc.in"]').forEach(function (el) {
+  el.addEventListener('click', function () {
+    if (window.gtag) gtag('event', 'cta_click_signup');
+  });
+});
