@@ -30,6 +30,7 @@ if (form) {
       name: form.querySelector('#name').value.trim(),
       email: form.querySelector('#email').value.trim(),
       organization: form.querySelector('#org').value.trim(),
+      inquiry_type: form.querySelector('#inquiry_type').value,
       message: form.querySelector('#message').value.trim()
     };
 
@@ -47,8 +48,8 @@ if (form) {
       return res.json();
     })
     .then(function (data) {
-      // GA4: track contact form submission
-      if (window.gtag) gtag('event', 'contact_form_submit');
+      // GA4: track contact form submission with inquiry type
+      if (window.gtag) gtag('event', 'contact_form_submit', { inquiry_type: payload.inquiry_type });
       // Show success message
       form.innerHTML = '<div class="form-success">' +
         '<h3>Check Your Email</h3>' +
