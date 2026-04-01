@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurement Governance — PR, PO, GRN Approval Workflows | Oparc</title>
+  <meta name="description" content="Structured procurement workflow from purchase requisition through purchase order to goods receipt. Multi-level approvals, invoice matching, GST compliance, and complete audit trail.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/procurement.html">Procurement</a>
+        <a href="/asset-management.html">Assets</a>
+        <a href="/tally-integration.html">Tally</a>
+        <a href="/vendor-management.html">Vendors</a>
+        <a href="/compliance.html">Compliance</a>
+        <a href="/reports.html">Reports</a>
+        <a href="/how-it-works.html">How We Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Procurement <span class="highlight">Governance</span></h1>
+        <p class="hero-sub">Requisition to Receipt</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Email and paper-based approvals leave no structured audit trail. Auditors cannot verify who approved what, when, or against which authority limit.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Duplicate purchase orders against the same requisition go undetected, leading to over-procurement and wasted budget.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Invoice mismatches between PO, GRN, and vendor invoice are discovered after payment — when recovery is difficult.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How We Address This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <h3>Purchase Requisitions</h3>
+          <p>8 PR types including procurement, expense, debit note, write-off, scrap, disposal, movement, and consumption. Multi-line support with a Field Rules Engine that enforces which fields are required, optional, or locked per PR type. Negative PR types inherit asset metadata automatically. Self-approval prevention is enforced at the system level.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <h3>Approval Matrix</h3>
+          <p>Routes requisitions by department, category, amount band, location, and other dimensions. Multi-level approval chains with date-window enforcement. The routing snapshot is frozen at the time of submission — subsequent matrix changes do not alter existing workflows.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>Purchase Orders</h3>
+          <p>Created from approved PR lines with a double-PO guard that prevents the same requisition line from being claimed by multiple orders. TDS per line, PDF generation, and a bypass-PO mode for direct procurement scenarios.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          </div>
+          <h3>Goods Receipt</h3>
+          <p>Three-bucket equation tracks ordered, received, and pending quantities. Supports PIECEMEAL, SINGLE, and TOGETHER delivery modes. Three-way invoice matching validates quantity, price, and GST against the purchase order before posting.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h3>Service Acceptance</h3>
+          <p>For expense-type purchase orders, service acceptance replaces physical goods receipt. Supports partial quantity acceptance with auto-close of PO and PR lines on final posting.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          </div>
+          <h3>Mismatch Resolution</h3>
+          <p>Invoice discrepancies within configurable tolerance are auto-accepted. Mismatches above tolerance require manual resolution — accept, adjust, or dispute. Posting is blocked until every mismatch is resolved.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Controls -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Additional Controls</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Gate Entry</h3>
+          <p>Security-role restricted gate entry with QC inspection fields. Gate entry records feed directly into the GRN workflow, ensuring physical receipt is documented before goods are accepted.</p>
+        </div>
+        <div class="why-item">
+          <h3>Vendor Debit Notes</h3>
+          <p>Four types — rejection, under-received, damage, and price excess. Each generates a GST-compliant PDF and posts the corresponding accounting entry to Tally.</p>
+        </div>
+        <div class="why-item">
+          <h3>Asset Movement</h3>
+          <p>MOVEMENT requisitions use a two-phase dual approval — source department approves the release, then the receiving department approves the acceptance. Destination asset is created automatically on posting.</p>
+        </div>
+        <div class="why-item">
+          <h3>Audit Trail</h3>
+          <p>Every status transition, approval action, and guard violation is logged with timestamp, user, and context. Full audit history is available as CSV export for statutory and internal auditors.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">8</div>
+          <div class="stat-label">PR types</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Routing dimensions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Delivery modes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">22</div>
+          <div class="stat-label">Accounting events</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your setup and we will evaluate how our services may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement.html">Procurement</a>
+          <a href="/asset-management.html">Asset Management</a>
+          <a href="/tally-integration.html">Tally Integration</a>
+          <a href="/vendor-management.html">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/compliance.html">Compliance</a>
+          <a href="/reports.html">Reports</a>
+          <a href="/how-it-works.html">How We Work</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var GA_ID = "G-LE8PMCPPYM";
+    var EU_COUNTRIES = new Set([
+      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR",
+      "DE","GR","HU","IE","IT","LV","LT","LU","MT","NL",
+      "PL","PT","RO","SK","SI","ES","SE",
+      "GB","IS","LI","NO"
+    ]);
+    function loadGA() {
+      if (document.getElementById("ga-script")) return;
+      var s = document.createElement("script");
+      s.id = "ga-script"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    function showBanner(isEU) {
+      var banner = document.getElementById("cookie-banner");
+      var text = document.getElementById("cookie-text");
+      var decline = document.getElementById("cookie-decline");
+      if (isEU) {
+        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
+        decline.style.display = "inline-block";
+      } else {
+        text.textContent = "We use analytics cookies to improve your experience.";
+      }
+      banner.style.display = "flex";
+      document.getElementById("cookie-accept").addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "accepted");
+        banner.style.display = "none";
+        loadGA();
+      });
+      decline.addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "declined");
+        banner.style.display = "none";
+      });
+    }
+    var consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") { loadGA(); return; }
+    if (consent === "declined") { return; }
+    fetch("/api/geo")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var isEU = EU_COUNTRIES.has(data.country);
+        if (!isEU) { loadGA(); }
+        showBanner(isEU);
+      })
+      .catch(function() { showBanner(true); });
+  })();
+  </script>
+</body>
+</html>

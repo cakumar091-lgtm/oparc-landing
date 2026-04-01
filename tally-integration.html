@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tally Integration for Asset Management & Procurement | Oparc</title>
+  <meta name="description" content="Automated Tally XML integration covering 22 accounting event types. Voucher generation for PR, PO, GRN, SA posting and reversal with GST/TDS handling and ledger reconciliation.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/procurement.html">Procurement</a>
+        <a href="/asset-management.html">Assets</a>
+        <a href="/tally-integration.html">Tally</a>
+        <a href="/vendor-management.html">Vendors</a>
+        <a href="/compliance.html">Compliance</a>
+        <a href="/reports.html">Reports</a>
+        <a href="/how-it-works.html">How We Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Tally Accounting<br><span class="highlight">Integration</span></h1>
+        <p class="hero-sub">Automated voucher generation for 22 event types — posting, reversal, vendor, and asset entries</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Manual journal entries for every procurement transaction consume accounting staff time and introduce transcription errors that compound over the financial year.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>The asset register and Tally's fixed asset ledger drift apart — different totals, missing entries, and no systematic way to reconcile without manual comparison.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Year-end reconciliation between operational records and books of account is painful, error-prone, and typically rushed under audit timelines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How We Address This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v16h16"/><path d="M4 14l4-4 4 4 4-4 4 4"/></svg>
+          </div>
+          <h3>Queue-Based Sync</h3>
+          <p>Every accounting event enters a processing queue with states: PENDING, PROCESSING, POSTED, FAILED, SKIPPED. Failed entries can be retried or regenerated. A dead letter queue captures persistent failures for manual review.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M12 12v4m0-4h.01"/></svg>
+          </div>
+          <h3>22 Event Types</h3>
+          <p>Covers PR posting and reversal, PO posting and reversal, GRN posting and reversal, SA posting and reversal, vendor approval, asset creation, VDN posting, and more. Each event type generates the correct Tally voucher structure.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/></svg>
+          </div>
+          <h3>Ledger Mapping</h3>
+          <p>10 mapping types connect system values to Tally ledger names. A setup wizard with fuzzy-match helps configure mappings. Missing ledgers are identified and can be auto-created in Tally during sync.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
+          </div>
+          <h3>GST & TDS</h3>
+          <p>Automatic CGST/SGST/IGST split based on vendor and organisation GSTIN. TDS deduction per PO line with section-wise rates. ITC eligibility toggle. Reverse charge flag where applicable. All reflected correctly in generated vouchers.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Pre-Process Validation</h3>
+          <p>Before sync, the system validates all entries against live Tally ledgers. Missing ledgers and unmapped values are reported with resolution steps — fix before sync, not after.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          </div>
+          <h3>Reconciliation</h3>
+          <p>Compare posted totals from the system against Tally actuals. Voucher counts, vendor ledger balances, and asset ledger balances are checked. Discrepancies are highlighted for investigation.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Operational Features -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Operational Features</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Incremental Sync</h3>
+          <p>Only processes new or changed documents since the last sync. No need to re-export the entire dataset. Reduces processing time and avoids duplicate entries.</p>
+        </div>
+        <div class="why-item">
+          <h3>Test Connection</h3>
+          <p>Validate Tally server connectivity before initiating a sync. Confirms the Tally instance is reachable and the target company exists.</p>
+        </div>
+        <div class="why-item">
+          <h3>Verified Through Audit</h3>
+          <p>The Tally integration module has been through 8 rounds of systematic audit with 197 automated tests covering all event types, edge cases, and error handling paths.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">22</div>
+          <div class="stat-label">Event types</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10</div>
+          <div class="stat-label">Mapping types</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">197</div>
+          <div class="stat-label">Automated tests</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Audit rounds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your setup and we will evaluate how our services may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement.html">Procurement</a>
+          <a href="/asset-management.html">Asset Management</a>
+          <a href="/tally-integration.html">Tally Integration</a>
+          <a href="/vendor-management.html">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/compliance.html">Compliance</a>
+          <a href="/reports.html">Reports</a>
+          <a href="/how-it-works.html">How We Work</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var GA_ID = "G-LE8PMCPPYM";
+    var EU_COUNTRIES = new Set([
+      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR",
+      "DE","GR","HU","IE","IT","LV","LT","LU","MT","NL",
+      "PL","PT","RO","SK","SI","ES","SE",
+      "GB","IS","LI","NO"
+    ]);
+    function loadGA() {
+      if (document.getElementById("ga-script")) return;
+      var s = document.createElement("script");
+      s.id = "ga-script"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    function showBanner(isEU) {
+      var banner = document.getElementById("cookie-banner");
+      var text = document.getElementById("cookie-text");
+      var decline = document.getElementById("cookie-decline");
+      if (isEU) {
+        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
+        decline.style.display = "inline-block";
+      } else {
+        text.textContent = "We use analytics cookies to improve your experience.";
+      }
+      banner.style.display = "flex";
+      document.getElementById("cookie-accept").addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "accepted");
+        banner.style.display = "none";
+        loadGA();
+      });
+      decline.addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "declined");
+        banner.style.display = "none";
+      });
+    }
+    var consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") { loadGA(); return; }
+    if (consent === "declined") { return; }
+    fetch("/api/geo")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var isEU = EU_COUNTRIES.has(data.country);
+        if (!isEU) { loadGA(); }
+        showBanner(isEU);
+      })
+      .catch(function() { showBanner(true); });
+  })();
+  </script>
+</body>
+</html>
