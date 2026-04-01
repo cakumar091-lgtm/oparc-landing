@@ -65,6 +65,65 @@
     </div>
   </section>
 
+  <!-- Data Migration -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Data Migration</h2>
+      <p class="section-sub">Institutions moving from spreadsheets or other systems can bring existing asset and vendor data into ProcureTrail through a structured bulk upload engine.</p>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          </div>
+          <h3>Bulk Asset Upload</h3>
+          <p>Upload up to 5,000 asset records per batch via CSV or XLSX. The system provides downloadable templates with all supported columns. Separate templates for new asset creation and updates to existing records.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <h3>Dry-Run Validation</h3>
+          <p>Every upload runs through a validation pass before writing to the database. Column detection, required field checks, classification matching, and data type validation — all reported per row. No records are created until validation passes.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01M5.07 19H19a2 2 0 001.75-2.75L13.75 4a2 2 0 00-3.5 0L3.32 16.25A2 2 0 005.07 19z"/></svg>
+          </div>
+          <h3>Row-Level Error Reporting</h3>
+          <p>Validation errors are returned per row with specific error codes and messages. Failed rows can be exported as a CSV, corrected, and re-uploaded — only the failed entries need to be reprocessed.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M3 14h18M12 3v18"/></svg>
+          </div>
+          <h3>Batch Tracking</h3>
+          <p>Every upload is recorded as a batch with metadata: upload timestamp, user, row counts (total, success, failed), and sheet type. Batches can be listed and inspected for audit purposes.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 2v6h6M21.5 22v-6h-6"/><path d="M22 11.5A10 10 0 003.2 7.2M2 12.5a10 10 0 0018.8 4.2"/></svg>
+          </div>
+          <h3>Batch Reversal</h3>
+          <p>If a bulk upload contains errors that passed validation, the entire batch can be reversed — removing all records created in that batch. Reversal is blocked if assets from the batch are already referenced by purchase requisitions, have child assets, or have been tagged.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </div>
+          <h3>Vendor Bulk Import</h3>
+          <p>Vendor records can also be imported via CSV or XLSX with the same validation and error reporting. Supports upsert logic — new vendors are created, existing vendors are updated based on matching criteria.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Your Data, Your Control -->
   <section class="why-us">
     <div class="container">
