@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Procurement Governance — PR, PO, GRN Approval Workflows | Oparc</title>
-  <meta name="description" content="Structured procurement workflow from purchase requisition through purchase order to goods receipt. Multi-level approvals, invoice matching, GST compliance, and complete audit trail.">
+  <title>Goods Receipt Note (GRN) Software — Gate Entry, 3-Way Matching | Oparc</title>
+  <meta name="description" content="Goods receipt with gate entry inspection, 3-bucket quantity tracking, multi-level approval, invoice mismatch detection, and automatic asset register creation on posting.">
+  <meta name="keywords" content="GRN software India, goods receipt note software, goods receipt management, GRN approval workflow, gate entry software, three way matching GRN">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
@@ -35,8 +36,8 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Procurement <span class="highlight">Governance</span></h1>
-        <p class="hero-sub">Requisition to Receipt</p>
+        <h1>Goods Receipt &amp; <span class="highlight">Gate Entry</span></h1>
+        <p class="hero-sub">From security gate to asset register — structured goods receipt with inspection, 3-bucket quantity tracking, multi-level approval, and automatic asset creation on posting.</p>
       </div>
     </div>
   </section>
@@ -48,15 +49,15 @@
       <div class="problems-grid">
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Email and paper-based approvals leave no structured audit trail. Auditors cannot verify who approved what, when, or against which authority limit.</p>
+          <p>Goods arrive at the gate and are accepted without inspection. Damaged items enter the store. Rejected quantities are not recorded. When the invoice arrives, there is no evidence of what was actually received.</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Duplicate purchase orders against the same requisition go undetected, leading to over-procurement and wasted budget.</p>
+          <p>GRN and gate entry are disconnected processes — often in different systems or spreadsheets. Quantities accepted at the gate don't match GRN records. Short receipts are discovered during audit, not at receipt.</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Invoice mismatches between PO, GRN, and vendor invoice are discovered after payment — when recovery is difficult.</p>
+          <p>Assets are created manually after goods receipt — often weeks later. The delay means the asset register is always behind reality. New assets miss tagging cycles and verification campaigns.</p>
         </div>
       </div>
     </div>
@@ -72,91 +73,50 @@
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
           </div>
-          <h3>Purchase Requisitions</h3>
-          <p>Requisitions for goods procurement, service expenses, and vendor debit notes — each with multi-line support and per-line approval. A Field Rules Engine enforces which fields are required, optional, or locked based on the type of request. Self-approval prevention is enforced at the system level. Asset dispositions (write-off, scrap, disposal, movement, consumption) use the same governed approval workflow — asset metadata is inherited automatically, so the approval chain verifies the action without manual data re-entry.</p>
+          <h3>Gate Entry Inspection</h3>
+          <p>Security records what arrives: challan number, vehicle, supplier, and per-line 3-bucket breakdown (accepted, rejected, damaged). Rejection and damage documented with reason and informed user. Optional — off by default.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+          </div>
+          <h3>3-Bucket Quantity Tracking</h3>
+          <p>Every receipt line tracks three quantities: accepted, rejected, and damaged. The equation must balance: received = accepted + rejected + damaged. Over-receipt is blocked — cumulative accepted cannot exceed ordered.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
           </div>
-          <h3>Approval Matrix</h3>
-          <p>Routes requisitions by department, category, amount band, location, and other dimensions. Multi-level approval chains with date-window enforcement. The routing snapshot is frozen at the time of submission — subsequent matrix changes do not alter existing workflows.</p>
+          <h3>Delivery Mode Enforcement</h3>
+          <p>Four modes control how goods are received: INDEPENDENT (any quantity, any time), PIECEMEAL (multiple partial GRNs), SINGLE (all-or-nothing), TOGETHER (all lines complete in one receipt). Set per PO.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
           </div>
-          <h3>Purchase Orders</h3>
-          <p>Created from approved PR lines with a double-PO guard that prevents the same requisition line from being claimed by multiple orders. TDS per line, PDF generation, and a bypass-PO mode for direct procurement scenarios.</p>
+          <h3>Multi-Level GRN Approval</h3>
+          <p>Snapshot-driven approval with level-by-level progression. Submitter cannot self-approve. The approval chain is frozen at submission and unaffected by later configuration changes.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
           </div>
-          <h3>Goods Receipt</h3>
-          <p>Three-bucket equation tracks ordered, received, and pending quantities. Supports PIECEMEAL, SINGLE, and TOGETHER delivery modes. Three-way invoice matching validates quantity, price, and GST against the purchase order before posting.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-          </div>
-          <h3>Service Acceptance</h3>
-          <p>For expense-type purchase orders, service acceptance replaces physical goods receipt. Supports partial quantity acceptance with auto-close of PO and PR lines on final posting.</p>
+          <h3>Automatic Asset Creation</h3>
+          <p>When a GRN is posted, asset register entries are created automatically with generated asset IDs, linked to the PO line, GRN line, and vendor. No manual asset creation step.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
           </div>
-          <h3>Mismatch Resolution</h3>
-          <p>Invoice discrepancies within configurable tolerance are auto-accepted. Mismatches above tolerance require manual resolution — accept, adjust, or dispute. Posting is blocked until every mismatch is resolved.</p>
+          <h3>Condition Tracking</h3>
+          <p>Per-line condition on receipt (Good, Partial, Damaged), rejection reason, damage remarks, material disposition, and informed user. Creates a complete receiving record for audit.</p>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- Optional Modules Note -->
-  <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <div class="container" style="text-align: center; max-width: 720px;">
-      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">You Don't Need All of This on Day One</h3>
-      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">The core workflow — requisition, approval, purchase order, goods receipt — works out of the box. Everything below is an optional toggle, off by default: gate entry, mismatch resolution, TDS tracking, Tally integration, HSN/SAC validation, bypass PO mode, and piecemeal delivery. Turn each on when your process requires it.</p>
-    </div>
-  </section>
-
-  <!-- Additional Controls -->
-  <section class="why-us">
-    <div class="container">
-      <h2 class="section-title">Additional Controls</h2>
-      <div class="why-grid">
-        <div class="why-item">
-          <h3>Gate Entry</h3>
-          <p>Security-role restricted gate entry with QC inspection fields. Gate entry records feed directly into the GRN workflow, ensuring physical receipt is documented before goods are accepted.</p>
-        </div>
-        <div class="why-item">
-          <h3>Vendor Debit Notes</h3>
-          <p>Four types — rejection, under-received, damage, and price excess. Each generates a GST-compliant PDF and posts the corresponding accounting entry to Tally.</p>
-        </div>
-        <div class="why-item">
-          <h3>Asset Movement & Disposition</h3>
-          <p>Transferring an asset between departments follows a two-phase approval — the source department approves the release, then the receiving department approves acceptance. The destination asset record is created automatically on posting. Write-offs, scrap, disposal, and consumption follow the same approval workflow, with asset metadata inherited from the register — no manual re-entry of classification, category, or financial details.</p>
-        </div>
-        <div class="why-item">
-          <h3>Audit Trail</h3>
-          <p>Every status transition, approval action, and guard violation is logged with timestamp, user, and context. Full audit history is available as CSV export for statutory and internal auditors.</p>
-        </div>
-        <div class="why-item">
-          <h3>Approval Notifications</h3>
-          <p>When a document reaches an approval level, assigned approvers are notified by email (with a direct link) and by in-app notification (badge refreshes every 60 seconds). When approved or rejected, the requester is notified with the approver's name and comment. Both channels are fire-and-forget — no approval is silently missed.</p>
-        </div>
-        <div class="why-item">
-          <h3>Purchase Order Documents</h3>
-          <p>PO PDFs generated on-the-fly with configurable sections per PO — toggle supplier address, line details, financial summary, and footer. Indian numbering format (lakhs/crores). When shared with a vendor, the event is logged with a snapshot of the active configuration. Full share history is retrievable per PO.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -167,19 +127,43 @@
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-number">3</div>
-          <div class="stat-label">Document types governed (PR, PO, GRN)</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Routing dimensions</div>
+          <div class="stat-label">Quantity buckets</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">4</div>
           <div class="stat-label">Delivery modes</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">22</div>
-          <div class="stat-label">Accounting events</div>
+          <div class="stat-number">0</div>
+          <div class="stat-label">Manual asset creation</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Gate-to-register traceability</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Compliance Mapping</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>Companies Act 2013</h3>
+          <p class="compliance-ref">Section 143(3)(i)</p>
+          <p>Internal controls over goods receipt. Gate entry with security inspection, multi-level GRN approval, and posting controls.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>CARO 2020</h3>
+          <p class="compliance-ref">Clause 3(i)</p>
+          <p>Asset register entries match actual receipt. GRN posting creates assets with verifiable quantities and values.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>GST Act</h3>
+          <p class="compliance-ref">Invoice Matching</p>
+          <p>Invoice matching at receipt. Quantity, price, and GST discrepancies detected before posting. Vendor debit notes generated with correct tax treatment.</p>
         </div>
       </div>
     </div>
@@ -189,7 +173,7 @@
   <section class="contact" style="padding: 64px 0;">
     <div class="container" style="text-align: center;">
       <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
-      <p class="section-sub">Share a brief overview of your setup and we will evaluate how our services may apply.</p>
+      <p class="section-sub">Share a brief overview of your goods receipt volumes and we will evaluate how structured gate entry and GRN controls may apply to your setup.</p>
       <div style="margin-top: 32px;">
         <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
       </div>

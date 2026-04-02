@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Procurement Governance — PR, PO, GRN Approval Workflows | Oparc</title>
-  <meta name="description" content="Structured procurement workflow from purchase requisition through purchase order to goods receipt. Multi-level approvals, invoice matching, GST compliance, and complete audit trail.">
+  <title>QR Asset Tagging & Physical Verification Campaigns | Oparc</title>
+  <meta name="description" content="Bulk QR tag generation, PWA mobile scanner, 3-tier scan resolution, physical verification campaigns with discrepancy tracking, and custodian self-declaration.">
+  <meta name="keywords" content="QR code asset tagging software, asset tagging software India, physical verification fixed assets, asset verification campaign software, asset audit software India, barcode asset tracking">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
@@ -35,8 +36,8 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Procurement <span class="highlight">Governance</span></h1>
-        <p class="hero-sub">Requisition to Receipt</p>
+        <h1>Asset Tagging &amp; <span class="highlight">Physical Verification</span></h1>
+        <p class="hero-sub">From bulk tag generation to structured verification campaigns — with QR scanning, 3-tier resolution, discrepancy investigation, and custodian self-declaration.</p>
       </div>
     </div>
   </section>
@@ -48,15 +49,15 @@
       <div class="problems-grid">
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Email and paper-based approvals leave no structured audit trail. Auditors cannot verify who approved what, when, or against which authority limit.</p>
+          <p>Asset tags are printed from Excel and manually stuck on items. There is no link between the tag and the asset register. When a tag falls off or becomes unreadable, the asset becomes unidentifiable.</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Duplicate purchase orders against the same requisition go undetected, leading to over-procurement and wasted budget.</p>
+          <p>Physical verification is done by walking through rooms with a printed list. Results are recorded on paper, then entered into Excel. Discrepancies are noted but not tracked to resolution. The same unverified assets appear in the next cycle.</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Invoice mismatches between PO, GRN, and vendor invoice are discovered after payment — when recovery is difficult.</p>
+          <p>Auditors require evidence that physical verification was conducted — who did it, when, which assets were verified, and which were missing. Paper-based verification produces none of this systematically.</p>
         </div>
       </div>
     </div>
@@ -72,91 +73,50 @@
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
           </div>
-          <h3>Purchase Requisitions</h3>
-          <p>Requisitions for goods procurement, service expenses, and vendor debit notes — each with multi-line support and per-line approval. A Field Rules Engine enforces which fields are required, optional, or locked based on the type of request. Self-approval prevention is enforced at the system level. Asset dispositions (write-off, scrap, disposal, movement, consumption) use the same governed approval workflow — asset metadata is inherited automatically, so the approval chain verifies the action without manual data re-entry.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-          </div>
-          <h3>Approval Matrix</h3>
-          <p>Routes requisitions by department, category, amount band, location, and other dimensions. Multi-level approval chains with date-window enforcement. The routing snapshot is frozen at the time of submission — subsequent matrix changes do not alter existing workflows.</p>
+          <h3>Bulk Tag Generation</h3>
+          <p>Admin uploads CSV/XLSX with asset IDs. Tags generated in format TAG-{sequence}-{asset_id} using a globally unique sequence counter (database-locked to prevent duplicates). P1 governance fields set automatically.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3>Purchase Orders</h3>
-          <p>Created from approved PR lines with a double-PO guard that prevents the same requisition line from being claimed by multiple orders. TDS per line, PDF generation, and a bypass-PO mode for direct procurement scenarios.</p>
+          <h3>QR Code PDF Printing</h3>
+          <p>Upload a list of asset IDs or tag IDs. The system generates a PDF with QR codes ready for printing and affixing. Every print event is logged — who printed, when, which assets.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
           </div>
-          <h3>Goods Receipt</h3>
-          <p>Three-bucket equation tracks ordered, received, and pending quantities. Supports PIECEMEAL, SINGLE, and TOGETHER delivery modes. Three-way invoice matching validates quantity, price, and GST against the purchase order before posting.</p>
+          <h3>PWA Mobile Scanner</h3>
+          <p>Scan QR codes using a phone camera. No app installation required — works in any mobile browser. Supports manual entry and RFID batch upload for high-volume scanning. Condition reporting (Good/Fair/Poor/Damaged/Not Found) at scan time.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
           </div>
-          <h3>Service Acceptance</h3>
-          <p>For expense-type purchase orders, service acceptance replaces physical goods receipt. Supports partial quantity acceptance with auto-close of PO and PR lines on final posting.</p>
+          <h3>3-Tier Scan Resolution</h3>
+          <p>Scanned values are resolved through three tiers: P1 canonical tag, shadow tag (historical), and legacy tag. Each match tier is recorded with SHA-256 hash for audit integrity. Canonical matches auto-verify the asset.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <h3>Verification Campaigns</h3>
+          <p>Admin creates a campaign: name, department, location filter, target date range. Assets matching the criteria are auto-assigned. Campaign lifecycle: create, activate (assigns assets), complete (marks remaining as overdue), cancel. Real-time progress tracking with completion percentage.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
           </div>
-          <h3>Mismatch Resolution</h3>
-          <p>Invoice discrepancies within configurable tolerance are auto-accepted. Mismatches above tolerance require manual resolution — accept, adjust, or dispute. Posting is blocked until every mismatch is resolved.</p>
+          <h3>Discrepancy Investigation</h3>
+          <p>Assets found with discrepancies (wrong location, wrong condition, missing) are flagged for investigation. Investigation records capture findings, resolution, and admin disposition. Full audit trail from scan to resolution.</p>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- Optional Modules Note -->
-  <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <div class="container" style="text-align: center; max-width: 720px;">
-      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">You Don't Need All of This on Day One</h3>
-      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">The core workflow — requisition, approval, purchase order, goods receipt — works out of the box. Everything below is an optional toggle, off by default: gate entry, mismatch resolution, TDS tracking, Tally integration, HSN/SAC validation, bypass PO mode, and piecemeal delivery. Turn each on when your process requires it.</p>
-    </div>
-  </section>
-
-  <!-- Additional Controls -->
-  <section class="why-us">
-    <div class="container">
-      <h2 class="section-title">Additional Controls</h2>
-      <div class="why-grid">
-        <div class="why-item">
-          <h3>Gate Entry</h3>
-          <p>Security-role restricted gate entry with QC inspection fields. Gate entry records feed directly into the GRN workflow, ensuring physical receipt is documented before goods are accepted.</p>
-        </div>
-        <div class="why-item">
-          <h3>Vendor Debit Notes</h3>
-          <p>Four types — rejection, under-received, damage, and price excess. Each generates a GST-compliant PDF and posts the corresponding accounting entry to Tally.</p>
-        </div>
-        <div class="why-item">
-          <h3>Asset Movement & Disposition</h3>
-          <p>Transferring an asset between departments follows a two-phase approval — the source department approves the release, then the receiving department approves acceptance. The destination asset record is created automatically on posting. Write-offs, scrap, disposal, and consumption follow the same approval workflow, with asset metadata inherited from the register — no manual re-entry of classification, category, or financial details.</p>
-        </div>
-        <div class="why-item">
-          <h3>Audit Trail</h3>
-          <p>Every status transition, approval action, and guard violation is logged with timestamp, user, and context. Full audit history is available as CSV export for statutory and internal auditors.</p>
-        </div>
-        <div class="why-item">
-          <h3>Approval Notifications</h3>
-          <p>When a document reaches an approval level, assigned approvers are notified by email (with a direct link) and by in-app notification (badge refreshes every 60 seconds). When approved or rejected, the requester is notified with the approver's name and comment. Both channels are fire-and-forget — no approval is silently missed.</p>
-        </div>
-        <div class="why-item">
-          <h3>Purchase Order Documents</h3>
-          <p>PO PDFs generated on-the-fly with configurable sections per PO — toggle supplier address, line details, financial summary, and footer. Indian numbering format (lakhs/crores). When shared with a vendor, the event is logged with a snapshot of the active configuration. Full share history is retrievable per PO.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -166,20 +126,44 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Condition states</div>
+        </div>
+        <div class="stat-item">
           <div class="stat-number">3</div>
-          <div class="stat-label">Document types governed (PR, PO, GRN)</div>
+          <div class="stat-label">Scan resolution tiers</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Routing dimensions</div>
+          <div class="stat-number">0</div>
+          <div class="stat-label">Paper-based records</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Delivery modes</div>
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Scan audit trail</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">22</div>
-          <div class="stat-label">Accounting events</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Compliance Mapping</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>CARO 2020</h3>
+          <p class="compliance-ref">Clause 3(i)(b)</p>
+          <p>Physical verification conducted at reasonable intervals. Campaign-based verification with completion tracking and overdue alerts.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Companies Act 2013</h3>
+          <p class="compliance-ref">Section 128</p>
+          <p>Verification records maintained as books of account. SHA-256 hashed scan entries with immutable audit logs.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>AS 10 / Ind AS 16</h3>
+          <p class="compliance-ref">Asset Identification</p>
+          <p>Asset identification and location tracking. QR tags linked to register entries. Discrepancies investigated and resolved with documented disposition.</p>
         </div>
       </div>
     </div>
@@ -189,7 +173,7 @@
   <section class="contact" style="padding: 64px 0;">
     <div class="container" style="text-align: center;">
       <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
-      <p class="section-sub">Share a brief overview of your setup and we will evaluate how our services may apply.</p>
+      <p class="section-sub">Share a brief overview of your asset base and verification requirements, and we will evaluate how structured tagging and verification may apply to your setup.</p>
       <div style="margin-top: 32px;">
         <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
       </div>

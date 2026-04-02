@@ -51,6 +51,36 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oparc.in/fixed-asset-register</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/purchase-order-approval</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/grn-goods-receipt</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/vendor-debit-note</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/asset-tagging-verification</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/education-procurement</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/privacy</loc>
     <priority>0.3</priority>
   </url>
