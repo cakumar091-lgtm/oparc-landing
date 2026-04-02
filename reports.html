@@ -170,6 +170,37 @@
     </div>
   </section>
 
+  <!-- Expense Register -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Expense Register</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.6);">Service-related expenses tracked in a dedicated register with GST and TDS detail.</p>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>Three Entry Types</h3>
+          <p class="compliance-ref">Forward, Correction, Reversal</p>
+          <p>SA_POSTING (forward expense from Service Acceptance), DEBIT_NOTE (correction entry), and SA_REVERSAL (posting reversal). Each linked back to originating PR, PO, and SA.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>GST Split</h3>
+          <p class="compliance-ref">CGST / SGST / IGST</p>
+          <p>Per-line CGST, SGST, and IGST amounts at both unit and line level. HSN/SAC code captured per entry for tax return preparation.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>TDS Tracking</h3>
+          <p class="compliance-ref">Section, Rate, Amount</p>
+          <p>TDS section code, rate, and deducted amount per line. Summary calculates net TDS across postings and reversals for each period.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Period Summaries</h3>
+          <p class="compliance-ref">Month / Quarter / FY</p>
+          <p>Aggregated stats across four time periods: all-time, current month, current quarter, and current financial year. Counts, amounts, and net TDS per period.</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:24px; color:rgba(255,255,255,.5); font-size:0.875rem;">16+ filter dimensions including department, vendor, classification, date range, amount range, and financial year. Global search across expense ID, item name, supplier, and document numbers. CSV export with optional FY filter.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">
@@ -221,6 +252,8 @@
         </div>
         <div class="footer-col">
           <h4>More</h4>
+          <a href="/invoice-matching.html">Invoice Matching</a>
+          <a href="/data-migration.html">Data Migration</a>
           <a href="/compliance.html">Compliance</a>
           <a href="/reports.html">Reports</a>
           <a href="/how-it-works.html">How We Work</a>

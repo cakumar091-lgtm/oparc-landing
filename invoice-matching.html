@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Procurement Governance — PR, PO, GRN Approval Workflows | Oparc</title>
-  <meta name="description" content="Structured procurement workflow from purchase requisition through purchase order to goods receipt. Multi-level approvals, invoice matching, GST compliance, and complete audit trail.">
+  <title>Invoice Matching & Mismatch Resolution — Quantity, Price, GST | Oparc</title>
+  <meta name="description" content="Three-way invoice matching at goods receipt and service acceptance. Automatic resolution within tolerance, manual approval above tolerance, dispute workflow, and GST split verification (CGST/SGST/IGST).">
+  <meta name="keywords" content="invoice matching software India, 3-way matching procurement, invoice mismatch resolution, GRN invoice reconciliation, invoice price variance, GST mismatch, vendor debit note software, purchase order matching, goods receipt matching, three way matching">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
@@ -35,8 +36,8 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Procurement <span class="highlight">Governance</span></h1>
-        <p class="hero-sub">Requisition to Receipt</p>
+        <h1>Invoice Matching &amp; <span class="highlight">Mismatch Resolution</span></h1>
+        <p class="hero-sub">Three-way matching on quantity, price, and GST — with configurable tolerance, two-tier resolution, and posting blocked until every discrepancy is resolved.</p>
       </div>
     </div>
   </section>
@@ -48,15 +49,15 @@
       <div class="problems-grid">
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Email and paper-based approvals leave no structured audit trail. Auditors cannot verify who approved what, when, or against which authority limit.</p>
+          <p>Invoice mismatches — quantity shortages, price variances, incorrect GST — are discovered during audit or after payment. By then, recovery is difficult.</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Duplicate purchase orders against the same requisition go undetected, leading to over-procurement and wasted budget.</p>
+          <p>Manual matching in spreadsheets misses variances on high-volume line items. When mismatches are found, resolution is informal — emails, verbal approvals, no recorded outcome.</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon">&ldquo;</div>
-          <p>Invoice mismatches between PO, GRN, and vendor invoice are discovered after payment — when recovery is difficult.</p>
+          <p>Auditors flag absent matching controls under SA 315 (control environment) and Companies Act Section 143(3)(i) (internal financial controls).</p>
         </div>
       </div>
     </div>
@@ -72,92 +73,88 @@
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
           </div>
-          <h3>Purchase Requisitions</h3>
-          <p>Requisitions for goods procurement, service expenses, and vendor debit notes — each with multi-line support and per-line approval. A Field Rules Engine enforces which fields are required, optional, or locked based on the type of request. Self-approval prevention is enforced at the system level. Asset dispositions (write-off, scrap, disposal, movement, consumption) use the same governed approval workflow — asset metadata is inherited automatically, so the approval chain verifies the action without manual data re-entry.</p>
+          <h3>Three-Way Matching</h3>
+          <p>Every goods receipt (GRN) and service acceptance (SA) line is matched against the purchase order on three dimensions: quantity (under/over received), unit price (invoice rate vs agreed PO rate), and GST (invoice GST vs PO GST, split into CGST/SGST/IGST based on vendor GSTIN and organisation state code).</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
           </div>
-          <h3>Approval Matrix</h3>
-          <p>Routes requisitions by department, category, amount band, location, and other dimensions. Multi-level approval chains with date-window enforcement. The routing snapshot is frozen at the time of submission — subsequent matrix changes do not alter existing workflows.</p>
+          <h3>Configurable Tolerance</h3>
+          <p>Minor rounding differences within the configured tolerance percentage are auto-accepted — no human intervention needed. Only variances above tolerance require manual review. The tolerance threshold is set per organisation.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
           </div>
-          <h3>Purchase Orders</h3>
-          <p>Created from approved PR lines with a double-PO guard that prevents the same requisition line from being claimed by multiple orders. TDS per line, PDF generation, and a bypass-PO mode for direct procurement scenarios.</p>
+          <h3>Two-Tier Resolution</h3>
+          <p>Above-tolerance mismatches follow a structured path: a designated resolver (not the GRN/SA creator) reviews and chooses to accept or dispute. Acceptance above threshold requires a second approval from a different user — ensuring no single person can accept a large price variance.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
           </div>
-          <h3>Goods Receipt</h3>
-          <p>Three-bucket equation tracks ordered, received, and pending quantities. Supports PIECEMEAL, SINGLE, and TOGETHER delivery modes. Three-way invoice matching validates quantity, price, and GST against the purchase order before posting.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-          </div>
-          <h3>Service Acceptance</h3>
-          <p>For expense-type purchase orders, service acceptance replaces physical goods receipt. Supports partial quantity acceptance with auto-close of PO and PR lines on final posting.</p>
+          <h3>Posting Block</h3>
+          <p>A GRN or SA cannot be posted to the asset register or expense register until every mismatch on every line is resolved. Unresolved mismatches are visible in a dedicated pending-resolution queue for approvers.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
           </div>
-          <h3>Mismatch Resolution</h3>
-          <p>Invoice discrepancies within configurable tolerance are auto-accepted. Mismatches above tolerance require manual resolution — accept, adjust, or dispute. Posting is blocked until every mismatch is resolved.</p>
+          <h3>PO Flag Propagation</h3>
+          <p>When a mismatch is detected, the parent purchase order is flagged — pending price mismatch, pending rejection, or pending damage. These flags appear in PO exports, dashboard views, and CSV downloads. They clear automatically when the corresponding vendor debit note is approved.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>HSN/SAC Validation</h3>
+          <p>At GRN and SA creation, HSN/SAC codes are validated against the master. Invalid codes generate a warning — flagging tax classification issues without blocking operations.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Optional Modules Note -->
+  <!-- Optional Note -->
   <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container" style="text-align: center; max-width: 720px;">
-      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">You Don't Need All of This on Day One</h3>
-      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">The core workflow — requisition, approval, purchase order, goods receipt — works out of the box. Everything below is an optional toggle, off by default: gate entry, mismatch resolution, TDS tracking, Tally integration, HSN/SAC validation, bypass PO mode, and piecemeal delivery. Turn each on when your process requires it.</p>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">Optional — Enable When You Need It</h3>
+      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">Manual mismatch resolution and HSN/SAC validation are both off by default. Basic goods receipt and service acceptance work without them. Enable mismatch resolution when you want structured variance handling. Enable HSN/SAC when you want tax code validation at receipt. Each is an independent toggle.</p>
     </div>
   </section>
 
-  <!-- Additional Controls -->
+  <!-- Vendor Debit Notes -->
   <section class="why-us">
     <div class="container">
-      <h2 class="section-title">Additional Controls</h2>
+      <h2 class="section-title">Vendor Debit Notes</h2>
+      <p class="section-sub">Unresolved variances that require financial adjustment result in vendor debit notes — each with correct GST treatment and a compliant PDF.</p>
       <div class="why-grid">
         <div class="why-item">
-          <h3>Gate Entry</h3>
-          <p>Security-role restricted gate entry with QC inspection fields. Gate entry records feed directly into the GRN workflow, ensuring physical receipt is documented before goods are accepted.</p>
+          <h3>Rejection</h3>
+          <p>Goods rejected at receipt or gate entry. Debit amount calculated with GST split.</p>
         </div>
         <div class="why-item">
-          <h3>Vendor Debit Notes</h3>
-          <p>Four types — rejection, under-received, damage, and price excess. Each generates a GST-compliant PDF and posts the corresponding accounting entry to Tally.</p>
+          <h3>Under-Received</h3>
+          <p>Quantity shortfall against invoice. The difference between invoiced and accepted quantities drives the debit.</p>
         </div>
         <div class="why-item">
-          <h3>Asset Movement & Disposition</h3>
-          <p>Transferring an asset between departments follows a two-phase approval — the source department approves the release, then the receiving department approves acceptance. The destination asset record is created automatically on posting. Write-offs, scrap, disposal, and consumption follow the same approval workflow, with asset metadata inherited from the register — no manual re-entry of classification, category, or financial details.</p>
+          <h3>Damage</h3>
+          <p>Goods received in damaged condition. Documented at gate entry or GRN with condition remarks.</p>
         </div>
         <div class="why-item">
-          <h3>Audit Trail</h3>
-          <p>Every status transition, approval action, and guard violation is logged with timestamp, user, and context. Full audit history is available as CSV export for statutory and internal auditors.</p>
-        </div>
-        <div class="why-item">
-          <h3>Approval Notifications</h3>
-          <p>When a document reaches an approval level, assigned approvers are notified by email (with a direct link) and by in-app notification (badge refreshes every 60 seconds). When approved or rejected, the requester is notified with the approver's name and comment. Both channels are fire-and-forget — no approval is silently missed.</p>
-        </div>
-        <div class="why-item">
-          <h3>Purchase Order Documents</h3>
-          <p>PO PDFs generated on-the-fly with configurable sections per PO — toggle supplier address, line details, financial summary, and footer. Indian numbering format (lakhs/crores). When shared with a vendor, the event is logged with a snapshot of the active configuration. Full share history is retrievable per PO.</p>
+          <h3>Price Excess</h3>
+          <p>Invoice rate exceeds the agreed PO rate. The unit price variance is applied across the accepted quantity.</p>
         </div>
       </div>
+      <p style="text-align:center; margin-top:32px; color:var(--text-muted); font-size:0.938rem;">
+        Each VDN generates a GST-compliant PDF — titled "Tax Debit Note" when the organisation's GSTIN is configured, or "Debit Note" otherwise. The PDF includes organisation and vendor identity blocks, item table, tax breakdown, amount in words, and approval stamps. VDN posting enqueues the corresponding Tally journal entry.
+      </p>
     </div>
   </section>
 
@@ -167,19 +164,48 @@
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-number">3</div>
-          <div class="stat-label">Document types governed (PR, PO, GRN)</div>
+          <div class="stat-label">Matching dimensions</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">10+</div>
-          <div class="stat-label">Routing dimensions</div>
+          <div class="stat-number">2</div>
+          <div class="stat-label">Resolution tiers</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">4</div>
-          <div class="stat-label">Delivery modes</div>
+          <div class="stat-label">Debit note types</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">22</div>
-          <div class="stat-label">Accounting events</div>
+          <div class="stat-number">0</div>
+          <div class="stat-label">Unresolved mismatches posted</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Compliance Mapping</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>Companies Act 2013</h3>
+          <p class="compliance-ref">Section 143(3)(i)</p>
+          <p>Posting blocked until mismatches resolved. Two-tier approval for above-tolerance acceptance. Internal controls over financial reporting.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>CARO 2020</h3>
+          <p class="compliance-ref">Clause 3(i)</p>
+          <p>Mismatch-free GRN posting ensures asset register entries match actual receipt. Proper records of fixed assets with quantitative details.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>GST Act</h3>
+          <p class="compliance-ref">Section 34</p>
+          <p>VDN PDF follows prescribed format with GSTIN, HSN, and CGST/SGST/IGST split. Tax debit notes per statutory requirements.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Internal Controls</h3>
+          <p class="compliance-ref">SA 315 / ICFR</p>
+          <p>Segregation of duties — resolver cannot be the approver. Automated tolerance gates. Every resolution logged with actor and timestamp.</p>
         </div>
       </div>
     </div>
@@ -189,7 +215,7 @@
   <section class="contact" style="padding: 64px 0;">
     <div class="container" style="text-align: center;">
       <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
-      <p class="section-sub">Share a brief overview of your setup and we will evaluate how our services may apply.</p>
+      <p class="section-sub">Share a brief overview of your procurement volumes and we will evaluate how invoice matching controls may apply to your setup.</p>
       <div style="margin-top: 32px;">
         <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
       </div>

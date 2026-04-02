@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asset Data Migration — Bulk Import from Excel with Validation | Oparc</title>
+  <meta name="description" content="Migrate asset registers from Excel with dry-run validation, 5,000 rows per batch, row-level error reporting, and batch reversal. Three operation modes: create, update, and proportional adjustment.">
+  <meta name="keywords" content="asset data migration tool, bulk asset import from Excel, migrate asset register, asset upload software, bulk asset upload, asset register migration, Excel to asset register, data migration validation, bulk upload with rollback">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/procurement.html">Procurement</a>
+        <a href="/asset-management.html">Assets</a>
+        <a href="/tally-integration.html">Tally</a>
+        <a href="/vendor-management.html">Vendors</a>
+        <a href="/compliance.html">Compliance</a>
+        <a href="/reports.html">Reports</a>
+        <a href="/how-it-works.html">How We Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Data Migration &amp; <span class="highlight">Bulk Asset Upload</span></h1>
+        <p class="hero-sub">Move your existing asset register from Excel — with dry-run validation, row-level error reporting, and the ability to reverse an entire batch if something isn't right.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Switching to a new system means moving thousands of asset records. Manual re-entry is impractical. One-off scripts risk importing bad data that undermines the new register from day one.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Typical CSV imports offer no validation — duplicate asset IDs, missing mandatory fields, and wrong depreciation figures go undetected until an auditor finds them.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Once a bad import is committed, there is no structured way to undo it. Organisations either live with incorrect data or start over.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How We Address This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          </div>
+          <h3>Three Operation Modes</h3>
+          <p>The bulk engine handles three scenarios in a single upload. <strong>Create:</strong> new assets with auto-generated IDs. <strong>Update:</strong> modify allowed fields on existing records (immutable fields like classification and quantity are blocked). <strong>Adjust:</strong> proportional quantity reduction with financial recalculation. The mode is determined automatically from each row's data.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Dry-Run Validation</h3>
+          <p>Two validation levels before any data is written. <strong>File validation</strong> checks structure, columns, and data types — no database writes. <strong>Row-level validation</strong> runs the full pipeline in read-only mode and returns per-row pass/fail with specific error codes. Validate first, commit when confident.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <h3>40+ Validation Rules</h3>
+          <p>Each row passes through a rule engine: mandatory fields, forbidden system-generated fields, data type checks, immutability enforcement on updates, financial field gating (amounts only editable when blank), quantity guards, and owner-to-department derivation. Every failure returns a specific error code with a human-readable message.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+          </div>
+          <h3>Row-Level Atomicity</h3>
+          <p>Each row commits or rolls back independently. A single bad row does not block the other 4,999 rows in the batch. Success and failure counts are tracked, and failed rows are exportable as CSV for correction and re-upload.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>Guided Templates</h3>
+          <p>Downloadable Excel templates with colour-coded headers (gold for mandatory, blue for set-once fields), embedded dropdown validation, numeric constraints, and an Instructions sheet with a complete field reference. Separate templates for Create vs Update — each shows only the relevant fields.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+          </div>
+          <h3>Batch Reversal</h3>
+          <p>Made a mistake? Reverse an entire batch — all assets created in that upload are soft-deleted. Guard checks prevent reversal if assets are already referenced by purchase requisitions, have child records, have physical tags, or were created via procurement posting.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- What Gets Computed -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Automatic Computations</h2>
+      <p class="section-sub">The system derives values you shouldn't have to enter manually.</p>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Total Amount</h3>
+          <p>Computed as basic amount + GST amount. No manual totalling needed.</p>
+        </div>
+        <div class="why-item">
+          <h3>End of Useful Life</h3>
+          <p>Computed from useful life years + capitalisation date. Updates automatically if useful life changes.</p>
+        </div>
+        <div class="why-item">
+          <h3>Department</h3>
+          <p>Auto-derived from the owner's department assignment. No separate department column needed in the upload.</p>
+        </div>
+        <div class="why-item">
+          <h3>Asset Nature</h3>
+          <p>Derived from classification (Fixed Asset, Inventory, Consumable). Set automatically — cannot be manually overridden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">5,000</div>
+          <div class="stat-label">Rows per batch</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Operation modes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">40+</div>
+          <div class="stat-label">Validation rules</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">File formats supported</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audit & Formats -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Audit Trail &amp; Format Support</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>Per-Row Audit</h3>
+          <p class="compliance-ref">Full Traceability</p>
+          <p>Every processed row generates an audit record: raw payload, before-state, after-state, field-level deltas, outcome, and the business rule applied.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Batch Tracking</h3>
+          <p class="compliance-ref">Metadata Preserved</p>
+          <p>Each upload is recorded with timestamp, uploader, filename, row counts (total, success, failed), and error details. Batches are listed and retrievable at any time.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>File Formats</h3>
+          <p class="compliance-ref">CSV, XLSX, XLSM</p>
+          <p>Standard CSV (UTF-8), Excel workbooks, and macro-enabled workbooks. Date parsing handles YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY, MM/DD/YYYY, and Excel serial dates.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Null Semantics</h3>
+          <p class="compliance-ref">Explicit Control</p>
+          <p>Empty cell means "no change" on updates. The text "null" means "explicitly clear this field." No ambiguity about whether a blank was intentional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Ready to Migrate Your Asset Register?</h2>
+      <p class="section-sub">We handle the migration end-to-end — from mapping your existing spreadsheet to validating the import and verifying the result.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement.html">Procurement</a>
+          <a href="/asset-management.html">Asset Management</a>
+          <a href="/tally-integration.html">Tally Integration</a>
+          <a href="/vendor-management.html">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching.html">Invoice Matching</a>
+          <a href="/data-migration.html">Data Migration</a>
+          <a href="/compliance.html">Compliance</a>
+          <a href="/reports.html">Reports</a>
+          <a href="/how-it-works.html">How We Work</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var GA_ID = "G-LE8PMCPPYM";
+    var EU_COUNTRIES = new Set([
+      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR",
+      "DE","GR","HU","IE","IT","LV","LT","LU","MT","NL",
+      "PL","PT","RO","SK","SI","ES","SE",
+      "GB","IS","LI","NO"
+    ]);
+    function loadGA() {
+      if (document.getElementById("ga-script")) return;
+      var s = document.createElement("script");
+      s.id = "ga-script"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    function showBanner(isEU) {
+      var banner = document.getElementById("cookie-banner");
+      var text = document.getElementById("cookie-text");
+      var decline = document.getElementById("cookie-decline");
+      if (isEU) {
+        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
+        decline.style.display = "inline-block";
+      } else {
+        text.textContent = "We use analytics cookies to improve your experience.";
+      }
+      banner.style.display = "flex";
+      document.getElementById("cookie-accept").addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "accepted");
+        banner.style.display = "none";
+        loadGA();
+      });
+      decline.addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "declined");
+        banner.style.display = "none";
+      });
+    }
+    var consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") { loadGA(); return; }
+    if (consent === "declined") { return; }
+    fetch("/api/geo")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var isEU = EU_COUNTRIES.has(data.country);
+        if (!isEU) { loadGA(); }
+        showBanner(isEU);
+      })
+      .catch(function() { showBanner(true); });
+  })();
+  </script>
+</body>
+</html>

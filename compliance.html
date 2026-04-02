@@ -80,7 +80,10 @@
         <div class="compliance-card">
           <h3>DPDP Act 2023</h3>
           <p class="compliance-ref">Digital Personal Data Protection</p>
-          <p>Consent tracking for personal data collection. Data deletion request handling. Personal data export capability. Grievance officer designation. Designed to support compliance with India's data protection framework.</p>
+          <p><strong>Right to access (S6):</strong> Users export their personal data — profile, activity summary, last 500 audit records, consent history. Rate-limited to 1 per hour.<br>
+          <strong>Right to erasure (S8):</strong> Users request deletion; admin confirms. PII anonymised (username, name, email cleared; password invalidated), user row preserved for referential integrity.<br>
+          <strong>Consent (S7):</strong> Policy version, timestamp, and IP recorded per consent event. Re-consent required on policy version change.<br>
+          <strong>Grievance officer (S7):</strong> Designated per organisation. Falls back to admin if unset. Public endpoint for data subject contact.</p>
         </div>
 
       </div>
@@ -163,6 +166,8 @@
         </div>
         <div class="footer-col">
           <h4>More</h4>
+          <a href="/invoice-matching.html">Invoice Matching</a>
+          <a href="/data-migration.html">Data Migration</a>
           <a href="/compliance.html">Compliance</a>
           <a href="/reports.html">Reports</a>
           <a href="/how-it-works.html">How We Work</a>
