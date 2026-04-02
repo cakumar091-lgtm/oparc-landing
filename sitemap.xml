@@ -6,56 +6,56 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://oparc.in/procurement.html</loc>
+    <loc>https://oparc.in/procurement</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/asset-management.html</loc>
+    <loc>https://oparc.in/asset-management</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/tally-integration.html</loc>
+    <loc>https://oparc.in/tally-integration</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/vendor-management.html</loc>
+    <loc>https://oparc.in/vendor-management</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/compliance.html</loc>
+    <loc>https://oparc.in/compliance</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/reports.html</loc>
+    <loc>https://oparc.in/reports</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/how-it-works.html</loc>
+    <loc>https://oparc.in/how-it-works</loc>
     <lastmod>2026-04-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/invoice-matching.html</loc>
+    <loc>https://oparc.in/invoice-matching</loc>
     <lastmod>2026-04-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/data-migration.html</loc>
+    <loc>https://oparc.in/data-migration</loc>
     <lastmod>2026-04-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://oparc.in/privacy.html</loc>
+    <loc>https://oparc.in/privacy</loc>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://oparc.in/terms.html</loc>
+    <loc>https://oparc.in/terms</loc>
     <priority>0.3</priority>
   </url>
 </urlset>
