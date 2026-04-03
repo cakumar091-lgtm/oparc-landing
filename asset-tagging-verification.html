@@ -29,8 +29,24 @@
     "@type": "Service",
     "name": "QR Asset Tagging & Physical Verification",
     "description": "Bulk QR tag generation, PWA mobile scanner, 3-tier scan resolution, and physical verification campaigns with discrepancy tracking.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Asset Verification"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Asset Tagging & Verification", "item": "https://oparc.in/asset-tagging-verification" }
+    ]
   }
   </script>
 </head>

@@ -29,8 +29,24 @@
     "@type": "Service",
     "name": "Asset Data Migration",
     "description": "Migrate asset registers from Excel with dry-run validation, row-level error reporting, and batch reversal.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Data Migration"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Data Migration", "item": "https://oparc.in/data-migration" }
+    ]
   }
   </script>
 </head>

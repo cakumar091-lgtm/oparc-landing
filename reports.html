@@ -29,8 +29,24 @@
     "@type": "Service",
     "name": "Procurement & Asset Reporting",
     "description": "11 analytical reports covering procurement pipeline, asset aging, approval bottlenecks, supplier performance, and compliance trends.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Business Analytics"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Reports & Dashboard", "item": "https://oparc.in/reports" }
+    ]
   }
   </script>
 </head>

@@ -29,8 +29,64 @@
     "@type": "Service",
     "name": "Asset Lifecycle Management",
     "description": "Automated fixed asset register with SLM/WDV depreciation, QR tagging, physical verification campaigns, and asset movement tracking.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Asset Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Asset Management", "item": "https://oparc.in/asset-management" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a fixed asset register and why do Indian companies need one?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A fixed asset register is a detailed record of all property, plant, and equipment owned by an organisation. Under Companies Act 2013 and CARO 2020, Indian companies must maintain asset-wise records with cost, depreciation, location, and disposal details. ProcureTrail automates this with 40+ filter dimensions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does QR tagging work for asset tracking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Admin uploads a list of asset IDs and the system generates unique QR tags in TAG-{sequence}-{asset_id} format. Tags are printed and applied to physical assets. Staff scan tags using a phone browser (PWA — no app install needed) to verify, report condition, or look up asset details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I run physical verification campaigns?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Create a verification campaign, assign target assets, and send teams to scan. The system tracks which assets are verified, missing, or in poor condition. Discrepancy reports show exactly what was found vs expected — ready for auditors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are asset movements between departments handled?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MOVEMENT requisitions use a dual-approval workflow — the source department approves the release, then the receiving department approves acceptance. A new destination asset record is created automatically on posting, maintaining full provenance and audit trail."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -226,6 +282,31 @@
           <div class="stat-number">SLM & WDV</div>
           <div class="stat-label">Depreciation methods</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="why-us" style="padding: 64px 0;">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div style="max-width: 720px; margin: 32px auto 0;">
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">What is a fixed asset register and why do Indian companies need one?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">A fixed asset register is a detailed record of all property, plant, and equipment owned by an organisation. Under Companies Act 2013 and CARO 2020, Indian companies must maintain asset-wise records with cost, depreciation, location, and disposal details. ProcureTrail automates this with 40+ filter dimensions.</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">How does QR tagging work for asset tracking?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Admin uploads a list of asset IDs and the system generates unique QR tags in TAG-{sequence}-{asset_id} format. Tags are printed and applied to physical assets. Staff scan tags using a phone browser (PWA — no app install needed) to verify, report condition, or look up asset details.</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Can I run physical verification campaigns?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes. Create a verification campaign, assign target assets, and send teams to scan. The system tracks which assets are verified, missing, or in poor condition. Discrepancy reports show exactly what was found vs expected — ready for auditors.</p>
+        </details>
+        <details style="margin-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">How are asset movements between departments handled?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">MOVEMENT requisitions use a dual-approval workflow — the source department approves the release, then the receiving department approves acceptance. A new destination asset record is created automatically on posting, maintaining full provenance and audit trail.</p>
+        </details>
       </div>
     </div>
   </section>

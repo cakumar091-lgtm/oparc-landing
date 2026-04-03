@@ -29,8 +29,24 @@
     "@type": "Service",
     "name": "Invoice Matching & Mismatch Resolution",
     "description": "Three-way invoice matching at goods receipt and service acceptance with automatic resolution, dispute workflow, and GST split verification.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Invoice Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Invoice Matching", "item": "https://oparc.in/invoice-matching" }
+    ]
   }
   </script>
 </head>

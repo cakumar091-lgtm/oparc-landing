@@ -29,8 +29,64 @@
     "@type": "Service",
     "name": "Statutory Compliance Management",
     "description": "Built-in compliance with Companies Act 2013, CARO 2020, AS 10, GST Act, TDS provisions, and DPDP Act 2023.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Compliance Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Statutory Compliance", "item": "https://oparc.in/compliance" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What statutory compliance does this software cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ProcureTrail covers Companies Act 2013 (Schedule II depreciation, asset register format), CARO 2020 (fixed asset reporting), AS 10 / Ind AS 16 (asset recognition and measurement), GST Act (CGST/SGST/IGST split at transaction level), TDS provisions (194C/194Q), and DPDP Act 2023 (data privacy and consent management)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does this help with CARO 2020 compliance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The fixed asset register maintains asset-wise records with classification, location, depreciation method, and disposal details — all fields required for CARO 2020 clause 3(i) reporting on property, plant and equipment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is GST compliance built into the procurement workflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every transaction captures GST at the line level with automatic CGST/SGST/IGST split based on supply type. HSN/SAC codes, ITC eligibility, and reverse charge are tracked. Tally vouchers include the correct GST ledger mapping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this meet audit trail requirements under Indian law?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every action — approval, rejection, edit, posting, reversal — is logged with user, timestamp, and before/after values in an immutable audit trail. This meets the audit trail requirements under Companies Act 2013 Section 128 and the 2021 MCA notification."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -162,6 +218,31 @@
           <div class="stat-number">DPDP</div>
           <div class="stat-label">Act compliant</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="why-us" style="padding: 64px 0;">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div style="max-width: 720px; margin: 32px auto 0;">
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">What statutory compliance does this software cover?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">ProcureTrail covers Companies Act 2013 (Schedule II depreciation, asset register format), CARO 2020 (fixed asset reporting), AS 10 / Ind AS 16 (asset recognition and measurement), GST Act (CGST/SGST/IGST split at transaction level), TDS provisions (194C/194Q), and DPDP Act 2023 (data privacy and consent management).</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">How does this help with CARO 2020 compliance?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">The fixed asset register maintains asset-wise records with classification, location, depreciation method, and disposal details — all fields required for CARO 2020 clause 3(i) reporting on property, plant and equipment.</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Is GST compliance built into the procurement workflow?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes. Every transaction captures GST at the line level with automatic CGST/SGST/IGST split based on supply type. HSN/SAC codes, ITC eligibility, and reverse charge are tracked. Tally vouchers include the correct GST ledger mapping.</p>
+        </details>
+        <details style="margin-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Does this meet audit trail requirements under Indian law?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes. Every action — approval, rejection, edit, posting, reversal — is logged with user, timestamp, and before/after values in an immutable audit trail. This meets the audit trail requirements under Companies Act 2013 Section 128 and the 2021 MCA notification.</p>
+        </details>
       </div>
     </div>
   </section>

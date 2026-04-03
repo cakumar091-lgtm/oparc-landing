@@ -29,9 +29,24 @@
     "@type": "Service",
     "name": "Education Procurement & Asset Management",
     "description": "Procurement and asset management for educational institutions with configurable field labels, multi-level approvals, and UGC compliance.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
-    "serviceType": "Education Management",
-    "areaServed": "India"
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
+    "serviceType": "Education Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Education Procurement", "item": "https://oparc.in/education-procurement" }
+    ]
   }
   </script>
 </head>

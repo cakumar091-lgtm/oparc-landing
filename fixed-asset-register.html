@@ -29,8 +29,64 @@
     "@type": "Service",
     "name": "Fixed Asset Register & Depreciation Management",
     "description": "Compliant fixed asset register with SLM and WDV depreciation, year-end snapshots, financial year locking, and 40+ filter dimensions.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Asset Register Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Fixed Asset Register", "item": "https://oparc.in/fixed-asset-register" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this fixed asset register compliant with Companies Act 2013?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The register maintains all fields required under Companies Act 2013 Schedule II and CARO 2020, including asset-wise depreciation (SLM and WDV), additions, disposals, and year-end closing balances."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does depreciation calculation work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ProcureTrail supports both Straight Line Method (SLM) and Written Down Value (WDV) depreciation. Rates are configured per asset classification. Year-end snapshots lock depreciation for audited periods while allowing corrections in the current year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I migrate my existing asset register from Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The bulk upload engine supports create, update, and proportional adjustment modes with dry-run validation, row-level error reporting, and batch reversal. Up to 5,000 rows per batch."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this generate Tally-compatible depreciation entries?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Asset capitalisation and depreciation entries are generated as Tally XML vouchers with proper ledger mapping, GST treatment, and narration — ready for import into TallyPrime."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -191,6 +247,31 @@
           <p class="compliance-ref">Schedule II</p>
           <p>Depreciation computed per useful life and method prescribed under Schedule II. SLM and WDV both supported with configurable classes.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="why-us" style="padding: 64px 0;">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div style="max-width: 720px; margin: 32px auto 0;">
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Is this fixed asset register compliant with Companies Act 2013?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes. The register maintains all fields required under Companies Act 2013 Schedule II and CARO 2020, including asset-wise depreciation (SLM and WDV), additions, disposals, and year-end closing balances.</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">How does depreciation calculation work?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">ProcureTrail supports both Straight Line Method (SLM) and Written Down Value (WDV) depreciation. Rates are configured per asset classification. Year-end snapshots lock depreciation for audited periods while allowing corrections in the current year.</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Can I migrate my existing asset register from Excel?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes. The bulk upload engine supports create, update, and proportional adjustment modes with dry-run validation, row-level error reporting, and batch reversal. Up to 5,000 rows per batch.</p>
+        </details>
+        <details style="margin-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Does this generate Tally-compatible depreciation entries?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes. Asset capitalisation and depreciation entries are generated as Tally XML vouchers with proper ledger mapping, GST treatment, and narration — ready for import into TallyPrime.</p>
+        </details>
       </div>
     </div>
   </section>

@@ -29,8 +29,24 @@
     "@type": "Service",
     "name": "Vendor Debit Note Management",
     "description": "GST-compliant vendor debit notes for rejection, under-receipt, damage, and price excess with automatic tax split and Tally posting.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Debit Note Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Vendor Debit Notes", "item": "https://oparc.in/vendor-debit-note" }
+    ]
   }
   </script>
 </head>

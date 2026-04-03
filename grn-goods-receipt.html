@@ -29,8 +29,24 @@
     "@type": "Service",
     "name": "Goods Receipt & Gate Entry",
     "description": "Goods receipt with gate entry inspection, 3-bucket quantity tracking, multi-level approval, and invoice mismatch detection.",
-    "provider": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
     "serviceType": "Goods Receipt Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Goods Receipt", "item": "https://oparc.in/grn-goods-receipt" }
+    ]
   }
   </script>
 </head>
