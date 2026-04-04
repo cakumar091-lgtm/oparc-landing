@@ -169,6 +169,7 @@
           <a href="/compliance">Compliance</a>
           <a href="/reports">Reports</a>
           <a href="/how-it-works">How We Work</a>
+          <a href="/guides">Guides</a>
           <a href="/#contact">Contact</a>
         </div>
         <div class="footer-col">
@@ -180,6 +181,72 @@
       </div>
     </div>
   </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var GA_ID = "G-LE8PMCPPYM";
+    var EU_COUNTRIES = new Set(["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","GB","IS","LI","NO"]);
+    function loadGA() {
+      if (document.getElementById("ga-script")) return;
+      var s = document.createElement("script");
+      s.id = "ga-script"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    function showBanner(isEU) {
+      var banner = document.getElementById("cookie-banner");
+      var text = document.getElementById("cookie-text");
+      var decline = document.getElementById("cookie-decline");
+      if (isEU) {
+        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
+        decline.style.display = "inline-block";
+      } else {
+        text.textContent = "We use analytics cookies to improve your experience.";
+      }
+      banner.style.display = "flex";
+      document.getElementById("cookie-accept").addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "accepted");
+        banner.style.display = "none";
+        loadGA();
+      });
+      decline.addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "declined");
+        banner.style.display = "none";
+      });
+    }
+    var consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") { loadGA(); return; }
+    if (consent === "declined") { return; }
+    fetch("/api/geo")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var isEU = EU_COUNTRIES.has(data.country);
+        if (!isEU) { loadGA(); }
+        showBanner(isEU);
+      })
+      .catch(function() { showBanner(true); });
+  })();
+  </script>
 
   <!-- WhatsApp -->
   <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
