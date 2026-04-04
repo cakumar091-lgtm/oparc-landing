@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARO 2020 & Internal Financial Controls — What Your Procurement and Asset Records Need | Oparc</title>
+  <meta name="description" content="A practical guide to CARO 2020 Clause 3(i) and Internal Financial Controls under Section 143 of the Companies Act 2013. Covers applicability thresholds, audit trail requirements, what controls auditors check, and consequences of non-compliance.">
+  <meta name="keywords" content="CARO 2020 fixed assets, internal financial controls India, IFC audit private company, Section 143 internal controls, audit trail Companies Act, fixed asset register compliance, CARO clause 3(i), procurement controls audit, IFC procurement, Companies Accounts Rules audit trail">
+  <link rel="canonical" href="https://oparc.in/caro-ifc-compliance-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/caro-ifc-compliance-guide">
+  <meta property="og:title" content="CARO 2020 & Internal Financial Controls — What Your Procurement and Asset Records Need">
+  <meta property="og:description" content="Practical guide to CARO 2020, IFC under Section 143, audit trail requirements, and what controls auditors check on procurement and fixed assets.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CARO 2020 & Internal Financial Controls — Procurement & Asset Compliance">
+  <meta name="twitter:description" content="What CARO 2020 and IFC require for your procurement and asset records. Applicability, controls, consequences.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "CARO 2020 & Internal Financial Controls — What Your Procurement and Asset Records Need",
+    "description": "A practical guide to CARO 2020 Clause 3(i) and Internal Financial Controls under Section 143 of the Companies Act 2013.",
+    "author": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-04",
+    "mainEntityOfPage": "https://oparc.in/caro-ifc-compliance-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Compliance", "item": "https://oparc.in/compliance" },
+      { "@type": "ListItem", "position": 3, "name": "CARO & IFC Guide", "item": "https://oparc.in/caro-ifc-compliance-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does CARO 2020 apply to private limited companies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, unless the company meets all three exemption conditions simultaneously: paid-up capital plus reserves not exceeding Rs 1 crore, borrowings from banks or financial institutions not exceeding Rs 1 crore at any point during the year, and revenue not exceeding Rs 10 crore. If any one threshold is breached, CARO 2020 applies in full."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is internal financial controls (IFC) audit mandatory for all private companies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Private companies with turnover below Rs 50 crore and borrowings below Rs 25 crore are exempt from IFC auditor reporting under Section 143(3)(i). However, directors of all companies — regardless of size — must state in the annual report that IFCs are adequate and operating effectively under Section 134(5)(e)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the audit trail requirement apply to asset registers maintained in Excel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Rule 3 of the Companies (Accounts) Rules 2014 requires accounting software to have a built-in audit trail that records every transaction change with date and user, and that cannot be disabled. Excel does not have this capability. Asset records maintained in Excel do not satisfy this requirement, which applies to all companies from 1 April 2023."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the penalties for not maintaining proper books of account?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Under Section 128 of the Companies Act 2013, the company faces a penalty of Rs 1 lakh plus Rs 500 per day of continuing failure (up to Rs 5 lakh), and every officer in default faces a penalty of Rs 25,000. Under Section 134(8), for false statements in the directors responsibility statement, officers face imprisonment up to 3 years or fine up to Rs 5 lakh or both."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/caro-ifc-compliance-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+          <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>CARO 2020 & Internal Financial Controls — What Your Procurement and Asset Records Need</h1>
+    <p class="date">Published: April 4, 2026</p>
+
+    <p>Two of the most common areas where auditors raise observations relate to fixed asset records and procurement controls. CARO 2020 requires the auditor to report on whether the company maintains proper records of its property, plant and equipment. The Companies Act requires the auditor to report on whether the company has adequate internal financial controls. And since April 2023, every company using software to maintain its books must ensure that software has a tamper-proof audit trail.</p>
+
+    <p>This article covers what these requirements are, which companies they apply to, what controls auditors look for, and what happens when gaps are found.</p>
+
+    <h2>1. CARO 2020 — Clause 3(i): Fixed Asset Records</h2>
+
+    <p>The Companies (Auditor's Report) Order, 2020 requires the statutory auditor to report on several matters related to property, plant and equipment (PPE). Clause 3(i) specifically asks:</p>
+
+    <ul>
+      <li>Whether the company maintains <strong>proper records</strong> showing full particulars — including quantitative details and situation (location) — of its PPE</li>
+      <li>Whether the PPE has been <strong>physically verified</strong> by the management at reasonable intervals</li>
+      <li>Whether any <strong>material discrepancies</strong> were noticed during such verification and if so, whether they have been properly dealt with in the books</li>
+      <li>Whether title deeds of all <strong>immovable properties</strong> are held in the name of the company</li>
+    </ul>
+
+    <h3>What "proper records" means in practice</h3>
+
+    <p>The auditor expects to see, for each asset: a unique identifier, description, classification, cost of acquisition, date of acquisition, location (building, floor, room), department, custodian, depreciation method and rate, accumulated depreciation, and written-down value. An Excel sheet with "Laptop - Rs 50,000 - IT Dept" does not meet this standard.</p>
+
+    <h3>Does CARO apply to your company?</h3>
+
+    <p>CARO 2020 applies to all companies except banking, insurance, and Section 8 companies. <strong>Private limited companies</strong> are exempt only if they satisfy <strong>all three</strong> conditions simultaneously:</p>
+
+    <table>
+      <tr><th>Condition</th><th>Threshold</th></tr>
+      <tr><td>Paid-up capital + reserves and surplus</td><td>Does not exceed Rs 1 crore</td></tr>
+      <tr><td>Borrowings from banks / financial institutions</td><td>Does not exceed Rs 1 crore at any point during the FY</td></tr>
+      <tr><td>Total revenue (including discontinued operations)</td><td>Does not exceed Rs 10 crore</td></tr>
+    </table>
+
+    <p>If <strong>any one</strong> of these is breached, CARO applies in full. Small companies (paid-up capital up to Rs 4 crore and turnover up to Rs 40 crore) have a broader exemption.</p>
+
+    <h2>2. Internal Financial Controls — Section 143(3)(i)</h2>
+
+    <p>Section 143(3)(i) of the Companies Act 2013 requires the auditor to state whether the company has adequate <strong>internal financial controls (IFC)</strong> with reference to financial statements, and whether those controls are operating effectively.</p>
+
+    <p>Internal financial controls are defined under Section 134(5)(e) as the policies and procedures adopted by a company for:</p>
+
+    <ul>
+      <li>Orderly and efficient conduct of business</li>
+      <li>Adherence to company policies</li>
+      <li>Safeguarding of assets</li>
+      <li>Prevention and detection of fraud and errors</li>
+      <li>Accuracy and completeness of accounting records</li>
+      <li>Timely preparation of reliable financial information</li>
+    </ul>
+
+    <h3>Does IFC audit apply to your company?</h3>
+
+    <p>Private companies are <strong>exempt from IFC auditor reporting</strong> if both conditions are met:</p>
+
+    <table>
+      <tr><th>Condition</th><th>Threshold</th></tr>
+      <tr><td>Turnover (per latest audited financial statement)</td><td>Less than Rs 50 crore</td></tr>
+      <tr><td>Aggregate borrowings from banks / FIs / corporates</td><td>Less than Rs 25 crore at any point during the FY</td></tr>
+    </table>
+
+    <p>OPC and small companies are fully exempt. However, two important qualifications:</p>
+
+    <ol>
+      <li><strong>The exemption is lost</strong> if the company has defaulted in filing financial statements under Section 137 or annual return under Section 92.</li>
+      <li><strong>Directors remain responsible regardless.</strong> Even if the auditor's IFC report is exempted, Section 134(5)(e) requires directors to state in the annual report that IFCs are adequate and operating effectively. There is no exemption from this directors' responsibility.</li>
+    </ol>
+
+    <h3>What IFC controls do auditors check on procurement and assets?</h3>
+
+    <table>
+      <tr><th>Control area</th><th>What the auditor looks for</th></tr>
+      <tr><td>Purchase authorisation</td><td>Are purchases approved by authorised personnel before commitment to a vendor?</td></tr>
+      <tr><td>Segregation of duties</td><td>Are the people who request, approve, and receive goods different individuals?</td></tr>
+      <tr><td>GRN verification</td><td>Is physical receipt verified against the purchase order before payment is processed?</td></tr>
+      <tr><td>Invoice matching</td><td>Are vendor invoices matched to PO and GRN before payment — quantity, price, and tax?</td></tr>
+      <tr><td>Asset capitalisation</td><td>Are assets recorded in the register when acquired, with correct cost and classification?</td></tr>
+      <tr><td>Asset safeguarding</td><td>Are assets physically verified at reasonable intervals? Are discrepancies investigated?</td></tr>
+      <tr><td>Disposal controls</td><td>Are asset disposals authorised, recorded, and proceeds accounted for?</td></tr>
+    </table>
+
+    <h2>3. The Audit Trail Requirement — Rule 3 of Companies (Accounts) Rules 2014</h2>
+
+    <p>This is a requirement many organisations are still catching up with. Effective <strong>1 April 2023</strong>, Rule 3(1) of the Companies (Accounts) Rules 2014 requires:</p>
+
+    <blockquote>
+      <p>Every company which uses accounting software for maintaining its books of account shall use only such accounting software which has a feature of recording audit trail of each and every transaction, creating an edit log of each change made in books of account along with the date when such changes were made and ensuring that the audit trail cannot be disabled.</p>
+    </blockquote>
+
+    <p>Key points:</p>
+
+    <ul>
+      <li><strong>Applies to ALL companies</strong> — including OPC, small, dormant, and Section 8 companies. No exemption.</li>
+      <li><strong>"Books of account"</strong> under Section 2(13) includes records of all assets and liabilities. The fixed asset register is within scope.</li>
+      <li>The audit trail must be <strong>preserved for 8 years</strong> (Section 128(5)).</li>
+      <li>The auditor must <strong>separately report</strong> on audit trail compliance under Rule 11(g) of the Companies (Audit and Auditors) Rules 2014 — whether the feature was operational throughout the year, whether it was tampered with, and whether it was preserved.</li>
+    </ul>
+
+    <h3>What this means for Excel-based records</h3>
+
+    <p>Excel does not have a built-in, tamper-proof audit trail. A cell can be edited, a row deleted, a formula changed — with no automatic record of who did it, when, or what the previous value was. Any company maintaining asset records, procurement records, or financial data in Excel spreadsheets does not satisfy this requirement.</p>
+
+    <p>This is not a technical interpretation — it is the plain reading of the rule. The software must record the trail. Excel does not.</p>
+
+    <h2>4. Consequences for the Company and Its Directors</h2>
+
+    <table>
+      <tr><th>Provision</th><th>What it covers</th><th>Penalty</th></tr>
+      <tr><td>Section 128</td><td>Failure to maintain proper books of account</td><td>Company: Rs 1 lakh + Rs 500/day (max Rs 5 lakh). Officers: Rs 25,000 each</td></tr>
+      <tr><td>Section 129</td><td>Financial statements not giving true and fair view</td><td>Company: Rs 5 lakh. Officers: imprisonment up to 1 year or fine Rs 1-5 lakh or both</td></tr>
+      <tr><td>Section 134(8)</td><td>False directors' responsibility statement (including IFC adequacy)</td><td>Company: Rs 50,000-25 lakh. Officers: imprisonment up to 3 years or fine Rs 50,000-5 lakh or both</td></tr>
+      <tr><td>Section 447</td><td>Fraud (including fraudulent records)</td><td>Imprisonment 6 months to 10 years + fine 1x to 3x the fraud amount</td></tr>
+      <tr><td>Section 448</td><td>False statement in any return, report, or financial statement</td><td>Imprisonment up to 2 years + fine Rs 50,000-5 lakh</td></tr>
+    </table>
+
+    <p>Beyond statutory penalties, the practical consequences matter more for most companies: a qualified audit report affects bank loan processing, investor due diligence, and vendor relationships. Banks review the CARO report and IFC opinion before sanctioning or renewing credit facilities.</p>
+
+    <h2>5. Consequences for the Auditor</h2>
+
+    <p>Auditors face their own consequences for inadequate reporting. These provisions are relevant because they explain why your statutory auditor is increasingly insistent on seeing proper records and controls.</p>
+
+    <table>
+      <tr><th>Provision</th><th>What it covers</th><th>Penalty</th></tr>
+      <tr><td>Section 147(1)</td><td>Contravention of audit provisions</td><td>Fine Rs 25,000 to Rs 5 lakh</td></tr>
+      <tr><td>Section 147(2)</td><td>Knowingly/wilfully with intent to deceive</td><td>Imprisonment up to 1 year + fine Rs 1-25 lakh</td></tr>
+      <tr><td>Section 143(12)</td><td>Failure to report fraud discovered during audit</td><td>Fine Rs 1 lakh to Rs 25 lakh</td></tr>
+      <tr><td>NFRA</td><td>Inadequate audit quality</td><td>Penalty up to 5x audit fees + debarment up to 10 years</td></tr>
+      <tr><td>ICAI</td><td>Professional misconduct</td><td>Removal from register up to 5 years + fine up to Rs 5 lakh</td></tr>
+    </table>
+
+    <p>NFRA has debarred 85 chartered accountants as of 2025 for audit failures — including cases involving inadequate control testing, failure to verify asset records, and baseless reports on internal financial controls. ICAI penalised 241 members in a single year — a record high. These are not theoretical risks.</p>
+
+    <h2>6. What Good Records and Controls Look Like</h2>
+
+    <p>When an auditor tests your procurement and asset records, they are looking for a system — not a collection of documents. The difference:</p>
+
+    <table>
+      <tr><th>What auditors ask</th><th>Without a system</th><th>With a governed system</th></tr>
+      <tr><td>"Show me the approval for this purchase"</td><td>Email thread, verbal confirmation</td><td>Approval matrix with frozen snapshot showing who approved, when, at what level</td></tr>
+      <tr><td>"Show me receipt was verified before payment"</td><td>Signed delivery challan in a file</td><td>GRN matched to PO with quantity, price, and condition recorded</td></tr>
+      <tr><td>"Show me your asset records"</td><td>Excel with asset name and cost</td><td>Register with 40+ fields — ID, location, custodian, classification, depreciation, acquisition trail</td></tr>
+      <tr><td>"Show me assets physically exist"</td><td>"We did a check last year"</td><td>Verification campaign report — who scanned, when, what condition, what was missing</td></tr>
+      <tr><td>"Show me disposals were authorised"</td><td>Board resolution</td><td>Disposal requisition with approval chain, asset value at disposal, proceeds recorded</td></tr>
+      <tr><td>"Show me the audit trail"</td><td>"We don't delete anything"</td><td>System-generated log of every change with user, timestamp, and before/after values</td></tr>
+    </table>
+
+    <h2>7. Implementing These Controls</h2>
+
+    <p>The requirements described in this article — CARO-compliant asset records, internal financial controls over procurement, and tamper-proof audit trails — are not about installing software. They are about putting a structured process in place:</p>
+
+    <ol>
+      <li><strong>Define your approval structure:</strong> Who can request purchases? Who approves, and at what thresholds? Map this to an <a href="/purchase-order-approval">approval matrix</a> with clear levels and dimensions.</li>
+      <li><strong>Govern the procurement chain:</strong> Every purchase follows <a href="/procurement">PR → PO → GRN</a> with each step requiring completion before the next. No ad-hoc purchases, no retroactive documentation.</li>
+      <li><strong>Maintain a structured asset register:</strong> Every asset has a complete record — identity, location, financial details, lifecycle status. <a href="/fixed-asset-register">Depreciation</a> runs on defined schedules with year-end snapshots that cannot be modified.</li>
+      <li><strong>Verify physically:</strong> <a href="/asset-tagging-verification">Tag assets with QR codes</a>, run periodic verification campaigns, record what was found and what was missing. This directly satisfies CARO Clause 3(i).</li>
+      <li><strong>Match invoices:</strong> Before payment, the vendor's invoice is <a href="/invoice-matching">matched to the PO and GRN</a> — quantity, price, and GST. Mismatches are resolved through a defined workflow, not ignored.</li>
+      <li><strong>Ensure the audit trail:</strong> Every action in the system — creation, approval, rejection, edit, posting, reversal — is logged with user, timestamp, and before/after values. The trail cannot be disabled or tampered with.</li>
+    </ol>
+
+    <p>ProcureTrail supports this complete workflow. But the principle applies regardless of the tool — the statutory requirement is for <strong>controls and records</strong>, not for any specific software.</p>
+
+  </div>
+
+  <!-- FAQ Section -->
+  <section class="why-us" style="padding: 64px 0;">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div style="max-width: 720px; margin: 32px auto 0;">
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Does CARO 2020 apply to private limited companies?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Yes, unless the company meets all three exemption conditions simultaneously: paid-up capital plus reserves not exceeding Rs 1 crore, borrowings from banks or financial institutions not exceeding Rs 1 crore at any point during the year, and revenue not exceeding Rs 10 crore. If any one threshold is breached, CARO 2020 applies in full.</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Is internal financial controls (IFC) audit mandatory for all private companies?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">No. Private companies with turnover below Rs 50 crore and borrowings below Rs 25 crore are exempt from IFC auditor reporting under Section 143(3)(i). However, directors of all companies — regardless of size — must state in the annual report that IFCs are adequate and operating effectively under Section 134(5)(e).</p>
+        </details>
+        <details style="margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">Does the audit trail requirement apply to asset registers maintained in Excel?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Rule 3 of the Companies (Accounts) Rules 2014 requires accounting software to have a built-in audit trail that records every transaction change with date and user, and that cannot be disabled. Excel does not have this capability. Asset records maintained in Excel do not satisfy this requirement, which applies to all companies from 1 April 2023.</p>
+        </details>
+        <details style="margin-bottom: 16px;">
+          <summary style="cursor: pointer; font-weight: 600; font-size: 1.05rem;">What are the penalties for not maintaining proper books of account?</summary>
+          <p style="margin-top: 12px; color: var(--text-muted); line-height: 1.7;">Under Section 128 of the Companies Act 2013, the company faces a penalty of Rs 1 lakh plus Rs 500 per day of continuing failure (up to Rs 5 lakh), and every officer in default faces a penalty of Rs 25,000. Under Section 134(8), for false statements in the directors' responsibility statement, officers face imprisonment up to 3 years or fine up to Rs 5 lakh or both.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement Governance</a>
+        <a href="/fixed-asset-register-companies-act" style="display:inline-block; padding:8px 16px; border:1px solid var(--primary); border-radius:6px; color:var(--primary); text-decoration:none; font-size:0.9rem;">Guide: Companies Act 2013</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your current procurement and asset record-keeping setup and we will evaluate where the gaps are.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var GA_ID = "G-LE8PMCPPYM";
+    var EU_COUNTRIES = new Set([
+      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR",
+      "DE","GR","HU","IE","IT","LV","LT","LU","MT","NL",
+      "PL","PT","RO","SK","SI","ES","SE",
+      "GB","IS","LI","NO"
+    ]);
+    function loadGA() {
+      if (document.getElementById("ga-script")) return;
+      var s = document.createElement("script");
+      s.id = "ga-script"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    function showBanner(isEU) {
+      var banner = document.getElementById("cookie-banner");
+      var text = document.getElementById("cookie-text");
+      var decline = document.getElementById("cookie-decline");
+      if (isEU) {
+        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
+        decline.style.display = "inline-block";
+      } else {
+        text.textContent = "We use analytics cookies to improve your experience.";
+      }
+      banner.style.display = "flex";
+      document.getElementById("cookie-accept").addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "accepted");
+        banner.style.display = "none";
+        loadGA();
+      });
+      decline.addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "declined");
+        banner.style.display = "none";
+      });
+    }
+    var consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") { loadGA(); return; }
+    if (consent === "declined") { return; }
+    fetch("/api/geo")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var isEU = EU_COUNTRIES.has(data.country);
+        if (!isEU) { loadGA(); }
+        showBanner(isEU);
+      })
+      .catch(function() { showBanner(true); });
+  })();
+  </script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
