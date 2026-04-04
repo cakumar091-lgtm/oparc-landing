@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurement Workflow for Organisations — PR, PO, GRN Explained | Oparc</title>
+  <meta name="description" content="A practical guide to structuring procurement workflows with purchase requisitions, purchase orders, and goods receipt notes. Covers approval governance, invoice matching, and common gaps that lead to audit findings.">
+  <meta name="keywords" content="procurement workflow India, PR PO GRN process, purchase requisition process, purchase order workflow, goods receipt note process, procurement software India, procurement governance, procurement audit trail, multi-level approval procurement">
+  <link rel="canonical" href="https://oparc.in/procurement-workflow-india">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/procurement-workflow-india">
+  <meta property="og:title" content="Procurement Workflow for Organisations — PR, PO, GRN Explained">
+  <meta property="og:description" content="A practical guide to structuring procurement workflows with purchase requisitions, purchase orders, and goods receipt notes.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Procurement Workflow for Organisations — PR, PO, GRN Explained">
+  <meta name="twitter:description" content="Practical guide to PR, PO, GRN workflows with approval governance and invoice matching.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Procurement Workflow for Organisations — PR, PO, GRN Explained",
+    "description": "A practical guide to structuring procurement workflows with purchase requisitions, purchase orders, and goods receipt notes.",
+    "author": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-04",
+    "mainEntityOfPage": "https://oparc.in/procurement-workflow-india"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Procurement", "item": "https://oparc.in/procurement" },
+      { "@type": "ListItem", "position": 3, "name": "PR, PO, GRN Explained", "item": "https://oparc.in/procurement-workflow-india" }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/procurement-workflow-india">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+          <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Procurement Workflow for Organisations — PR, PO, GRN Explained</h1>
+    <p class="date">Published: April 4, 2026</p>
+
+    <p>Most organisations buy things. Fewer have a structured process for it. The result is predictable — purchases happen without proper approvals, invoices don't match what was ordered, and when the auditor arrives, there's no trail from "someone needed this" to "we paid for it and received it."</p>
+
+    <p>This article explains the three core documents in a procurement workflow — Purchase Requisition (PR), Purchase Order (PO), and Goods Receipt Note (GRN) — and how they connect to create an auditable, governed process.</p>
+
+    <h2>1. The Three Documents</h2>
+
+    <table>
+      <tr><th>Document</th><th>Who Creates It</th><th>Purpose</th></tr>
+      <tr><td>Purchase Requisition (PR)</td><td>Any employee</td><td>Formal request to procure something — specifies what, why, how many, and estimated cost</td></tr>
+      <tr><td>Purchase Order (PO)</td><td>Procurement team / manager</td><td>Instruction to a vendor — specifies agreed price, quantity, delivery terms, and payment terms</td></tr>
+      <tr><td>Goods Receipt Note (GRN)</td><td>Stores / receiving team</td><td>Confirmation that goods were physically received — specifies what arrived, in what quantity, and in what condition</td></tr>
+    </table>
+
+    <p>The flow is sequential: <strong>PR → PO → GRN</strong>. Each document requires approval before the next can be created. This is the governance chain — it ensures no purchase happens without authorization and no payment happens without confirmed receipt.</p>
+
+    <h2>2. Purchase Requisition — The Starting Point</h2>
+
+    <p>A purchase requisition is where the process begins. An employee identifies a need — equipment for a lab, stationery for a department, maintenance supplies — and raises a formal request.</p>
+
+    <p>A well-structured PR captures:</p>
+    <ul>
+      <li>What is being requested (item description, classification, specifications)</li>
+      <li>How many units and estimated unit cost</li>
+      <li>Which department and budget it falls under</li>
+      <li>Why it's needed (justification)</li>
+    </ul>
+
+    <h3>Approval Governance</h3>
+    <p>The PR then goes through an approval chain. Who approves depends on the organisation's rules — typically based on the department, the type of purchase, and the amount. A stationery request for Rs 5,000 might need only a department head's approval. A capital equipment purchase for Rs 50 lakhs might need the CFO and a procurement committee.</p>
+
+    <p>This is where an <a href="/purchase-order-approval">approval matrix</a> becomes valuable. Instead of ad-hoc approvals via email or verbal nods, the system routes each PR to the right approvers based on configurable rules.</p>
+
+    <blockquote>
+      <p>The approval matrix is the foundation of procurement governance. Without it, you have a process. With it, you have a governed process.</p>
+    </blockquote>
+
+    <h2>3. Purchase Order — The Commitment</h2>
+
+    <p>Once a PR is approved, it becomes eligible for a Purchase Order. The PO is the organisation's formal commitment to a vendor — "we will buy these items at this price, and you will deliver by this date."</p>
+
+    <p>A PO typically includes:</p>
+    <ul>
+      <li>Vendor details (name, GSTIN, address)</li>
+      <li>Line items inherited from the approved PR (description, quantity, agreed unit price)</li>
+      <li>GST treatment (CGST/SGST for intra-state, IGST for inter-state)</li>
+      <li>TDS applicability (Section 194C for contracts, 194Q for goods above threshold)</li>
+      <li>Delivery terms, payment terms, and any special conditions</li>
+    </ul>
+
+    <p>The PO itself goes through its own approval chain — because the actual vendor and price may differ from what was estimated in the PR. A PR might estimate Rs 10,000 per unit, but after vendor negotiation, the PO might be at Rs 9,500 or Rs 11,000. The PO approval ensures someone has reviewed the actual commercial terms.</p>
+
+    <h2>4. Goods Receipt Note — The Confirmation</h2>
+
+    <p>When goods arrive, the receiving team creates a GRN. This is the physical confirmation that what was ordered has actually arrived.</p>
+
+    <p>A GRN records:</p>
+    <ul>
+      <li>What was received (matched against PO line items)</li>
+      <li>How many units arrived vs how many were ordered</li>
+      <li>Condition on receipt (acceptable, damaged, wrong item)</li>
+      <li>Gate entry details (if the organisation has a security/stores check)</li>
+    </ul>
+
+    <h3>Three-Way Matching</h3>
+    <p>This is where <a href="/invoice-matching">invoice matching</a> comes in. When the vendor sends an invoice, it's matched against three documents:</p>
+
+    <ol>
+      <li><strong>PO:</strong> Did we order this at this price?</li>
+      <li><strong>GRN:</strong> Did we receive this quantity?</li>
+      <li><strong>Invoice:</strong> Is the vendor billing correctly?</li>
+    </ol>
+
+    <p>Mismatches — quantity differences, price discrepancies, GST calculation errors — are flagged for resolution before payment. This prevents overpayment, duplicate payment, and payment for goods not received.</p>
+
+    <h2>5. What Happens After GRN?</h2>
+
+    <p>For capital items (fixed assets), the GRN triggers asset capitalisation — the item enters the <a href="/fixed-asset-register">fixed asset register</a> with its cost, classification, location, and depreciation schedule. For consumables and inventory, it updates stock records.</p>
+
+    <p>If the organisation uses <a href="/tally-integration">Tally for accounting</a>, the GRN posting generates the corresponding accounting voucher — crediting the vendor, debiting the asset or expense account, and handling GST input credit.</p>
+
+    <h2>6. Why This Structure Matters</h2>
+
+    <p>Without this workflow, procurement typically happens through emails, verbal approvals, and retroactive documentation. The problems are predictable:</p>
+
+    <ul>
+      <li><strong>Unauthorised purchases:</strong> No one approved it, but the goods arrived and the vendor expects payment.</li>
+      <li><strong>No price governance:</strong> Different departments buy the same item from different vendors at different prices. Nobody notices until an audit.</li>
+      <li><strong>Payment without receipt:</strong> Invoices are paid without confirming that goods were actually received and inspected.</li>
+      <li><strong>Audit findings:</strong> The auditor asks "show me the approval for this Rs 15 lakh purchase" and the answer is "the director told us verbally." This becomes a qualification in the audit report.</li>
+      <li><strong>Tax leakage:</strong> GST input credit is claimed on invoices that don't match the PO, or TDS isn't deducted where required.</li>
+    </ul>
+
+    <h2>7. Getting Started</h2>
+
+    <p>Implementing a PR → PO → GRN workflow doesn't require replacing your entire ERP. The practical steps are:</p>
+
+    <ol>
+      <li><strong>Map your current process:</strong> Who buys what? Who approves? How do goods get received today?</li>
+      <li><strong>Define your approval matrix:</strong> Which roles approve which types and amounts of purchases?</li>
+      <li><strong>Start with one department:</strong> Run the governed workflow for one department first. Expand after it's stable.</li>
+      <li><strong>Connect to accounting:</strong> Once the workflow is producing clean data, generate Tally vouchers from it instead of manual entry.</li>
+    </ol>
+
+    <p><a href="/procurement">ProcureTrail</a> supports this complete workflow — from <a href="/procurement">PR creation and multi-level approval</a>, through <a href="/purchase-order-approval">PO approval with GST/TDS handling</a>, to <a href="/grn-goods-receipt">GRN with gate entry and three-way matching</a>. <a href="/vendor-debit-note">Vendor debit notes</a> handle the mismatches. <a href="/tally-integration">Tally integration</a> handles the accounting.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement Governance</a>
+        <a href="/purchase-order-approval" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">PO Approval Workflow</a>
+        <a href="/grn-goods-receipt" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Goods Receipt</a>
+        <a href="/invoice-matching" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Invoice Matching</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your procurement process and we will evaluate how a governed workflow may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var GA_ID = "G-LE8PMCPPYM";
+    var EU_COUNTRIES = new Set([
+      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR",
+      "DE","GR","HU","IE","IT","LV","LT","LU","MT","NL",
+      "PL","PT","RO","SK","SI","ES","SE",
+      "GB","IS","LI","NO"
+    ]);
+    function loadGA() {
+      if (document.getElementById("ga-script")) return;
+      var s = document.createElement("script");
+      s.id = "ga-script"; s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+    }
+    function showBanner(isEU) {
+      var banner = document.getElementById("cookie-banner");
+      var text = document.getElementById("cookie-text");
+      var decline = document.getElementById("cookie-decline");
+      if (isEU) {
+        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
+        decline.style.display = "inline-block";
+      } else {
+        text.textContent = "We use analytics cookies to improve your experience.";
+      }
+      banner.style.display = "flex";
+      document.getElementById("cookie-accept").addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "accepted");
+        banner.style.display = "none";
+        loadGA();
+      });
+      decline.addEventListener("click", function() {
+        localStorage.setItem("cookie_consent", "declined");
+        banner.style.display = "none";
+      });
+    }
+    var consent = localStorage.getItem("cookie_consent");
+    if (consent === "accepted") { loadGA(); return; }
+    if (consent === "declined") { return; }
+    fetch("/api/geo")
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var isEU = EU_COUNTRIES.has(data.country);
+        if (!isEU) { loadGA(); }
+        showBanner(isEU);
+      })
+      .catch(function() { showBanner(true); });
+  })();
+  </script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
