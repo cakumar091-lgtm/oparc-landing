@@ -742,3 +742,30 @@ a:hover { color: var(--primary); }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .compliance-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ===== WhatsApp Floating Button ===== */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+.wa-float svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
