@@ -101,6 +101,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://oparc.in/asset-governance-guide</loc>
+    <lastmod>2026-04-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/guides</loc>
     <lastmod>2026-04-04</lastmod>
     <priority>0.6</priority>
