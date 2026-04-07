@@ -41,6 +41,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oparc.in/demo</loc>
+    <lastmod>2026-04-07</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/invoice-matching</loc>
     <lastmod>2026-04-03</lastmod>
     <priority>0.8</priority>
