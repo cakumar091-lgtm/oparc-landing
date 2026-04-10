@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tally Integration for Asset Management — Automated Voucher Generation from Procurement | Oparc</title>
+  <meta name="description" content="How a structured procurement system generates Tally-compatible accounting vouchers automatically — purchase vouchers, debit notes, journal entries, GST/TDS handling, and fixed asset register integration. A practical guide for finance teams and CAs.">
+  <meta name="keywords" content="tally integration for asset management, tally xml voucher software, auto generate tally vouchers from procurement, fixed asset register tally integration, tally accounting automation, tally voucher generation, GST tally integration, TDS tally voucher">
+  <link rel="canonical" href="https://oparc.in/tally-asset-integration-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/tally-asset-integration-guide">
+  <meta property="og:title" content="Tally Integration for Asset Management — Automated Voucher Generation from Procurement">
+  <meta property="og:description" content="How a structured procurement system generates Tally-compatible accounting vouchers automatically. Covers purchase vouchers, debit notes, journal entries, GST/TDS, and reconciliation.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tally Integration for Asset Management — Automated Voucher Generation from Procurement">
+  <meta name="twitter:description" content="Practical guide to automated Tally voucher generation from procurement workflows. GST/TDS handling, ledger mapping, and reconciliation.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Tally Integration for Asset Management — Automated Voucher Generation from Procurement",
+    "description": "How a structured procurement system generates Tally-compatible accounting vouchers automatically — purchase vouchers, debit notes, journal entries, GST/TDS handling, and fixed asset register integration.",
+    "author": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-10",
+    "dateModified": "2026-04-10",
+    "mainEntityOfPage": "https://oparc.in/tally-asset-integration-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Tally Integration for Asset Management", "item": "https://oparc.in/tally-asset-integration-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use ProcureTrail without enabling Tally integration?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Tally integration is a master switch that is off by default. The procurement and asset management workflows — PR, PO, GRN, service acceptance, approvals, asset register — all function fully without it. You enable the Tally module only when your ledger mappings are configured and you are ready to generate vouchers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it support TallyPrime?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The integration generates standard Tally XML voucher format that is compatible with both TallyPrime and Tally.ERP 9. The XML structure follows Tally's published schema, so it works with any version that supports XML import."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are GST entries handled in the generated vouchers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GST treatment is determined automatically based on the vendor's GSTIN and the organisation's GSTIN. Intra-state transactions split into CGST and SGST at equal rates. Inter-state transactions use IGST. The system maps each tax component to the correct Tally ledger based on your configured GST ledger mappings. ITC eligibility is a separate toggle per transaction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if a voucher fails to sync with Tally?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every accounting event enters a processing queue with tracked states: PENDING, PROCESSING, POSTED, FAILED, and SKIPPED. Failed entries are retained with error details and can be retried after the issue is resolved. Persistent failures move to a dead letter queue for manual review. No data is lost — every event is tracked from creation through posting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Tally integration module audited?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The module has been through 8 rounds of systematic audit covering all 22 event types, edge cases, reversal scenarios, and error handling paths. There are 197 automated tests that run against every code change. The audit findings and design decisions are documented and locked — they inform how each voucher type is structured."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/tally-asset-integration-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/tally-asset-integration-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Tally Integration for Asset Management — How Automated Voucher Generation Works</h1>
+    <p class="date">Published: April 10, 2026</p>
+
+    <p>Every organisation that manages fixed assets faces the same operational reality: the procurement system produces documents (purchase orders, goods receipts, invoices), and someone has to translate those into accounting entries in Tally. In most organisations, that translation is manual — an accountant reads the GRN, opens Tally, and types the purchase voucher. Then the journal entry for asset capitalisation. Then the GST input credit entry. Then the TDS entry.</p>
+
+    <p>This manual double-entry is where errors accumulate. A transposed amount, a wrong ledger, a missed TDS deduction, a GST entry posted under IGST instead of CGST/SGST — each error is small individually, but across hundreds of transactions per month, they compound into reconciliation gaps that consume days during audit season.</p>
+
+    <p>This article explains how a structured procurement and asset management system can generate Tally-compatible vouchers automatically — what gets generated, how the mapping works, and what controls exist to ensure the entries are correct before they reach Tally.</p>
+
+    <h2>1. The Problem — Manual Double-Entry Between Systems</h2>
+
+    <p>Consider the lifecycle of a single capital purchase:</p>
+
+    <ol>
+      <li>A purchase requisition is raised and approved</li>
+      <li>A purchase order is created with agreed pricing, GST rates, and TDS applicability</li>
+      <li>Goods are received and inspected (GRN)</li>
+      <li>The invoice is matched against the PO and GRN</li>
+      <li>The asset is capitalised in the fixed asset register</li>
+      <li>Depreciation begins from the date of capitalisation</li>
+    </ol>
+
+    <p>Each of these steps produces an accounting event that needs a corresponding Tally entry. For the GRN alone, the accountant needs to:</p>
+
+    <ul>
+      <li>Debit the asset account (or expense account for revenue items)</li>
+      <li>Credit the vendor's ledger</li>
+      <li>Post CGST/SGST or IGST to the correct input credit ledgers</li>
+      <li>Deduct TDS if applicable and post to the TDS payable ledger</li>
+      <li>Handle any customs duty or additional charges</li>
+    </ul>
+
+    <p>Multiply this across every GRN, every debit note, every depreciation run, and every asset write-off — and the accounting team's time is consumed by data entry rather than analysis and oversight.</p>
+
+    <blockquote>
+      <p>The goal is not to replace the accountant's judgement. It is to eliminate the transcription — to ensure that when a GRN is posted in the operational system, the corresponding Tally voucher is generated with the correct ledgers, amounts, and tax treatment, ready for review and import.</p>
+    </blockquote>
+
+    <h2>2. What Gets Generated — Five Voucher Categories</h2>
+
+    <p>A well-designed integration covers the full spectrum of accounting events that arise from procurement and asset management. These fall into five categories:</p>
+
+    <h3>2.1 Purchase Vouchers</h3>
+
+    <p>Generated when goods or services are formally received and accepted:</p>
+
+    <ul>
+      <li><strong>GRN Posting:</strong> When physical goods are received against a purchase order, a purchase voucher is generated — debiting the asset or expense account, crediting the vendor, and posting GST components to the appropriate input credit ledgers.</li>
+      <li><strong>Service Acceptance (SA) Posting:</strong> For service-type purchase orders (maintenance contracts, consulting, professional services), the equivalent of a GRN is a service acceptance. The voucher structure is the same — debit the expense account, credit the vendor, handle GST and TDS.</li>
+      <li><strong>Reversal entries:</strong> If a GRN or SA is reversed (goods returned, service rejected), a corresponding reversal voucher is generated that mirrors the original entry with opposite debit/credit.</li>
+    </ul>
+
+    <h3>2.2 Debit Notes</h3>
+
+    <p>Generated when the organisation needs to reduce the amount owed to a vendor:</p>
+
+    <ul>
+      <li><strong>Price overcharge:</strong> The vendor invoiced Rs 1,200 per unit but the PO specified Rs 1,000. A vendor debit note reduces the vendor's account by the excess amount.</li>
+      <li><strong>Quantity mismatch:</strong> The vendor invoiced for 100 units but only 95 were received per the GRN. The debit note adjusts the difference.</li>
+      <li><strong>Damage or quality rejection:</strong> Items received but rejected during inspection. The debit note covers the value of rejected goods.</li>
+    </ul>
+
+    <p>Each debit note voucher correctly reverses the GST component of the adjustment — if the original purchase had CGST/SGST, the debit note reduces input credit proportionally.</p>
+
+    <h3>2.3 Journal Vouchers</h3>
+
+    <p>Generated for accounting events that are not purchase transactions but arise from asset lifecycle management:</p>
+
+    <ul>
+      <li><strong>Depreciation:</strong> Monthly or annual depreciation entries — debit the depreciation expense account, credit the accumulated depreciation account. Supports both Straight Line Method (SLM) and Written Down Value (WDV) as per Companies Act Schedule II.</li>
+      <li><strong>Write-off:</strong> When an asset is written off (damaged beyond repair, obsolete), a journal entry removes it from the books — debit the write-off/loss account, credit the asset account net of accumulated depreciation.</li>
+      <li><strong>Scrap:</strong> Similar to write-off but the asset retains a scrap value. The journal entry records the loss on disposal and the scrap recovery.</li>
+      <li><strong>Disposal:</strong> When an asset is sold, the journal entry records the sale proceeds, removes the asset from the books, and recognises the profit or loss on disposal.</li>
+      <li><strong>Customs duty capitalisation:</strong> Where customs duty is part of the asset's cost, a journal entry capitalises the duty amount to the asset account.</li>
+    </ul>
+
+    <h3>2.4 Purchase Order Vouchers</h3>
+
+    <p>Generated for commitment tracking — these are not accounting entries in the traditional sense, but Tally supports PO vouchers that help organisations track outstanding commitments:</p>
+
+    <ul>
+      <li><strong>PO Posting:</strong> When a purchase order is approved, a PO voucher records the committed amount against the vendor.</li>
+      <li><strong>PO Reversal:</strong> When a PO is cancelled or closed, the commitment voucher is reversed.</li>
+    </ul>
+
+    <p>This is particularly valuable for organisations that need to report outstanding purchase commitments in their financial statements or for budget tracking against approved capital expenditure.</p>
+
+    <h3>2.5 Master Data</h3>
+
+    <p>Beyond vouchers, the integration can generate Tally master data entries:</p>
+
+    <ul>
+      <li><strong>Vendor ledgers:</strong> When a new vendor is approved in the procurement system, a corresponding sundry creditor ledger can be created in Tally with the correct group, GSTIN, and contact details.</li>
+      <li><strong>Fixed asset ledger entries:</strong> When a new asset is capitalised through GRN posting, a fixed asset ledger entry is created in Tally under the appropriate asset group, with the correct depreciation rate and method.</li>
+    </ul>
+
+    <h2>3. How the Mapping Works — Connecting System Values to Tally Ledgers</h2>
+
+    <p>The bridge between the procurement system and Tally is the ledger mapping layer. Every value that appears in a generated voucher — the vendor name, the asset account, the GST ledger, the TDS section — must map to an actual ledger in Tally.</p>
+
+    <p>A well-structured integration uses multiple mapping types to cover all the dimensions:</p>
+
+    <table>
+      <tr><th>Mapping Type</th><th>What It Maps</th><th>Example</th></tr>
+      <tr><td>Vendor</td><td>System vendor ID to Tally sundry creditor ledger</td><td>Vendor "ABC Suppliers" maps to Tally ledger "ABC Suppliers Pvt Ltd"</td></tr>
+      <tr><td>Asset Classification</td><td>Asset class to Tally fixed asset group/ledger</td><td>"FURNITURE" maps to "Furniture & Fixtures" under "Fixed Assets"</td></tr>
+      <tr><td>Expense Account</td><td>Expense type to Tally expense ledger</td><td>"STATIONERY" maps to "Printing & Stationery" under "Indirect Expenses"</td></tr>
+      <tr><td>GST Output</td><td>Tax component to GST ledger</td><td>CGST 9% maps to "CGST Input 9%" under "Duties & Taxes"</td></tr>
+      <tr><td>TDS Section</td><td>TDS section code to Tally TDS ledger</td><td>Section 194C maps to "TDS Payable u/s 194C"</td></tr>
+      <tr><td>Department</td><td>Department to Tally cost centre</td><td>"Engineering" maps to cost centre "ENGG"</td></tr>
+      <tr><td>Depreciation</td><td>Depreciation expense to Tally ledger</td><td>"Depreciation - Furniture" under "Indirect Expenses"</td></tr>
+      <tr><td>Accumulated Depreciation</td><td>Contra account for depreciation</td><td>"Accum. Depreciation - Furniture" under "Fixed Assets"</td></tr>
+      <tr><td>Loss on Disposal</td><td>Write-off/disposal loss to Tally ledger</td><td>"Loss on Disposal of Assets" under "Indirect Expenses"</td></tr>
+      <tr><td>Customs Duty</td><td>Customs/import duty to Tally ledger</td><td>"Customs Duty" under "Duties & Taxes"</td></tr>
+    </table>
+
+    <p>The mapping configuration is done once during setup — typically by the CA or finance team who knows both the chart of accounts in Tally and the classification structure in the procurement system. A setup wizard with fuzzy-match suggestions helps identify the correct Tally ledger for each system value.</p>
+
+    <blockquote>
+      <p>If a mapping is missing — say a new asset classification is created but no Tally ledger is mapped — the system identifies this during pre-processing validation and blocks the voucher from being generated until the mapping is configured. This prevents incomplete entries from reaching Tally.</p>
+    </blockquote>
+
+    <h2>4. GST and TDS Handling</h2>
+
+    <h3>4.1 GST — Automatic Tax Split</h3>
+
+    <p>GST treatment is determined automatically based on two GSTINs — the vendor's and the organisation's:</p>
+
+    <ul>
+      <li><strong>Intra-state supply</strong> (vendor and organisation in the same state): The tax amount splits equally into CGST and SGST. Each component maps to its own Tally ledger.</li>
+      <li><strong>Inter-state supply</strong> (vendor and organisation in different states): The full tax amount posts as IGST to a single ledger.</li>
+    </ul>
+
+    <p>The system determines this automatically from the first two digits of the GSTIN (state code). The finance team does not need to specify whether a particular transaction is intra-state or inter-state — the system derives it.</p>
+
+    <p>ITC (Input Tax Credit) eligibility is a separate toggle. Some purchases may not be eligible for ITC (e.g., items used for personal purposes, blocked credits under Section 17(5) of CGST Act). When ITC is marked as ineligible, the GST amount is capitalised to the asset cost rather than posted to the input credit ledger.</p>
+
+    <h3>4.2 TDS — Per-Line Deduction</h3>
+
+    <p>TDS is tracked at the purchase order line level. Each PO line can have:</p>
+
+    <ul>
+      <li>A TDS section (194C for contracts, 194Q for goods above threshold, 194J for professional services, etc.)</li>
+      <li>A TDS rate (as per the applicable section and the vendor's PAN status)</li>
+      <li>The computed TDS amount</li>
+    </ul>
+
+    <p>When the GRN or SA is posted, the TDS amount is deducted from the vendor's payable and posted to the TDS payable ledger mapped to that section. This ensures TDS is deducted at the point of credit to the vendor's account, as required under the Income Tax Act.</p>
+
+    <h2>5. Pre-Processing Validation</h2>
+
+    <p>Before any voucher is sent to Tally, the system runs a validation pass that checks:</p>
+
+    <ul>
+      <li><strong>Ledger existence:</strong> Does the mapped Tally ledger actually exist in the target Tally company? A test connection verifies this.</li>
+      <li><strong>Mapping completeness:</strong> Are all required mappings configured — vendor, asset class, GST ledgers, TDS sections?</li>
+      <li><strong>Amount integrity:</strong> Do the debits equal the credits in the generated voucher? (This should always be true for system-generated entries, but the check catches edge cases.)</li>
+      <li><strong>Date validity:</strong> Is the voucher date within an open accounting period in Tally?</li>
+    </ul>
+
+    <p>Missing ledgers are reported with specific resolution steps — which ledger is missing, what group it should be created under, and what the expected properties are. The CA or finance team can create the missing ledger in Tally and retry.</p>
+
+    <h2>6. Reconciliation — Comparing System Totals Against Tally</h2>
+
+    <p>Generating vouchers is only half the problem. The other half is confirming that what was generated actually matches what is in Tally. A reconciliation module addresses this by comparing:</p>
+
+    <ul>
+      <li><strong>Voucher counts:</strong> How many purchase vouchers were generated vs how many exist in Tally for the same period?</li>
+      <li><strong>Vendor balances:</strong> The total amount posted to each vendor's ledger in the system vs the vendor's ledger balance in Tally.</li>
+      <li><strong>Asset ledger balances:</strong> The total capitalised value per asset class in the system vs the corresponding fixed asset group balance in Tally.</li>
+      <li><strong>Tax ledger balances:</strong> Total CGST, SGST, IGST posted vs the corresponding tax ledger balances in Tally.</li>
+    </ul>
+
+    <p>Discrepancies are highlighted with the specific amounts and the direction of the difference. Common causes include manual entries made directly in Tally (bypassing the system), vouchers that failed to sync, or timing differences between the system's posting date and Tally's voucher date.</p>
+
+    <blockquote>
+      <p>Reconciliation is not a one-time exercise. Run it monthly, before closing the books. The smaller the period, the easier it is to identify and resolve discrepancies.</p>
+    </blockquote>
+
+    <h2>7. Practical Considerations</h2>
+
+    <h3>7.1 Queue-Based Processing</h3>
+
+    <p>Vouchers are not pushed to Tally in real-time. Instead, every accounting event enters a processing queue with tracked states: PENDING, PROCESSING, POSTED, FAILED, and SKIPPED. This design has practical advantages:</p>
+
+    <ul>
+      <li>If Tally is offline or the network is unavailable, entries queue up and process when connectivity is restored.</li>
+      <li>Failed entries retain the full error detail and can be retried individually.</li>
+      <li>The finance team can review pending entries before they are pushed to Tally.</li>
+      <li>Persistent failures move to a dead letter queue for manual investigation.</li>
+    </ul>
+
+    <h3>7.2 Incremental Sync</h3>
+
+    <p>Each sync processes only new or changed documents since the last successful sync. There is no need to re-export the entire dataset. This keeps sync times short and avoids duplicate entries.</p>
+
+    <h3>7.3 The Integration Is Optional</h3>
+
+    <p>This point bears emphasis: the Tally integration is a module that can be enabled or disabled without affecting the core procurement and asset management workflows. An organisation can run the full PR, PO, GRN, approval, and asset register workflow and never enable Tally integration. When the finance team is ready — when ledger mappings are configured and tested — the integration is switched on.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>Can I use ProcureTrail without enabling Tally integration?</h3>
+    <p>Yes. Tally integration is a master switch that is off by default. The procurement and asset management workflows — PR, PO, GRN, service acceptance, approvals, asset register — all function fully without it. You enable the Tally module only when your ledger mappings are configured and you are ready to generate vouchers.</p>
+
+    <h3>Does it support TallyPrime?</h3>
+    <p>Yes. The integration generates standard Tally XML voucher format that is compatible with both TallyPrime and Tally.ERP 9. The XML structure follows Tally's published schema, so it works with any version that supports XML import.</p>
+
+    <h3>How are GST entries handled in the generated vouchers?</h3>
+    <p>GST treatment is determined automatically based on the vendor's GSTIN and the organisation's GSTIN. Intra-state transactions split into CGST and SGST at equal rates. Inter-state transactions use IGST. The system maps each tax component to the correct Tally ledger based on your configured GST ledger mappings. ITC eligibility is a separate toggle per transaction.</p>
+
+    <h3>What happens if a voucher fails to sync with Tally?</h3>
+    <p>Every accounting event enters a processing queue with tracked states: PENDING, PROCESSING, POSTED, FAILED, and SKIPPED. Failed entries are retained with error details and can be retried after the issue is resolved. Persistent failures move to a dead letter queue for manual review. No data is lost — every event is tracked from creation through posting.</p>
+
+    <h3>Is the Tally integration module audited?</h3>
+    <p>The module has been through 8 rounds of systematic audit covering all 22 event types, edge cases, reversal scenarios, and error handling paths. There are 197 automated tests that run against every code change. The audit findings and design decisions are documented and maintained as part of the governance framework.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement Governance</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your current accounting workflow and we will evaluate how automated voucher generation may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
