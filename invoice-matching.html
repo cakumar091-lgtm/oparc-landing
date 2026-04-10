@@ -19,9 +19,10 @@
   <meta property="og:image" content="https://oparc.in/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Invoice Matching & Mismatch Resolution | Oparc">
   <meta name="twitter:description" content="Three-way invoice matching at goods receipt and service acceptance. Automatic resolution, dispute workflow, GST split verification.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
 
   <script type="application/ld+json">
   {
@@ -50,6 +51,7 @@
   }
   </script>
   <link rel="alternate" hreflang="en-IN" href="https://oparc.in/invoice-matching">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/invoice-matching">
 </head>
 <body>
 
@@ -59,7 +61,7 @@
       <a href="/" class="logo"></a>
       <div class="nav-links">
         <a href="/">Home</a>
-          <a href="/procurement">Procurement</a>
+        <a href="/procurement">Procurement</a>
         <a href="/asset-management">Assets</a>
         <a href="/tally-integration">Tally</a>
         <a href="/vendor-management">Vendors</a>
@@ -307,7 +309,7 @@
           <a href="/compliance">Compliance</a>
           <a href="/reports">Reports</a>
           <a href="/how-it-works">How We Work</a>
-        <a href="/demo">Demo</a>
+          <a href="/demo">Demo</a>
           <a href="/guides">Guides</a>
           <a href="/#contact">Contact</a>
         </div>
@@ -336,61 +338,7 @@
     </div>
   </div>
 
-  <script>
-  (function() {
-    var GA_ID = "G-LE8PMCPPYM";
-    var EU_COUNTRIES = new Set([
-      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR",
-      "DE","GR","HU","IE","IT","LV","LT","LU","MT","NL",
-      "PL","PT","RO","SK","SI","ES","SE",
-      "GB","IS","LI","NO"
-    ]);
-    function loadGA() {
-      if (document.getElementById("ga-script")) return;
-      var s = document.createElement("script");
-      s.id = "ga-script"; s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
-      document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      window.gtag = gtag;
-      gtag("js", new Date());
-      gtag("config", GA_ID);
-    }
-    function showBanner(isEU) {
-      var banner = document.getElementById("cookie-banner");
-      var text = document.getElementById("cookie-text");
-      var decline = document.getElementById("cookie-decline");
-      if (isEU) {
-        text.textContent = "We use cookies to understand how visitors interact with our site. Your data is not sold or shared.";
-        decline.style.display = "inline-block";
-      } else {
-        text.textContent = "We use analytics cookies to improve your experience.";
-      }
-      banner.style.display = "flex";
-      document.getElementById("cookie-accept").addEventListener("click", function() {
-        localStorage.setItem("cookie_consent", "accepted");
-        banner.style.display = "none";
-        loadGA();
-      });
-      decline.addEventListener("click", function() {
-        localStorage.setItem("cookie_consent", "declined");
-        banner.style.display = "none";
-      });
-    }
-    var consent = localStorage.getItem("cookie_consent");
-    if (consent === "accepted") { loadGA(); return; }
-    if (consent === "declined") { return; }
-    fetch("/api/geo")
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        var isEU = EU_COUNTRIES.has(data.country);
-        if (!isEU) { loadGA(); }
-        showBanner(isEU);
-      })
-      .catch(function() { showBanner(true); });
-  })();
-  </script>
+  <script src="cookie-consent.js"></script>
 
   <!-- WhatsApp -->
   <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
