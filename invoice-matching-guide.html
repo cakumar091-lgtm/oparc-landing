@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three-Way Invoice Matching in Procurement — Resolving Mismatches Systematically | Oparc</title>
+  <meta name="description" content="How three-way invoice matching works in procurement — PO, GRN, and invoice comparison for quantity, price, and GST. Covers mismatch types, resolution workflows, vendor debit notes, and impact on accounting entries.">
+  <meta name="keywords" content="3 way invoice matching software India, invoice mismatch resolution, GRN PO invoice matching, procurement invoice verification, three way matching, invoice reconciliation software, vendor debit note, GST invoice matching">
+  <link rel="canonical" href="https://oparc.in/invoice-matching-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/invoice-matching-guide">
+  <meta property="og:title" content="Three-Way Invoice Matching in Procurement — Resolving Mismatches Systematically">
+  <meta property="og:description" content="How three-way invoice matching works — PO, GRN, and invoice comparison for quantity, price, and GST. Mismatch types, resolution workflows, and vendor debit notes.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Three-Way Invoice Matching in Procurement — Resolving Mismatches Systematically">
+  <meta name="twitter:description" content="PO, GRN, and invoice matching for quantity, price, and GST. Mismatch resolution workflows, vendor debit notes, and accounting impact.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Three-Way Invoice Matching in Procurement — Resolving Mismatches Systematically",
+    "description": "How three-way invoice matching works in procurement — PO, GRN, and invoice comparison for quantity, price, and GST. Covers mismatch types, resolution workflows, vendor debit notes, and impact on accounting entries.",
+    "author": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-10",
+    "dateModified": "2026-04-10",
+    "mainEntityOfPage": "https://oparc.in/invoice-matching-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Three-Way Invoice Matching", "item": "https://oparc.in/invoice-matching-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is 3-way matching in procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three-way matching is the process of comparing three documents before approving a vendor payment: the purchase order (what was agreed), the goods receipt note or service acceptance (what was actually received), and the vendor's invoice (what the vendor is billing). The comparison checks quantity, unit price, and tax amounts. When all three documents align within acceptable tolerances, the invoice is cleared for payment. When they do not, the mismatch must be investigated and resolved before payment proceeds."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are quantity mismatches handled?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A quantity mismatch occurs when the quantity on the vendor's invoice differs from the quantity actually received (as recorded in the GRN). For example, the vendor invoices for 100 units but only 95 were received. The system flags this as a quantity mismatch and presents the user with resolution options: accept the invoice quantity (if the remaining 5 are expected in a subsequent delivery), reject the excess (and raise a debit note for the 5 units), or partially accept (accept 95 and dispute 5). Each resolution is recorded with the user's decision and timestamp."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when the invoice price differs from the PO price?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A price mismatch occurs when the unit price on the invoice differs from the unit price agreed in the purchase order. If the difference falls within a configured tolerance (for example, within 2%), the system can auto-accept the invoice price. If the difference exceeds the tolerance, the mismatch is flagged for manual review. The reviewer can accept the vendor's price (if a price revision was agreed but not updated on the PO), reject the invoice price and raise a debit note for the overcharge, or negotiate with the vendor and update the resolution accordingly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can mismatches be partially accepted?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Partial acceptance is supported for quantity mismatches. If the vendor invoiced for 100 units, 95 were received, and the organisation decides to accept 95 and dispute 5, the system records this as a partial acceptance. The accepted portion (95 units at the agreed price) clears for payment processing, while the disputed portion (5 units) generates a debit note or remains in dispute until resolved. This avoids holding up the entire invoice over a partial discrepancy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do resolved mismatches appear in Tally?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When the Tally integration module is enabled, resolved mismatches generate the appropriate accounting vouchers automatically. An accepted invoice generates a purchase voucher with the final agreed amounts. A debit note for a price overcharge generates a debit note voucher that reduces the vendor's account and reverses the proportional GST input credit. A quantity rejection generates a similar debit note voucher. Each voucher maps to the correct Tally ledgers — vendor, asset or expense account, GST components, and TDS where applicable. The finance team reviews and imports these vouchers into Tally."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/invoice-matching-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/invoice-matching-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Three-Way Invoice Matching in Procurement — Resolving Mismatches Systematically</h1>
+    <p class="date">Published: April 10, 2026</p>
+
+    <p>In any procurement operation, the moment a vendor submits an invoice is when the organisation's exposure becomes real. Until that point, the purchase order is a commitment and the goods receipt is a record of what arrived. The invoice is the vendor's claim for payment. If the invoice does not match the PO and the GRN, the organisation faces a choice: pay the wrong amount, or investigate the discrepancy.</p>
+
+    <p>Most organisations investigate manually. Someone in accounts payable opens the invoice, pulls up the PO in one window, checks the GRN register in another, and compares line by line. For a single invoice with three line items, this takes minutes. For hundreds of invoices per month with varying quantities, prices, and tax treatments, the manual approach consumes days — and errors still slip through.</p>
+
+    <p>This article explains how three-way matching works in a structured procurement system, what types of mismatches arise, and how each is resolved systematically.</p>
+
+    <h2>1. The Problem — Why Manual Invoice Verification Fails</h2>
+
+    <p>Manual invoice verification suffers from predictable failure modes:</p>
+
+    <ul>
+      <li><strong>Overpayments:</strong> The vendor invoices at a higher price than the PO, and the accounts team does not catch the difference. Over time, small per-unit overcharges compound into significant overpayments.</li>
+      <li><strong>Duplicate payments:</strong> The same invoice is submitted twice (or a credit note is submitted alongside the original invoice), and both are processed. Without systematic matching, duplicates are caught only during reconciliation — if at all.</li>
+      <li><strong>Quantity disputes:</strong> The vendor invoices for 100 units, but the GRN records only 95 as received. Without matching, the organisation pays for 5 units it never received.</li>
+      <li><strong>GST mismatches:</strong> The vendor charges IGST when the transaction is intra-state (should be CGST + SGST), or applies an incorrect tax rate. The organisation claims incorrect input credit, creating a liability during GST audits.</li>
+      <li><strong>No accountability:</strong> When mismatches are discovered during the annual audit, there is no record of who approved the payment, whether the mismatch was known at the time, or what the resolution was.</li>
+    </ul>
+
+    <p>The common thread is the absence of a systematic comparison step between the three documents — PO, GRN, and invoice — before payment is authorised.</p>
+
+    <h2>2. What Is Three-Way Matching</h2>
+
+    <p>Three-way matching compares three documents for every invoice line item:</p>
+
+    <table>
+      <tr><th>Document</th><th>What It Records</th><th>Who Creates It</th></tr>
+      <tr><td>Purchase Order (PO)</td><td>What was agreed — item, quantity, unit price, tax rate, delivery terms</td><td>The buying organisation, after approval</td></tr>
+      <tr><td>Goods Receipt Note (GRN)</td><td>What was actually received — item, quantity received, condition, receipt date</td><td>The store or receiving department</td></tr>
+      <tr><td>Invoice</td><td>What the vendor is billing — item, quantity billed, unit price, tax amount, total</td><td>The vendor</td></tr>
+    </table>
+
+    <p>For each line item, the system compares:</p>
+
+    <ul>
+      <li><strong>Quantity:</strong> PO quantity vs GRN received quantity vs invoice quantity. All three should match, or the differences should be within acceptable tolerances.</li>
+      <li><strong>Unit price:</strong> PO agreed price vs invoice price. The GRN typically does not carry price information — price matching is PO-to-invoice.</li>
+      <li><strong>Tax amount:</strong> Expected tax (computed from PO price and applicable GST rate) vs invoiced tax. This includes verifying the correct GST split (CGST/SGST vs IGST).</li>
+    </ul>
+
+    <blockquote>
+      <p>Three-way matching is not a new concept — it is standard practice in any properly governed accounts payable function. What changes with a structured system is that the comparison happens automatically, tolerances are configurable, and every match or mismatch is recorded with an audit trail.</p>
+    </blockquote>
+
+    <h2>3. Types of Mismatches</h2>
+
+    <h3>3.1 Quantity Mismatch</h3>
+
+    <p>The most common mismatch. It arises when the quantity received (per GRN) differs from the quantity invoiced by the vendor.</p>
+
+    <ul>
+      <li><strong>Under-receipt:</strong> The vendor invoices for 100 units, but only 95 were received. The organisation should not pay for 5 units it does not have.</li>
+      <li><strong>Over-receipt:</strong> The GRN records 105 units received against a PO for 100. The vendor invoices for 100. The extra 5 units need to be addressed — either returned, or the PO amended to cover the excess.</li>
+      <li><strong>Partial delivery:</strong> The PO is for 100 units, the vendor delivers 60 in the first shipment (GRN records 60), and invoices for 60. This is not a mismatch — it is a partial fulfilment. The system tracks the remaining 40 as outstanding against the PO.</li>
+    </ul>
+
+    <h3>3.2 Price Mismatch</h3>
+
+    <p>The vendor's invoice shows a unit price that differs from the price agreed in the purchase order.</p>
+
+    <ul>
+      <li><strong>Price increase:</strong> The PO states Rs 1,000 per unit, but the invoice shows Rs 1,200. This could be a legitimate price revision (communicated but not updated on the PO) or an error.</li>
+      <li><strong>Price decrease:</strong> The invoice shows a lower price than the PO — less common, but it happens with promotional pricing or negotiated discounts applied after PO issuance.</li>
+    </ul>
+
+    <p>Tolerance-based handling helps here. If the organisation configures a 2% price tolerance, a PO price of Rs 1,000 and an invoice price of Rs 1,015 would auto-accept. An invoice price of Rs 1,050 (5% above) would be flagged for manual review.</p>
+
+    <h3>3.3 GST Mismatch</h3>
+
+    <p>GST mismatches are particularly consequential because they affect input tax credit claims:</p>
+
+    <ul>
+      <li><strong>Wrong GST type:</strong> The vendor charges IGST on what should be an intra-state supply (CGST + SGST), or vice versa. This is determined by comparing the vendor's GSTIN state code with the organisation's GSTIN state code.</li>
+      <li><strong>Wrong rate:</strong> The vendor applies 18% GST when the item falls under 12% or 5%. The applicable rate depends on the HSN code.</li>
+      <li><strong>Arithmetic error:</strong> The tax amount does not match the taxable value multiplied by the stated rate.</li>
+    </ul>
+
+    <h2>4. Resolution Workflow</h2>
+
+    <p>When a mismatch is detected, it follows a structured resolution path:</p>
+
+    <ol>
+      <li><strong>Detection:</strong> The system automatically compares the invoice against the PO and GRN at the point of invoice entry. Mismatches are classified by type (quantity, price, GST) and severity (within tolerance, outside tolerance).</li>
+      <li><strong>Flagging:</strong> Mismatches outside tolerance are flagged and assigned to the appropriate person for review — typically the procurement officer who raised the PO or the accounts payable team lead.</li>
+      <li><strong>Investigation:</strong> The reviewer examines the mismatch, contacts the vendor if needed, and determines the root cause — was it an error, a legitimate change, or a dispute?</li>
+      <li><strong>Resolution:</strong> The reviewer selects a resolution action:
+        <ul>
+          <li><strong>Accept:</strong> Accept the vendor's invoice as correct (e.g., a price revision was agreed verbally but the PO was not updated).</li>
+          <li><strong>Reject:</strong> Reject the invoice and ask the vendor to resubmit with corrected amounts.</li>
+          <li><strong>Raise debit note:</strong> Accept the invoice partially and raise a vendor debit note for the disputed amount.</li>
+        </ul>
+      </li>
+      <li><strong>Approval:</strong> The resolution decision goes through its own approval workflow. A junior accounts officer cannot unilaterally accept a Rs 50,000 overcharge — the resolution must be approved by someone with the appropriate authority.</li>
+    </ol>
+
+    <p>Every step — detection, flagging, investigation notes, resolution decision, and approval — is recorded with timestamps and user identities. This creates a complete audit trail for each mismatch from discovery to closure.</p>
+
+    <h2>5. Vendor Debit Notes</h2>
+
+    <p>When the resolution is to reduce the amount owed to the vendor, a vendor debit note (VDN) is raised. There are four common scenarios:</p>
+
+    <table>
+      <tr><th>Type</th><th>Trigger</th><th>Example</th></tr>
+      <tr><td>Price Overcharge</td><td>Invoice price exceeds PO price beyond tolerance</td><td>PO: Rs 1,000/unit. Invoice: Rs 1,200/unit. Debit note for Rs 200/unit x quantity.</td></tr>
+      <tr><td>Quantity Excess</td><td>Invoice quantity exceeds received quantity</td><td>Invoiced: 100 units. Received: 95 units. Debit note for 5 units at PO price.</td></tr>
+      <tr><td>Quality Rejection</td><td>Goods received but rejected during inspection</td><td>Received 100 units, 8 rejected on quality. Debit note for 8 units.</td></tr>
+      <tr><td>Damage</td><td>Goods received in damaged condition</td><td>Received 100 units, 3 damaged in transit. Debit note for 3 units.</td></tr>
+    </table>
+
+    <p>Each debit note carries the correct GST treatment — if the original purchase was intra-state with CGST/SGST, the debit note reverses the proportional CGST and SGST amounts. If it was inter-state, the debit note reverses the proportional IGST. This ensures input tax credit claims remain accurate.</p>
+
+    <p>Debit notes follow their own approval workflow before being communicated to the vendor. The vendor receives the debit note and can either accept it (adjusting their receivables) or dispute it (triggering a further round of negotiation).</p>
+
+    <h2>6. The Role of Gate Entry</h2>
+
+    <p>Before a GRN is created, goods physically arrive at the organisation's premises. Gate entry is the first checkpoint in this process.</p>
+
+    <p>When a delivery arrives at the gate, the security or stores team records:</p>
+
+    <ul>
+      <li>The vendor and delivery challan details</li>
+      <li>The number of packages, cartons, or units received</li>
+      <li>The PO number referenced by the vendor</li>
+      <li>Any visible damage to packaging</li>
+    </ul>
+
+    <p>This gate entry record serves as preliminary evidence of receipt. The formal GRN — which involves detailed inspection, quantity counting, and quality checking — happens after the goods move from the gate to the stores or inspection area.</p>
+
+    <p>The gate entry and GRN together form the "receipt" side of the three-way match. If the gate entry records 100 cartons but the GRN (after unpacking and counting) records only 95 usable units, the discrepancy between gate entry and GRN itself becomes a data point for investigation — was there damage during unpacking, or did the vendor short-ship within sealed cartons?</p>
+
+    <h2>7. Impact on Books — How Resolved Mismatches Flow to Accounting</h2>
+
+    <p>Every resolved mismatch produces an accounting consequence:</p>
+
+    <ul>
+      <li><strong>Accepted invoice (no mismatch):</strong> A standard purchase voucher is generated — debit the asset or expense account, credit the vendor, post GST to input credit ledgers, deduct TDS where applicable.</li>
+      <li><strong>Price overcharge debit note:</strong> A debit note voucher is generated — debit the vendor's account (reducing the payable), credit the asset or expense account (reducing the capitalised cost), and reverse the proportional GST input credit.</li>
+      <li><strong>Quantity rejection debit note:</strong> Similar to price overcharge — the debit note reduces the vendor's payable by the value of rejected units, including proportional GST reversal.</li>
+      <li><strong>Partial acceptance:</strong> The accepted portion generates a purchase voucher at the accepted quantity and price. The rejected portion generates a debit note. Both vouchers are linked to the same invoice for traceability.</li>
+    </ul>
+
+    <p>When the Tally integration module is enabled, these vouchers are generated automatically with the correct ledger mappings, GST treatment, and TDS deductions. The finance team reviews the generated vouchers and imports them into Tally.</p>
+
+    <blockquote>
+      <p>The accounting treatment of mismatches is not optional. Every rupee of difference between what was ordered, what was received, and what was invoiced must be accounted for — either through the purchase voucher, a debit note, or a provision. A structured matching system ensures that none of these differences are lost or ignored.</p>
+    </blockquote>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>What is 3-way matching in procurement?</h3>
+    <p>Three-way matching is the process of comparing three documents before approving a vendor payment: the purchase order (what was agreed), the goods receipt note or service acceptance (what was actually received), and the vendor's invoice (what the vendor is billing). The comparison checks quantity, unit price, and tax amounts. When all three documents align within acceptable tolerances, the invoice is cleared for payment. When they do not, the mismatch must be investigated and resolved before payment proceeds.</p>
+
+    <h3>How are quantity mismatches handled?</h3>
+    <p>A quantity mismatch occurs when the quantity on the vendor's invoice differs from the quantity actually received (as recorded in the GRN). For example, the vendor invoices for 100 units but only 95 were received. The system flags this as a quantity mismatch and presents the user with resolution options: accept the invoice quantity (if the remaining 5 are expected in a subsequent delivery), reject the excess (and raise a debit note for the 5 units), or partially accept (accept 95 and dispute 5). Each resolution is recorded with the user's decision and timestamp.</p>
+
+    <h3>What happens when the invoice price differs from the PO price?</h3>
+    <p>A price mismatch occurs when the unit price on the invoice differs from the unit price agreed in the purchase order. If the difference falls within a configured tolerance (for example, within 2%), the system can auto-accept the invoice price. If the difference exceeds the tolerance, the mismatch is flagged for manual review. The reviewer can accept the vendor's price (if a price revision was agreed but not updated on the PO), reject the invoice price and raise a debit note for the overcharge, or negotiate with the vendor and update the resolution accordingly.</p>
+
+    <h3>Can mismatches be partially accepted?</h3>
+    <p>Yes. Partial acceptance is supported for quantity mismatches. If the vendor invoiced for 100 units, 95 were received, and the organisation decides to accept 95 and dispute 5, the system records this as a partial acceptance. The accepted portion (95 units at the agreed price) clears for payment processing, while the disputed portion (5 units) generates a debit note or remains in dispute until resolved. This avoids holding up the entire invoice over a partial discrepancy.</p>
+
+    <h3>How do resolved mismatches appear in Tally?</h3>
+    <p>When the Tally integration module is enabled, resolved mismatches generate the appropriate accounting vouchers automatically. An accepted invoice generates a purchase voucher with the final agreed amounts. A debit note for a price overcharge generates a debit note voucher that reduces the vendor's account and reverses the proportional GST input credit. A quantity rejection generates a similar debit note voucher. Each voucher maps to the correct Tally ledgers — vendor, asset or expense account, GST components, and TDS where applicable. The finance team reviews and imports these vouchers into Tally.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/invoice-matching" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Invoice Matching</a>
+        <a href="/grn-goods-receipt" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Goods Receipt & Gate Entry</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement Governance</a>
+        <a href="/vendor-debit-note" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Vendor Debit Notes</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your current invoice verification process and we will evaluate how structured matching may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

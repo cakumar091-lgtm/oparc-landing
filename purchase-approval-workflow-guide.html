@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Level Purchase Approval Workflows — Configuring Procurement Governance | Oparc</title>
+  <meta name="description" content="How multi-level purchase approval workflows work — approval matrix configuration, dimension-based routing, per-line vs collective approval, PO progression modes, and authority projection. A practical guide for finance teams and CAs.">
+  <meta name="keywords" content="multi level purchase approval software, purchase requisition approval workflow, procurement approval matrix, purchase order approval process India, approval workflow software, procurement governance, purchase approval automation">
+  <link rel="canonical" href="https://oparc.in/purchase-approval-workflow-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/purchase-approval-workflow-guide">
+  <meta property="og:title" content="Multi-Level Purchase Approval Workflows — Configuring Procurement Governance">
+  <meta property="og:description" content="How multi-level purchase approval workflows work — approval matrix, dimension-based routing, per-line vs collective approval, and authority projection.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Multi-Level Purchase Approval Workflows — Configuring Procurement Governance">
+  <meta name="twitter:description" content="Approval matrix configuration, dimension-based routing, per-line vs collective approval, PO progression modes, and authority projection.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Multi-Level Purchase Approval Workflows — Configuring Procurement Governance",
+    "description": "How multi-level purchase approval workflows work — approval matrix configuration, dimension-based routing, per-line vs collective approval, PO progression modes, and authority projection.",
+    "author": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-10",
+    "dateModified": "2026-04-10",
+    "mainEntityOfPage": "https://oparc.in/purchase-approval-workflow-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Multi-Level Purchase Approval Workflows", "item": "https://oparc.in/purchase-approval-workflow-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an approval matrix in procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An approval matrix is a set of rules that determines who must approve a purchase requisition, purchase order, or goods receipt based on the characteristics of the request. The matrix maps combinations of dimensions — department, asset classification, location, amount, and document type — to a chain of approvers at specified levels. When a requisition is submitted, the system matches it against the matrix to find the best-fit rule and seeds the approval chain accordingly. This replaces informal email-based approvals with a structured, auditable process."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can different items in one requisition route to different approvers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on the approval topology configured for the requisition. In LINE_LEVEL mode (the default), each line item is evaluated independently — different items can route to different approvers based on their individual dimensions (classification, amount, location). In COLLECTIVE mode, all line items in the requisition are treated as a unit and route to the same approval chain. The topology is set when the requisition is created and cannot be changed after submission."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are approval limits configured?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Approval limits are configured as amount thresholds in the approval matrix. Each approval code can specify an amount limit. When a requisition line's value falls within a particular range, the system selects the approval code whose amount limit is the tightest fit — the lowest limit that still covers the line's value. For example, if there are codes for amounts up to Rs 50,000 (one-level approval) and up to Rs 5,00,000 (two-level approval), a requisition for Rs 75,000 would match the Rs 5,00,000 code and require two levels of approval."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if the approver is unavailable?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The system does not currently support automatic delegation or re-routing when an approver is unavailable. A pending approval remains with the assigned approver until they act on it. The organisation can monitor pending approvals through the dashboard — items awaiting approval are visible to administrators and can be escalated manually. SLA tracking per approval level helps identify bottlenecks: if a level has a configured SLA of 2 days and the approval is still pending after 3 days, it is flagged for attention."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the approval history preserved for audit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every approval action — approve, reject — is recorded with the approver's identity, timestamp, and any remarks provided. The approval chain is versioned through snapshot groups: if routing changes (for example, during the transition from source to receiving department in a MOVEMENT requisition), the previous snapshot is superseded and a new one is created. Both snapshots are retained. Auditors can trace the complete approval history of any document from submission through each level of approval to final status."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/purchase-approval-workflow-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/purchase-approval-workflow-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Multi-Level Purchase Approval Workflows — Configuring Procurement Governance</h1>
+    <p class="date">Published: April 10, 2026</p>
+
+    <p>In most growing organisations, procurement starts informally. Someone sends a WhatsApp message to the manager: "Need to buy 50 chairs for the new office." The manager replies "ok." The admin team places the order, the invoice arrives, the accountant books it, and the chairs appear in the office. No one questions the process because it works — until it does not.</p>
+
+    <p>The problems emerge gradually. A department head approves a Rs 3 lakh purchase that should have required the CFO's sign-off. An employee raises the same purchase request twice and both get approved. A vendor is paid for goods that were never received because no one verified delivery against the order. The annual audit reveals that 40% of purchases have no documented approval trail.</p>
+
+    <p>This article explains how structured approval workflows address these problems — how an approval matrix routes requisitions to the right approvers, how multi-level chains enforce authority limits, and how the approval pattern cascades through the full procurement cycle from purchase requisition to purchase order to goods receipt.</p>
+
+    <h2>1. The Problem — Informal Approvals Leave No Trail</h2>
+
+    <p>Informal approval systems — email threads, WhatsApp messages, verbal confirmations — share common weaknesses:</p>
+
+    <ul>
+      <li><strong>No authority limits:</strong> There is no systematic way to ensure that a Rs 5 lakh purchase is approved by someone with the authority to approve amounts of that magnitude. A department head may approve purchases that, per policy, require the CFO's approval.</li>
+      <li><strong>No audit trail:</strong> When the auditor asks "who approved this purchase?", the answer is a WhatsApp message that may or may not still exist on someone's phone. This does not satisfy the requirements of Section 143 of the Companies Act or CARO 2020 for documented internal financial controls.</li>
+      <li><strong>No segregation of duties:</strong> The same person who raises the purchase request can approve it. Without system-enforced segregation, the control exists only on paper.</li>
+      <li><strong>No visibility:</strong> Management has no dashboard showing how many purchases are pending approval, how long they have been waiting, or what the total committed value is. Procurement is a black box until the invoices arrive.</li>
+      <li><strong>No consistency:</strong> Similar purchases from different departments follow different approval paths because there is no documented routing logic. The engineering department's laptop purchases go through three levels of approval; the marketing department's identical laptop purchases get approved by a single manager.</li>
+    </ul>
+
+    <h2>2. The Approval Matrix — Rules That Route Requisitions</h2>
+
+    <p>An approval matrix is a set of configured rules that map the characteristics of a purchase to a chain of approvers. The matrix answers the question: "Given this type of purchase, from this department, at this amount, who needs to approve it?"</p>
+
+    <h3>2.1 Dimensions</h3>
+
+    <p>Each approval rule is defined across several dimensions:</p>
+
+    <table>
+      <tr><th>Dimension</th><th>What It Controls</th><th>Example</th></tr>
+      <tr><td>Department</td><td>Which department raised the request</td><td>"Engineering" or "Marketing" or "Any"</td></tr>
+      <tr><td>Classification</td><td>What type of asset or expense is being purchased</td><td>"IT_EQUIPMENT", "FURNITURE", "STATIONERY"</td></tr>
+      <tr><td>Location</td><td>Which site or campus the purchase is for</td><td>"Bangalore HQ", "Mumbai Office"</td></tr>
+      <tr><td>Amount Limit</td><td>Maximum value covered by this rule</td><td>Rs 50,000, Rs 5,00,000, Rs 50,00,000</td></tr>
+      <tr><td>Document Type</td><td>PR, PO, or GRN</td><td>Different approval chains for different document types</td></tr>
+      <tr><td>PR Type</td><td>PROCUREMENT, EXPENSE, WRITE_OFF, etc.</td><td>Write-offs may require different approvers than procurements</td></tr>
+    </table>
+
+    <h3>2.2 Approval Codes</h3>
+
+    <p>Rules are grouped into named codes. Each code represents a complete approval chain — one or more levels of approvers that must act in sequence. For example:</p>
+
+    <ul>
+      <li><strong>Code: "IT-LOW"</strong> — IT Equipment, up to Rs 50,000. One level: Department Manager.</li>
+      <li><strong>Code: "IT-HIGH"</strong> — IT Equipment, up to Rs 5,00,000. Two levels: Department Manager (Level 1), then CFO (Level 2).</li>
+      <li><strong>Code: "CAPEX-MAJOR"</strong> — Any classification, above Rs 5,00,000. Three levels: Department Manager (Level 1), CFO (Level 2), then MD (Level 3).</li>
+    </ul>
+
+    <p>Within a code, all rows share the same governance version, document type, PR type, and amount limit. Each approver within a code is unique — no person can appear twice in the same chain. Levels are contiguous, starting at 1.</p>
+
+    <h2>3. How Routing Works</h2>
+
+    <p>When a purchase requisition is submitted, the routing engine evaluates it against the approval matrix to determine the correct approval chain.</p>
+
+    <h3>3.1 The Matching Process</h3>
+
+    <ol>
+      <li><strong>Extract dimensions:</strong> The system reads the requisition's department, classification, location, amount, document type, and PR type.</li>
+      <li><strong>Filter candidates:</strong> All active approval codes that match the requisition's dimensions are identified. A code matches if its dimension values either match exactly or are set to "Any" (wildcard).</li>
+      <li><strong>Score specificity:</strong> Among matching codes, the system ranks by specificity — a code that matches on department + classification + location is more specific than one that matches on department + "Any" + "Any".</li>
+      <li><strong>Apply amount banding:</strong> Among codes with the same specificity score, the one with the lowest amount limit that still covers the requisition amount is selected. This ensures the tightest-fit authority band.</li>
+      <li><strong>Select winner:</strong> The highest-specificity, tightest-amount code becomes the routing decision. All rows of that code — representing all levels of the approval chain — are seeded as the requisition's approval workflow.</li>
+    </ol>
+
+    <h3>3.2 Fallback Chain</h3>
+
+    <p>If no exact match is found for the requisition's PR type, the system falls back through a hierarchy:</p>
+
+    <ol>
+      <li>Exact PR type (e.g., WRITE_OFF)</li>
+      <li>Generic negative type (NEGATIVE — covers all negative PR types)</li>
+      <li>PROCUREMENT (general procurement catch-all)</li>
+      <li>ANY (universal fallback)</li>
+    </ol>
+
+    <p>This fallback chain ensures that every requisition gets routed, even if a specific rule for that exact combination of dimensions has not been configured. The trade-off is intentional: it is better to route a requisition to a general approval chain than to block it entirely because no rule matches.</p>
+
+    <blockquote>
+      <p>Routing is computed once, at the moment of submission. Once the approval workflow is seeded, it is not recomputed — even if the approval matrix is updated later. This ensures that a requisition in progress is not retroactively rerouted, which would create confusion and audit issues.</p>
+    </blockquote>
+
+    <h2>4. Multi-Level Approvals — Sequential, Enforced</h2>
+
+    <p>When an approval chain has multiple levels, the system enforces strict sequencing:</p>
+
+    <ul>
+      <li><strong>Level 1 must complete before Level 2 can act.</strong> If Level 1 has multiple approvers (e.g., two department managers who share approval responsibility), all of them must complete their actions before Level 2 is activated.</li>
+      <li><strong>Rejection is allowed at any level.</strong> An approver at Level 1 can reject a requisition without waiting for other Level 1 approvers to act. Rejection is immediate and terminal — a rejected requisition cannot be approved by a higher level.</li>
+      <li><strong>Each action is recorded.</strong> When an approver approves or rejects a line, the system records the approver's identity, timestamp, and any remarks. This creates the audit trail that statutory auditors require.</li>
+    </ul>
+
+    <p>The level enforcement prevents a common governance failure: a senior approver rubber-stamping a requisition before the operational-level approver has reviewed it. In a structured system, the CFO cannot approve a purchase before the department manager has reviewed and approved it.</p>
+
+    <h2>5. Per-Line vs Collective Approval</h2>
+
+    <p>A single purchase requisition may contain multiple line items — 10 laptops, 5 printers, and 20 headsets, for example. The approval topology determines how these lines are treated during the approval process:</p>
+
+    <h3>5.1 LINE_LEVEL (Default)</h3>
+
+    <p>Each line item is approved or rejected independently. An approver can approve the laptops, reject the printers, and approve the headsets — all within the same requisition. Each line carries its own status (PENDING, APPROVED, REJECTED) and progresses through the approval chain independently.</p>
+
+    <p>This is the more flexible option and is suitable when different items in a requisition may have different justifications, urgency levels, or budget implications.</p>
+
+    <h3>5.2 COLLECTIVE</h3>
+
+    <p>All line items are treated as a single unit. The approver either approves the entire requisition or rejects it. There is no option to approve some lines and reject others. Line-level approval endpoints return an error if attempted on a collective requisition.</p>
+
+    <p>This is appropriate when the items are interdependent — for example, a server and its associated networking equipment that are only useful together.</p>
+
+    <h2>6. PO Progression Modes</h2>
+
+    <p>Once a requisition is approved (fully or partially), the next step is creating a purchase order. The PO progression mode controls when this can happen:</p>
+
+    <h3>6.1 COMBINED</h3>
+
+    <p>All lines in the requisition must be approved before a PO can be created. This ensures the PO reflects the full approved scope. If some lines are still pending or have been rejected, PO creation is blocked.</p>
+
+    <h3>6.2 INDIVIDUAL</h3>
+
+    <p>A PO can be created with only the approved lines. If 8 out of 10 lines are approved and 2 are still pending, a PO can proceed with the 8 approved lines. The remaining 2 can be included in a subsequent PO once approved.</p>
+
+    <p>This mode is valuable for time-sensitive procurement where delaying the entire order for one or two pending lines is not practical.</p>
+
+    <h2>7. Authority Projection — Telling Users What They Can Do</h2>
+
+    <p>A common usability problem in approval systems is ambiguity: the user sees a requisition but does not know whether they can approve it, whether they need to wait for someone else to act first, or why the approve button is greyed out.</p>
+
+    <p>Authority projection solves this by computing, for each user and each document, exactly what actions they are allowed to take — and why.</p>
+
+    <p>When a user views a requisition, PO, or GRN, the system evaluates:</p>
+
+    <ul>
+      <li>Is this user in the approval chain for this document?</li>
+      <li>If yes, at which level?</li>
+      <li>Has the previous level completed?</li>
+      <li>Has this user already acted on this document?</li>
+    </ul>
+
+    <p>The result is a clear signal: "You can approve this", "You can reject this", "Waiting for Level 1 approval", or "You have already approved this at Level 1." The frontend renders the appropriate buttons based on this signal — it never makes its own access decisions.</p>
+
+    <h2>8. Cascading to PO and GRN</h2>
+
+    <p>The approval pattern does not end with the purchase requisition. It extends through the full procurement lifecycle:</p>
+
+    <h3>8.1 Purchase Order Approval</h3>
+
+    <p>When a PO is created from an approved PR and submitted for approval, the routing engine evaluates the PO against the approval matrix — using the same dimension-based matching but for the PO document type. The PO may route to different approvers than the PR, depending on how the matrix is configured. This provides a second layer of governance: the person who approved the purchase concept (PR) may not be the same person who approves the commercial commitment (PO).</p>
+
+    <h3>8.2 GRN Approval</h3>
+
+    <p>When goods are received and a GRN is submitted, it follows its own approval chain. GRN approval confirms that the goods were physically received, inspected, and accepted. This is typically handled by the stores or quality team, separate from the procurement and finance approvers who handled the PR and PO.</p>
+
+    <h3>8.3 Service Acceptance</h3>
+
+    <p>For service-type purchase orders (consulting, maintenance, professional services), the equivalent of a GRN is a service acceptance. Service acceptance follows its own approval routing — the person who confirms that a consulting engagement was satisfactorily completed may be the project manager, not the procurement officer.</p>
+
+    <p>Each document type — PR, PO, GRN, SA — has its own approval tables and snapshot history. They are never mixed. This ensures that the audit trail for each document type is self-contained and independently verifiable.</p>
+
+    <blockquote>
+      <p>The cascading approval pattern serves a fundamental governance purpose: it ensures that no single person can unilaterally commit the organisation to a purchase. The requisitioner raises the need, the manager approves the concept, the procurement team selects the vendor and agrees terms (PO), and the stores team confirms receipt (GRN). Each step is independently approved and independently auditable.</p>
+    </blockquote>
+
+    <h2>9. Frequently Asked Questions</h2>
+
+    <h3>What is an approval matrix in procurement?</h3>
+    <p>An approval matrix is a set of rules that determines who must approve a purchase requisition, purchase order, or goods receipt based on the characteristics of the request. The matrix maps combinations of dimensions — department, asset classification, location, amount, and document type — to a chain of approvers at specified levels. When a requisition is submitted, the system matches it against the matrix to find the best-fit rule and seeds the approval chain accordingly. This replaces informal email-based approvals with a structured, auditable process.</p>
+
+    <h3>Can different items in one requisition route to different approvers?</h3>
+    <p>It depends on the approval topology configured for the requisition. In LINE_LEVEL mode (the default), each line item is evaluated independently — different items can route to different approvers based on their individual dimensions (classification, amount, location). In COLLECTIVE mode, all line items in the requisition are treated as a unit and route to the same approval chain. The topology is set when the requisition is created and cannot be changed after submission.</p>
+
+    <h3>How are approval limits configured?</h3>
+    <p>Approval limits are configured as amount thresholds in the approval matrix. Each approval code can specify an amount limit. When a requisition line's value falls within a particular range, the system selects the approval code whose amount limit is the tightest fit — the lowest limit that still covers the line's value. For example, if there are codes for amounts up to Rs 50,000 (one-level approval) and up to Rs 5,00,000 (two-level approval), a requisition for Rs 75,000 would match the Rs 5,00,000 code and require two levels of approval.</p>
+
+    <h3>What happens if the approver is unavailable?</h3>
+    <p>The system does not currently support automatic delegation or re-routing when an approver is unavailable. A pending approval remains with the assigned approver until they act on it. The organisation can monitor pending approvals through the dashboard — items awaiting approval are visible to administrators and can be escalated manually. SLA tracking per approval level helps identify bottlenecks: if a level has a configured SLA of 2 days and the approval is still pending after 3 days, it is flagged for attention.</p>
+
+    <h3>Is the approval history preserved for audit?</h3>
+    <p>Yes. Every approval action — approve, reject — is recorded with the approver's identity, timestamp, and any remarks provided. The approval chain is versioned through snapshot groups: if routing changes (for example, during the transition from source to receiving department in a MOVEMENT requisition), the previous snapshot is superseded and a new one is created. Both snapshots are retained. Auditors can trace the complete approval history of any document from submission through each level of approval to final status.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement Governance</a>
+        <a href="/purchase-order-approval" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Purchase Order Approval</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+        <a href="/how-it-works" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">How We Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your current procurement approval process and we will evaluate how structured workflows may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

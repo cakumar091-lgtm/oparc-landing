@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asset Physical Verification — A Practical Guide for Finance Teams | Oparc</title>
+  <meta name="description" content="How to run structured physical verification of fixed assets — QR tagging, verification campaigns, scan resolution, discrepancy tracking, and audit trail. A practical guide for finance teams and CAs in India.">
+  <meta name="keywords" content="asset physical verification software, asset verification campaign, fixed asset verification process India, QR code asset verification, physical verification fixed assets, asset tagging verification India, asset audit trail">
+  <link rel="canonical" href="https://oparc.in/asset-verification-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/asset-verification-guide">
+  <meta property="og:title" content="Asset Physical Verification — A Practical Guide for Finance Teams">
+  <meta property="og:description" content="How to run structured physical verification of fixed assets — QR tagging, verification campaigns, scan resolution, discrepancy tracking, and audit trail.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Asset Physical Verification — A Practical Guide for Finance Teams">
+  <meta name="twitter:description" content="Structured physical verification of fixed assets — QR tagging, campaigns, scan resolution, discrepancy tracking, and audit trail.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Asset Physical Verification — A Practical Guide for Finance Teams",
+    "description": "How to run structured physical verification of fixed assets — QR tagging, verification campaigns, scan resolution, discrepancy tracking, and audit trail.",
+    "author": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-10",
+    "dateModified": "2026-04-10",
+    "mainEntityOfPage": "https://oparc.in/asset-verification-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Asset Physical Verification", "item": "https://oparc.in/asset-verification-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is QR tagging different from barcode tagging?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Traditional barcodes store a single string — typically an asset number — and require a dedicated barcode scanner. QR codes store richer data, can encode the asset's canonical tag identifier, and are scannable using any smartphone camera or a lightweight PWA. QR codes also survive partial damage better than barcodes. From a governance perspective, the key difference is that a QR-based system can link to a structured tag identity with three resolution tiers — canonical, shadow, and legacy — which means even assets with old barcode labels can be resolved through the same scan workflow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can verification be done with a phone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A Progressive Web App (PWA) runs in the phone's browser — no app store installation required. The verifier opens the PWA, authenticates, and scans QR tags using the phone's camera. Each scan records the asset identity, timestamp, GPS coordinates (if permitted), and the verifier's user ID. The scanned data syncs to the central system when the device is online. This approach eliminates the need for dedicated scanning hardware."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when an asset is not found during verification?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Assets assigned to a verification campaign that are not scanned by the campaign close date are flagged as unverified. The system distinguishes between 'not scanned' (verifier did not attempt) and 'not found' (verifier explicitly marked the asset as missing). Missing assets are flagged with a discrepancy status and can trigger follow-up actions — a re-verification assignment, an investigation, or ultimately a write-off requisition if the asset cannot be located."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does verification link to the fixed asset register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each scan resolves to a specific asset record in the fixed asset register. When a canonical tag is scanned, the system matches it to the asset's tag identifier and updates the asset's last-verified date and operational status. This creates a direct link between the physical verification event and the financial record. Discrepancies — missing assets, location mismatches, condition changes — are recorded against the asset register entry, which means the finance team can see verification status alongside book value, depreciation, and insurance coverage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an audit trail for each scan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every scan event is logged with the scanned value, the resolved asset identity, the verifier's user ID, the timestamp, and a governance signal indicating the resolution tier (canonical match, shadow tag match, or legacy tag match). The scanned value is hashed for tamper detection. This audit trail is immutable — scan records cannot be edited or deleted after creation. Auditors can review the full scan history for any asset or any verification campaign."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/asset-verification-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/asset-verification-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Asset Physical Verification — A Practical Guide for Finance Teams</h1>
+    <p class="date">Published: April 10, 2026</p>
+
+    <p>Physical verification of fixed assets is a statutory requirement under the Companies Act 2013 and a practical necessity for any organisation that wants accurate financial statements. Yet in most organisations, the process remains manual — a team walks through buildings with a printed Excel list, ticking off items they can see and marking question marks next to items they cannot find. The list goes back to the accounts department, someone reconciles it against the asset register, discrepancies are noted in a memo, and the memo is filed.</p>
+
+    <p>The problems with this approach are well documented: it is slow, it is error-prone, it produces no audit trail, and by the time discrepancies are investigated, the verification data is already stale. This article explains how structured verification works when it is supported by a system — from QR tagging through campaign management to discrepancy resolution.</p>
+
+    <h2>1. The Problem — Why Spreadsheet-Based Verification Fails</h2>
+
+    <p>Manual verification typically involves printing the asset register, assigning sections of it to different staff members, and asking them to physically locate each asset. The issues compound at every step:</p>
+
+    <ul>
+      <li><strong>No unique identifier on the asset:</strong> Without a physical tag, the verifier has to match the asset by description — "wooden desk, 4-drawer" — which is ambiguous when a floor has thirty similar desks.</li>
+      <li><strong>No real-time tracking:</strong> The finance team has no visibility into verification progress until the printed sheets come back, which may take days or weeks.</li>
+      <li><strong>No audit trail:</strong> There is no record of when the verification happened, who did it, or whether the verifier actually visited the location. A tick mark on a printout is not evidence.</li>
+      <li><strong>Discrepancies are lost:</strong> When the printed list comes back with handwritten notes — "not found", "moved to 3rd floor", "damaged" — these notes often fail to translate into corrective action. There is no systematic way to track resolution.</li>
+      <li><strong>Assets get missed entirely:</strong> Items that were purchased after the register was printed, or items that moved between locations, are invisible to the verification team.</li>
+    </ul>
+
+    <p>For organisations with hundreds or thousands of assets across multiple locations, the manual approach does not scale. Year-end verification becomes a dreaded exercise that consumes weeks and produces questionable results.</p>
+
+    <h2>2. How Structured Verification Works</h2>
+
+    <p>A structured approach breaks the verification process into distinct, trackable phases:</p>
+
+    <ol>
+      <li><strong>Tag the assets:</strong> Every asset gets a unique physical identifier — a QR code tag — that links it to its record in the asset register.</li>
+      <li><strong>Create a campaign:</strong> Define the scope (which assets, which locations, which departments), assign verifiers, and set a deadline.</li>
+      <li><strong>Scan and record:</strong> Verifiers use a mobile device to scan each asset's tag. The scan records the asset identity, timestamp, verifier, and location.</li>
+      <li><strong>Reconcile:</strong> Compare scanned assets against the campaign scope. Identify unverified assets, location mismatches, and condition discrepancies.</li>
+      <li><strong>Resolve discrepancies:</strong> Investigate missing assets, update locations for moved assets, raise write-off requisitions for assets that cannot be found.</li>
+    </ol>
+
+    <p>Each phase produces structured data that feeds into the next. The result is a verification exercise that is auditable, repeatable, and produces actionable information rather than a stack of annotated printouts.</p>
+
+    <h2>3. QR Tagging — The Foundation of Physical Verification</h2>
+
+    <p>Effective verification begins with the ability to uniquely identify each physical asset. QR tags serve this purpose.</p>
+
+    <h3>3.1 Tag Generation</h3>
+
+    <p>Tags are generated in bulk — typically through a CSV or Excel upload that maps each asset to its tag. The system assigns a deterministic tag identifier in the format <code>TAG-{sequence}-{asset_id}</code>, ensuring global uniqueness. A global sequence counter, locked during generation, prevents duplicate tag numbers even when multiple batches are generated simultaneously.</p>
+
+    <h3>3.2 Tag-to-Asset Binding</h3>
+
+    <p>Each generated tag is permanently bound to a specific asset record. The tag ID becomes an alternate identifier for the asset — alongside the asset's system ID and any legacy identifiers it may carry (old barcode numbers, manual register numbers, department-specific codes).</p>
+
+    <h3>3.3 Scan Resolution — Three Tiers</h3>
+
+    <p>When a tag is scanned, the system resolves the scanned value through a three-tier lookup:</p>
+
+    <table>
+      <tr><th>Tier</th><th>Resolution Type</th><th>What It Means</th></tr>
+      <tr><td>1</td><td>Canonical (P1)</td><td>The scanned value matches the system-generated tag ID exactly. This is the expected result for properly tagged assets.</td></tr>
+      <tr><td>2</td><td>Shadow</td><td>The scanned value matches an alternate identifier stored against the asset (e.g., an old barcode number). The asset is identified, but the tag is not the canonical one.</td></tr>
+      <tr><td>3</td><td>Legacy</td><td>The scanned value matches a legacy tag field. The asset is identified through historical data. This covers assets that were tagged under a previous system.</td></tr>
+    </table>
+
+    <p>This three-tier approach is important for organisations transitioning from an older tagging system. Assets do not need to be re-tagged immediately — the system can resolve old tags while new canonical tags are rolled out gradually.</p>
+
+    <h2>4. Verification Campaigns</h2>
+
+    <p>A verification campaign is a structured exercise with defined scope, assignments, and deadlines.</p>
+
+    <h3>4.1 Creating a Campaign</h3>
+
+    <p>The finance or admin team defines the campaign parameters:</p>
+
+    <ul>
+      <li><strong>Scope:</strong> Which assets are included — by location, department, classification, or a custom selection.</li>
+      <li><strong>Verifiers:</strong> Who is responsible for verifying which assets. Assignments can be by location (Floor 2 assigned to Person A), by department, or by individual asset list.</li>
+      <li><strong>Timeline:</strong> Start date and deadline for completion.</li>
+      <li><strong>Type:</strong> Full verification (all assets in scope) or sample verification (a random or targeted subset).</li>
+    </ul>
+
+    <h3>4.2 Tracking Progress</h3>
+
+    <p>As verifiers scan assets, the campaign dashboard updates in real time — showing the percentage verified, unverified count, and any discrepancies flagged. The finance team can identify bottlenecks (a verifier who has not started, a location with a high unverified count) and intervene before the deadline passes.</p>
+
+    <h3>4.3 Flagging Discrepancies</h3>
+
+    <p>During scanning, the verifier can flag issues beyond simple presence or absence:</p>
+
+    <ul>
+      <li><strong>Location mismatch:</strong> The asset is found, but not where the register says it should be.</li>
+      <li><strong>Condition change:</strong> The asset is found but is damaged, non-functional, or in a different operational state than recorded.</li>
+      <li><strong>Tag missing or damaged:</strong> The physical tag is absent or unreadable, requiring re-tagging.</li>
+      <li><strong>Duplicate found:</strong> Two physical assets appear to map to the same register entry — indicating a data quality issue.</li>
+    </ul>
+
+    <h3>4.4 Closing the Campaign</h3>
+
+    <p>When the deadline arrives or all assets are accounted for, the campaign is closed. The system generates a verification summary — assets verified, assets missing, discrepancies by category — that serves as documentation for auditors and management.</p>
+
+    <h2>5. Operational Status Tracking</h2>
+
+    <p>Verification is not just about confirming that an asset exists. It is also about confirming its operational status. Each asset carries a status that reflects its current condition:</p>
+
+    <table>
+      <tr><th>Status</th><th>Meaning</th></tr>
+      <tr><td>Active / In-Use</td><td>The asset is deployed and operational.</td></tr>
+      <tr><td>Idle</td><td>The asset exists and is functional but is not currently deployed. It may be in storage or awaiting assignment.</td></tr>
+      <tr><td>Under Repair</td><td>The asset has been sent for maintenance or repair. It is expected to return to active status.</td></tr>
+      <tr><td>Missing</td><td>The asset could not be located during verification. Investigation is required.</td></tr>
+      <tr><td>Retired / Written Off</td><td>The asset has been formally removed from active use through a write-off or disposal requisition.</td></tr>
+    </table>
+
+    <p>During verification, the verifier confirms or updates the operational status. This creates a point-in-time record of each asset's condition — data that feeds into insurance valuations, depreciation reviews, and capital planning.</p>
+
+    <h2>6. Audit Trail — Every Scan Is Logged</h2>
+
+    <p>Every scan event creates an immutable audit record containing:</p>
+
+    <ul>
+      <li><strong>Scanned value:</strong> What the scanner read (the raw QR content), hashed with SHA-256 for tamper detection.</li>
+      <li><strong>Resolved identity:</strong> Which asset the scan resolved to, and through which resolution tier (canonical, shadow, or legacy).</li>
+      <li><strong>Verifier:</strong> The authenticated user who performed the scan.</li>
+      <li><strong>Timestamp:</strong> When the scan occurred, recorded to the second.</li>
+      <li><strong>Governance signal:</strong> A classification of the scan event — SCAN_CANONICAL (expected), SCAN_SHADOW_TAG (alternate identifier used), SCAN_LEGACY_TAG (old system tag used).</li>
+    </ul>
+
+    <p>This audit trail is not editable. Scan records cannot be modified or deleted after creation. For statutory auditors reviewing the physical verification process, this provides documentary evidence that each asset was physically located, when it was verified, and by whom.</p>
+
+    <blockquote>
+      <p>The audit trail transforms physical verification from a subjective exercise ("we checked everything") into an evidence-based process. Each assertion — "this asset was at this location on this date" — is backed by a timestamped, authenticated scan record.</p>
+    </blockquote>
+
+    <h2>7. Practical Considerations</h2>
+
+    <h3>7.1 When to Run Verification</h3>
+
+    <p>Most organisations run physical verification at year-end, driven by the statutory audit requirement. However, limiting verification to once a year means that discrepancies are discovered too late to investigate effectively. A more practical approach combines:</p>
+
+    <ul>
+      <li><strong>Full year-end verification:</strong> Comprehensive, all-assets verification before the books close. This satisfies the statutory requirement and produces the formal verification report.</li>
+      <li><strong>Mid-year sample verification:</strong> A targeted check of a subset — perhaps high-value assets, recently acquired assets, or assets in locations with historically high discrepancy rates.</li>
+      <li><strong>Ad-hoc verification:</strong> Triggered by events — a department relocation, an insurance claim, a change of custodian, or a report of missing items.</li>
+    </ul>
+
+    <h3>7.2 Linking to Depreciation and Insurance</h3>
+
+    <p>Verification data has direct implications for two financial processes:</p>
+
+    <ul>
+      <li><strong>Depreciation:</strong> An asset that is verified as missing or non-functional may need to be impaired or written off, which changes the depreciation schedule. An asset found in a different condition than recorded may need its useful life reassessed.</li>
+      <li><strong>Insurance:</strong> Insurance coverage should reflect the current state and location of assets. Verification data provides the evidence base for updating insurance declarations — confirming which assets exist, where they are, and their approximate condition.</li>
+    </ul>
+
+    <h3>7.3 Transitioning from Manual Processes</h3>
+
+    <p>For organisations currently using Excel-based verification, the transition to a structured system does not need to happen all at once. A practical path is:</p>
+
+    <ol>
+      <li>Import the current asset register into the system.</li>
+      <li>Generate and apply QR tags in phases — starting with high-value assets or a single location.</li>
+      <li>Run the first campaign as a pilot — one department or one building.</li>
+      <li>Expand to full-organisation coverage in subsequent cycles.</li>
+    </ol>
+
+    <p>The first cycle will inevitably surface data quality issues — assets in the register that do not exist physically, physical assets that are not in the register, location data that is outdated. This is expected. The value of the structured approach is that these issues are surfaced systematically rather than discovered accidentally.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>How is QR tagging different from barcode tagging?</h3>
+    <p>Traditional barcodes store a single string — typically an asset number — and require a dedicated barcode scanner. QR codes store richer data, can encode the asset's canonical tag identifier, and are scannable using any smartphone camera or a lightweight PWA. QR codes also survive partial damage better than barcodes. From a governance perspective, the key difference is that a QR-based system can link to a structured tag identity with three resolution tiers — canonical, shadow, and legacy — which means even assets with old barcode labels can be resolved through the same scan workflow.</p>
+
+    <h3>Can verification be done with a phone?</h3>
+    <p>Yes. A Progressive Web App (PWA) runs in the phone's browser — no app store installation required. The verifier opens the PWA, authenticates, and scans QR tags using the phone's camera. Each scan records the asset identity, timestamp, and the verifier's user ID. The scanned data syncs to the central system when the device is online. This approach eliminates the need for dedicated scanning hardware.</p>
+
+    <h3>What happens when an asset is not found during verification?</h3>
+    <p>Assets assigned to a verification campaign that are not scanned by the campaign close date are flagged as unverified. The system distinguishes between "not scanned" (verifier did not attempt) and "not found" (verifier explicitly marked the asset as missing). Missing assets are flagged with a discrepancy status and can trigger follow-up actions — a re-verification assignment, an investigation, or ultimately a write-off requisition if the asset cannot be located.</p>
+
+    <h3>How does verification link to the fixed asset register?</h3>
+    <p>Each scan resolves to a specific asset record in the fixed asset register. When a canonical tag is scanned, the system matches it to the asset's tag identifier and updates the asset's last-verified date and operational status. This creates a direct link between the physical verification event and the financial record. Discrepancies — missing assets, location mismatches, condition changes — are recorded against the asset register entry, which means the finance team can see verification status alongside book value, depreciation, and insurance coverage.</p>
+
+    <h3>Is there an audit trail for each scan?</h3>
+    <p>Yes. Every scan event is logged with the scanned value, the resolved asset identity, the verifier's user ID, the timestamp, and a governance signal indicating the resolution tier (canonical match, shadow tag match, or legacy tag match). The scanned value is hashed for tamper detection. This audit trail is immutable — scan records cannot be edited or deleted after creation. Auditors can review the full scan history for any asset or any verification campaign.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/asset-management" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Asset Lifecycle Management</a>
+        <a href="/asset-tagging-verification" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Asset Tagging & Verification</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your current asset verification process and we will evaluate how a structured approach may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810358" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
