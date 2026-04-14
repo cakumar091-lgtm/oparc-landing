@@ -221,6 +221,26 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://oparc.in/duplicate-vendor-payment-prevention</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/lost-stolen-assets-no-tracking</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/warranty-amc-expired-paying-repairs</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/insurance-claim-denied-no-asset-records</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/guides</loc>
     <lastmod>2026-04-14</lastmod>
     <priority>0.6</priority>
