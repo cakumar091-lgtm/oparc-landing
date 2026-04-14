@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Declaration of Fixed Assets by Custodians — A Practical Guide | Oparc</title>
+  <meta name="description" content="How to run custodian-driven self-declaration of fixed assets — push verification to asset holders instead of sending audit teams. Covers scoped campaigns, condition reporting, overdue tracking, and audit trails for CARO and statutory compliance.">
+  <meta name="keywords" content="self declaration of fixed assets, custodian asset verification, asset holder self declaration, fixed asset verification by custodian, asset condition reporting software, CARO fixed asset verification, push verification assets India">
+  <link rel="canonical" href="https://oparc.in/custodian-self-declaration-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/custodian-self-declaration-guide">
+  <meta property="og:title" content="Self-Declaration of Fixed Assets by Custodians — A Practical Guide">
+  <meta property="og:description" content="Push verification to asset holders instead of sending audit teams. Scoped campaigns, condition reporting, overdue tracking, and audit trails.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Self-Declaration of Fixed Assets by Custodians — A Practical Guide">
+  <meta name="twitter:description" content="Push verification to asset holders instead of sending audit teams. Scoped campaigns, condition reporting, overdue tracking, and audit trails.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Self-Declaration of Fixed Assets by Custodians — A Practical Guide",
+    "description": "How to run custodian-driven self-declaration of fixed assets — push verification to asset holders instead of sending audit teams.",
+    "author": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Oparc",
+      "url": "https://oparc.in"
+    },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/custodian-self-declaration-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Custodian Self-Declaration", "item": "https://oparc.in/custodian-self-declaration-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between physical verification and self-declaration of assets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Physical verification involves a dedicated team walking through locations to physically locate and inspect assets. Self-declaration inverts this — the person who actually uses the asset (the custodian) confirms its existence, location, and condition through a system. Physical verification is thorough but slow, expensive, and disruptive. Self-declaration is faster and scales better because it distributes the work to the people who already know where the assets are. Many organisations use both: self-declaration for routine quarterly checks, and physical verification campaigns for year-end statutory compliance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is custodian self-declaration accepted by statutory auditors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Self-declaration alone does not replace the physical verification requirement under CARO 2020 or Companies Act 2013. However, it serves as a strong supplementary control. When each declaration is timestamped, tied to a specific user, and recorded with condition details, it creates an evidence trail that auditors can rely on for interim checks. For year-end compliance, organisations typically combine self-declaration data with a targeted physical verification campaign — the self-declaration identifies which assets need closer inspection, reducing the scope and cost of the physical exercise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if a custodian does not respond by the deadline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Assets that remain in PENDING status after the due date are automatically flagged as OVERDUE. The finance team can see which custodians have not responded and which assets are overdue. Custodians can still submit declarations for overdue assets — the system does not lock them out. When the admin closes the campaign, any remaining PENDING items are marked OVERDUE in the final report. This creates a documented record of non-compliance that can be escalated to department heads."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can self-declaration be scoped to specific departments or locations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Declaration requests are created with AND-combined scope filters — department, location, and classification. Only assets matching all specified criteria are assigned to the campaign. For example, a request scoped to 'IT department + Building A' will only include IT assets located in Building A. This allows rolling campaigns — one department per week, or one location per month — rather than disrupting the entire organisation at once."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What condition options can custodians report?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Custodians select from five condition states: GOOD (fully operational), FAIR (operational with minor issues), POOR (functional but needs attention), DAMAGED (not fully functional, repair needed), or NOT_FOUND (asset cannot be located). Each declaration can include free-text remarks for context. The condition data feeds into the asset register — an asset reported as DAMAGED can trigger a maintenance request, while NOT_FOUND triggers an investigation workflow that may lead to a write-off requisition."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/custodian-self-declaration-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/custodian-self-declaration-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Self-Declaration of Fixed Assets by Custodians — A Practical Guide</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>Every year, the finance department sends a team to verify fixed assets. The team walks through buildings with a printed register, tries to match descriptions to physical items, and returns with a stack of annotated sheets. The exercise takes weeks, disrupts operations, and the results are unreliable — because the people doing the verification often have no idea what they are looking at.</p>
+
+    <p>There is a simpler question to ask: why not ask the person who actually uses the asset?</p>
+
+    <p>The department head who uses a projector daily knows whether it works. The lab technician who operates an instrument knows whether it is in the lab. The IT administrator who issued a laptop knows whether it was returned. These custodians have the information the finance team is trying to collect — but traditional verification bypasses them entirely.</p>
+
+    <p>Self-declaration inverts the process. Instead of sending auditors to find assets, the system asks custodians to confirm what they have. This article explains how structured self-declaration works, when to use it, and how it fits alongside physical verification for statutory compliance.</p>
+
+    <h2>1. The Problem — Why Centralised Verification Struggles to Scale</h2>
+
+    <p>Centralised physical verification works reasonably well for small organisations — a single building, a few hundred assets, one person who knows where everything is. It breaks down as the organisation grows:</p>
+
+    <ul>
+      <li><strong>The verification team does not know the assets.</strong> A finance executive sent to verify laboratory equipment cannot distinguish between a spectrophotometer and a colorimeter without reading serial numbers — and the serial number plate is often inaccessible, faded, or missing.</li>
+      <li><strong>Custodians are not available.</strong> The verification team arrives at a department, but the HOD is in a meeting, the lab is locked, or the staff member who manages the equipment is on leave. The team marks the asset as "could not verify" and moves on.</li>
+      <li><strong>Location data is stale.</strong> The register says the asset is on the 3rd floor, but it was moved to the 2nd floor six months ago. Nobody updated the register because there is no process for tracking transfers.</li>
+      <li><strong>The exercise is annual.</strong> Assets go missing in January but the verification happens in March. By the time the discrepancy surfaces, investigation is difficult — nobody remembers what happened three months ago.</li>
+      <li><strong>No condition data.</strong> Traditional verification confirms presence (yes/no) but rarely captures condition. An asset that is present but non-functional appears the same as a working asset on the verification report.</li>
+    </ul>
+
+    <p>For universities with thousands of assets across multiple campuses, hospitals with equipment in every ward, or manufacturing units with tools spread across shifts — centralised verification becomes a formality that satisfies the auditor but does not actually tell management what they own.</p>
+
+    <h2>2. What Self-Declaration Changes</h2>
+
+    <p>Self-declaration shifts the burden of proof from the finance team to the asset custodian. The custodian is the person recorded as the asset's owner or user in the asset register. When a self-declaration campaign is launched, each custodian receives a list of assets assigned to them and is asked to confirm:</p>
+
+    <ol>
+      <li><strong>Is the asset present?</strong> Can the custodian physically see it?</li>
+      <li><strong>What condition is it in?</strong> GOOD, FAIR, POOR, DAMAGED, or NOT_FOUND.</li>
+      <li><strong>Any remarks?</strong> Free-text context — "moved to Room 204", "sent for repair on 15 March", "screen cracked but functional".</li>
+    </ol>
+
+    <p>This works because the custodian already has the information. They do not need to go looking for the asset — they see it every day. The declaration takes seconds per asset, not the minutes or hours that a visiting verification team would spend.</p>
+
+    <h2>3. How a Structured Self-Declaration Campaign Works</h2>
+
+    <h3>3.1 Creating the Campaign</h3>
+
+    <p>The finance or admin team defines the scope using AND-combined filters:</p>
+
+    <table>
+      <tr><th>Filter</th><th>Example</th><th>Effect</th></tr>
+      <tr><td>Department</td><td>Computer Science</td><td>Only assets assigned to CS department</td></tr>
+      <tr><td>Location</td><td>Building A</td><td>Only assets with location_l1 = Building A</td></tr>
+      <tr><td>Classification</td><td>FIXED_ASSET</td><td>Only fixed assets (excludes consumables, inventory)</td></tr>
+    </table>
+
+    <p>All filters are combined with AND — so "Computer Science + Building A + FIXED_ASSET" includes only fixed assets in the CS department located in Building A. A due date is set, and all matching active assets are stamped as PENDING.</p>
+
+    <h3>3.2 Custodians Respond</h3>
+
+    <p>Each custodian sees their pending assets — sorted by due date — and declares each one. Declarations can be submitted individually or in bulk (with per-item error handling, so one bad entry does not block the rest). Only the asset's registered owner can declare — preventing one person from declaring on behalf of another without accountability.</p>
+
+    <h3>3.3 Tracking Progress</h3>
+
+    <p>The campaign dashboard shows real-time counts: declared, pending, and overdue. The finance team can identify which departments are lagging and follow up before the deadline. This is fundamentally different from centralised verification, where the finance team has no visibility until the printed sheets come back.</p>
+
+    <h3>3.4 Handling Non-Response</h3>
+
+    <p>When the deadline passes, the admin can complete the campaign. Remaining PENDING assets are marked OVERDUE. Crucially, custodians can still declare overdue assets — the system does not lock them out. This creates a documented record of late compliance without permanently blocking the process.</p>
+
+    <h3>3.5 Campaign Close and Reporting</h3>
+
+    <p>The closed campaign produces a structured report: total assets in scope, how many were declared (with condition breakdown), how many are overdue, and who has not responded. This report can be presented to auditors as evidence of a systematic verification exercise — far more convincing than a stack of annotated printouts.</p>
+
+    <h2>4. When to Use Self-Declaration vs Physical Verification</h2>
+
+    <p>Self-declaration does not replace physical verification — it complements it. Each approach suits different situations:</p>
+
+    <table>
+      <tr><th>Approach</th><th>Best For</th><th>Frequency</th></tr>
+      <tr><td>Self-Declaration</td><td>Routine confirmation — quarterly or monthly checks, interim audits, department-level accountability</td><td>Monthly / Quarterly</td></tr>
+      <tr><td>Physical Verification (QR scan campaigns)</td><td>Year-end statutory compliance, high-value asset audits, insurance valuation exercises</td><td>Annually</td></tr>
+      <tr><td>Both combined</td><td>Self-declaration identifies which assets need closer inspection; physical verification confirms the exceptions</td><td>Rolling</td></tr>
+    </table>
+
+    <p>The practical pattern is: run self-declaration quarterly to maintain a baseline, then use the results to focus the annual physical verification on assets that were reported as DAMAGED, NOT_FOUND, or overdue. This reduces the scope and cost of the physical exercise substantially.</p>
+
+    <h2>5. Condition Reporting — Beyond Presence</h2>
+
+    <p>Traditional verification asks a binary question: is the asset there or not? Self-declaration asks a richer question: what state is it in?</p>
+
+    <table>
+      <tr><th>Condition</th><th>What It Means</th><th>What Happens Next</th></tr>
+      <tr><td>GOOD</td><td>Fully operational, no issues</td><td>No action needed</td></tr>
+      <tr><td>FAIR</td><td>Operational with minor issues</td><td>Note for next maintenance cycle</td></tr>
+      <tr><td>POOR</td><td>Functional but needs attention</td><td>Maintenance request or replacement planning</td></tr>
+      <tr><td>DAMAGED</td><td>Not fully functional</td><td>Repair request, insurance claim, or write-off consideration</td></tr>
+      <tr><td>NOT_FOUND</td><td>Custodian cannot locate the asset</td><td>Investigation → write-off requisition if unresolved</td></tr>
+    </table>
+
+    <p>This condition data feeds directly into the asset register. When a custodian reports an asset as DAMAGED, the finance team sees that status alongside the book value, depreciation schedule, and insurance coverage. This creates a direct link between operational reality and financial records — something that a printed verification checklist cannot provide.</p>
+
+    <h2>6. Audit Trail — Every Declaration Is Permanent</h2>
+
+    <p>Each self-declaration creates an immutable record containing the custodian's identity, timestamp, condition reported, and any remarks. These records cannot be edited or deleted after submission. For any asset, the full declaration history is available — showing every campaign the asset participated in, what condition was reported, and by whom.</p>
+
+    <blockquote>
+      <p>The value of self-declaration for auditors is not just that it confirms asset existence — it creates a documented chain of custodian accountability. Each person who declared an asset as GOOD is on record. If the asset later turns out to be missing, the investigation starts with a specific person and a specific date.</p>
+    </blockquote>
+
+    <h2>7. Practical Considerations</h2>
+
+    <h3>7.1 Rolling vs All-at-Once Campaigns</h3>
+
+    <p>Launching a self-declaration for all 5,000 assets across every department on the same day creates a spike of activity and a flood of follow-up queries. A rolling approach — one department per week, or one building per month — spreads the load and gives the finance team time to investigate issues as they surface.</p>
+
+    <h3>7.2 Linking to Write-Off and Disposal</h3>
+
+    <p>An asset reported as NOT_FOUND in two consecutive declaration campaigns is a strong candidate for write-off. The declaration history provides the evidence trail: "custodian reported NOT_FOUND on 15 January and again on 15 April — investigation confirmed the asset cannot be located." This documented trail supports the write-off requisition and satisfies the auditor's need for evidence that the asset was genuinely searched for.</p>
+
+    <h3>7.3 Getting Custodians to Actually Respond</h3>
+
+    <p>The biggest practical challenge with self-declaration is participation. Three things help:</p>
+
+    <ul>
+      <li><strong>Keep it simple.</strong> The custodian should be able to declare an asset in under 10 seconds — select condition, optionally add a remark, submit. Bulk declaration for custodians with many assets.</li>
+      <li><strong>Visible deadlines.</strong> The system shows pending and overdue counts. Department heads can see which of their staff have not responded.</li>
+      <li><strong>Escalation path.</strong> When the campaign report shows 30% non-response from a department, that data point goes to the department head. Social accountability drives participation more effectively than repeated emails.</li>
+    </ul>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>What is the difference between physical verification and self-declaration of assets?</h3>
+    <p>Physical verification involves a dedicated team walking through locations to physically locate and inspect assets. Self-declaration inverts this — the person who actually uses the asset confirms its existence, location, and condition through a system. Physical verification is thorough but slow, expensive, and disruptive. Self-declaration is faster and scales better because it distributes the work to the people who already know where the assets are. Many organisations use both: self-declaration for routine quarterly checks, and physical verification campaigns for year-end statutory compliance.</p>
+
+    <h3>Is custodian self-declaration accepted by statutory auditors?</h3>
+    <p>Self-declaration alone does not replace the physical verification requirement under CARO 2020 or Companies Act 2013. However, it serves as a strong supplementary control. When each declaration is timestamped, tied to a specific user, and recorded with condition details, it creates an evidence trail that auditors can rely on for interim checks. For year-end compliance, organisations typically combine self-declaration data with a targeted physical verification campaign — the self-declaration identifies which assets need closer inspection, reducing the scope and cost of the physical exercise.</p>
+
+    <h3>What happens if a custodian does not respond by the deadline?</h3>
+    <p>Assets that remain in PENDING status after the due date are automatically flagged as OVERDUE. The finance team can see which custodians have not responded and which assets are overdue. Custodians can still submit declarations for overdue assets — the system does not lock them out. When the admin closes the campaign, any remaining PENDING items are marked OVERDUE in the final report. This creates a documented record of non-compliance that can be escalated to department heads.</p>
+
+    <h3>Can self-declaration be scoped to specific departments or locations?</h3>
+    <p>Yes. Declaration requests are created with AND-combined scope filters — department, location, and classification. Only assets matching all specified criteria are assigned to the campaign. For example, a request scoped to "IT department + Building A" will only include IT assets located in Building A. This allows rolling campaigns — one department per week, or one location per month — rather than disrupting the entire organisation at once.</p>
+
+    <h3>What condition options can custodians report?</h3>
+    <p>Custodians select from five condition states: GOOD (fully operational), FAIR (operational with minor issues), POOR (functional but needs attention), DAMAGED (not fully functional, repair needed), or NOT_FOUND (asset cannot be located). Each declaration can include free-text remarks for context. The condition data feeds into the asset register — an asset reported as DAMAGED can trigger a maintenance request, while NOT_FOUND triggers an investigation workflow that may lead to a write-off requisition.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/asset-verification-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Physical Verification Guide</a>
+        <a href="/asset-tagging-verification" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Asset Tagging & Verification</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If your current verification process involves printed sheets and manual follow-ups, share a brief overview and we will evaluate how a structured self-declaration approach may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

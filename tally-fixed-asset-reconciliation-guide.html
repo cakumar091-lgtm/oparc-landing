@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tally Fixed Asset Reconciliation — Matching Your Register to Your Books | Oparc</title>
+  <meta name="description" content="How to reconcile your fixed asset register with Tally accounting entries. Covers voucher count matching, ledger balance comparison, common drift causes, and automated reconciliation reports for Indian organisations.">
+  <meta name="keywords" content="tally fixed asset reconciliation, tally asset register mismatch, fixed asset register tally comparison, reconcile assets with tally, tally voucher reconciliation software, asset register accounting reconciliation India, tally EAM reconciliation">
+  <link rel="canonical" href="https://oparc.in/tally-fixed-asset-reconciliation-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/tally-fixed-asset-reconciliation-guide">
+  <meta property="og:title" content="Tally Fixed Asset Reconciliation — Matching Your Register to Your Books">
+  <meta property="og:description" content="How to reconcile your fixed asset register with Tally accounting entries. Voucher count matching, ledger balance comparison, and automated reconciliation.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tally Fixed Asset Reconciliation — Matching Your Register to Your Books">
+  <meta name="twitter:description" content="How to reconcile your fixed asset register with Tally accounting entries. Voucher count matching, ledger balance comparison, and automated reconciliation.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Tally Fixed Asset Reconciliation — Matching Your Register to Your Books",
+    "description": "How to reconcile your fixed asset register with Tally accounting entries. Covers voucher count matching, ledger balance comparison, and automated reconciliation reports.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/tally-fixed-asset-reconciliation-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Tally Fixed Asset Reconciliation", "item": "https://oparc.in/tally-fixed-asset-reconciliation-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do Tally and the fixed asset register show different numbers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most common cause is that entries are made in one system but not the other. A purchase voucher may be entered in Tally directly without going through the procurement workflow, or a GRN may be posted in the asset system but the Tally sync failed silently. Other causes include timing differences (an asset posted on 31 March in the register but the Tally voucher created on 1 April), manual Tally entries that bypass the integration, reversed transactions where only one system was updated, and rounding differences in GST calculations. Reconciliation identifies these gaps so they can be investigated and corrected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does automated reconciliation work between EAM and Tally?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The reconciliation process compares three dimensions: voucher counts (how many purchase vouchers, journal entries, and debit notes exist in each system), vendor ledger balances (total amounts posted per vendor in the asset system vs the corresponding vendor ledger in Tally), and asset class ledger balances (total capitalised value per asset classification vs the corresponding asset ledger in Tally). Differences are flagged with the specific item, amount, and direction of mismatch. The reconciliation reads live Tally data via the Tally XML API and compares it against the posted items in the asset management system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between reconciliation and verification of posted items?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reconciliation compares aggregate totals — does the total in the asset system match the total in Tally? Verification checks individual items — for each item marked as POSTED in the asset system, does the corresponding voucher actually exist in Tally? An item may be marked POSTED in the asset system because the sync appeared to succeed, but the voucher might not exist in Tally due to a network failure, a Tally restart during import, or a manual deletion in Tally. Verification catches these phantom postings that reconciliation totals might miss if other items compensate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should reconciliation be performed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Monthly reconciliation is the practical minimum for organisations actively procuring assets. This catches drift early — a mismatch that has accumulated over one month is easier to investigate than one that has accumulated over twelve. Some organisations run reconciliation weekly during high-procurement periods (new campus setup, large capital projects). Year-end reconciliation is mandatory before closing books, but by that point, any mismatches found are harder to investigate because the transactions are months old."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when a Tally sync fails?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Failed sync items enter a queue-based retry system. Each item is attempted multiple times with the failure reason recorded. Items that exhaust all retries move to a dead letter queue where they can be investigated manually. Common failure causes include Tally server being offline, a ledger referenced in the voucher not existing in Tally, or the company in Tally being in a different financial year. The dead letter queue preserves the full voucher data so the item can be retried or manually entered once the underlying issue is resolved."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/tally-fixed-asset-reconciliation-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/tally-fixed-asset-reconciliation-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Tally Fixed Asset Reconciliation — Matching Your Register to Your Books</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>The fixed asset register says the organisation has assets worth Rs 2.4 crore. Tally says Rs 2.35 crore. The difference is Rs 5 lakh. Nobody knows where it comes from.</p>
+
+    <p>This is not unusual. In most Indian organisations, the fixed asset register and the accounting books are maintained separately — the asset register tracks what was bought, where it is, and what condition it is in, while Tally tracks the financial entries: purchase vouchers, depreciation journals, and write-off entries. Over time, these two records drift apart. A purchase is entered in Tally but the asset is not added to the register. An asset is scrapped in the register but the write-off entry is not posted to Tally. A reversal is processed in one system but not the other.</p>
+
+    <p>Reconciliation is the process of comparing these two records, identifying differences, and resolving them. This article explains how structured reconciliation works when the asset management system and Tally are connected, what causes drift, and how to prevent it.</p>
+
+    <h2>1. Why the Numbers Drift Apart</h2>
+
+    <p>Even in organisations that use both an asset management system and Tally, drift happens for predictable reasons:</p>
+
+    <ul>
+      <li><strong>Manual Tally entries.</strong> The accountant enters a purchase voucher directly in Tally because the GRN has not been processed yet. The asset is capitalised in the books but does not exist in the asset register.</li>
+      <li><strong>Silent sync failures.</strong> The system generates a Tally XML voucher and sends it, but Tally was offline or the company was in a different financial year. The system marks the item as "sent" but Tally never received it.</li>
+      <li><strong>Timing differences.</strong> An asset posted in the register on 31 March but the Tally voucher created on 1 April ends up in different financial years.</li>
+      <li><strong>Partial reversals.</strong> A GRN is reversed in the asset system (which removes the asset from the register), but the corresponding reversal voucher in Tally fails or is skipped.</li>
+      <li><strong>Rounding.</strong> GST calculations in the asset system use one rounding method; Tally uses another. The difference is typically a few rupees per transaction, but across hundreds of transactions, it accumulates.</li>
+      <li><strong>Ledger mapping changes.</strong> The asset classification "IT Equipment" maps to Tally ledger "Computers" — but someone renames the Tally ledger to "IT Equipment (Fixed)" without updating the mapping. New vouchers fail, but old ones remain under the old ledger name.</li>
+    </ul>
+
+    <h2>2. The Three Dimensions of Reconciliation</h2>
+
+    <p>Effective reconciliation compares the asset system and Tally across three dimensions:</p>
+
+    <h3>2.1 Voucher Count Matching</h3>
+
+    <p>The simplest check: does the number of vouchers match? For each event type — purchase posting, depreciation journal, write-off entry, vendor debit note — count the items in the asset system marked as POSTED and count the corresponding vouchers in Tally.</p>
+
+    <table>
+      <tr><th>Event Type</th><th>Asset System (POSTED)</th><th>Tally (Vouchers)</th><th>Difference</th></tr>
+      <tr><td>Purchase Voucher</td><td>142</td><td>140</td><td>2 missing in Tally</td></tr>
+      <tr><td>Depreciation Journal</td><td>12</td><td>12</td><td>Match</td></tr>
+      <tr><td>Write-Off Entry</td><td>8</td><td>7</td><td>1 missing in Tally</td></tr>
+      <tr><td>Vendor Debit Note</td><td>5</td><td>5</td><td>Match</td></tr>
+    </table>
+
+    <p>A count mismatch is the clearest signal. If the asset system shows 142 purchase postings but Tally has only 140 purchase vouchers, exactly 2 items need to be found and resolved.</p>
+
+    <h3>2.2 Vendor Ledger Balance Comparison</h3>
+
+    <p>Beyond counts, compare the total amounts posted per vendor. For each vendor, sum all posted amounts in the asset system and compare against the vendor's ledger balance in Tally.</p>
+
+    <p>Vendor-level comparison catches a category of errors that count matching cannot: a voucher exists in both systems but with a different amount (perhaps due to a manual correction in Tally), or two vouchers exist in Tally for the same transaction (double entry).</p>
+
+    <h3>2.3 Asset Class Ledger Balance Comparison</h3>
+
+    <p>The third dimension compares by asset classification. Total capitalised value for "Furniture" in the asset system should match the "Furniture" ledger balance in Tally. Total capitalised value for "IT Equipment" should match the corresponding Tally ledger.</p>
+
+    <p>Asset class comparison reveals ledger mapping issues — if the asset system maps "Laboratory Equipment" to Tally ledger "Lab Equipment" but some items were manually posted to "Scientific Instruments" in Tally, the class-level totals will not match even though the overall total might.</p>
+
+    <h2>3. Verification — Checking Individual Items</h2>
+
+    <p>Reconciliation works with aggregates. Verification works with individual items. For each item marked as POSTED in the asset system, verification checks whether the corresponding voucher actually exists in Tally.</p>
+
+    <p>This catches a specific failure mode: phantom postings. The asset system records a successful sync, but the voucher does not exist in Tally — perhaps because Tally was restarted during the XML import, or the voucher was manually deleted in Tally.</p>
+
+    <blockquote>
+      <p>Reconciliation tells you the totals do not match. Verification tells you exactly which items are missing. Both are needed — reconciliation for the big picture, verification for the specific exceptions.</p>
+    </blockquote>
+
+    <h2>4. The Queue — How Sync Failures Are Handled</h2>
+
+    <p>When the asset system generates a Tally voucher, the voucher does not go directly to Tally. It enters a queue with a status lifecycle:</p>
+
+    <table>
+      <tr><th>Status</th><th>Meaning</th></tr>
+      <tr><td>PENDING</td><td>Voucher generated, waiting to be sent</td></tr>
+      <tr><td>PROCESSING</td><td>Currently being sent to Tally</td></tr>
+      <tr><td>POSTED</td><td>Tally accepted the voucher</td></tr>
+      <tr><td>FAILED</td><td>Tally rejected or was unreachable — will be retried</td></tr>
+      <tr><td>SKIPPED</td><td>Manually skipped by admin (e.g., duplicate, test entry)</td></tr>
+    </table>
+
+    <p>Failed items are retried automatically. Items that exhaust all retries move to a dead letter queue — a holding area for items that need manual investigation. Common dead letter causes:</p>
+
+    <ul>
+      <li><strong>Ledger does not exist in Tally.</strong> The mapping references a ledger that was deleted or renamed in Tally.</li>
+      <li><strong>Financial year mismatch.</strong> Tally's active financial year does not match the voucher date.</li>
+      <li><strong>Company mismatch.</strong> The Tally company was switched or the connection points to a different company.</li>
+      <li><strong>Tally server persistently offline.</strong> The desktop Tally instance was shut down and nobody restarted it.</li>
+    </ul>
+
+    <p>The dead letter queue preserves the full voucher XML so the item can be retried once the underlying issue is fixed, or manually entered if necessary.</p>
+
+    <h2>5. Pre-Processing Validation</h2>
+
+    <p>The most effective way to prevent reconciliation issues is to catch them before posting. Pre-processing validation checks all PENDING items against live Tally state before any vouchers are sent:</p>
+
+    <ul>
+      <li><strong>Ledger existence check:</strong> Does every ledger referenced in the pending vouchers exist in Tally? If "Computer Equipment" is referenced but Tally only has "Computers," the mismatch is flagged before posting.</li>
+      <li><strong>Missing ledger resolution:</strong> The system can suggest which Tally ledgers are close matches (fuzzy matching) and can even auto-create missing ledgers in Tally if configured to do so.</li>
+      <li><strong>Connection health:</strong> Is Tally online and responsive? Is the correct company loaded?</li>
+    </ul>
+
+    <p>Running pre-processing validation before each sync batch eliminates the most common failure causes and keeps the dead letter queue empty.</p>
+
+    <h2>6. Practical Reconciliation Workflow</h2>
+
+    <ol>
+      <li><strong>Weekly:</strong> Check the sync queue for FAILED and dead letter items. Resolve before they accumulate.</li>
+      <li><strong>Monthly:</strong> Run the full reconciliation report — voucher counts, vendor balances, asset class balances. Investigate any differences.</li>
+      <li><strong>Before year-end:</strong> Run verification on all POSTED items. Confirm every item in the asset system has a matching voucher in Tally. Resolve all dead letter items.</li>
+      <li><strong>After year-end:</strong> Run reconciliation one final time after books are closed. The numbers should match. If they do not, the specific discrepancies from the reconciliation report tell you exactly where to look.</li>
+    </ol>
+
+    <h2>7. Frequently Asked Questions</h2>
+
+    <h3>Why do Tally and the fixed asset register show different numbers?</h3>
+    <p>The most common cause is that entries are made in one system but not the other. A purchase voucher may be entered in Tally directly without going through the procurement workflow, or a GRN may be posted in the asset system but the Tally sync failed silently. Other causes include timing differences, manual Tally entries that bypass the integration, reversed transactions where only one system was updated, and rounding differences in GST calculations. Reconciliation identifies these gaps so they can be investigated and corrected.</p>
+
+    <h3>How does automated reconciliation work between EAM and Tally?</h3>
+    <p>The reconciliation process compares three dimensions: voucher counts (how many purchase vouchers, journal entries, and debit notes exist in each system), vendor ledger balances (total amounts posted per vendor), and asset class ledger balances (total capitalised value per asset classification). Differences are flagged with the specific item, amount, and direction of mismatch. The reconciliation reads live Tally data via the Tally XML API and compares it against the posted items in the asset management system.</p>
+
+    <h3>What is the difference between reconciliation and verification of posted items?</h3>
+    <p>Reconciliation compares aggregate totals — does the total in the asset system match the total in Tally? Verification checks individual items — for each item marked as POSTED in the asset system, does the corresponding voucher actually exist in Tally? An item may be marked POSTED because the sync appeared to succeed, but the voucher might not exist in Tally due to a network failure or a manual deletion. Verification catches these phantom postings that reconciliation totals might miss.</p>
+
+    <h3>How often should reconciliation be performed?</h3>
+    <p>Monthly reconciliation is the practical minimum for organisations actively procuring assets. This catches drift early — a mismatch accumulated over one month is easier to investigate than one accumulated over twelve. Some organisations run reconciliation weekly during high-procurement periods. Year-end reconciliation is mandatory before closing books, but by that point, mismatches are harder to investigate because transactions are months old.</p>
+
+    <h3>What happens when a Tally sync fails?</h3>
+    <p>Failed sync items enter a queue-based retry system. Each item is attempted multiple times with the failure reason recorded. Items that exhaust all retries move to a dead letter queue where they can be investigated manually. Common causes include Tally being offline, ledger not existing in Tally, or financial year mismatch. The dead letter queue preserves the full voucher data so the item can be retried or manually entered once the issue is resolved.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/tally-asset-integration-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration Guide</a>
+        <a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/reports" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Reports</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If your asset register and Tally books show different numbers at year-end, share a brief overview and we will evaluate how automated reconciliation may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

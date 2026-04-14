@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Document Expiry Tracking — Preventing Compliance Gaps Before They Happen | Oparc</title>
+  <meta name="description" content="How to track vendor GSTIN, contracts, and compliance documents with automated expiry alerts. Covers urgency-based monitoring, compliance reports, and spend-linked vendor risk assessment for Indian organisations.">
+  <meta name="keywords" content="vendor document expiry tracking, vendor compliance document management, vendor GSTIN expiry alert, vendor contract expiry software, supplier document management India, vendor compliance monitoring software, vendor document renewal tracking">
+  <link rel="canonical" href="https://oparc.in/vendor-document-expiry-tracking-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/vendor-document-expiry-tracking-guide">
+  <meta property="og:title" content="Vendor Document Expiry Tracking — Preventing Compliance Gaps Before They Happen">
+  <meta property="og:description" content="How to track vendor GSTIN, contracts, and compliance documents with automated expiry alerts. Urgency-based monitoring and spend-linked risk assessment.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vendor Document Expiry Tracking — Preventing Compliance Gaps Before They Happen">
+  <meta name="twitter:description" content="Track vendor GSTIN, contracts, and compliance documents with automated expiry alerts. Urgency-based monitoring and spend-linked risk assessment.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Vendor Document Expiry Tracking — Preventing Compliance Gaps Before They Happen",
+    "description": "How to track vendor GSTIN, contracts, and compliance documents with automated expiry alerts. Covers urgency-based monitoring and compliance reports.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/vendor-document-expiry-tracking-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Vendor Document Expiry Tracking", "item": "https://oparc.in/vendor-document-expiry-tracking-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What vendor documents should be tracked for expiry?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At minimum: GST registration certificate (renewed annually for composition scheme vendors), trade licences, MSME registration (valid for the registration period), insurance policies, and any industry-specific certifications (ISO, FSSAI, drug licence, pollution control board clearance). Additionally, contracts — annual maintenance contracts (AMC), rate contracts, and service agreements — all have expiry dates that directly affect procurement eligibility. The key principle is: if the document affects whether you should be transacting with the vendor, its expiry date needs to be tracked."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far in advance should expiry alerts be generated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A practical default is 90 days, with urgency bands: RED for items expiring within 7 days (immediate action required), ORANGE for 8-30 days (action needed this month), GOLD for 31-60 days (plan renewal), and BLUE for 61-90 days (awareness only). The 90-day window gives enough lead time for document renewals that involve government processing — GST amendments, trade licence renewals, and MSME re-registrations can take 30-60 days. For contracts, the renewal negotiation should start at least 60 days before expiry to avoid gaps in coverage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should vendors with expired documents be blocked from new purchase orders?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This depends on the document type and the organisation's risk appetite. A hard block on expired GST registration makes sense — transacting with a vendor whose GST registration has been cancelled exposes the organisation to ITC reversal. But blocking on an expired ISO certificate might be too aggressive — the vendor is still legally capable of supplying goods. A practical approach is soft blocking: the system flags the expired document during PO creation and requires the creator to acknowledge the risk, but does not prevent the PO. Hard blocks should be reserved for statutory compliance documents where the legal risk is clear."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does vendor compliance tracking relate to spend data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compliance reports become more actionable when linked to spend. A vendor with an expiring GST certificate and Rs 5 lakh in annual spend is a different priority from one with Rs 50 lakh. Spend data — committed (approved and posted POs) and actual (posted GRNs and SAs) — provides the risk context. When the compliance report shows 3 vendors in RED urgency with a combined annual spend of Rs 1.2 crore, the procurement team knows exactly how much business is at risk if those documents are not renewed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can vendor documents be uploaded and tracked in the system?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Each vendor can have multiple documents attached — each with an expiry date, document type classification, and the uploaded file. Documents are stored with UUID-based safe filenames and validated for file extension. The expiry date is what drives the monitoring — once uploaded, the document appears in compliance reports when its expiry approaches. Documents can be updated (new version uploaded with new expiry date) without losing the history of previous versions."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/vendor-document-expiry-tracking-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/vendor-document-expiry-tracking-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Vendor Document Expiry Tracking — Preventing Compliance Gaps Before They Happen</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>A vendor's GST registration was cancelled three months ago. Nobody noticed. The organisation continued issuing purchase orders, receiving goods, and claiming Input Tax Credit on those invoices. When the statutory auditor catches it — and they will — the ITC for those three months must be reversed, with interest. The vendor is asked for updated documents. They say they have applied for re-registration and it will come "soon." The organisation has no documentation of when the lapse started, what was procured during the gap, or how much ITC is at risk.</p>
+
+    <p>This is not a rare scenario. In organisations with 50 or more active vendors, document expiry is a predictable compliance risk that happens continuously — not once, but across multiple vendors, multiple document types, and multiple timelines. This article explains how structured document expiry tracking works, why urgency-based monitoring matters, and how linking compliance to spend data transforms vendor risk from a surprise into a manageable process.</p>
+
+    <h2>1. What Needs to Be Tracked</h2>
+
+    <p>Vendor compliance involves three categories of documents, each with its own renewal cycle and risk profile:</p>
+
+    <h3>1.1 Statutory Documents</h3>
+
+    <table>
+      <tr><th>Document</th><th>Typical Validity</th><th>Risk if Expired</th></tr>
+      <tr><td>GST Registration Certificate</td><td>Continuous (but can be cancelled/suspended)</td><td>ITC reversal on all post-cancellation invoices</td></tr>
+      <tr><td>Trade Licence</td><td>Annual</td><td>Vendor operating illegally — potential penalty for buyer</td></tr>
+      <tr><td>MSME Registration</td><td>Registration period</td><td>Loss of MSME payment priority (45-day rule under MSMED Act)</td></tr>
+      <tr><td>PAN Card</td><td>Permanent (but needs verification)</td><td>TDS complications — higher withholding rate for invalid PAN</td></tr>
+    </table>
+
+    <h3>1.2 Industry-Specific Certifications</h3>
+
+    <ul>
+      <li><strong>ISO certifications</strong> (9001, 14001, 27001) — typically valid for 3 years with annual surveillance audits</li>
+      <li><strong>FSSAI licence</strong> — required for food-related vendors, annual or 5-year validity</li>
+      <li><strong>Drug licence</strong> — required for pharmaceutical vendors, state-specific validity</li>
+      <li><strong>Pollution Control Board consent</strong> — required for manufacturing vendors, validity varies by state</li>
+      <li><strong>Insurance policies</strong> — professional indemnity, product liability, annual renewal</li>
+    </ul>
+
+    <h3>1.3 Contracts</h3>
+
+    <ul>
+      <li><strong>Annual Maintenance Contracts (AMC)</strong> — expiry means assets are unprotected</li>
+      <li><strong>Rate contracts</strong> — expiry means agreed pricing no longer applies</li>
+      <li><strong>Service agreements</strong> — expiry means terms are not binding</li>
+      <li><strong>Warranty contracts</strong> — expiry means repair costs shift to the organisation</li>
+    </ul>
+
+    <p>Each of these has a different renewal timeline, a different risk consequence, and a different person responsible for renewal. Tracking them in a spreadsheet works for 10 vendors. At 50 vendors with 3-5 documents each, that is 150-250 expiry dates to monitor — a spreadsheet breaks down.</p>
+
+    <h2>2. Urgency-Based Monitoring</h2>
+
+    <p>Not all expiring documents need the same urgency. A document expiring in 90 days needs awareness; a document expiring in 5 days needs immediate action. Urgency bands create a visual triage system:</p>
+
+    <table>
+      <tr><th>Band</th><th>Days to Expiry</th><th>Action</th></tr>
+      <tr><td style="color: #c0392b; font-weight: 600;">RED</td><td>7 days or less</td><td>Immediate action — contact vendor, escalate to procurement head</td></tr>
+      <tr><td style="color: #e67e22; font-weight: 600;">ORANGE</td><td>8 to 30 days</td><td>This month — initiate renewal process, request updated document</td></tr>
+      <tr><td style="color: #f1c40f; font-weight: 600;">GOLD</td><td>31 to 60 days</td><td>Plan renewal — budget for renewal fees, schedule vendor follow-up</td></tr>
+      <tr><td style="color: #3498db; font-weight: 600;">BLUE</td><td>61 to 90 days</td><td>Awareness — note upcoming renewal, no action needed yet</td></tr>
+    </table>
+
+    <p>The compliance report, generated with a configurable look-ahead window (default 90 days), shows all vendors with any document, contract, or certification approaching expiry — colour-coded by urgency band. A weekly review of this report takes five minutes and prevents three months of retroactive cleanup.</p>
+
+    <h2>3. Linking Compliance to Spend</h2>
+
+    <p>A vendor with an expiring GST certificate and Rs 500 in annual spend is not urgent. The same expiry on a vendor with Rs 50 lakh in annual spend requires immediate attention. Compliance tracking becomes actionable when it includes spend context.</p>
+
+    <p>Two spend metrics matter:</p>
+
+    <ul>
+      <li><strong>Committed spend:</strong> The value of approved and posted purchase orders — what the organisation has committed to pay.</li>
+      <li><strong>Actual spend:</strong> The value of posted GRNs and service acceptances — what has actually been received and accepted.</li>
+    </ul>
+
+    <p>When the compliance report shows a vendor in RED urgency with Rs 12 lakh committed spend and Rs 8 lakh actual spend, the procurement team knows: "We have Rs 4 lakh in outstanding POs with a vendor whose GST certificate expires in 3 days. Do we hold the POs or proceed?"</p>
+
+    <blockquote>
+      <p>Compliance without spend context is a list. Compliance with spend context is a risk register. The difference is whether the CFO acts on it.</p>
+    </blockquote>
+
+    <h2>4. The Vendor Lifecycle Connection</h2>
+
+    <p>Document tracking does not exist in isolation. It connects to the vendor's lifecycle status:</p>
+
+    <table>
+      <tr><th>Vendor Status</th><th>Document Implication</th></tr>
+      <tr><td>DRAFT</td><td>Documents are being collected — minimum one address required to submit</td></tr>
+      <tr><td>SUBMITTED</td><td>Documents locked — admin reviews completeness before approval</td></tr>
+      <tr><td>ACTIVE</td><td>Documents are being monitored — expiry alerts are active</td></tr>
+      <tr><td>SUSPENDED</td><td>Documents may have expired — suspension may be triggered by compliance failure</td></tr>
+      <tr><td>BLACKLISTED</td><td>No monitoring needed — vendor is permanently excluded</td></tr>
+    </table>
+
+    <p>When a vendor is submitted for admin approval, the admin reviews not just the vendor's basic details but also the completeness and validity of attached documents. This validation at entry prevents the most common source of compliance gaps: vendors being approved without proper documentation.</p>
+
+    <h2>5. Multi-GSTIN Tracking</h2>
+
+    <p>Many vendors operate from multiple states, each with a different GSTIN. A vendor headquartered in Karnataka (29XXXXX) may have a branch in Telangana (36XXXXX). The GSTIN determines whether the transaction is interstate (IGST) or intrastate (CGST + SGST) — which affects both the tax split and the ITC claim.</p>
+
+    <p>In a structured system, GSTINs are tracked at the address level — each vendor address carries its own GSTIN. When a purchase order is created, the buyer selects which vendor address to use, and the corresponding GSTIN is frozen on the PO. This frozen GSTIN flows through to GRN, vendor debit notes, and Tally vouchers — ensuring the tax split is consistent from order to accounting entry.</p>
+
+    <p>The compliance report tracks GSTIN validity per address, not just per vendor — because a vendor may have a valid GSTIN in one state and a cancelled one in another.</p>
+
+    <h2>6. Practical Implementation</h2>
+
+    <h3>6.1 Getting Documents Into the System</h3>
+
+    <p>Documents are uploaded against each vendor — with a document type, expiry date, and the file itself. The system validates file extensions and generates safe filenames (UUID-based) to prevent path traversal. Each upload creates a record that enters the monitoring cycle.</p>
+
+    <p>For bulk vendor onboarding, documents can be uploaded after the vendor is created but before submission — the submit validation checks that minimum documentation requirements are met.</p>
+
+    <h3>6.2 Weekly Compliance Review</h3>
+
+    <p>The recommended cadence is a weekly review of the compliance report filtered to RED and ORANGE items. This takes minutes — the report shows vendor name, document type, expiry date, urgency band, and optionally spend data. Actions flow directly: contact the vendor, request an updated document, or escalate to procurement management.</p>
+
+    <h3>6.3 Year-End Compliance Snapshot</h3>
+
+    <p>Before the financial year closes, generate the compliance report for all vendors (not just expiring ones). This provides a point-in-time snapshot of vendor compliance status — useful for the statutory auditor's vendor verification procedures and for internal audit documentation.</p>
+
+    <h2>7. Frequently Asked Questions</h2>
+
+    <h3>What vendor documents should be tracked for expiry?</h3>
+    <p>At minimum: GST registration certificate, trade licences, MSME registration, insurance policies, and any industry-specific certifications (ISO, FSSAI, drug licence, pollution control board clearance). Additionally, contracts — AMC, rate contracts, and service agreements — all have expiry dates that directly affect procurement eligibility. The key principle is: if the document affects whether you should be transacting with the vendor, its expiry date needs to be tracked.</p>
+
+    <h3>How far in advance should expiry alerts be generated?</h3>
+    <p>A practical default is 90 days, with urgency bands: RED for items expiring within 7 days (immediate action), ORANGE for 8-30 days (action this month), GOLD for 31-60 days (plan renewal), and BLUE for 61-90 days (awareness). The 90-day window gives enough lead time for government-related renewals that can take 30-60 days to process.</p>
+
+    <h3>Should vendors with expired documents be blocked from new purchase orders?</h3>
+    <p>This depends on the document type and risk appetite. A hard block on expired GST registration makes sense — transacting exposes the organisation to ITC reversal. But blocking on an expired ISO certificate might be too aggressive. A practical approach is soft blocking: the system flags the expired document during PO creation and requires acknowledgement, but does not prevent the PO. Hard blocks should be reserved for statutory compliance documents.</p>
+
+    <h3>How does vendor compliance tracking relate to spend data?</h3>
+    <p>Compliance reports become actionable when linked to spend. A vendor with an expiring certificate and Rs 5 lakh in annual spend is a different priority from one with Rs 50 lakh. Spend data — committed (approved POs) and actual (posted GRNs/SAs) — provides the risk context that turns a compliance list into a risk register.</p>
+
+    <h3>Can vendor documents be uploaded and tracked in the system?</h3>
+    <p>Yes. Each vendor can have multiple documents — each with an expiry date, type classification, and the uploaded file. Documents are stored with UUID-based safe filenames. The expiry date drives the monitoring — once uploaded, the document appears in compliance reports when its expiry approaches. Documents can be updated with new versions without losing previous version history.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/vendor-management" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Vendor Management</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a>
+        <a href="/reports" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Reports</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If vendor document renewals are tracked in spreadsheets and expiries surface as surprises during audits, share a brief overview and we will evaluate how structured tracking may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Order Approval Delays — How to Find and Fix Bottlenecks | Oparc</title>
+  <meta name="description" content="How to identify where purchase orders get stuck in approval chains. Covers approval aging reports, SLA breach tracking, bottleneck approver identification, and practical approaches to reducing procurement cycle time.">
+  <meta name="keywords" content="purchase order approval delay, purchase approval bottleneck tracking, PO approval stuck, procurement approval cycle time, SLA breach approval tracking, purchase order approval workflow delay, approval aging report procurement">
+  <link rel="canonical" href="https://oparc.in/approval-bottleneck-tracking-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/approval-bottleneck-tracking-guide">
+  <meta property="og:title" content="Purchase Order Approval Delays — How to Find and Fix Bottlenecks">
+  <meta property="og:description" content="How to identify where purchase orders get stuck in approval chains. Approval aging, SLA breach tracking, bottleneck approver identification.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Purchase Order Approval Delays — How to Find and Fix Bottlenecks">
+  <meta name="twitter:description" content="How to identify where purchase orders get stuck in approval chains. Approval aging, SLA breach tracking, bottleneck approver identification.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Purchase Order Approval Delays — How to Find and Fix Bottlenecks",
+    "description": "How to identify where purchase orders get stuck in approval chains. Covers approval aging reports, SLA breach tracking, bottleneck approver identification.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/approval-bottleneck-tracking-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Approval Bottleneck Tracking", "item": "https://oparc.in/approval-bottleneck-tracking-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you measure how long a purchase order has been stuck in approval?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Approval aging is measured from the moment the document enters a specific approval level. When a PO is submitted, it arrives at Level 1. The system records the timestamp. If the Level 1 approver has not acted after 3 days, the aging report shows that PO as '3 days pending at Level 1.' When Level 1 approves and it moves to Level 2, the clock resets for that level. This per-level measurement pinpoints exactly where the delay is — it is not enough to know a PO has been pending for 10 days; you need to know it spent 2 days at Level 1 and has been stuck at Level 2 for 8 days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an SLA breach in purchase approval?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An SLA (Service Level Agreement) breach occurs when an approver does not act within the configured time window for their level. Each level in the approval matrix can have an SLA — for example, Level 1 must respond within 2 days, Level 2 within 3 days. When the elapsed time exceeds the SLA, the system flags it as a breach. SLA breach reports show which documents are overdue, by how many days, and which approver is responsible. This transforms approval delays from an invisible problem into a measurable one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you identify which approver causes the most delays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Bottleneck analysis aggregates pending approval counts and aging data by approver across all document types — purchase requisitions, purchase orders, and goods receipt notes. If one manager has 15 pending approvals averaging 6 days each while others average 1 day, the data makes the bottleneck visible. This is not about blame — it often reveals structural issues: the approver may be over-assigned (appearing in too many approval matrix codes), on extended leave without a delegate, or simply unaware that documents are waiting for them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do approval delays affect procurement cycle time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Procurement cycle time measures the duration from purchase requisition submission to goods receipt. Approval delays directly inflate this metric. A PR that takes 5 days to approve, followed by a PO that takes 7 days to approve, adds 12 days of wait time before a vendor even receives the order. Cycle time reports broken down by stage — PR approval, PO approval, vendor delivery, GRN processing — reveal whether the bottleneck is internal (approval delays) or external (vendor delivery). In many mid-market organisations, internal approval delays exceed vendor delivery times."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do approvers receive notifications when documents are waiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. When a document reaches an approver's level, they receive both an in-app notification and an email notification (if their email is verified). The notification includes a direct link to the document. Approvers also have a dedicated 'pending for me' view that shows all documents awaiting their action across all document types. Unread notification counts are updated in real time on the dashboard. The system does not send reminder notifications for overdue items — that is tracked through the SLA breach report rather than through repeated emails."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/approval-bottleneck-tracking-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/approval-bottleneck-tracking-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Purchase Order Approval Delays — How to Find and Fix Bottlenecks</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>A purchase requisition is raised on Monday. The department head approves it by Wednesday. A purchase order is created on Thursday. Then it sits. The CFO is travelling. The finance controller is reviewing last quarter's numbers. The PO needs two levels of approval and neither approver has looked at it. Two weeks later, someone in procurement follows up with the vendor — who has already increased prices. The organisation either pays more or starts over.</p>
+
+    <p>This pattern repeats in every organisation that has multi-level approval workflows without visibility into where things get stuck. The approvals exist for a reason — financial controls, segregation of duties, compliance with internal policies. But the controls create delays, and without measurement, delays become invisible.</p>
+
+    <p>This article explains how to make approval bottlenecks visible — through aging reports, SLA tracking, and approver-level analysis — so that governance does not come at the cost of operational speed.</p>
+
+    <h2>1. The Invisible Queue</h2>
+
+    <p>In most organisations, the person who raised a purchase requisition has no idea where it is in the approval chain. They know they submitted it. They know it has not been approved. But they cannot see whether it is sitting with the department head, the finance controller, or the CFO. They cannot tell if the delay is 2 days or 12.</p>
+
+    <p>This invisibility creates several problems:</p>
+
+    <ul>
+      <li><strong>Follow-ups are manual and political.</strong> The requester calls the department head, who says "I approved it last week." The requester calls finance, who says "we haven't received it." Nobody can see the actual state.</li>
+      <li><strong>Urgent requests get the same treatment as routine ones.</strong> A procurement for a production-critical spare part sits in the same queue as a stationery order. The approver sees a list of pending items with no urgency context.</li>
+      <li><strong>Patterns are invisible.</strong> If one approver consistently takes 10 days while others take 1, nobody notices until the CFO asks why procurement takes six weeks.</li>
+      <li><strong>No accountability.</strong> When there is no measurement, there is no conversation about approval speed. The delay is accepted as "how things work."</li>
+    </ul>
+
+    <h2>2. Three Layers of Visibility</h2>
+
+    <p>Solving approval delays requires three distinct types of reporting, each answering a different question:</p>
+
+    <h3>2.1 Approval Aging — Where Is Each Document Right Now?</h3>
+
+    <p>Approval aging answers the immediate question: which documents are pending, and for how long? The report shows every document currently in an approval workflow — purchase requisitions, purchase orders, and goods receipt notes — along with:</p>
+
+    <ul>
+      <li>Which approval level the document is currently at</li>
+      <li>Who the approver is at that level</li>
+      <li>How many days the document has been pending at that level</li>
+      <li>The total elapsed time since submission</li>
+    </ul>
+
+    <p>This per-level measurement is critical. A PO that has been pending for 10 days tells you there is a delay. A PO that spent 1 day at Level 1 and has been stuck at Level 2 for 9 days tells you exactly where the delay is.</p>
+
+    <h3>2.2 SLA Breach Tracking — Which Approvals Have Exceeded Their Time Limit?</h3>
+
+    <p>Aging tells you how long things have been waiting. SLA breach tracking tells you which ones have exceeded an agreed threshold.</p>
+
+    <p>Each level in the approval matrix can carry an SLA — the maximum number of days an approver should take to act. When configured:</p>
+
+    <table>
+      <tr><th>Level</th><th>Approver Role</th><th>SLA (days)</th></tr>
+      <tr><td>1</td><td>Department Head</td><td>2</td></tr>
+      <tr><td>2</td><td>Finance Controller</td><td>3</td></tr>
+      <tr><td>3</td><td>CFO</td><td>5</td></tr>
+    </table>
+
+    <p>A document that has been at Level 2 for 5 days when the SLA is 3 days is flagged as a breach — 2 days overdue. The SLA breach report aggregates these across all pending documents, providing a clear view of which approvals are overdue and by how much.</p>
+
+    <p>SLAs transform approval speed from a vague expectation ("approvals should happen promptly") into a measurable commitment. When the CFO reviews a report showing 12 SLA breaches this month, the conversation shifts from "things feel slow" to "Level 2 has a structural capacity problem."</p>
+
+    <h3>2.3 Bottleneck Approver Analysis — Who Is the Constraint?</h3>
+
+    <p>The third layer aggregates data by approver rather than by document. For each person who appears in any approval workflow, the system can show:</p>
+
+    <ul>
+      <li>How many documents are currently pending with them</li>
+      <li>Average aging of their pending items</li>
+      <li>Number of SLA breaches attributed to them</li>
+      <li>Breakdown by document type (PR, PO, GRN)</li>
+    </ul>
+
+    <p>This approver-level view reveals structural issues that document-level reports cannot:</p>
+
+    <ul>
+      <li><strong>Over-assignment:</strong> An approver who appears in 15 different approval matrix codes is spread too thin. The fix is not "approve faster" — it is to redistribute approval responsibility.</li>
+      <li><strong>Absence without delegation:</strong> An approver on leave with no delegate creates a hard block. Documents cannot progress until they return.</li>
+      <li><strong>Awareness gap:</strong> Some approvers simply do not check the system regularly. They do not know documents are waiting. Notification delivery is the fix, not a bigger queue.</li>
+    </ul>
+
+    <h2>3. The Notification Layer</h2>
+
+    <p>Reports identify bottlenecks after the fact. Notifications prevent them in real time. A well-designed approval notification system includes:</p>
+
+    <ul>
+      <li><strong>Immediate notification:</strong> When a document reaches an approver's level, they receive an in-app notification and an email with a direct link to the document.</li>
+      <li><strong>Pending count on dashboard:</strong> The approver's landing page shows an unread count of documents awaiting their action. This is updated in real time — not daily or weekly.</li>
+      <li><strong>Dedicated queue:</strong> A "Pending for Me" view that consolidates all documents awaiting the approver's action across document types — PRs, POs, GRNs, service acceptances. One place to look, not four.</li>
+    </ul>
+
+    <p>The goal is to make pending approvals impossible to miss. An approver should not need to remember to check the system — the system should actively inform them.</p>
+
+    <h2>4. Procurement Cycle Time — The Broader Picture</h2>
+
+    <p>Approval delays are one component of overall procurement cycle time — the duration from requisition submission to goods receipt. A structured system measures each stage independently:</p>
+
+    <table>
+      <tr><th>Stage</th><th>Start</th><th>End</th><th>Typical Range</th></tr>
+      <tr><td>PR Approval</td><td>PR submitted</td><td>PR approved</td><td>1-5 days</td></tr>
+      <tr><td>PO Creation</td><td>PR approved</td><td>PO submitted</td><td>1-3 days</td></tr>
+      <tr><td>PO Approval</td><td>PO submitted</td><td>PO approved</td><td>2-10 days</td></tr>
+      <tr><td>Vendor Delivery</td><td>PO approved</td><td>Goods received</td><td>7-30 days</td></tr>
+      <tr><td>GRN Processing</td><td>Goods received</td><td>GRN approved</td><td>1-5 days</td></tr>
+    </table>
+
+    <p>When cycle time is broken down by stage, the bottleneck is obvious. If PR approval takes 2 days, vendor delivery takes 10 days, but PO approval takes 15 days — the problem is not the vendor. The problem is internal. Cycle time data, segmented by supplier, department, and classification, reveals patterns that aggregate numbers hide.</p>
+
+    <blockquote>
+      <p>In many mid-market organisations, internal approval delays exceed vendor delivery times. The organisation blames the vendor for slow procurement while the real constraint is its own approval chain.</p>
+    </blockquote>
+
+    <h2>5. Structural Fixes — Beyond Reports</h2>
+
+    <p>Reports make bottlenecks visible. Fixing them requires structural changes:</p>
+
+    <h3>5.1 Right-Sizing the Approval Chain</h3>
+
+    <p>Not every purchase needs three levels of approval. A configurable approval matrix can route based on amount, classification, and department — so a stationery order worth Rs 5,000 gets a single-level approval while a capital asset worth Rs 50 lakhs gets three levels. Reducing unnecessary levels is the single most effective way to reduce cycle time.</p>
+
+    <h3>5.2 Bypass PO for Pre-Approved Items</h3>
+
+    <p>Some items — annual maintenance contracts, recurring services — are pre-approved in the budget but still go through the full PR-PO cycle. A bypass mode that auto-creates and auto-approves the PO when the PR is approved eliminates an entire stage for these items. This should require a stated reason and should only be available in combined (all-lines-together) mode to prevent misuse.</p>
+
+    <h3>5.3 Per-Line Approval</h3>
+
+    <p>When a requisition has 10 lines and only 1 is contentious, the entire requisition should not wait. Per-line approval allows 9 lines to be approved and proceed to PO while the contentious line is discussed. This granularity prevents one line from blocking an entire procurement batch.</p>
+
+    <h3>5.4 Approval Topology Choice</h3>
+
+    <p>Some procurement decisions genuinely need all-or-nothing treatment — approve or reject the entire batch. Others benefit from line-by-line granularity. Offering both topologies (collective and line-level) as a per-requisition configuration lets the submitter choose the appropriate model without requiring a different workflow for each.</p>
+
+    <h2>6. What to Measure and How Often</h2>
+
+    <table>
+      <tr><th>Metric</th><th>What It Reveals</th><th>Review Frequency</th></tr>
+      <tr><td>Average PR approval time</td><td>Department-level efficiency</td><td>Monthly</td></tr>
+      <tr><td>Average PO approval time</td><td>Finance team responsiveness</td><td>Monthly</td></tr>
+      <tr><td>SLA breach count</td><td>Governance adherence</td><td>Weekly</td></tr>
+      <tr><td>Bottleneck approver list</td><td>Structural capacity issues</td><td>Monthly</td></tr>
+      <tr><td>End-to-end cycle time</td><td>Overall procurement efficiency</td><td>Quarterly</td></tr>
+      <tr><td>Cycle time by supplier</td><td>Vendor performance</td><td>Quarterly</td></tr>
+    </table>
+
+    <h2>7. Frequently Asked Questions</h2>
+
+    <h3>How do you measure how long a purchase order has been stuck in approval?</h3>
+    <p>Approval aging is measured from the moment the document enters a specific approval level. When a PO is submitted, it arrives at Level 1. The system records the timestamp. If the Level 1 approver has not acted after 3 days, the aging report shows that PO as "3 days pending at Level 1." When Level 1 approves and it moves to Level 2, the clock resets for that level. This per-level measurement pinpoints exactly where the delay is — it is not enough to know a PO has been pending for 10 days; you need to know it spent 2 days at Level 1 and has been stuck at Level 2 for 8 days.</p>
+
+    <h3>What is an SLA breach in purchase approval?</h3>
+    <p>An SLA (Service Level Agreement) breach occurs when an approver does not act within the configured time window for their level. Each level in the approval matrix can have an SLA — for example, Level 1 must respond within 2 days, Level 2 within 3 days. When the elapsed time exceeds the SLA, the system flags it as a breach. SLA breach reports show which documents are overdue, by how many days, and which approver is responsible. This transforms approval delays from an invisible problem into a measurable one.</p>
+
+    <h3>Can you identify which approver causes the most delays?</h3>
+    <p>Yes. Bottleneck analysis aggregates pending approval counts and aging data by approver across all document types — purchase requisitions, purchase orders, and goods receipt notes. If one manager has 15 pending approvals averaging 6 days each while others average 1 day, the data makes the bottleneck visible. This is not about blame — it often reveals structural issues: the approver may be over-assigned, on extended leave without a delegate, or simply unaware that documents are waiting.</p>
+
+    <h3>How do approval delays affect procurement cycle time?</h3>
+    <p>Procurement cycle time measures the duration from purchase requisition submission to goods receipt. Approval delays directly inflate this metric. A PR that takes 5 days to approve, followed by a PO that takes 7 days to approve, adds 12 days of wait time before a vendor even receives the order. Cycle time reports broken down by stage reveal whether the bottleneck is internal or external. In many mid-market organisations, internal approval delays exceed vendor delivery times.</p>
+
+    <h3>Do approvers receive notifications when documents are waiting?</h3>
+    <p>Yes. When a document reaches an approver's level, they receive both an in-app notification and an email notification (if their email is verified). The notification includes a direct link to the document. Approvers also have a dedicated "pending for me" view that shows all documents awaiting their action across all document types. Unread notification counts are updated in real time on the dashboard.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/purchase-approval-workflow-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Approval Workflow Guide</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a>
+        <a href="/purchase-order-approval" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Purchase Order Approval</a>
+        <a href="/reports" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Reports</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If purchase approvals regularly take weeks and nobody can explain where things get stuck, share a brief overview and we will evaluate how structured tracking may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

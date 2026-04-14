@@ -141,8 +141,33 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://oparc.in/custodian-self-declaration-guide</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/approval-bottleneck-tracking-guide</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/tally-fixed-asset-reconciliation-guide</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/vendor-document-expiry-tracking-guide</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/asset-transfer-tracking-guide</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/guides</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-14</lastmod>
     <priority>0.6</priority>
   </url>
   <url>

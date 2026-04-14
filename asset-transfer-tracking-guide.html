@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asset Transfer Between Departments — Tracking Movements with Governance | Oparc</title>
+  <meta name="description" content="How to track asset transfers between departments with dual-phase approval. Covers source and receiving department sign-off, destination asset creation, ownership updates, and audit trails for inter-departmental asset movements.">
+  <meta name="keywords" content="asset transfer between departments, inter department asset transfer tracking, asset movement tracking software, department asset transfer approval, fixed asset transfer process, asset relocation tracking software India, asset custody transfer">
+  <link rel="canonical" href="https://oparc.in/asset-transfer-tracking-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/asset-transfer-tracking-guide">
+  <meta property="og:title" content="Asset Transfer Between Departments — Tracking Movements with Governance">
+  <meta property="og:description" content="How to track asset transfers between departments with dual-phase approval. Source and receiving department sign-off, destination asset creation, audit trails.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Asset Transfer Between Departments — Tracking Movements with Governance">
+  <meta name="twitter:description" content="Track asset transfers between departments with dual-phase approval. Source and receiving department sign-off, ownership updates, audit trails.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Asset Transfer Between Departments — Tracking Movements with Governance",
+    "description": "How to track asset transfers between departments with dual-phase approval. Covers source and receiving department sign-off, ownership updates, and audit trails.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/asset-transfer-tracking-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Asset Transfer Tracking", "item": "https://oparc.in/asset-transfer-tracking-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does an asset transfer need approval from both departments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A transfer affects two departments: the source loses an asset (reducing its asset base and potentially affecting its depreciation charges), and the destination gains one (which needs to be accounted for under their responsibility). Without dual approval, transfers can happen informally — a laptop moves from Marketing to Engineering because someone needed it, but Marketing's asset register still shows it. Dual-phase approval ensures the source department formally releases the asset (acknowledging the reduction) and the receiving department formally accepts it (acknowledging the new custody). This prevents phantom assets — items that exist on paper in one department but physically reside in another."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to the asset ID when an asset is transferred?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The source asset is reduced (its quantity decremented or status changed), and a new destination asset record is created with a derived asset ID. The format is {source_asset_id}-M{sequence} — for example, if asset IT-EQ-2026-0042 is transferred, the destination record becomes IT-EQ-2026-0042-M001. This derived ID preserves the lineage — anyone looking at the destination asset can trace it back to the original procurement through the ID alone. The destination asset carries the new ownership (department, user, location) while inheriting the financial history (original cost, accumulated depreciation) from the source."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is depreciation handled after a transfer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The destination asset inherits the financial attributes of the source — original cost, accumulated depreciation, and remaining useful life. Depreciation continues from where it left off, not from zero. This is consistent with accounting treatment: a transfer between departments within the same entity is not a new purchase. The asset's book value, depreciation method, and schedule remain unchanged. What changes is the ownership (department, custodian, location) and the reporting — the depreciation charge now appears against the receiving department's cost centre rather than the source department's."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a transfer be reversed if the receiving department rejects the asset?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Rejection happens during the approval phase, not after posting. If the receiving department's approver rejects the transfer during Phase 2 (receiving phase approval), the transfer does not proceed — no destination asset is created, and the source asset remains unchanged. Once a transfer is posted (both phases approved), it is treated as a completed transaction. To reverse a posted transfer, a new MOVEMENT requisition would need to be raised in the opposite direction — from the receiving department back to the source — going through the same dual-phase approval. This ensures every movement is documented and approved, even reversals."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you track all movements of a specific asset over time?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every transfer creates a MOVEMENT requisition that links the source asset and destination asset. The source asset's audit trail shows the transfer-out event, and the destination asset's ID encodes its lineage (the -M suffix with sequence number). By following the chain of asset IDs — IT-EQ-2026-0042 transferred to IT-EQ-2026-0042-M001, which was later transferred to IT-EQ-2026-0042-M001-M001 — the complete movement history is traceable. The requisition history for each transfer includes: who initiated it, who approved it (both phases), when each approval happened, and what destination details were specified."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/asset-transfer-tracking-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/asset-transfer-tracking-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Asset Transfer Between Departments — Tracking Movements with Governance</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>A projector was purchased for the Conference Room. Six months later, it is in the Training Department. The asset register still shows it in the Conference Room. The Training Department did not request it formally — someone carried it over because they needed it for a workshop. When the auditor asks about it during physical verification, the Conference Room says "we gave it to Training" and Training says "it was always here." The asset register is wrong, nobody knows when it moved, and there is no documentation of the transfer.</p>
+
+    <p>This is the most common way asset registers become unreliable. Assets move between departments, locations, and custodians constantly — but most organisations have no process for recording these movements. The asset stays on the source department's books while physically residing elsewhere. Over time, the asset register drifts from reality.</p>
+
+    <p>This article explains how structured asset transfers work when both departments must formally approve the movement — ensuring the register reflects reality and every transfer has an audit trail.</p>
+
+    <h2>1. Why Informal Transfers Break the Register</h2>
+
+    <p>Informal transfers — where someone physically moves an asset without updating the register — create cascading problems:</p>
+
+    <ul>
+      <li><strong>Depreciation is charged to the wrong department.</strong> The source department's budget absorbs the depreciation cost for an asset it no longer uses. The receiving department benefits from the asset without bearing the financial cost.</li>
+      <li><strong>Physical verification fails.</strong> The verification team checks the Conference Room for the projector, does not find it, and marks it as "not found." It triggers an investigation that ends with "oh, Training has it." Hours wasted.</li>
+      <li><strong>Insurance claims are complicated.</strong> If the asset is damaged in the Training Department, the insurance claim references the Conference Room (per the register). The insurer may question the discrepancy.</li>
+      <li><strong>Custodian accountability is broken.</strong> The Conference Room manager is still the registered custodian. If the projector is lost or damaged, accountability falls on someone who has not had it for months.</li>
+      <li><strong>Budget planning is distorted.</strong> The Conference Room budget includes an asset it does not have. Training's actual asset base is understated — they may request a new projector when they already have one.</li>
+    </ul>
+
+    <h2>2. Dual-Phase Approval — How It Works</h2>
+
+    <p>A structured asset transfer uses a MOVEMENT requisition that requires approval from both the source and receiving departments. This two-phase process ensures both sides of the transaction are documented and authorised.</p>
+
+    <h3>Phase 1: Source Department Approval</h3>
+
+    <p>The requester creates a MOVEMENT requisition specifying:</p>
+
+    <ul>
+      <li>Which asset is being transferred (by asset ID)</li>
+      <li>Who the destination user is (the person who will receive the asset)</li>
+      <li>The destination location (campus, building, floor/room)</li>
+      <li>The reason for the transfer</li>
+    </ul>
+
+    <p>The destination department is automatically derived from the destination user's department — it cannot be set independently. This prevents mismatches where an asset is assigned to a user in one department but the transfer is tagged to a different department.</p>
+
+    <p>The requisition is submitted and routed to the source department's approval chain — the same approval matrix used for procurement, but applied to the source department and the asset's classification. The source approvers are being asked: "Do you authorise releasing this asset from your department?"</p>
+
+    <p>When all levels of source approval are complete, the requisition moves to a special status: SOURCE_APPROVED.</p>
+
+    <h3>Phase 2: Receiving Department Approval (Auto-Seeded)</h3>
+
+    <p>When the source phase completes, the system automatically creates a second approval chain — this time using the receiving department's approval matrix. The receiving approvers are being asked: "Do you authorise accepting this asset into your department?"</p>
+
+    <p>This phase is seeded automatically — no manual intervention is needed to start it. The routing uses the destination department but the source asset's classification (because the classification does not change during a transfer — a laptop remains a laptop regardless of which department holds it).</p>
+
+    <p>When the receiving phase is fully approved, the transfer is ready for posting.</p>
+
+    <h3>Posting: What Actually Happens</h3>
+
+    <p>When the MOVEMENT requisition is posted:</p>
+
+    <ol>
+      <li><strong>The source asset is reduced</strong> — its quantity is decremented (or the entire asset is marked as transferred if the full quantity moves).</li>
+      <li><strong>A new destination asset is created</strong> — with the destination user, department, and location. The asset ID is derived from the source: <code>{source_asset_id}-M{sequence}</code>.</li>
+      <li><strong>Financial attributes are inherited</strong> — original cost, accumulated depreciation, useful life, and depreciation method all carry over from the source.</li>
+      <li><strong>The audit trail records everything</strong> — who initiated, who approved (both phases), when, and the before/after state of both assets.</li>
+    </ol>
+
+    <blockquote>
+      <p>The key design decision is that a transfer creates a new asset record with a derived ID rather than simply editing the existing record's department field. This preserves the complete history — the source department's records still show the asset existed and was transferred out, and the destination department's records show when the asset arrived and where it came from.</p>
+    </blockquote>
+
+    <h2>3. Why Both Phases Matter</h2>
+
+    <p>Some organisations use a single-approval transfer — the source approves the release and the asset automatically arrives at the destination. This is simpler but creates problems:</p>
+
+    <table>
+      <tr><th>Scenario</th><th>Single-Phase</th><th>Dual-Phase</th></tr>
+      <tr><td>Source pushes unwanted assets to another department</td><td>Receiving has no say — assets appear on their books</td><td>Receiving can reject — the transfer does not proceed</td></tr>
+      <tr><td>Transfer to a department with different approval limits</td><td>Source's approval chain may not match destination's governance requirements</td><td>Each department applies its own approval matrix</td></tr>
+      <tr><td>Accountability during transition</td><td>Unclear — is the asset the source's or destination's between approval and physical move?</td><td>Clear — SOURCE_APPROVED means released but not yet accepted</td></tr>
+    </table>
+
+    <p>Dual-phase approval prevents a common organisational problem: one department dumping assets onto another. Without receiving approval, the receiving department has no mechanism to refuse.</p>
+
+    <h2>4. The Destination Fields</h2>
+
+    <p>A MOVEMENT requisition captures specific destination details:</p>
+
+    <table>
+      <tr><th>Field</th><th>Required?</th><th>How It Works</th></tr>
+      <tr><td>Destination User (<code>to_user_id</code>)</td><td>Required</td><td>The person who will be the new custodian</td></tr>
+      <tr><td>Destination Department (<code>to_department_id</code>)</td><td>Auto-derived</td><td>Derived from the destination user's department — cannot be set manually</td></tr>
+      <tr><td>Destination Location (L1/L2/L3)</td><td>Optional</td><td>Campus, building, floor/room where the asset will reside</td></tr>
+      <tr><td>Destination Classification (<code>to_classification</code>)</td><td>Optional</td><td>Only used if the classification changes during transfer (rare)</td></tr>
+    </table>
+
+    <p>The auto-derivation of department from user is a deliberate governance choice. It prevents a situation where an asset is transferred "to the IT department" but assigned to a user in Finance — which would create a register inconsistency on day one.</p>
+
+    <h2>5. What Does Not Change During a Transfer</h2>
+
+    <p>A transfer changes ownership and location. It does not change identity:</p>
+
+    <ul>
+      <li><strong>Classification</strong> stays the same — a laptop remains IT_EQUIPMENT</li>
+      <li><strong>Category hierarchy</strong> is preserved — L1/L2/L3 categories carry over</li>
+      <li><strong>Item name and description</strong> are inherited</li>
+      <li><strong>Financial data</strong> — original cost, GST, accumulated depreciation, useful life</li>
+      <li><strong>Depreciation method and rate</strong> — SLM or WDV continues as before</li>
+    </ul>
+
+    <p>This is consistent with the accounting treatment: an inter-departmental transfer within the same legal entity is not a sale or a new purchase. The asset's financial identity is unchanged; only its custodial assignment moves.</p>
+
+    <h2>6. Tracking Movement History</h2>
+
+    <p>Every transfer creates a documented chain. The asset ID encodes the lineage:</p>
+
+    <ul>
+      <li><strong>Original procurement:</strong> <code>IT-EQ-2026-0042</code></li>
+      <li><strong>First transfer:</strong> <code>IT-EQ-2026-0042-M001</code></li>
+      <li><strong>Second transfer:</strong> <code>IT-EQ-2026-0042-M001-M001</code></li>
+    </ul>
+
+    <p>Anyone looking at the asset ID <code>IT-EQ-2026-0042-M001</code> can immediately see: this asset was originally <code>IT-EQ-2026-0042</code> and has been transferred once. The full requisition history — who initiated, who approved both phases, when each step happened, and the destination details — is available in the audit trail.</p>
+
+    <h2>7. Practical Considerations</h2>
+
+    <h3>7.1 Temporary vs Permanent Transfers</h3>
+
+    <p>MOVEMENT requisitions in a governed system are designed for permanent transfers — the asset's custody formally changes. For temporary loans ("borrowing the projector for a week"), a lighter process may be appropriate. Some organisations use the self-declaration mechanism for this: the custodian declares the asset as "temporarily relocated" with a remark, and the formal transfer is only initiated if the temporary arrangement becomes permanent.</p>
+
+    <h3>7.2 Bulk Transfers</h3>
+
+    <p>When a department relocates (new building, floor change), dozens of assets may need to transfer simultaneously. A MOVEMENT requisition supports multiple lines — each referencing a different asset — so an entire department's assets can be transferred in a single requisition with a single approval flow.</p>
+
+    <h3>7.3 Transfers and Tally</h3>
+
+    <p>When the Tally integration is enabled, posting a MOVEMENT requisition enqueues the appropriate accounting entries: a reduction on the source department's cost centre and a corresponding addition on the destination department's cost centre. The Tally vouchers are generated automatically, ensuring the books reflect the transfer without manual journal entries.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>Why does an asset transfer need approval from both departments?</h3>
+    <p>A transfer affects two departments: the source loses an asset and the destination gains one. Without dual approval, transfers can happen informally — assets appear on a department's books without their consent. Dual-phase approval ensures the source formally releases the asset and the receiving department formally accepts it, preventing phantom assets that exist on paper in one department but physically reside in another.</p>
+
+    <h3>What happens to the asset ID when an asset is transferred?</h3>
+    <p>The source asset is reduced, and a new destination asset record is created with a derived ID in the format <code>{source_asset_id}-M{sequence}</code>. This preserves lineage — anyone looking at the destination asset can trace it back to the original procurement. The destination asset carries new ownership while inheriting the financial history from the source.</p>
+
+    <h3>How is depreciation handled after a transfer?</h3>
+    <p>The destination asset inherits the financial attributes of the source — original cost, accumulated depreciation, and remaining useful life. Depreciation continues from where it left off. A transfer within the same entity is not a new purchase — the asset's book value, method, and schedule remain unchanged. The depreciation charge simply shifts to the receiving department's cost centre.</p>
+
+    <h3>Can a transfer be reversed if the receiving department rejects the asset?</h3>
+    <p>Rejection happens during approval, not after posting. If the receiving department's approver rejects during Phase 2, the transfer does not proceed and the source asset remains unchanged. Once posted, reversal requires a new MOVEMENT requisition in the opposite direction — from receiving back to source — going through the same dual-phase approval. Every movement is documented, even reversals.</p>
+
+    <h3>How do you track all movements of a specific asset over time?</h3>
+    <p>Every transfer creates a MOVEMENT requisition linking source and destination assets. The asset ID chain encodes the lineage — following the -M suffixes traces the complete movement history. The requisition history for each transfer includes who initiated it, who approved both phases, timestamps, and destination details.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/asset-management" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Asset Management</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If assets move between departments without documentation and your register does not reflect where things actually are, share a brief overview and we will evaluate how structured transfer tracking may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
