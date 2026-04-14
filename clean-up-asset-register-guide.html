@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Asset Register Is a Mess — A Step-by-Step Guide to Cleaning It Up | Oparc</title>
+  <meta name="description" content="Some assets exist physically but not in the register. Some are in the register but missing. Some have barcodes, some don't. A practical guide to reconciling, cleaning up, and migrating a messy fixed asset register — from Excel chaos to a structured system.">
+  <meta name="keywords" content="clean up asset register, reconcile physical assets with register, fix asset register discrepancies, migrate Excel asset register, assets not in register how to add, messy fixed asset register cleanup, asset register reconciliation process India, barcode to QR asset migration">
+  <link rel="canonical" href="https://oparc.in/clean-up-asset-register-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/clean-up-asset-register-guide">
+  <meta property="og:title" content="Your Asset Register Is a Mess — A Step-by-Step Guide to Cleaning It Up">
+  <meta property="og:description" content="Some assets exist but aren't in the register. Some are in the register but missing. A practical guide to reconciling and migrating a messy register.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Asset Register Is a Mess — A Step-by-Step Guide to Cleaning It Up">
+  <meta name="twitter:description" content="Some assets exist but aren't registered. Some are registered but missing. A step-by-step cleanup and migration guide.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Your Asset Register Is a Mess — A Step-by-Step Guide to Cleaning It Up",
+    "description": "A practical guide to reconciling, cleaning up, and migrating a messy fixed asset register — from Excel chaos to a structured system.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/clean-up-asset-register-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Clean Up Asset Register", "item": "https://oparc.in/clean-up-asset-register-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I start cleaning up a messy asset register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with a physical count — not the register. Walk through every location, identify every physical asset, and record it independently of what the register says. Then compare the physical count against the register to identify three categories: assets found physically but not in the register (unrecorded), assets in the register but not found physically (ghost assets), and assets found but with wrong details (location, condition, custodian). This comparison — not the register itself — becomes your starting point for cleanup. Trying to fix the register without a physical count means correcting data against data, with no anchor to reality."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I do with assets that exist physically but are not in the register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "These need to be added to the register through a formal process. For each unrecorded asset, gather whatever documentation exists — purchase orders, invoices, bank statements, vendor correspondence. If original documents are available, use the actual purchase cost and date. If not, a reasonable estimate is needed — either from a valuer or by referencing similar assets purchased around the same period. The key is documentation: record the basis of valuation and the reason the asset was not previously registered. A bulk upload facility that validates each row before committing helps process hundreds of additions without manual entry errors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What about assets that have old barcodes — do I need to re-tag everything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not necessarily. A system with multi-tier scan resolution can recognise old barcode numbers alongside new QR tags. When you scan an old barcode, the system resolves it through a legacy lookup — it identifies the asset even though the scanned value is not the new canonical tag. Over time, as you generate and apply new QR tags, the old barcodes become secondary identifiers. This means you can migrate gradually — start by importing the old barcode numbers as legacy identifiers, generate new QR tags in batches, and apply them as you visit each location. You do not need to re-tag 5,000 assets on day one."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I handle assets in the register that cannot be physically found?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "First, investigate — an asset marked 'not found' may have moved to another location, may be with a vendor for repair, or may be in storage. Set a reasonable investigation period (30-60 days). If the asset genuinely cannot be located after investigation, it needs to be written off through a formal approval process — a write-off requisition that goes through the same approval matrix as a purchase. This creates an audit trail: who requested the write-off, who approved it, and when. The write-off adjusts the register and, if accounting integration is enabled, generates the corresponding accounting entry."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I import my existing Excel register into a structured system?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but the import should include validation — not just data transfer. A structured bulk upload validates each row against business rules: mandatory fields present, data types correct, classifications valid, quantities positive, amounts reasonable. Rows that fail validation are reported with specific error codes so they can be fixed before re-upload. A dry-run mode lets you validate the entire file without committing any data — you see exactly which rows will succeed and which will fail before any changes are made. This prevents the common problem of importing 5,000 rows and discovering 200 had errors after the fact."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/clean-up-asset-register-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/clean-up-asset-register-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="container nav-inner"><a href="/" class="logo"></a><div class="nav-links"><a href="/">Home</a><a href="/procurement">Procurement</a><a href="/asset-management">Assets</a><a href="/tally-integration">Tally</a><a href="/vendor-management">Vendors</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/#contact">Contact</a><a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a></div><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="article container">
+    <h1>Your Asset Register Is a Mess — A Step-by-Step Guide to Cleaning It Up</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>The register says 1,200 assets. The physical count finds 980. Of those 980, about 150 have old barcode stickers from a previous system, 400 have no tag at all, and the rest have handwritten numbers on masking tape. Thirty assets found on the 2nd floor are listed as being on the 4th floor. Forty-seven items found during the count do not appear in the register at all — they were purchased from departmental budgets and never recorded. The register itself is a collection of three Excel files maintained by different people, with different column names, and overlapping serial numbers.</p>
+
+    <p>This is not an unusual starting point. Most organisations that decide to clean up their asset register are not starting from zero — they are starting from a tangle of partial data, inconsistent tagging, informal movements, and years of deferred maintenance. The question is not whether the register is wrong — that is already known. The question is: how do you get from here to a reliable, auditable register without shutting down operations for a month?</p>
+
+    <p>This guide walks through the process step by step.</p>
+
+    <h2>1. Start With Physical Reality, Not the Register</h2>
+
+    <p>The most common mistake is trying to fix the register by reviewing the register. This is circular — you are correcting data against data, with no anchor to physical reality. The cleanup must start with a physical count that is independent of the existing register.</p>
+
+    <h3>What the physical count produces</h3>
+
+    <p>Walk through every location. For every physical asset found, record:</p>
+
+    <ul>
+      <li>What it is (item name, description, make/model if visible)</li>
+      <li>Where it is (building, floor, room)</li>
+      <li>What condition it is in (working, damaged, idle, non-functional)</li>
+      <li>Any existing identifier (old barcode number, asset tag, serial number on the equipment)</li>
+      <li>Who uses it (the person or department in physical possession)</li>
+    </ul>
+
+    <p>This count is your ground truth. It does not matter what the register says — this is what physically exists.</p>
+
+    <h2>2. Compare Physical Count Against the Register</h2>
+
+    <p>With the physical count complete, compare it against the existing register (however messy that register is). The comparison produces three categories:</p>
+
+    <table>
+      <tr><th>Category</th><th>What It Means</th><th>Count (typical)</th></tr>
+      <tr><td><strong>Matched</strong></td><td>Asset found physically AND exists in the register with correct details</td><td>50-70% of register</td></tr>
+      <tr><td><strong>Ghost assets</strong></td><td>In the register but NOT found physically — potential write-offs</td><td>10-30% of register</td></tr>
+      <tr><td><strong>Unrecorded assets</strong></td><td>Found physically but NOT in the register — need to be added</td><td>5-15% of physical count</td></tr>
+    </table>
+
+    <p>Within the "matched" category, there will be sub-issues: wrong location (asset moved but register not updated), wrong custodian (person changed but register shows the original), wrong condition (register says "active" but the asset is idle or damaged), wrong value (estimated cost instead of actual purchase cost).</p>
+
+    <blockquote>
+      <p>The reconciliation is not about matching numbers — it is about finding every discrepancy so that each one can be resolved individually. A reconciliation that says "220 discrepancies found" is useless. One that says "47 unrecorded, 180 ghost, 120 wrong location, 85 wrong custodian" is actionable.</p>
+    </blockquote>
+
+    <h2>3. Resolve Each Category</h2>
+
+    <h3>3.1 Ghost Assets — In Register, Not Found</h3>
+
+    <p>Before writing anything off, investigate. Common explanations:</p>
+    <ul>
+      <li>The asset moved to another location and the count team missed it</li>
+      <li>The asset is with a vendor for repair</li>
+      <li>The asset was transferred to another department informally</li>
+      <li>The asset was disposed of but the register was never updated</li>
+      <li>The asset was genuinely lost or stolen</li>
+    </ul>
+
+    <p>Set a 30-60 day investigation window. After investigation, assets that genuinely cannot be located should be <a href="/asset-write-off-scrap-disposal-guide">written off through a formal approval process</a> — not silently deleted from the register.</p>
+
+    <h3>3.2 Unrecorded Assets — Found, Not in Register</h3>
+
+    <p>These need to be added. For each one, gather whatever purchase documentation exists — POs, invoices, bank statements. If original documents are not available, estimate the value using similar assets or engage a valuer for high-value items. Document the basis of valuation.</p>
+
+    <p>A <a href="/data-migration">bulk upload facility</a> that validates each row — checking mandatory fields, data types, classifications, and amounts — prevents import errors. A dry-run mode that shows which rows will succeed and which will fail before committing any data is essential when processing hundreds of additions.</p>
+
+    <h3>3.3 Matched But Wrong — Location, Custodian, Condition</h3>
+
+    <p>These are register corrections. For each one, update the record with the physical count data. If the correction is a location change (asset physically found on 2nd floor, register says 4th floor), this may indicate an undocumented <a href="/asset-transfer-tracking-guide">transfer</a> that should be recorded.</p>
+
+    <h2>4. Tag Everything</h2>
+
+    <p>Once the register reflects physical reality, the next step is ensuring every asset has a unique physical identifier. Without a tag, the same reconciliation problem will recur — you will not be able to match physical assets to register entries reliably.</p>
+
+    <h3>Handling mixed tagging</h3>
+
+    <p>Most organisations in this situation have a mix:</p>
+
+    <table>
+      <tr><th>Current State</th><th>Action</th></tr>
+      <tr><td>Old barcodes (still readable)</td><td>Import barcode numbers as legacy identifiers. System resolves them through <a href="/asset-verification-guide">three-tier scan resolution</a> — legacy tag lookup finds the asset even though it is not the new canonical tag.</td></tr>
+      <tr><td>Handwritten labels or masking tape</td><td>Replace with QR tags. Generate through <a href="/asset-tagging-verification">bulk tag generation</a> — upload the asset list, system assigns TAG-{sequence}-{asset_id} format.</td></tr>
+      <tr><td>No tag at all</td><td>Generate and apply new QR tags.</td></tr>
+      <tr><td>Multiple conflicting tags</td><td>Designate one as canonical, record others as shadow identifiers. Any scan resolves to the same asset.</td></tr>
+    </table>
+
+    <p>The migration does not need to happen all at once. Start with high-value assets or one location. The three-tier scan resolution means old barcodes continue to work while new QR tags are rolled out gradually.</p>
+
+    <h2>5. Import Into a Structured System</h2>
+
+    <p>With the data cleaned and tagged, the next step is moving from Excel to a structured <a href="/fixed-asset-register">asset register</a>. The import process should include:</p>
+
+    <ul>
+      <li><strong>Validation:</strong> Every row checked against business rules before committing. Mandatory fields, valid classifications, positive quantities, reasonable amounts.</li>
+      <li><strong>Dry-run:</strong> Preview the import results without writing to the database. See exactly which rows pass and which fail.</li>
+      <li><strong>Row-level error reporting:</strong> Failed rows reported with specific error codes and field names — not just "row 342 failed."</li>
+      <li><strong>Batch tracking:</strong> Every import batch is recorded — who uploaded, when, how many rows, which assets. If an import was wrong, the batch can be reversed.</li>
+    </ul>
+
+    <h2>6. Set Up Ongoing Governance</h2>
+
+    <p>A clean register is only clean on the day you clean it. Without ongoing governance, it will drift back to its current state within a year. The structural changes that prevent drift:</p>
+
+    <ul>
+      <li><strong>All new purchases flow through <a href="/procurement">PR → PO → GRN</a>.</strong> Every asset entering the organisation is automatically registered when the goods receipt is posted. No manual register entry.</li>
+      <li><strong>Transfers require <a href="/asset-transfer-tracking-guide">dual-department approval</a>.</strong> No informal movements. The register updates automatically when the transfer is posted.</li>
+      <li><strong>Removals go through <a href="/asset-write-off-scrap-disposal-guide">formal write-off</a>.</strong> The register shrinks when it should — not just grows.</li>
+      <li><strong>Quarterly <a href="/custodian-self-declaration-guide">self-declaration</a>.</strong> Custodians confirm what they have. Discrepancies surface in weeks, not years.</li>
+      <li><strong>Annual <a href="/asset-verification-guide">physical verification campaign</a>.</strong> QR scan every asset. Reconcile against the register. Process discrepancies formally.</li>
+    </ul>
+
+    <blockquote>
+      <p>The cleanup is a project. The governance is a process. Without the process, the project will need to be repeated.</p>
+    </blockquote>
+
+    <h2>7. Timeline — How Long Does This Take?</h2>
+
+    <table>
+      <tr><th>Phase</th><th>Effort</th><th>Typical Duration</th></tr>
+      <tr><td>Physical count</td><td>Depends on asset count and locations</td><td>1-4 weeks</td></tr>
+      <tr><td>Reconciliation</td><td>Comparing count against register</td><td>1-2 weeks</td></tr>
+      <tr><td>Investigation and resolution</td><td>Ghost assets, unrecorded assets, corrections</td><td>2-4 weeks</td></tr>
+      <tr><td>Tagging</td><td>Generate + apply QR tags</td><td>1-3 weeks (can overlap)</td></tr>
+      <tr><td>System import</td><td>Validate, dry-run, commit</td><td>2-5 days</td></tr>
+      <tr><td>Governance setup</td><td>Approval matrix, workflows, permissions</td><td>1-2 weeks</td></tr>
+    </table>
+
+    <p>For an organisation with 1,000-5,000 assets across multiple locations, the end-to-end process typically takes 6-12 weeks. The physical count is the most labour-intensive phase. The system import, if the data is clean, is the fastest — hours, not weeks.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>How do I start cleaning up a messy asset register?</h3>
+    <p>Start with a physical count — not the register. Walk through every location, identify every physical asset, and record it independently of what the register says. Then compare the physical count against the register to identify three categories: assets found but not registered (unrecorded), assets registered but not found (ghost assets), and assets found but with wrong details. This comparison becomes your starting point. Trying to fix the register without a physical count means correcting data against data, with no anchor to reality.</p>
+
+    <h3>What do I do with assets that exist physically but are not in the register?</h3>
+    <p>These need to be added through a formal process. For each unrecorded asset, gather whatever documentation exists — purchase orders, invoices, bank statements. If original documents are available, use the actual cost and date. If not, a reasonable estimate is needed. The key is documenting the basis of valuation and the reason the asset was not previously registered. A bulk upload facility that validates each row before committing helps process hundreds of additions without manual entry errors.</p>
+
+    <h3>What about assets that have old barcodes — do I need to re-tag everything?</h3>
+    <p>Not necessarily. A system with multi-tier scan resolution can recognise old barcode numbers alongside new QR tags. When you scan an old barcode, the system resolves it through a legacy lookup. Over time, as you generate and apply new QR tags, the old barcodes become secondary identifiers. You can migrate gradually — import old barcode numbers as legacy identifiers, generate new QR tags in batches, and apply them as you visit each location. You do not need to re-tag 5,000 assets on day one.</p>
+
+    <h3>How do I handle assets in the register that cannot be physically found?</h3>
+    <p>First, investigate — an asset marked "not found" may have moved, may be with a vendor for repair, or may be in storage. Set a 30-60 day investigation period. If genuinely not locatable, write it off through a formal approval process — a write-off requisition going through the same approval chain as a purchase. This creates an audit trail. The write-off adjusts the register and generates the corresponding accounting entry if integration is enabled.</p>
+
+    <h3>Can I import my existing Excel register into a structured system?</h3>
+    <p>Yes, but the import should include validation — not just data transfer. A structured bulk upload validates each row against business rules: mandatory fields, valid classifications, correct data types. Rows that fail are reported with specific error codes. A dry-run mode lets you validate the entire file without committing — you see which rows succeed and which fail before any changes are made. Batch tracking records every import so it can be reviewed or reversed if needed.</p>
+
+  </div>
+
+  <section style="padding: 48px 0 0;"><div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;"><p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p><div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;"><a href="/data-migration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Data Migration</a><a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a><a href="/asset-verification-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Physical Verification Guide</a><a href="/asset-tagging-verification" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Asset Tagging</a></div></div></section>
+
+  <section class="contact" style="padding: 64px 0;"><div class="container" style="text-align: center;"><h2 class="section-title">Need Help Cleaning Up Your Asset Register?</h2><p class="section-sub">If your register is a mix of Excel files, old barcodes, and unrecorded items — share a brief overview and we will assess what a structured cleanup would involve for your organisation.</p><div style="margin-top: 32px;"><a href="/#contact" class="btn btn-lg">Book a Consultation</a></div></div></section>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><p>Procurement & asset management — delivered as a professional service.</p></div><div class="footer-links"><div class="footer-col"><h4>Services</h4><a href="/procurement">Procurement</a><a href="/asset-management">Asset Management</a><a href="/tally-integration">Tally Integration</a><a href="/vendor-management">Vendor Management</a></div><div class="footer-col"><h4>More</h4><a href="/invoice-matching">Invoice Matching</a><a href="/data-migration">Data Migration</a><a href="/fixed-asset-register">Fixed Asset Register</a><a href="/purchase-order-approval">Purchase Order Approval</a><a href="/grn-goods-receipt">Goods Receipt</a><a href="/vendor-debit-note">Vendor Debit Notes</a><a href="/asset-tagging-verification">Asset Tagging</a><a href="/education-procurement">Education</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/guides">Guides</a><a href="/#contact">Contact</a></div><div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a></div></div></div></footer>
+
+  <script src="script.js"></script>
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; font-size:14px;"><span id="cookie-text"></span><div><button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button><button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button></div></div>
+  <script src="cookie-consent.js"></script>
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</body>
+</html>
