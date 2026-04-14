@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why a Separate Procurement and Asset Management Tool — When Your ERP Already Has Modules for Both | Oparc</title>
+  <meta name="description" content="Your ERP or Tally already has procurement and asset modules. Why would you buy a separate tool? Because 70% of ERP implementations fail to meet objectives, only 26% of modules are used, and bolt-on modules lack the governance depth that auditors and regulators require. A practical analysis for CFOs and finance teams.">
+  <meta name="keywords" content="why separate procurement software, procurement tool vs ERP module, standalone asset management vs ERP, best of breed procurement software, ERP procurement module not enough, separate asset management tool why, procurement software vs Tally, dedicated procurement tool India">
+  <link rel="canonical" href="https://oparc.in/why-separate-procurement-asset-management-tool">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/why-separate-procurement-asset-management-tool">
+  <meta property="og:title" content="Why a Separate Procurement and Asset Management Tool — When Your ERP Already Has Modules">
+  <meta property="og:description" content="Your ERP already has procurement and asset modules. Why buy a separate tool? Because bolt-on modules lack governance depth.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Why a Separate Procurement and Asset Management Tool — When Your ERP Already Has Modules">
+  <meta name="twitter:description" content="70% of ERP implementations fail objectives. Only 26% of modules are used. Bolt-on modules lack governance depth.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why a Separate Procurement and Asset Management Tool — When Your ERP Already Has Modules for Both",
+    "description": "Your ERP already has procurement and asset modules. Why buy a separate tool? A practical analysis of depth, cost, adoption, and governance.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/why-separate-procurement-asset-management-tool"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Why a Separate Tool", "item": "https://oparc.in/why-separate-procurement-asset-management-tool" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why not just use Tally for asset management?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tally is accounting software. It tracks financial transactions — purchase vouchers, depreciation journal entries, ledger balances. It does not track procurement governance (who approved what, at what level, based on what rules), physical asset verification (QR tagging, scan campaigns, discrepancy investigation), or operational workflows (gate entry inspection, mismatch resolution, vendor debit notes). Organisations that use Tally for asset management are essentially maintaining a financial register — they know what they paid for assets, but not where those assets are, what condition they are in, who has custody, or whether they were verified this year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a standalone procurement tool worth the cost when our ERP already includes procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on what you need from procurement. If your requirement is 'create a PO and send it to the vendor,' most ERPs handle that adequately. But if you need multi-dimensional approval routing (by department, amount, classification, and location), per-line approval where 9 good lines proceed while 1 is debated, three-way matching with tolerance-based auto-resolution, or vendor compliance tracking with expiry alerts — ERP procurement modules typically lack this depth. The cost comparison should not be 'standalone tool cost vs zero' — it should be 'standalone tool cost vs the cost of the governance gaps the ERP leaves open.'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What about integration — will a separate tool create data silos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This was a valid concern a decade ago when integration meant custom middleware projects. Modern standalone tools integrate via API or structured data exchange. For Tally specifically, XML-based voucher generation can automate 22 event types — purchase postings, depreciation journals, vendor debit notes, asset master creation — with queue-based sync, retry logic, and reconciliation reports that compare the procurement system's posted totals against Tally's actuals. The integration is not a bolt-on — it is a core capability that is often deeper than what an ERP's built-in module provides."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Our company has only 200-500 assets. Do we really need a dedicated tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The question is not how many assets you have — it is how much governance you need around them. A company with 200 high-value assets (lab equipment, vehicles, IT infrastructure) where the auditor checks physical verification, where insurance claims require documentation, and where CARO compliance is applicable — that company needs governance that an Excel register cannot provide. A company with 5,000 low-value consumables might manage with simpler tracking. Asset count is a proxy; the real drivers are audit requirements, compliance obligations, and the financial materiality of the assets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if we outgrow the standalone tool and need a full ERP later?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A well-structured standalone tool makes ERP migration easier, not harder. Your procurement data is structured (PR, PO, GRN with approval trails), your asset register is clean (tagged, verified, depreciated), and your vendor master is complete (GSTIN, compliance documents, TDS sections). When the time comes for an ERP, you are migrating clean, governed data — not the messy spreadsheets that most ERP implementations start with. The 70% ERP failure rate is largely driven by poor data and undefined processes. A standalone tool that forces governance on your data is the best preparation for a future ERP."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/why-separate-procurement-asset-management-tool">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/why-separate-procurement-asset-management-tool">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="container nav-inner"><a href="/" class="logo"></a><div class="nav-links"><a href="/">Home</a><a href="/procurement">Procurement</a><a href="/asset-management">Assets</a><a href="/tally-integration">Tally</a><a href="/vendor-management">Vendors</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/#contact">Contact</a><a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a></div><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="article container">
+    <h1>Why a Separate Procurement and Asset Management Tool — When Your ERP Already Has Modules for Both</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>The CFO's objection is reasonable: "We already have Tally. We already have an ERP with a procurement module and an asset module. Why would we pay for another tool that does the same thing?"</p>
+
+    <p>It is the right question. And the answer is not "because our tool is better" — that is a sales pitch, not an analysis. The answer is structural: ERP procurement and asset modules are designed to record transactions. A dedicated governance tool is designed to control them. These are different objectives, and the gap between them is where audit findings, compliance failures, and financial losses originate.</p>
+
+    <p>This article examines the gap honestly — where ERPs are sufficient, where they fall short, and when a separate tool is justified.</p>
+
+    <h2>1. What ERPs Do Well</h2>
+
+    <p>ERPs are transaction systems. They are designed to record what happened: a purchase order was created, an invoice was received, a payment was made, an asset was capitalised. At this level, they work. If your requirement is:</p>
+
+    <ul>
+      <li>Create a purchase order and email it to a vendor</li>
+      <li>Record the invoice and schedule payment</li>
+      <li>Capitalise the asset and calculate depreciation</li>
+      <li>Post journal entries for all of the above</li>
+    </ul>
+
+    <p>Then your ERP's built-in modules are likely adequate. You do not need a separate tool for basic transaction recording.</p>
+
+    <h2>2. Where the Gap Appears</h2>
+
+    <p>The gap is not in recording — it is in governing. Governance answers questions that transaction systems do not:</p>
+
+    <table>
+      <tr><th>Question</th><th>ERP Module</th><th>Governance Tool</th></tr>
+      <tr><td>Who approved this purchase, at what level, based on what rules?</td><td>Basic approval (1-2 levels, amount-based)</td><td><a href="/purchase-approval-workflow-guide">10+ routing dimensions</a>, frozen snapshots, per-line approval, SLA tracking</td></tr>
+      <tr><td>Does the invoice match what was ordered AND what was received?</td><td>"3-way matching" as a checkbox</td><td><a href="/invoice-matching-guide">Qty + price + GST mismatch</a> tracked separately, tolerance-based auto-resolution, dispute workflow, VDN pipeline</td></tr>
+      <tr><td>Has this asset been physically verified this year?</td><td>Not available</td><td><a href="/asset-verification-guide">QR scan campaigns</a>, 3-tier resolution, reconciliation reports, <a href="/custodian-self-declaration-guide">custodian self-declaration</a></td></tr>
+      <tr><td>Is this vendor's GST registration still valid?</td><td>GSTIN stored as a text field</td><td><a href="/vendor-document-expiry-tracking-guide">Expiry tracking</a> with urgency bands, compliance reports linked to spend data</td></tr>
+      <tr><td>Who inspected these goods at the gate?</td><td>Not available</td><td><a href="/gate-entry-quality-inspection-guide">Security-role gate entry</a>, 3-bucket inspection, correction workflow</td></tr>
+      <tr><td>Was TDS deducted correctly on this PO?</td><td>TDS as a payment-stage calculation</td><td><a href="/tds-purchase-order-automation-guide">Per-line TDS at PO creation</a>, approver override, section master</td></tr>
+      <tr><td>Where did this asset go when it left this department?</td><td>Manual register edit</td><td><a href="/asset-transfer-tracking-guide">Dual-phase transfer</a> with source + receiving dept approval</td></tr>
+    </table>
+
+    <p>Each row in this table represents a governance gap. Each gap is a potential audit finding, compliance failure, or financial loss. The question is not whether the ERP can create a PO — it can. The question is whether it can prevent a bad PO from being created, ensure the right person approved it, verify that what was received matches what was ordered, and produce an audit trail that satisfies the statutory auditor.</p>
+
+    <h2>3. The Numbers Behind the Gap</h2>
+
+    <p>This is not a theoretical argument. Research quantifies the consequences:</p>
+
+    <table>
+      <tr><th>Statistic</th><th>Source</th></tr>
+      <tr><td>70% of ERP implementations fail to meet original objectives</td><td>Gartner</td></tr>
+      <tr><td>Only 26% of ERP modules are actually used by employees</td><td>Industry surveys</td></tr>
+      <tr><td>71% of businesses prefer best-of-breed over all-in-one</td><td>Gartner 2019</td></tr>
+      <tr><td>59% of Indian organisations faced procurement fraud in past 24 months</td><td>PwC 2024</td></tr>
+      <tr><td>Companies lose 10-20% of savings to uncontrolled spending per quarter</td><td>Industry research</td></tr>
+      <tr><td>35% more cost per invoice with manual procurement vs automation</td><td>Industry benchmarks</td></tr>
+    </table>
+
+    <p>The 26% statistic is particularly telling. Organisations buy ERPs with 50-100 modules — procurement, inventory, manufacturing, CRM, project management, HR. They use a fraction. The rest becomes shelfware — paid for, maintained, never adopted. The modules that are used are often the simplest ones (accounting, invoicing), not the governance-heavy ones (procurement approval, asset verification).</p>
+
+    <blockquote>
+      <p>The cost comparison is not "separate tool vs zero." It is "separate tool vs the cost of governance gaps the ERP leaves open." A single <a href="/auditor-qualified-fixed-asset-discrepancy">audit qualification</a>, one <a href="/gst-itc-reversed-vendor-gstin">ITC reversal</a>, or a pattern of <a href="/duplicate-vendor-payment-prevention">duplicate payments</a> can cost more than years of a dedicated tool.</p>
+    </blockquote>
+
+    <h2>4. The Tally Question</h2>
+
+    <p>For Indian mid-market companies, the specific question is often about Tally: "Tally already handles our accounting. Why not use Tally for assets too?"</p>
+
+    <p>Tally is accounting software — and it is excellent at accounting. It tracks purchase vouchers, depreciation journal entries, and ledger balances. But it does not track:</p>
+
+    <ul>
+      <li><strong>Procurement governance:</strong> Who approved the purchase, through how many levels, based on what routing rules</li>
+      <li><strong>Receipt verification:</strong> Did someone independently inspect what the vendor delivered before it entered the warehouse?</li>
+      <li><strong>Physical verification:</strong> Has the asset been physically seen this year? By whom? In what condition?</li>
+      <li><strong>Vendor compliance:</strong> Is the vendor's GSTIN still active? When does their trade licence expire?</li>
+      <li><strong>Asset lifecycle:</strong> When was the asset transferred? Who approved the scrap? Where is the tracking asset?</li>
+    </ul>
+
+    <p>A dedicated tool that <a href="/tally-integration">integrates with Tally</a> gives you both: Tally handles the accounting entries (what it does well), while the governance tool handles procurement control, asset tracking, and compliance (what Tally does not do). The integration — automated voucher generation, queue-based sync, <a href="/tally-fixed-asset-reconciliation-guide">reconciliation reports</a> — ensures the two systems stay in sync without manual double-entry.</p>
+
+    <h2>5. When a Separate Tool Is NOT Justified</h2>
+
+    <p>Honesty matters. A separate tool is not justified in every situation:</p>
+
+    <ul>
+      <li><strong>Very small organisations (under 50 assets, 1-2 vendors):</strong> The governance overhead exceeds the risk. A well-maintained Excel register with annual physical verification is sufficient.</li>
+      <li><strong>Organisations already using a comprehensive ERP well:</strong> If you have SAP or Oracle and your team actually uses the procurement and asset modules — with proper configuration, approval workflows, and master data — a separate tool may add complexity without commensurate benefit.</li>
+      <li><strong>No compliance or audit requirements:</strong> If your organisation is not subject to CARO, does not claim GST ITC, does not have external auditors, and does not need to justify asset existence to insurers — the governance case is weaker.</li>
+    </ul>
+
+    <h2>6. When It IS Justified</h2>
+
+    <p>A separate tool is justified when:</p>
+
+    <ul>
+      <li><strong>Your ERP's procurement module is unused or underused.</strong> You bought it but nobody configured the approval workflow, so POs are created without governance. The module exists but the process does not.</li>
+      <li><strong>You use Tally and need governance on top of accounting.</strong> Tally handles the books; you need something to handle the controls.</li>
+      <li><strong>Your auditor has flagged asset discrepancies.</strong> The <a href="/auditor-qualified-fixed-asset-discrepancy">qualification</a> will persist until you have a verifiable, governed register.</li>
+      <li><strong>You have 500+ assets across multiple locations.</strong> Excel-based tracking breaks at this scale. Physical verification without QR tagging is unreliable.</li>
+      <li><strong>GST and TDS compliance are material.</strong> <a href="/gst-split-purchase-order-guide">Wrong GSTIN on POs</a> means wrong ITC. <a href="/tds-purchase-order-automation-guide">Wrong TDS section</a> means IT notices. These are not edge cases — they are routine compliance requirements.</li>
+      <li><strong>You need to start somewhere, not everywhere.</strong> An ERP is a 6-12 month implementation project. A focused tool that governs procurement + assets + Tally integration can be operational in weeks.</li>
+    </ul>
+
+    <h2>7. The "Outgrow" Question</h2>
+
+    <p>A common concern: "If we start with a standalone tool, what happens when we outgrow it and need a full ERP?"</p>
+
+    <p>A well-structured standalone tool makes ERP migration easier, not harder. Your procurement data is structured — PRs, POs, GRNs with complete approval trails. Your asset register is clean — tagged, verified, depreciated with year-end snapshots. Your vendor master is complete — GSTIN per address, compliance documents, TDS sections, performance history.</p>
+
+    <p>When the time comes for an ERP, you are migrating clean, governed data — not the messy spreadsheets that most ERP implementations start with. The 70% ERP failure rate is driven largely by poor data and undefined processes. A standalone tool that enforces governance on your data is, paradoxically, the preparation for a successful ERP implementation later.</p>
+
+    <blockquote>
+      <p>You do not need 100 modules on day one. You need 3 done properly: procurement with approval governance, asset management with physical verification, and accounting integration. Everything else can wait until the organisation's complexity demands it.</p>
+    </blockquote>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>Why not just use Tally for asset management?</h3>
+    <p>Tally is accounting software. It tracks purchase vouchers, depreciation entries, and ledger balances. It does not track procurement governance (who approved what, based on what rules), physical verification (QR campaigns, scan resolution), or operational workflows (gate entry, mismatch resolution, vendor debit notes). Organisations using Tally for asset management have a financial register — they know what they paid, but not where assets are, what condition they are in, or whether they were verified this year.</p>
+
+    <h3>Is a standalone procurement tool worth the cost when our ERP already includes procurement?</h3>
+    <p>If your need is "create a PO and send it to the vendor," ERPs handle that. But if you need multi-dimensional approval routing, per-line approval, three-way matching with tolerance, or vendor compliance tracking — ERP modules typically lack this depth. The cost comparison should not be "tool cost vs zero" — it should be "tool cost vs the cost of the governance gaps the ERP leaves open."</p>
+
+    <h3>What about integration — will a separate tool create data silos?</h3>
+    <p>Modern standalone tools integrate via API or structured data exchange. For Tally, XML-based voucher generation can automate 22 event types with queue-based sync, retry logic, and reconciliation reports. The integration is often deeper than what an ERP's built-in module provides — because it is a core capability, not an afterthought.</p>
+
+    <h3>Our company has only 200-500 assets. Do we really need a dedicated tool?</h3>
+    <p>The question is not asset count — it is governance need. A company with 200 high-value assets where the auditor checks physical verification, insurance claims require documentation, and CARO compliance applies — that company needs governance an Excel register cannot provide. Asset count is a proxy; the real drivers are audit requirements, compliance obligations, and financial materiality.</p>
+
+    <h3>What if we outgrow the standalone tool and need a full ERP later?</h3>
+    <p>A well-structured standalone tool makes ERP migration easier. Your data is structured (PRs, POs, GRNs with approval trails), your register is clean (tagged, verified, depreciated), and your vendor master is complete. The 70% ERP failure rate is driven by poor data and undefined processes. A governance tool that cleans your data is the preparation for a successful ERP implementation later.</p>
+
+  </div>
+
+  <section style="padding: 48px 0 0;"><div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;"><p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p><div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;"><a href="/erp-alternative-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">ERP Alternative Guide</a><a href="/how-it-works" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">How We Work</a><a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration</a><a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a></div></div></section>
+
+  <section class="contact" style="padding: 64px 0;"><div class="container" style="text-align: center;"><h2 class="section-title">Evaluating Whether a Separate Tool Is Right for You?</h2><p class="section-sub">Share a brief overview of your current setup — what ERP or accounting software you use, how procurement and assets are managed today, and what problems you are trying to solve. We will assess whether a dedicated governance tool addresses your specific gaps.</p><div style="margin-top: 32px;"><a href="/#contact" class="btn btn-lg">Book a Consultation</a></div></div></section>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><p>Procurement & asset management — delivered as a professional service.</p></div><div class="footer-links"><div class="footer-col"><h4>Services</h4><a href="/procurement">Procurement</a><a href="/asset-management">Asset Management</a><a href="/tally-integration">Tally Integration</a><a href="/vendor-management">Vendor Management</a></div><div class="footer-col"><h4>More</h4><a href="/invoice-matching">Invoice Matching</a><a href="/data-migration">Data Migration</a><a href="/fixed-asset-register">Fixed Asset Register</a><a href="/purchase-order-approval">Purchase Order Approval</a><a href="/grn-goods-receipt">Goods Receipt</a><a href="/vendor-debit-note">Vendor Debit Notes</a><a href="/asset-tagging-verification">Asset Tagging</a><a href="/education-procurement">Education</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/guides">Guides</a><a href="/#contact">Contact</a></div><div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a></div></div></div></footer>
+
+  <script src="script.js"></script>
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; font-size:14px;"><span id="cookie-text"></span><div><button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button><button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button></div></div>
+  <script src="cookie-consent.js"></script>
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</body>
+</html>
