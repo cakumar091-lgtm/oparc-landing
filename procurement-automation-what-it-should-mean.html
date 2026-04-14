@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurement Automation — What It Should Actually Automate | Oparc</title>
+  <meta name="description" content="Most procurement automation reduces data entry. The automation that matters reduces risk. Two types of automation — form-filling vs governance enforcement — and why automating controls prevents more loss than automating forms.">
+  <meta name="keywords" content="procurement automation meaning, what does procurement automation do, procurement automation vs governance, automated procurement controls, procurement automation India, asset management automation, automated approval workflow procurement, procurement automation benefits risks">
+  <link rel="canonical" href="https://oparc.in/procurement-automation-what-it-should-mean">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/procurement-automation-what-it-should-mean">
+  <meta property="og:title" content="Procurement Automation — What It Should Actually Automate">
+  <meta property="og:description" content="Most automation reduces typing. The automation that matters reduces risk. Form-filling vs governance enforcement.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Procurement Automation — What It Should Actually Automate">
+  <meta name="twitter:description" content="Most automation reduces typing. The automation that matters reduces risk. Form-filling vs governance enforcement.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Procurement Automation — What It Should Actually Automate",
+    "description": "Two types of procurement automation — form-filling vs governance enforcement — and why automating controls prevents more loss than automating forms.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/procurement-automation-what-it-should-mean"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Procurement Automation", "item": "https://oparc.in/procurement-automation-what-it-should-mean" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does procurement automation actually mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Procurement automation broadly means using technology to replace manual steps in the buying process. But there are two distinct types. The first — form-filling automation — reduces data entry: auto-generating purchase orders from requisitions, auto-calculating totals, auto-sending notifications. The second — governance automation — enforces controls: preventing self-approval, blocking duplicate orders, freezing routing decisions so they cannot be changed after submission, and automatically splitting GST based on vendor registration. Most tools focus on the first type. The second type is what prevents audit findings, compliance failures, and financial losses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is automating approvals the same as automating governance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Automating approvals means routing a document to the next person in a list — that is form-filling automation. Automating governance means the system enforces rules that humans might forget or skip: blocking an approver from approving their own requisition, preventing Level 2 from acting before Level 1 completes, freezing the approval chain at submission so later matrix changes do not affect pending documents, and matching the approval chain to 10 dimensions (not just amount). The difference is between 'sending it to the right person' and 'making sure the right person actually has authority and cannot be bypassed.'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What controls should a procurement system enforce automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At minimum: self-approval prevention (the person who submits cannot approve), duplicate order prevention (the same requisition line cannot appear on two purchase orders), over-receipt prevention (you cannot receive more than what was ordered), sequential level enforcement (Level 2 cannot act until Level 1 completes), and three-way matching before posting (invoice quantities and prices compared against order and receipt). These are controls that auditors check. If they are enforced by policy rather than by the system, they are only as reliable as the person who remembers to follow them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does automated GST compliance work in procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When a purchase order is created, the system reads the vendor's GSTIN (from the selected address) and the organisation's GST state code. If both are in the same state, GST is automatically split into CGST and SGST. If different states, the full amount is charged as IGST. This split flows unchanged through goods receipt, vendor debit notes, and accounting entries. The vendor's GSTIN is frozen on the purchase order at creation — if the vendor updates their registration later, existing orders are not retroactively affected. This prevents the ITC mismatches that trigger GST scrutiny notices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can automation replace the need for human approval entirely?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For low-value, pre-approved items — yes, through a bypass mode where the purchase order is auto-created and auto-approved when the requisition is approved. But this should be the exception, not the default. The purpose of approval workflows is not to slow things down — it is to ensure that someone with the right authority reviews the commitment before it becomes binding. Automation should make approvals faster and more reliable (routing to the right person instantly, providing all context in one view), not eliminate the human judgment that governance requires."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/procurement-automation-what-it-should-mean">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/procurement-automation-what-it-should-mean">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="container nav-inner"><a href="/" class="logo"></a><div class="nav-links"><a href="/">Home</a><a href="/procurement">Procurement</a><a href="/asset-management">Assets</a><a href="/tally-integration">Tally</a><a href="/vendor-management">Vendors</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/#contact">Contact</a><a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a></div><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="article container">
+    <h1>Procurement Automation — What It Should Actually Automate</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>When an organisation says "we need to automate procurement," they usually mean: we want to stop doing things manually. Stop emailing approval requests. Stop retyping data from requisitions into purchase orders. Stop manually calculating GST. Stop chasing people for sign-off.</p>
+
+    <p>These are real problems and automating them is valuable. But there is a deeper question that is rarely asked: what about the things that go wrong not because someone typed slowly, but because the system allowed something it should not have?</p>
+
+    <p>A purchase order was approved by the same person who raised it. A duplicate order was placed against a requisition that already had a PO. A vendor whose GST registration was cancelled three months ago continued receiving orders. An approver at Level 2 acted before Level 1 had reviewed the request. A goods receipt was posted for more units than were ordered.</p>
+
+    <p>These are not data entry errors. They are governance failures. And they are not fixed by faster form-filling — they are fixed by automating the controls that prevent them.</p>
+
+    <h2>1. Two Types of Automation</h2>
+
+    <p>It is useful to distinguish between two categories of automation in procurement:</p>
+
+    <table>
+      <tr><th></th><th>Form-Filling Automation</th><th>Governance Automation</th></tr>
+      <tr><td><strong>What it does</strong></td><td>Reduces manual data entry and speeds up document processing</td><td>Enforces rules, prevents violations, and maintains audit trails automatically</td></tr>
+      <tr><td><strong>Examples</strong></td><td>Auto-generate PO from approved requisition. Auto-calculate line totals. Auto-notify approvers. Auto-populate vendor details.</td><td>Block self-approval. Prevent duplicate POs. Freeze routing at submission. Enforce level sequence. Auto-split GST from GSTIN.</td></tr>
+      <tr><td><strong>What it saves</strong></td><td>Time and effort</td><td>Money, compliance, and audit findings</td></tr>
+      <tr><td><strong>When it fails</strong></td><td>Someone has to type more</td><td>Someone bypasses a control and nobody notices until the auditor does</td></tr>
+    </table>
+
+    <p>Both types matter. But organisations that automate only form-filling and not governance end up with a system that processes bad decisions faster. A purchase order that should never have been approved reaches the vendor in seconds instead of days — but the underlying problem (wrong approver, duplicate order, expired vendor) is the same.</p>
+
+    <blockquote>
+      <p>The measure of procurement automation should not be "how fast can we process a purchase order" but "how many things can go wrong that the system prevents automatically."</p>
+    </blockquote>
+
+    <h2>2. Governance Automation — What It Looks Like in Practice</h2>
+
+    <h3>2.1 Routing Decisions That Cannot Be Overridden</h3>
+
+    <p>When a requisition is submitted, the system evaluates it against an <a href="/purchase-approval-workflow-guide">approval matrix</a> with 10+ dimensions — department, classification, category, amount, location, and more. The matching is automatic: the system selects the most specific rule, applies the tightest amount band, and seeds the entire approval chain.</p>
+
+    <p>Critically, the routing decision is <strong>frozen at submission</strong>. If the approval matrix is changed after the requisition is submitted — perhaps a new level is added or an approver is changed — the pending requisition continues through its original chain. This prevents a situation where someone modifies the matrix to reroute a document to a friendlier approver.</p>
+
+    <h3>2.2 Controls That Cannot Be Bypassed</h3>
+
+    <table>
+      <tr><th>Control</th><th>What the system prevents</th></tr>
+      <tr><td>Self-approval prevention</td><td>The person who submits a requisition cannot be its approver — even if they appear in the approval matrix for that combination of dimensions</td></tr>
+      <tr><td>Level sequence enforcement</td><td>Level 2 cannot act until every approver at Level 1 has completed — rejecting at any level is always allowed</td></tr>
+      <tr><td>Double-PO guard</td><td>The same requisition line cannot be claimed by two purchase orders — prevents duplicate procurement</td></tr>
+      <tr><td>Over-receipt guard</td><td>Cumulative received quantity cannot exceed ordered quantity — enforced at goods receipt submission</td></tr>
+      <tr><td>Terminal state protection</td><td>Rejected and cancelled documents cannot be resurrected — no "un-rejecting" a purchase that was properly declined</td></tr>
+      <tr><td>Posted document immutability</td><td>Once a document is posted to the register or accounting system, it cannot be edited — corrections require new documents with their own approval chain</td></tr>
+    </table>
+
+    <p>Each of these controls exists because someone, somewhere, tried to do the thing it prevents. Self-approval exists because someone approved their own purchase. Duplicate POs exist because two departments ordered the same thing from the same requisition. Over-receipt exists because a stores manager accepted 120 units against a 100-unit order. The controls are not theoretical — they prevent documented failure modes.</p>
+
+    <h3>2.3 Tax Compliance That Happens at the Right Moment</h3>
+
+    <p><a href="/gst-split-purchase-order-guide">GST split</a> — CGST/SGST vs IGST — is determined automatically from the vendor's GSTIN and the organisation's state code at the moment the purchase order is created. Not at invoice processing. Not at payment. At the point of commitment, when the decision can still be corrected before money changes hands.</p>
+
+    <p><a href="/tds-purchase-order-automation-guide">TDS</a> is auto-filled from the vendor's tax configuration when the PO is created. The approver can review and adjust the section and rate before signing off. By the time the payment is due, the correct TDS has already been validated by someone with authority — not calculated after the fact by the accounts team.</p>
+
+    <h3>2.4 Register Updates That Happen Without Human Intervention</h3>
+
+    <p>When a goods receipt is posted, the <a href="/fixed-asset-register">asset register</a> updates automatically — new assets are created with system-generated IDs, depreciation parameters are set from the asset's classification, and the register entry links back to the PO, requisition, and vendor. Nobody types these entries. Nobody forgets to add them.</p>
+
+    <p>When a service acceptance is posted, the expense register updates. When all lines of a PO are covered by posted receipts, the PO auto-closes. When all PO lines are posted, the underlying requisition auto-closes. These cascading closures happen without anyone clicking a "close" button — the system derives the state from the facts.</p>
+
+    <p>When an <a href="/asset-write-off-scrap-disposal-guide">asset is scrapped</a>, the system creates a tracking asset with a derived ID, inherits proportional financials, and updates the source asset — all in one transaction. When an <a href="/asset-transfer-tracking-guide">asset is transferred</a> between departments, the receiving phase approval chain is auto-seeded when the source phase completes. Nobody creates the second workflow manually.</p>
+
+    <h2>3. The Audit Trail — Automation That Documents Itself</h2>
+
+    <p>Every automated action creates an audit record. Not just "PO approved by Ramesh" but:</p>
+
+    <ul>
+      <li>Which approval matrix code was matched, and why (specificity score, amount band)</li>
+      <li>Which level the approver acted at, and whether all prior levels were complete</li>
+      <li>The exact timestamp of each action</li>
+      <li>What the document looked like before and after each transition</li>
+      <li>Every blocked action — who tried to do what, and which control prevented it</li>
+    </ul>
+
+    <p>This audit trail is not a log file that someone might review. It is structured, queryable data that the statutory auditor can examine. When the auditor asks "who approved this purchase and did they have authority?" — the answer is a data record, not a recollection.</p>
+
+    <blockquote>
+      <p>The most valuable automation is the kind that runs silently in the background: blocking the things that should not happen, documenting the things that do, and connecting the things that need to stay connected. If the only automation in your procurement system is faster form-filling, the forms will be filled faster — but the controls that prevent loss will still depend on someone remembering to check.</p>
+    </blockquote>
+
+    <h2>4. Where Form-Filling Automation Still Matters</h2>
+
+    <p>This is not an argument against form-filling automation. It matters — substantially:</p>
+
+    <ul>
+      <li><strong>Auto-populating vendor details on POs</strong> saves time and prevents transcription errors</li>
+      <li><strong>Auto-calculating GST, TDS, and line totals</strong> eliminates arithmetic mistakes</li>
+      <li><strong>Generating PDFs</strong> with configurable sections replaces manual document preparation</li>
+      <li><strong>Bulk operations</strong> — uploading 5,000 assets, generating QR tags in batch, importing vendor lists — make migration practical</li>
+      <li><strong>Notifications</strong> ensure approvers know something is waiting without someone having to call them</li>
+      <li><strong><a href="/tally-integration">Tally voucher generation</a></strong> for 22 event types eliminates manual journal entries entirely</li>
+    </ul>
+
+    <p>The point is not that form-filling automation is unimportant. It is that it is insufficient. An organisation that automates data entry but not governance has a faster system that is equally vulnerable to the failures that cause audit findings, tax notices, and financial losses.</p>
+
+    <h2>5. How to Evaluate What a System Actually Automates</h2>
+
+    <p>When evaluating any procurement or asset management system, ask these questions:</p>
+
+    <table>
+      <tr><th>Question</th><th>Form-filling answer</th><th>Governance answer</th></tr>
+      <tr><td>Can the submitter approve their own request?</td><td>"We trust our team"</td><td>"The system blocks it — 403 error"</td></tr>
+      <tr><td>What happens if someone changes the approval matrix while a request is pending?</td><td>"The new rules apply"</td><td>"The routing snapshot was frozen at submission — pending requests are unaffected"</td></tr>
+      <tr><td>Can the same requisition line appear on two purchase orders?</td><td>"We have a process to check"</td><td>"The system returns HTTP 409 — the line is already claimed"</td></tr>
+      <tr><td>How is GST split between CGST/SGST and IGST?</td><td>"The accountant selects"</td><td>"Automatic — derived from vendor GSTIN and org state code"</td></tr>
+      <tr><td>What happens if goods receipt exceeds the ordered quantity?</td><td>"The stores manager should not accept more"</td><td>"Blocked at submission — cumulative check against ordered quantity"</td></tr>
+      <tr><td>Where is the audit trail for a blocked action?</td><td>"We log errors"</td><td>"Every blocked transition is recorded: actor, action, guard layer, reason"</td></tr>
+    </table>
+
+    <p>The pattern is consistent: form-filling answers rely on people following a process. Governance answers rely on the system enforcing the process. The difference becomes apparent the first time someone does not follow the process — which, in any organisation with more than 10 people, happens regularly.</p>
+
+    <h2>6. Frequently Asked Questions</h2>
+
+    <h3>What does procurement automation actually mean?</h3>
+    <p>Procurement automation broadly means using technology to replace manual steps in the buying process. But there are two distinct types. Form-filling automation reduces data entry: auto-generating POs from requisitions, auto-calculating totals, auto-sending notifications. Governance automation enforces controls: preventing self-approval, blocking duplicate orders, freezing routing decisions, and automatically splitting GST. Most tools focus on the first type. The second type is what prevents audit findings, compliance failures, and financial losses.</p>
+
+    <h3>Is automating approvals the same as automating governance?</h3>
+    <p>No. Automating approvals means routing a document to the next person in a list — that is form-filling automation. Automating governance means the system enforces rules that humans might forget or skip: blocking self-approval, preventing Level 2 from acting before Level 1 completes, freezing the approval chain at submission, and matching the chain to 10+ dimensions. The difference is between "sending it to the right person" and "making sure the right person actually has authority and cannot be bypassed."</p>
+
+    <h3>What controls should a procurement system enforce automatically?</h3>
+    <p>At minimum: self-approval prevention, duplicate order prevention, over-receipt prevention, sequential level enforcement, and three-way matching before posting. These are controls auditors check. If they are enforced by policy rather than by the system, they are only as reliable as the person who remembers to follow them.</p>
+
+    <h3>How does automated GST compliance work in procurement?</h3>
+    <p>When a purchase order is created, the system reads the vendor's GSTIN and the organisation's state code. Same state: CGST + SGST. Different states: IGST. This split flows unchanged through goods receipt, debit notes, and accounting entries. The GSTIN is frozen on the PO — later vendor registration changes do not retroactively affect existing orders. This prevents the ITC mismatches that trigger GST scrutiny notices.</p>
+
+    <h3>Can automation replace the need for human approval entirely?</h3>
+    <p>For low-value, pre-approved items — yes, through a bypass mode where the PO is auto-created and auto-approved when the requisition is approved. But this should be the exception. The purpose of approval workflows is to ensure someone with the right authority reviews the commitment. Automation should make approvals faster and more reliable — routing instantly, providing full context — not eliminate the human judgment that governance requires.</p>
+
+  </div>
+
+  <section style="padding: 48px 0 0;"><div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;"><p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p><div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;"><a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a><a href="/purchase-approval-workflow-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Approval Workflow Guide</a><a href="/why-separate-procurement-asset-management-tool" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Why a Separate Tool</a><a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Compliance</a></div></div></section>
+
+  <section class="contact" style="padding: 64px 0;"><div class="container" style="text-align: center;"><h2 class="section-title">Evaluating Procurement Automation?</h2><p class="section-sub">If you are evaluating tools and want to understand which controls are enforced by the system versus which depend on people following a process — share a brief overview and we will assess the governance gaps.</p><div style="margin-top: 32px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;"><a href="https://procuretrail.oparc.in/signup" class="btn btn-lg" target="_blank" rel="noopener">Sign Up and Explore</a><a href="/#contact" class="btn btn-lg" style="background: transparent; color: var(--navy); border: 2px solid var(--navy);">Book a Consultation</a></div></div></section>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><p>Procurement & asset management — delivered as a professional service.</p></div><div class="footer-links"><div class="footer-col"><h4>Services</h4><a href="/procurement">Procurement</a><a href="/asset-management">Asset Management</a><a href="/tally-integration">Tally Integration</a><a href="/vendor-management">Vendor Management</a></div><div class="footer-col"><h4>More</h4><a href="/invoice-matching">Invoice Matching</a><a href="/data-migration">Data Migration</a><a href="/fixed-asset-register">Fixed Asset Register</a><a href="/purchase-order-approval">Purchase Order Approval</a><a href="/grn-goods-receipt">Goods Receipt</a><a href="/vendor-debit-note">Vendor Debit Notes</a><a href="/asset-tagging-verification">Asset Tagging</a><a href="/education-procurement">Education</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/guides">Guides</a><a href="/#contact">Contact</a></div><div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a></div></div></div></footer>
+
+  <script src="script.js"></script>
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; font-size:14px;"><span id="cookie-text"></span><div><button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button><button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button></div></div>
+  <script src="cookie-consent.js"></script>
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</body>
+</html>
