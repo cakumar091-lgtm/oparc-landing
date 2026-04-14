@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchases Made Without Proper Approval — Responding to Audit Findings | Oparc</title>
+  <meta name="description" content="Auditor found purchases without proper approval — POs issued without PR approval, retroactive authorisation, or no segregation of duties. Understand why it happened, how to respond, and how to build a procurement approval process that prevents recurrence.">
+  <meta name="keywords" content="purchase without approval audit finding, unauthorised purchase internal audit, procurement without proper authorisation, purchase order no approval audit observation, internal control weakness procurement, purchase approval process missing">
+  <link rel="canonical" href="https://oparc.in/purchase-without-approval-audit-finding">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/purchase-without-approval-audit-finding">
+  <meta property="og:title" content="Purchases Made Without Proper Approval — Responding to Audit Findings">
+  <meta property="og:description" content="Audit found purchases without proper approval. Root cause analysis, immediate response steps, and how to build system-enforced approval controls.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Purchases Made Without Proper Approval — Responding to Audit Findings">
+  <meta name="twitter:description" content="Audit found unauthorised purchases. Why it happened, how to respond to the finding, and how to prevent recurrence through structured approval controls.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Purchases Made Without Proper Approval — Responding to Audit Findings",
+    "description": "Auditor found purchases without proper approval — POs without PR approval, retroactive authorisation, no segregation of duties. Root cause and prevention.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/purchase-without-approval-audit-finding"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Purchases Without Approval — Audit Finding", "item": "https://oparc.in/purchase-without-approval-audit-finding" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does an audit finding of 'purchases without proper approval' actually mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This finding means the auditor identified purchase transactions where the required authorisation was either missing, incomplete, or obtained after the fact. It can include purchase orders issued without a prior approved purchase requisition, purchases made directly by phone or email without any PO, approval obtained retroactively after goods were already received and paid for, or the same individual both initiating and approving the purchase. The auditor reports this as an internal control weakness because it means the organisation's spending controls can be bypassed — whether intentionally or through process gaps. Under CARO 2020 (for companies), auditors must specifically report on internal controls over purchase of inventory and fixed assets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I respond to an audit observation about unauthorised purchases?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The response should be structured in three parts. First, acknowledge the finding and quantify the scope — how many transactions, what total value, which departments, and what time period. Second, assess each transaction individually: was it a legitimate business need that bypassed the process due to urgency, or does it show signs of potential misuse? This distinction matters for the audit committee's risk assessment. Third, present a corrective action plan with specific timelines — not a vague commitment to 'improve processes' but concrete steps: implementing a structured approval matrix, enforcing system-level controls, and establishing monitoring mechanisms. The audit committee expects specificity, not reassurance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do email-based purchase approvals fail as an internal control?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Email approvals fail as internal controls for several structural reasons. They are not enforceable — nothing prevents someone from issuing a PO without waiting for the email approval. They are not auditable in a reliable way — emails can be deleted, forwarded chains can be broken, and searching for a specific approval across thousands of emails is impractical. They do not enforce segregation of duties — there is no system check preventing the same person from requesting and approving. They do not enforce approval sequence — a senior manager might be CC'd rather than explicitly approving, and their silence is treated as consent. And they have no time dimension — there is no way to prove whether the approval was obtained before or after the purchase was made."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is an approval matrix and how does it prevent unauthorised purchases?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An approval matrix is a configurable rule set that determines who must approve a purchase based on specific dimensions — such as the amount, the department, the type of purchase, and the asset classification. For example, a matrix might require department manager approval for purchases up to five lakh rupees and additional senior manager approval for purchases above that threshold. When the matrix is enforced by a system rather than by manual process, a purchase order physically cannot be created without the preceding purchase requisition being approved through the correct chain. The system routes the requisition to the correct approvers automatically, tracks their decisions, and blocks progression until all required approvals are obtained."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does a frozen approval snapshot help during audit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A frozen approval snapshot captures the complete approval chain — who was assigned to approve, at which level, in which sequence, and what decision they made — at the time the document was submitted for approval. This snapshot is immutable: it cannot be modified after the fact. During audit, the snapshot provides definitive evidence that the correct approval chain was followed for each purchase. The auditor can verify that the right approvers were assigned based on the matrix rules that were active at the time, that each approver explicitly approved or rejected, that the approval sequence was respected, and that no retroactive changes were made. Without this snapshot, the audit relies on email trails and verbal confirmations, which are neither reliable nor verifiable."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/purchase-without-approval-audit-finding">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/purchase-without-approval-audit-finding">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="container nav-inner"><a href="/" class="logo"></a><div class="nav-links"><a href="/">Home</a><a href="/procurement">Procurement</a><a href="/asset-management">Assets</a><a href="/tally-integration">Tally</a><a href="/vendor-management">Vendors</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/#contact">Contact</a><a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a></div><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="article container">
+    <h1>Purchases Made Without Proper Approval — Responding to Audit Findings</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>The audit report is on the table. Among the observations: purchases totalling several lakh rupees were made without documented approval. Some purchase orders were issued without a preceding purchase requisition. Others had approval obtained after the goods were already received and paid for. In one case, the same person raised the requisition, approved it, and issued the purchase order. The auditor has flagged this as an internal control weakness over procurement.</p>
+
+    <p>If this is an internal audit, the finding goes to the audit committee. If it is a statutory audit under the Companies Act, and the organisation falls under CARO 2020, the auditor must report on internal controls over purchase of inventory and fixed assets. Either way, the finding is now on record, and the organisation needs both an immediate response and a structural fix.</p>
+
+    <h2>1. What Happened</h2>
+
+    <p>The audit finding covers one or more of these scenarios:</p>
+
+    <ul>
+      <li><strong>No purchase requisition:</strong> A purchase order was issued directly — the requester contacted the vendor, agreed on terms, and asked someone in procurement to create the PO. No formal request was raised. No one outside the requester's circle evaluated whether the purchase was necessary or budgeted.</li>
+      <li><strong>PO without PR approval:</strong> A purchase requisition was created but the PO was issued before the requisition was fully approved. The approval came later — after the goods were ordered, sometimes after they were delivered. This is retroactive approval, and auditors treat it as equivalent to no approval.</li>
+      <li><strong>Self-approval:</strong> The person who raised the purchase requisition also approved it. There was no independent review. This violates the principle of segregation of duties — a foundational internal control requirement.</li>
+      <li><strong>Approval outside authority:</strong> A manager approved a purchase that exceeded their authority limit. A purchase of eight lakh rupees was approved by someone authorised only up to five lakh. No escalation to the appropriate authority occurred.</li>
+    </ul>
+
+    <p>The auditor does not need to find evidence of fraud to flag these as control weaknesses. The absence of proper controls is itself the finding — it means fraud, waste, or error could occur without detection.</p>
+
+    <h2>2. Why It Happened</h2>
+
+    <p>In most cases, purchases without approval are not the result of deliberate circumvention. They result from process gaps that make it easier to skip the approval than to follow it.</p>
+
+    <p><strong>No structured approval matrix.</strong> The organisation may have an informal understanding of who approves what, but it is not documented, not enforced, and not consistently applied. New employees do not know the rules. Departments interpret them differently.</p>
+
+    <p><strong>Email-based approvals.</strong> Approvals are obtained via email — a forwarded chain, a reply saying "go ahead", or sometimes just a CC that is interpreted as tacit consent. These cannot be reliably audited. The auditor cannot determine whether the approval was obtained before or after the purchase. Email approvals are not enforceable — nothing prevents someone from proceeding without waiting for the reply.</p>
+
+    <p><strong>No system enforcement.</strong> Even where an approval process exists on paper, it is advisory. The procurement system (if one exists) allows POs to be created regardless of whether the PR is approved. Approvals are a checkbox, not a gate. When deadlines are tight, the gate is skipped.</p>
+
+    <p><strong>No segregation of duties.</strong> The same person can create a requisition, approve it, and issue the PO. In smaller organisations, this happens because "everyone wears multiple hats." In larger ones, it happens because the system does not enforce role-based restrictions.</p>
+
+    <h2>3. What to Do Now</h2>
+
+    <p>The audit committee or management expects a structured response — not a vague commitment to improve. The response should cover:</p>
+
+    <ol>
+      <li><strong>Quantify the scope.</strong> How many transactions lacked proper approval? What is the total value? Which departments? What time period? This tells the committee whether the issue is isolated or systemic.</li>
+      <li><strong>Classify the transactions.</strong> For each unapproved purchase, determine: Was it a legitimate business need that bypassed the process due to urgency? Was it a routine purchase where the process was simply not followed? Or does it show indicators that warrant further investigation — unusual vendor, unusual amount, unusual timing?</li>
+      <li><strong>Retrospectively document rationale.</strong> For legitimate purchases that bypassed the process, document the business justification, the urgency, and the authorising person (even if authorisation was verbal). This does not fix the control weakness, but it provides the audit committee with context for their risk assessment.</li>
+      <li><strong>Present a corrective action plan.</strong> This is where the structural fix is described — with specific actions, responsible persons, and timelines. The plan should address the root causes identified in the next section.</li>
+    </ol>
+
+    <h2>4. How to Prevent Recurrence</h2>
+
+    <p>Preventing unauthorised purchases requires controls that are enforced by the system, not by policy documents that rely on people choosing to follow them.</p>
+
+    <h3>Configurable approval matrix</h3>
+    <p>A <a href="/purchase-approval-workflow-guide">structured approval matrix</a> defines who must approve a purchase based on routing dimensions: the amount, the department, the purchase type, and the asset classification. The matrix can have multiple levels — for instance, department manager at level 1 for amounts up to five lakh, and senior manager at level 2 for amounts above that. The matrix is configured once and applied automatically to every purchase requisition.</p>
+
+    <h3>System-enforced PR to PO chain</h3>
+    <p>In a governed <a href="/procurement">procurement workflow</a>, a purchase order cannot be created unless it references an approved purchase requisition. The system enforces this — it is not a guideline. If the PR is not approved, the PO creation is blocked. If the PR is partially approved (some lines approved, others pending), only the approved lines can be included in the PO. This eliminates the scenario where someone issues a PO and obtains approval after the fact.</p>
+
+    <h3>Self-approval prevention</h3>
+    <p>The system should prevent the person who created a requisition from appearing in its approval chain. This is a basic segregation of duties control. Even if the approval matrix would normally route the requisition to that person based on their role, the system excludes them for requisitions they created.</p>
+
+    <h3>Frozen approval snapshots</h3>
+    <p>When a requisition is submitted for approval, the system captures the complete approval chain — who is assigned, at what level, in what sequence — as an immutable snapshot. This snapshot cannot be modified after submission. During audit, it provides definitive evidence: the correct approvers were assigned based on the matrix, each approver explicitly acted, and the sequence was respected.</p>
+
+    <h3>Approval aging and SLA tracking</h3>
+    <p><a href="/approval-bottleneck-tracking-guide">Approval bottleneck tracking</a> monitors how long each approval has been pending and which approvers are causing delays. This addresses the root cause of retroactive approvals — people skip the process because approvals take too long. When delays are visible and tracked, they get addressed. When they are invisible, people find workarounds.</p>
+
+    <h3>Per-line approval topology</h3>
+    <p>For requisitions with multiple items, <a href="/per-line-approval-topology-guide">per-line approval</a> allows each line to be approved or rejected independently. An approver can approve three items and reject two, rather than being forced to approve or reject the entire requisition. This granularity reduces the incentive to bypass the process — requisitions are less likely to be held up by a single problematic line item.</p>
+
+    <blockquote>
+      <p>An audit finding about unauthorised purchases is a signal that the organisation's procurement controls are advisory rather than enforced. Policy documents do not prevent unauthorised purchases — system gates do. The difference between "we have a process" and "the system enforces the process" is the difference between an audit observation and audit comfort.</p>
+    </blockquote>
+
+    <h2>5. Frequently Asked Questions</h2>
+
+    <h3>What does an audit finding of "purchases without proper approval" actually mean?</h3>
+    <p>It means the auditor found purchase transactions where authorisation was missing, incomplete, or retroactive. This includes POs without prior PR approval, purchases without any PO, approval obtained after goods were received, or the same person initiating and approving. Under CARO 2020, auditors must specifically report on internal controls over purchase of inventory and fixed assets.</p>
+
+    <h3>How should I respond to an audit observation about unauthorised purchases?</h3>
+    <p>Structure the response in three parts: quantify the scope (transactions, value, departments, time period), assess each transaction individually (legitimate urgency vs. process gap vs. potential misuse), and present a corrective action plan with specific steps and timelines. The audit committee expects specificity, not reassurance.</p>
+
+    <h3>Why do email-based purchase approvals fail as an internal control?</h3>
+    <p>Email approvals are not enforceable (nothing prevents proceeding without them), not reliably auditable (emails can be deleted, chains broken), do not enforce segregation of duties, do not enforce sequence, and have no verifiable time dimension. An auditor cannot confirm whether email approval was obtained before or after the purchase.</p>
+
+    <h3>What is an approval matrix and how does it prevent unauthorised purchases?</h3>
+    <p>An approval matrix defines who must approve based on dimensions like amount, department, and purchase type. When enforced by a system, a PO cannot be created without the PR being approved through the correct chain. The system routes requisitions to correct approvers automatically and blocks progression until all required approvals are obtained.</p>
+
+    <h3>How does a frozen approval snapshot help during audit?</h3>
+    <p>A frozen snapshot captures the complete approval chain at submission time — who was assigned, at which level, what decision they made. It is immutable and cannot be modified after the fact. During audit, it provides definitive evidence that correct approvers were assigned, each explicitly acted, the sequence was followed, and no retroactive changes were made.</p>
+
+  </div>
+
+  <section style="padding: 48px 0 0;"><div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;"><p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p><div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;"><a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a><a href="/purchase-approval-workflow-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Purchase Approval Workflow</a><a href="/approval-bottleneck-tracking-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Approval Bottleneck Tracking</a><a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Compliance</a></div></div></section>
+
+  <section class="contact" style="padding: 64px 0;"><div class="container" style="text-align: center;"><h2 class="section-title">Close the Governance Gap</h2><p class="section-sub">If your audit flagged purchases without proper approval, share a brief overview of the finding and we will evaluate how system-enforced procurement controls apply to your organisation.</p><div style="margin-top: 32px;"><a href="/#contact" class="btn btn-lg">Book a Consultation</a></div></div></section>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><p>Procurement & asset management — delivered as a professional service.</p></div><div class="footer-links"><div class="footer-col"><h4>Services</h4><a href="/procurement">Procurement</a><a href="/asset-management">Asset Management</a><a href="/tally-integration">Tally Integration</a><a href="/vendor-management">Vendor Management</a></div><div class="footer-col"><h4>More</h4><a href="/invoice-matching">Invoice Matching</a><a href="/data-migration">Data Migration</a><a href="/fixed-asset-register">Fixed Asset Register</a><a href="/purchase-order-approval">Purchase Order Approval</a><a href="/grn-goods-receipt">Goods Receipt</a><a href="/vendor-debit-note">Vendor Debit Notes</a><a href="/asset-tagging-verification">Asset Tagging</a><a href="/education-procurement">Education</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/guides">Guides</a><a href="/#contact">Contact</a></div><div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a></div></div></div></footer>
+
+  <script src="script.js"></script>
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; font-size:14px;"><span id="cookie-text"></span><div><button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button><button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button></div></div>
+  <script src="cookie-consent.js"></script>
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</body>
+</html>

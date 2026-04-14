@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDS Short Deduction Notice — Why It Happened and How to Fix Your Process | Oparc</title>
+  <meta name="description" content="Received a TDS short deduction notice under Section 201? Understand why TDS was not deducted or was deducted at a wrong rate, how to respond, calculate interest, and build a procurement process that prevents TDS defaults.">
+  <meta name="keywords" content="TDS short deduction notice, section 201 TDS default, TDS not deducted purchase order, TDS wrong section applied, TDS short deduction interest calculation, income tax TDS notice how to respond, TDS compliance procurement">
+  <link rel="canonical" href="https://oparc.in/tds-short-deduction-notice">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/tds-short-deduction-notice">
+  <meta property="og:title" content="TDS Short Deduction Notice — Why It Happened and How to Fix Your Process">
+  <meta property="og:description" content="Section 201 TDS notice for short deduction or non-deduction. Root cause analysis, interest calculation, correction steps, and process-level prevention.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TDS Short Deduction Notice — Why It Happened and How to Fix Your Process">
+  <meta name="twitter:description" content="TDS short deduction notice under Section 201. Why it happened, how to respond, and how to embed TDS compliance in your procurement workflow.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "TDS Short Deduction Notice — Why It Happened and How to Fix Your Process",
+    "description": "Received a Section 201 TDS notice for short deduction or non-deduction on purchase payments. Root cause, response steps, and process-level prevention.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/tds-short-deduction-notice"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "TDS Short Deduction Notice", "item": "https://oparc.in/tds-short-deduction-notice" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Section 201 notice for TDS short deduction?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A notice under Section 201 of the Income Tax Act declares the deductor as an 'assessee in default' for failing to deduct TDS or deducting it at an incorrect rate. Section 201(1) covers the principal TDS amount that should have been deducted, and Section 201(1A) covers the interest on late or short deduction. Interest is charged at 1 percent per month (or part of month) for non-deduction (from the date TDS was deductible to the date of actual deduction) and 1.5 percent per month for late deposit (from the date of deduction to the date of actual deposit). The notice typically results from TRACES data matching purchase payments against TDS returns."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does TDS get deducted under the wrong section on purchase payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TDS sections are determined by the nature of the payment — Section 194C for contracts, 194J for professional or technical services, 194Q for purchase of goods above threshold, and so on. When TDS is calculated manually at the payment stage, the accounts team must determine the correct section for each payment. Misclassification happens when a service payment (194J at 10 percent) is treated as a contract payment (194C at 2 percent), or when cumulative payments to a vendor cross the 194Q threshold without being tracked. The wrong section means wrong rate, which means short deduction — even if TDS was deducted, it was deducted at a lower rate than required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is interest calculated on TDS short deduction?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Interest on TDS short deduction is calculated under Section 201(1A) at two rates depending on the nature of the default. For non-deduction or short deduction of TDS, the rate is 1 percent per month or part of a month, calculated from the date on which TDS was deductible to the date on which TDS is actually deducted. For late deposit of TDS that was deducted but not deposited with the government on time, the rate is 1.5 percent per month or part of a month, from the date of deduction to the date of actual deposit. Interest is calculated on the amount of TDS that should have been deducted or deposited, not on the payment amount itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can TDS compliance be embedded in the purchase order approval process?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — and this is the most effective point of intervention. When TDS is configured at the purchase order line level (not calculated later during payment processing), the applicable section and rate are visible to the approver before the PO is approved. The approver can verify that the correct section is applied, override the rate if a lower deduction certificate exists, or flag an incorrect classification before any payment is made. This shifts TDS from a post-facto accounting task to a pre-approved governance decision. The TDS amount then flows through to the PO value, GRN matching, and ultimately to payment processing and Tally voucher generation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do if the vendor has already filed their return showing the income?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If the vendor (deductee) has already included the payment in their income tax return and paid tax on it, the deductor may not be treated as an assessee in default under the proviso to Section 201(1). However, you must still file correction statements to reflect the correct TDS, and you remain liable for interest under Section 201(1A) — the interest liability is not waived even if the vendor has paid the tax. To claim this relief, you need to obtain a certificate from the vendor's chartered accountant or a declaration from the vendor along with evidence of tax payment. This is a reactive remedy — it does not eliminate interest or the administrative burden of correction."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/tds-short-deduction-notice">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/tds-short-deduction-notice">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="container nav-inner"><a href="/" class="logo"></a><div class="nav-links"><a href="/">Home</a><a href="/procurement">Procurement</a><a href="/asset-management">Assets</a><a href="/tally-integration">Tally</a><a href="/vendor-management">Vendors</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/#contact">Contact</a><a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a></div><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="article container">
+    <h1>TDS Short Deduction Notice — Why It Happened and How to Fix Your Process</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>The notice arrives from the Income Tax department. Section 201(1) — you are being treated as an assessee in default. Section 201(1A) — interest is being charged. The department's system has compared your TDS returns against the payments reported in Form 26AS and found a shortfall. Either TDS was not deducted on payments that required it, or it was deducted at a rate lower than the applicable rate. The interest has been accruing since the date the deduction should have been made.</p>
+
+    <p>This notice is not unusual. TDS defaults on purchase payments are among the most common compliance failures for organisations that handle procurement manually. The problem almost never originates in the accounts department — it starts much earlier, at the point where the purchase order is raised, and nobody asked which TDS section applies.</p>
+
+    <h2>1. What Happened</h2>
+
+    <p>TDS on purchase payments is governed by specific sections of the Income Tax Act, each with its own rate, threshold, and conditions:</p>
+
+    <table>
+      <tr><th>Section</th><th>Nature of Payment</th><th>Rate</th></tr>
+      <tr><td>194C</td><td>Contracts (works, supply of labour)</td><td>1% / 2%</td></tr>
+      <tr><td>194J</td><td>Professional or technical services</td><td>2% / 10%</td></tr>
+      <tr><td>194Q</td><td>Purchase of goods (above threshold)</td><td>0.1%</td></tr>
+      <tr><td>194I</td><td>Rent (machinery, equipment)</td><td>2% / 10%</td></tr>
+    </table>
+
+    <p>A short deduction notice means one or more of the following occurred:</p>
+
+    <ul>
+      <li><strong>Wrong section applied:</strong> A technical service payment (194J at 10%) was treated as a contract (194C at 2%). The 8% difference is a short deduction.</li>
+      <li><strong>TDS not deducted at all:</strong> Cumulative payments to a vendor crossed the Section 194Q threshold during the year, but nobody was tracking the running total. No TDS was deducted on payments beyond the threshold.</li>
+      <li><strong>TDS deducted but not deposited on time:</strong> The deduction was made from the vendor's payment, but the amount was deposited with the government after the due date.</li>
+      <li><strong>PAN not available or incorrect:</strong> When the vendor's PAN is not on file or is incorrect, TDS should be deducted at the higher rate under Section 206AA. If the standard rate was applied instead, the difference is a short deduction.</li>
+    </ul>
+
+    <h2>2. Why It Happened</h2>
+
+    <p>In most organisations, TDS is treated as an accounting function — something that happens at the time of payment processing. The accounts team receives an invoice, determines the TDS section, calculates the amount, deducts it, and deposits it. The problem with this approach is that every decision is made under time pressure, without the context of the original purchase.</p>
+
+    <p>The person processing the payment may not know whether the payment is for a contract, a professional service, or a goods purchase. They may not have visibility into cumulative payments to the vendor during the year. They may not know whether the vendor has provided a lower deduction certificate under Section 197. And they are making these decisions for dozens of payments each month.</p>
+
+    <p>The structural issue is that <strong>TDS determination happens too late in the process</strong>. By the time the payment is being processed, the purchase order has been raised, the goods or services have been delivered, and the invoice has been received. The correct TDS section should have been determined — and made visible to the approver — at the time the <a href="/procurement">purchase order was approved</a>.</p>
+
+    <h2>3. What to Do Now</h2>
+
+    <p>If you have received a Section 201 notice, the response involves several steps:</p>
+
+    <ol>
+      <li><strong>Identify all affected payments.</strong> Cross-reference the notice details with your payment records. For each payment, determine: was TDS deducted? At what rate? Under which section? What should the correct section and rate have been?</li>
+      <li><strong>Calculate the correct TDS and interest.</strong> For each short-deducted payment, compute the differential TDS. Calculate interest under Section 201(1A): 1% per month for non-deduction (from date deductible to date of actual deduction), 1.5% per month for late deposit (from date of deduction to date of deposit).</li>
+      <li><strong>File correction statements.</strong> File revised TDS returns (correction statements) through TRACES to reflect the correct TDS amounts, sections, and rates. This updates the vendor's Form 26AS.</li>
+      <li><strong>Check the vendor's return status.</strong> Under the proviso to Section 201(1), if the vendor has included the payment in their income and paid tax, you may not be treated as an assessee in default for the principal amount. However, interest under 201(1A) still applies. Obtain a CA certificate or declaration from the vendor as evidence.</li>
+      <li><strong>Deposit the shortfall.</strong> Pay the differential TDS along with interest through challan. File the correction statement referencing the challan.</li>
+    </ol>
+
+    <h2>4. How to Prevent Recurrence</h2>
+
+    <p>Preventing TDS defaults requires moving the TDS decision from the payment stage to the procurement stage. When TDS is embedded in the purchase order workflow, several failure points are eliminated.</p>
+
+    <h3>TDS section master and per-line configuration</h3>
+    <p>A <a href="/tds-purchase-order-automation-guide">TDS section master</a> maps payment types to their applicable sections and rates. When a purchase order line is created, the applicable TDS section and rate are either auto-suggested based on the item category or manually selected by the person raising the PO. The TDS amount is calculated and visible on the PO before it goes for approval.</p>
+
+    <h3>Approver review of TDS at approval</h3>
+    <p>When TDS is visible on the purchase order, the approver can verify the section classification before approving. If a service is incorrectly classified as a contract, the approver can override the TDS section and rate. This catches misclassification errors before any payment is made — not months later when the TDS return is scrutinised.</p>
+
+    <h3>TDS independent of accounting integration</h3>
+    <p>TDS compliance should function regardless of whether the organisation uses an accounting integration. Whether Tally vouchers are generated automatically via <a href="/tally-integration">Tally integration</a> or accounting entries are made manually, TDS on the purchase order remains visible, trackable, and auditable. The TDS toggle operates independently — it is a governance control, not an accounting feature.</p>
+
+    <h3>Cumulative threshold tracking</h3>
+    <p>For sections like 194Q where TDS applies only after cumulative payments cross a threshold, the system must track running totals per vendor per financial year. Without this tracking, the accounts team has no way to know when the threshold is crossed mid-year — and every payment after the threshold that lacks TDS deduction becomes a default.</p>
+
+    <blockquote>
+      <p>A Section 201 notice is not just a tax demand. It signals a systemic gap in procurement governance. The interest liability accumulates monthly, correction statements consume administrative time, and repeated defaults invite closer scrutiny from the department. Embedding TDS in the <a href="/compliance">procurement workflow</a> eliminates the gap between when TDS should be determined and when it actually is.</p>
+    </blockquote>
+
+    <h2>5. Frequently Asked Questions</h2>
+
+    <h3>What is a Section 201 notice for TDS short deduction?</h3>
+    <p>A Section 201 notice declares the deductor as an assessee in default for failing to deduct TDS or deducting it at an incorrect rate. Section 201(1) covers the principal amount; Section 201(1A) covers interest at 1% per month for non-deduction and 1.5% per month for late deposit. The notice typically results from TRACES data matching purchase payments against TDS returns.</p>
+
+    <h3>Why does TDS get deducted under the wrong section on purchase payments?</h3>
+    <p>TDS sections depend on the nature of the payment — contracts (194C), professional services (194J), goods purchase (194Q). When TDS is calculated manually at payment stage, misclassification occurs because the accounts team may not know the exact nature of the original purchase. A service payment classified as a contract results in a lower rate and a short deduction.</p>
+
+    <h3>How is interest calculated on TDS short deduction?</h3>
+    <p>Interest under Section 201(1A) is 1% per month (or part) for non-deduction, calculated from the date TDS was deductible to the date of actual deduction. For late deposit, it is 1.5% per month from deduction date to deposit date. Interest applies on the TDS amount, not the payment amount. Part of a month is treated as a full month.</p>
+
+    <h3>Can TDS compliance be embedded in the purchase order approval process?</h3>
+    <p>Yes. When TDS section and rate are configured at the PO line level, the applicable TDS is visible to the approver before approval. The approver can verify the classification, override the rate if a lower deduction certificate exists, or flag errors before any payment is made. This shifts TDS from a post-facto accounting task to a pre-approved governance decision.</p>
+
+    <h3>What should I do if the vendor has already filed their return showing the income?</h3>
+    <p>If the vendor included the payment in their income tax return and paid tax, you may not be treated as an assessee in default under the proviso to Section 201(1). However, interest under 201(1A) still applies. You need a CA certificate or vendor declaration with evidence of tax payment. This is a reactive remedy — it does not waive interest or eliminate correction filing.</p>
+
+  </div>
+
+  <section style="padding: 48px 0 0;"><div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;"><p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p><div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;"><a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Compliance</a><a href="/tds-purchase-order-automation-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">TDS on Purchase Orders</a><a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a><a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration</a></div></div></section>
+
+  <section class="contact" style="padding: 64px 0;"><div class="container" style="text-align: center;"><h2 class="section-title">Address the Gap Before the Next Notice</h2><p class="section-sub">If you have received a TDS notice or want to ensure you do not, share a brief overview of your procurement process and we will evaluate where TDS compliance gaps exist.</p><div style="margin-top: 32px;"><a href="/#contact" class="btn btn-lg">Book a Consultation</a></div></div></section>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><p>Procurement & asset management — delivered as a professional service.</p></div><div class="footer-links"><div class="footer-col"><h4>Services</h4><a href="/procurement">Procurement</a><a href="/asset-management">Asset Management</a><a href="/tally-integration">Tally Integration</a><a href="/vendor-management">Vendor Management</a></div><div class="footer-col"><h4>More</h4><a href="/invoice-matching">Invoice Matching</a><a href="/data-migration">Data Migration</a><a href="/fixed-asset-register">Fixed Asset Register</a><a href="/purchase-order-approval">Purchase Order Approval</a><a href="/grn-goods-receipt">Goods Receipt</a><a href="/vendor-debit-note">Vendor Debit Notes</a><a href="/asset-tagging-verification">Asset Tagging</a><a href="/education-procurement">Education</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/guides">Guides</a><a href="/#contact">Contact</a></div><div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a></div></div></div></footer>
+
+  <script src="script.js"></script>
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; font-size:14px;"><span id="cookie-text"></span><div><button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button><button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button></div></div>
+  <script src="cookie-consent.js"></script>
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</body>
+</html>
