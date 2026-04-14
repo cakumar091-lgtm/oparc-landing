@@ -184,7 +184,7 @@
       <tr><td>Location</td><td>Which site or campus the purchase is for</td><td>"Bangalore HQ", "Mumbai Office"</td></tr>
       <tr><td>Amount Limit</td><td>Maximum value covered by this rule</td><td>Rs 50,000, Rs 5,00,000, Rs 50,00,000</td></tr>
       <tr><td>Document Type</td><td>PR, PO, or GRN</td><td>Different approval chains for different document types</td></tr>
-      <tr><td>PR Type</td><td>PROCUREMENT, EXPENSE, WRITE_OFF, etc.</td><td>Write-offs may require different approvers than procurements</td></tr>
+      <tr><td>Requisition Type</td><td>Procurement, Expense, Write-Off, etc.</td><td>Asset removals may require different approvers than purchases</td></tr>
     </table>
 
     <h3>2.2 Approval Codes</h3>
@@ -197,7 +197,7 @@
       <li><strong>Code: "CAPEX-MAJOR"</strong> — Any classification, above Rs 5,00,000. Three levels: Department Manager (Level 1), CFO (Level 2), then MD (Level 3).</li>
     </ul>
 
-    <p>Within a code, all rows share the same governance version, document type, PR type, and amount limit. Each approver within a code is unique — no person can appear twice in the same chain. Levels are contiguous, starting at 1.</p>
+    <p>Within a code, all rows share the same governance version, document type, requisition type, and amount limit. Each approver within a code is unique — no person can appear twice in the same chain. Levels are contiguous, starting at 1.</p>
 
     <h2>3. How Routing Works</h2>
 
@@ -206,7 +206,7 @@
     <h3>3.1 The Matching Process</h3>
 
     <ol>
-      <li><strong>Extract dimensions:</strong> The system reads the requisition's department, classification, location, amount, document type, and PR type.</li>
+      <li><strong>Extract dimensions:</strong> The system reads the requisition's department, classification, location, amount, document type, and requisition type.</li>
       <li><strong>Filter candidates:</strong> All active approval codes that match the requisition's dimensions are identified. A code matches if its dimension values either match exactly or are set to "Any" (wildcard).</li>
       <li><strong>Score specificity:</strong> Among matching codes, the system ranks by specificity — a code that matches on department + classification + location is more specific than one that matches on department + "Any" + "Any".</li>
       <li><strong>Apply amount banding:</strong> Among codes with the same specificity score, the one with the lowest amount limit that still covers the requisition amount is selected. This ensures the tightest-fit authority band.</li>
@@ -215,13 +215,13 @@
 
     <h3>3.2 Fallback Chain</h3>
 
-    <p>If no exact match is found for the requisition's PR type, the system falls back through a hierarchy:</p>
+    <p>If no exact match is found for the requisition type, the system falls back through a hierarchy:</p>
 
     <ol>
-      <li>Exact PR type (e.g., WRITE_OFF)</li>
-      <li>Generic negative type (NEGATIVE — covers all negative PR types)</li>
-      <li>PROCUREMENT (general procurement catch-all)</li>
-      <li>ANY (universal fallback)</li>
+      <li>Exact type (e.g., Write-Off)</li>
+      <li>Generic asset removal type (covers all removal requisitions)</li>
+      <li>Procurement (general catch-all)</li>
+      <li>Any (universal fallback)</li>
     </ol>
 
     <p>This fallback chain ensures that every requisition gets routed, even if a specific rule for that exact combination of dimensions has not been configured. The trade-off is intentional: it is better to route a requisition to a general approval chain than to block it entirely because no rule matches.</p>

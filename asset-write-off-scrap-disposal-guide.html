@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register | Oparc</title>
-  <meta name="description" content="How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Covers negative PR types, asset metadata inheritance, SCRAP tracking assets with derived IDs, approval chains, and audit trails.">
+  <meta name="description" content="How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Covers asset metadata inheritance, scrap tracking assets with derived IDs, approval chains, and audit trails.">
   <meta name="keywords" content="asset write off process software, asset scrap disposal tracking, fixed asset disposal governance, asset condemnation process India, asset scrap tracking software, write off fixed assets process, asset disposal audit trail">
   <link rel="canonical" href="https://oparc.in/asset-write-off-scrap-disposal-guide">
   <link rel="stylesheet" href="style.css">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://oparc.in/asset-write-off-scrap-disposal-guide">
   <meta property="og:title" content="Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register">
-  <meta property="og:description" content="How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Negative PR types, inheritance, tracking assets, audit trails.">
+  <meta property="og:description" content="How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Asset metadata inheritance, tracking assets, audit trails.">
   <meta property="og:site_name" content="Oparc">
   <meta property="og:locale" content="en_IN">
   <meta property="og:image" content="https://oparc.in/og-image.jpg">
@@ -29,7 +29,7 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register",
-    "description": "How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Covers negative PR types, inheritance, tracking assets, and audit trails.",
+    "description": "How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Covers asset metadata inheritance, tracking assets, and audit trails.",
     "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
     "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
     "datePublished": "2026-04-14",
@@ -71,10 +71,10 @@
       },
       {
         "@type": "Question",
-        "name": "How does inheritance work for negative PR types?",
+        "name": "How does inheritance work for asset removal requests?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "When you create a negative PR (write-off, scrap, disposal, movement, or consumption), you reference an existing asset. The system automatically inherits the asset's metadata — item name, description, classification, category hierarchy, location, department, financial values, and other identity fields. These inherited fields are locked in inherit_only mode, meaning the requester cannot override or modify them. This prevents errors where someone manually enters different values than what the asset register contains. The requester only needs to provide the asset reference and the quantity to be removed; everything else comes from the register."
+          "text": "When you create a removal request (write-off, scrap, disposal, movement, or consumption), you reference an existing asset. The system automatically inherits the asset's metadata — item name, description, classification, category hierarchy, location, department, financial values, and other identity fields. These inherited fields are locked, meaning the requester cannot override or modify them. This prevents errors where someone manually enters different values than what the asset register contains. The requester only needs to provide the asset reference and the quantity to be removed; everything else comes from the register."
         }
       },
       {
@@ -82,7 +82,7 @@
         "name": "Can an asset removal be reversed after posting?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Once a negative PR is posted, the register change is permanent in the forward direction — the system does not offer an undo button for posted transactions. This is a deliberate governance choice: every register change must go through the full approval cycle. To reverse a write-off or disposal, the organisation would need to create a new positive PR (procurement) to re-add the asset to the register, going through the standard approval chain. For SCRAP, the tracking asset exists independently and can itself be disposed of or written off through its own negative PR. The audit trail preserves the complete history of all changes."
+          "text": "Once a removal request is posted, the register change is permanent in the forward direction — the system does not offer an undo button for posted transactions. This is a deliberate governance choice: every register change must go through the full approval cycle. To reverse a write-off or disposal, the organisation would need to create a new procurement requisition to re-add the asset to the register, going through the standard approval chain. For SCRAP, the tracking asset exists independently and can itself be disposed of or written off through its own removal request. The audit trail preserves the complete history of all changes."
         }
       },
       {
@@ -168,21 +168,21 @@
 
     <table>
       <tr><th>Type</th><th>What Happens</th><th>Register Effect</th><th>Tracking Asset Created?</th></tr>
-      <tr><td>WRITE_OFF</td><td>Asset value reduced to zero — no recovery</td><td>Source asset reduced</td><td>No</td></tr>
-      <tr><td>SCRAP</td><td>Asset condemned, physical material tracked</td><td>Source reduced + SCRAP tracking asset created</td><td>Yes (with -S suffix)</td></tr>
-      <tr><td>DISPOSAL</td><td>Asset sold or auctioned — proceeds recorded</td><td>Source asset reduced</td><td>No</td></tr>
-      <tr><td>MOVEMENT</td><td>Asset transferred to another department</td><td>Source reduced + destination asset created</td><td>Yes (with -M suffix)</td></tr>
-      <tr><td>CONSUMPTION</td><td>Consumable item used up</td><td>Source asset reduced</td><td>No</td></tr>
+      <tr><td>Write-Off</td><td>Asset value reduced to zero — no recovery</td><td>Source asset reduced</td><td>No</td></tr>
+      <tr><td>Scrap</td><td>Asset condemned, physical material tracked</td><td>Source reduced + scrap tracking asset created</td><td>Yes (with -S suffix)</td></tr>
+      <tr><td>Disposal</td><td>Asset sold or auctioned — proceeds recorded</td><td>Source asset reduced</td><td>No</td></tr>
+      <tr><td>Movement</td><td>Asset transferred to another department</td><td>Source reduced + destination asset created</td><td>Yes (with -M suffix)</td></tr>
+      <tr><td>Consumption</td><td>Consumable item used up</td><td>Source asset reduced</td><td>No</td></tr>
     </table>
 
-    <p>Each type follows the same governance framework — a negative purchase requisition with formal approval — but the register effects differ based on what physically happens to the asset.</p>
+    <p>Each type follows the same governance framework — a formal requisition with multi-level approval — but the register effects differ based on what physically happens to the asset.</p>
 
-    <h2>3. How Negative PRs Work — Inheritance and the Field Rules Engine</h2>
+    <h2>3. How Asset Removal Requests Work — Inheritance and Validation</h2>
 
     <p>When a user creates a removal requisition, they reference the existing asset by its ID. The system then automatically inherits all of the asset's metadata from the register: item name, description, classification, category hierarchy, location, department, custodian, and financial values.</p>
 
     <blockquote>
-      <p>These inherited fields operate in inherit_only mode. The requester cannot override or modify them. If the client attempts to supply a value for an inherited field, the system rejects the request with a validation error. This is enforced by the Field Rules Engine — the same governance layer that controls which fields are required, optional, or deactivated for each PR type.</p>
+      <p>These inherited fields operate in inherit_only mode. The requester cannot override or modify them. If the client attempts to supply a value for an inherited field, the system rejects the request with a validation error. This is enforced by the Field Rules Engine — the same governance layer that controls which fields are required, optional, or deactivated for each requisition type.</p>
     </blockquote>
 
     <p>The rationale is straightforward: if you are writing off asset IT-EQ-2026-0042, the item name, location, and cost should come from the register, not from the requester's memory. Manual entry introduces errors — and there is no legitimate reason to override the register's values during a removal.</p>
@@ -226,7 +226,7 @@
       <li>Every approval or rejection is recorded with the approver's identity and timestamp</li>
     </ul>
 
-    <p>The approval chain for a negative PR works identically to a positive PR: the same levels, the same routing logic, the same lifecycle states (DRAFT, SUBMITTED, PARTIALLY_APPROVED, APPROVED). The only difference is the register effect when posted.</p>
+    <p>The approval chain for an asset removal request works identically to a purchase requisition: the same levels, the same routing logic, the same lifecycle states (DRAFT, SUBMITTED, PARTIALLY_APPROVED, APPROVED). The only difference is the register effect when posted.</p>
 
     <h2>7. Audit Trail</h2>
 
@@ -250,11 +250,11 @@
     <h3>Why does SCRAP create a new asset record instead of just reducing the source?</h3>
     <p>When an asset is scrapped, the physical material does not disappear — it sits in a scrap yard or storage area until sold or disposed of. The scrap has residual value that must be tracked. Creating a separate tracking asset with classification SCRAP and a derived ID (for example, IT-EQ-2026-0042-S001) serves two purposes: it reduces the source asset on the original register, and it creates a visible record of the scrap material with its proportional financial value. This prevents scrapped items from accumulating physically but remaining invisible in the books.</p>
 
-    <h3>How does inheritance work for negative PRs?</h3>
-    <p>When you create a negative PR (write-off, scrap, disposal, movement, or consumption), you reference an existing asset. The system automatically inherits the asset's metadata — item name, description, classification, category hierarchy, location, department, financial values, and other identity fields. These inherited fields are locked in inherit_only mode, meaning the requester cannot override or modify them. If a value is supplied for an inherited field, the system rejects it with a validation error. The requester only provides the asset reference and the quantity to be removed.</p>
+    <h3>How does inheritance work for asset removal requests?</h3>
+    <p>When you create a removal request (write-off, scrap, disposal, movement, or consumption), you reference an existing asset. The system automatically inherits the asset's metadata — item name, description, classification, category hierarchy, location, department, financial values, and other identity fields. These inherited fields are locked, meaning the requester cannot override or modify them. If a value is supplied for an inherited field, the system rejects it with a validation error. The requester only provides the asset reference and the quantity to be removed.</p>
 
     <h3>Can an asset removal be reversed after posting?</h3>
-    <p>Once a negative PR is posted, the register change is permanent in the forward direction — there is no undo for posted transactions. This is a deliberate governance choice: every register change must go through the full approval cycle. To reverse a write-off or disposal, the organisation would create a new positive PR (procurement) to re-add the asset, going through standard approval. For SCRAP, the tracking asset exists independently and can itself be disposed of through its own negative PR. The audit trail preserves the complete history of all changes.</p>
+    <p>Once a removal request is posted, the register change is permanent in the forward direction — there is no undo for posted transactions. This is a deliberate governance choice: every register change must go through the full approval cycle. To reverse a write-off or disposal, the organisation would create a new procurement requisition to re-add the asset, going through standard approval. For SCRAP, the tracking asset exists independently and can itself be disposed of through its own removal request. The audit trail preserves the complete history of all changes.</p>
 
     <h3>How does asset removal affect depreciation calculations?</h3>
     <p>When an asset is removed from the register — whether through write-off, scrap, disposal, or consumption — depreciation stops from the date of posting. The remaining book value at the time of removal determines the financial impact. For a write-off, the entire remaining book value becomes a loss. For disposal, the difference between sale proceeds and book value is a gain or loss. For SCRAP, the tracking asset inherits proportional financials from the source, and depreciation on the source stops for the removed quantity. Partial removals reduce the depreciable base proportionally.</p>
