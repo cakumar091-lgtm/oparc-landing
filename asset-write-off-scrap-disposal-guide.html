@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register | Oparc</title>
+  <meta name="description" content="How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Covers negative PR types, asset metadata inheritance, SCRAP tracking assets with derived IDs, approval chains, and audit trails.">
+  <meta name="keywords" content="asset write off process software, asset scrap disposal tracking, fixed asset disposal governance, asset condemnation process India, asset scrap tracking software, write off fixed assets process, asset disposal audit trail">
+  <link rel="canonical" href="https://oparc.in/asset-write-off-scrap-disposal-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/asset-write-off-scrap-disposal-guide">
+  <meta property="og:title" content="Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register">
+  <meta property="og:description" content="How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Negative PR types, inheritance, tracking assets, audit trails.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register">
+  <meta name="twitter:description" content="Five types of asset removal under governance. Write-off, scrap tracking, disposal with proceeds, movement transfers, and consumption reduction.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register",
+    "description": "How five types of asset removal work under governance — write-off, scrap, disposal, movement, and consumption. Covers negative PR types, inheritance, tracking assets, and audit trails.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/asset-write-off-scrap-disposal-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Asset Write-Off, Scrap, and Disposal", "item": "https://oparc.in/asset-write-off-scrap-disposal-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between a write-off and a disposal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A write-off reduces the asset's value to zero on the register without any recovery. The asset is acknowledged as having no further economic value — it may be damaged beyond repair, obsolete, or lost. A disposal, by contrast, involves removing the asset from use but recovering some value through sale or auction. Disposal tracks the proceeds and the party to whom the asset was sold. In accounting terms, a write-off creates a loss equal to the remaining book value, while a disposal creates a gain or loss depending on whether the sale proceeds exceed or fall below the book value. Both require formal approval before the register is updated."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does SCRAP create a new asset record instead of just reducing the source?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When an asset is scrapped, the physical material does not disappear — it sits in a scrap yard or storage area until it is sold or disposed of. The scrap has residual value that must be tracked. Creating a separate tracking asset with classification SCRAP and a derived ID (for example, IT-EQ-2026-0042-S001) serves two purposes: it reduces the source asset's value on the original register, and it creates a visible record of the scrap material with its proportional financial value. This prevents the common problem where scrapped items accumulate physically but are invisible in the books because they were simply written off."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does inheritance work for negative PR types?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When you create a negative PR (write-off, scrap, disposal, movement, or consumption), you reference an existing asset. The system automatically inherits the asset's metadata — item name, description, classification, category hierarchy, location, department, financial values, and other identity fields. These inherited fields are locked in inherit_only mode, meaning the requester cannot override or modify them. This prevents errors where someone manually enters different values than what the asset register contains. The requester only needs to provide the asset reference and the quantity to be removed; everything else comes from the register."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can an asset removal be reversed after posting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Once a negative PR is posted, the register change is permanent in the forward direction — the system does not offer an undo button for posted transactions. This is a deliberate governance choice: every register change must go through the full approval cycle. To reverse a write-off or disposal, the organisation would need to create a new positive PR (procurement) to re-add the asset to the register, going through the standard approval chain. For SCRAP, the tracking asset exists independently and can itself be disposed of or written off through its own negative PR. The audit trail preserves the complete history of all changes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does asset removal affect depreciation calculations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When an asset is removed from the register — whether through write-off, scrap, disposal, or consumption — depreciation stops from the date of posting. The remaining book value at the time of removal determines the financial impact. For a write-off, the entire remaining book value becomes a loss. For disposal, the difference between sale proceeds and book value is recorded as a gain or loss. For SCRAP, the tracking asset inherits proportional financials from the source, and depreciation on the source stops for the removed quantity. Partial removals (removing 3 out of 10 units) reduce the depreciable base proportionally."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/asset-write-off-scrap-disposal-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/asset-write-off-scrap-disposal-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Asset Write-Off, Scrap, and Disposal — Governed Processes for Removing Assets from the Register</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>An organisation purchases 200 chairs over five years. Some break, some are lost during office relocations, and some are simply obsolete. When the auditor asks for a reconciliation, the register still shows 200. Nobody formally removed any of them. The finance team knows the number is wrong, but there is no documented process for taking assets off the books — so they stay, year after year, inflating the asset base and distorting depreciation charges.</p>
+
+    <p>This is not a technology problem. It is a governance gap. Most organisations have a process for acquiring assets but no structured process for removing them. The result is an asset register that only grows — never shrinks — until a painful manual clean-up is forced during an audit.</p>
+
+    <p>This article explains how five distinct types of asset removal work when they are subject to the same governance framework as procurement: formal requisitions, approval chains, audit trails, and automatic register updates.</p>
+
+    <h2>1. The Problem: Assets Disappear Without Governance</h2>
+
+    <p>When there is no formal removal process, assets are removed from registers through ad-hoc methods:</p>
+
+    <ul>
+      <li><strong>Email approvals.</strong> Someone sends an email saying "please write off the old printer" and the accountant manually deletes it from the Excel register. The email is buried in an inbox. No audit trail.</li>
+      <li><strong>Memo-based disposals.</strong> A memo is circulated for a condemnation committee. The committee meets, signs a paper, and the asset is struck off. The memo is filed in a cabinet. Finding it two years later is impractical.</li>
+      <li><strong>Silent removals.</strong> The accountant notices an asset has not been verified in two years and quietly removes it. Or worse, leaves it on the register because removing it requires explaining why it was not tracked.</li>
+      <li><strong>Scrap accumulation.</strong> Broken equipment is moved to a storeroom. It accumulates for years. It has residual value (metal, components) but nobody tracks it because the register only shows "active" assets.</li>
+    </ul>
+
+    <p>The consequence is an asset register that does not reflect reality — and no trail showing how it got that way.</p>
+
+    <h2>2. Five Types of Asset Removal</h2>
+
+    <p>Not all removals are the same. A broken laptop and a sold vehicle require different accounting treatments. The system distinguishes five types:</p>
+
+    <table>
+      <tr><th>Type</th><th>What Happens</th><th>Register Effect</th><th>Tracking Asset Created?</th></tr>
+      <tr><td>WRITE_OFF</td><td>Asset value reduced to zero — no recovery</td><td>Source asset reduced</td><td>No</td></tr>
+      <tr><td>SCRAP</td><td>Asset condemned, physical material tracked</td><td>Source reduced + SCRAP tracking asset created</td><td>Yes (with -S suffix)</td></tr>
+      <tr><td>DISPOSAL</td><td>Asset sold or auctioned — proceeds recorded</td><td>Source asset reduced</td><td>No</td></tr>
+      <tr><td>MOVEMENT</td><td>Asset transferred to another department</td><td>Source reduced + destination asset created</td><td>Yes (with -M suffix)</td></tr>
+      <tr><td>CONSUMPTION</td><td>Consumable item used up</td><td>Source asset reduced</td><td>No</td></tr>
+    </table>
+
+    <p>Each type follows the same governance framework — a negative purchase requisition with formal approval — but the register effects differ based on what physically happens to the asset.</p>
+
+    <h2>3. How Negative PRs Work — Inheritance and the Field Rules Engine</h2>
+
+    <p>When a user creates a removal requisition, they reference the existing asset by its ID. The system then automatically inherits all of the asset's metadata from the register: item name, description, classification, category hierarchy, location, department, custodian, and financial values.</p>
+
+    <blockquote>
+      <p>These inherited fields operate in inherit_only mode. The requester cannot override or modify them. If the client attempts to supply a value for an inherited field, the system rejects the request with a validation error. This is enforced by the Field Rules Engine — the same governance layer that controls which fields are required, optional, or deactivated for each PR type.</p>
+    </blockquote>
+
+    <p>The rationale is straightforward: if you are writing off asset IT-EQ-2026-0042, the item name, location, and cost should come from the register, not from the requester's memory. Manual entry introduces errors — and there is no legitimate reason to override the register's values during a removal.</p>
+
+    <p>The requester provides only what the register does not already know: the quantity to remove, the reason, and any type-specific details (such as sale proceeds for a disposal).</p>
+
+    <h2>4. SCRAP Tracking Assets — Derived IDs and Residual Value</h2>
+
+    <p>SCRAP is the only removal type (besides MOVEMENT) that creates a new asset record. When an asset is scrapped, two things happen:</p>
+
+    <ol>
+      <li><strong>The source asset is reduced</strong> — the scrapped quantity or value is decremented from the original asset record.</li>
+      <li><strong>A SCRAP tracking asset is created</strong> — a new record with classification "SCRAP" that represents the physical scrap material.</li>
+    </ol>
+
+    <p>The tracking asset's ID is derived from the source: <code>{source_asset_id}-S{sequence}</code>. For example, scrapping asset <code>IT-EQ-2026-0042</code> creates <code>IT-EQ-2026-0042-S001</code>. This derived ID preserves lineage without consuming the organisation's sequential asset ID pool — a critical distinction that prevents ID collisions with future procurements.</p>
+
+    <p>The tracking asset inherits the source's identity and ownership fields but carries proportional financials. If half the original quantity is scrapped, the tracking asset carries half the original cost and half the accumulated depreciation.</p>
+
+    <p>This design exists because scrapped items have residual value. A condemned printer has metal, plastic, and electronic components. An old air conditioner has copper and aluminium. This material sits in the scrap yard until it is sold — and that sale needs a reference in the register. Without a tracking asset, scrap revenue appears in the books with no corresponding asset to link it to.</p>
+
+    <h2>5. DISPOSAL with Proceeds</h2>
+
+    <p>Disposal records the removal of an asset through sale or auction. Unlike a write-off (where the value goes to zero), disposal captures what was recovered. The financial impact depends on the relationship between the sale proceeds and the book value:</p>
+
+    <ul>
+      <li><strong>Proceeds exceed book value:</strong> a gain on disposal is recorded</li>
+      <li><strong>Proceeds below book value:</strong> a loss on disposal is recorded</li>
+      <li><strong>Proceeds equal book value:</strong> no gain or loss</li>
+    </ul>
+
+    <p>The disposal requisition captures the proceeds amount and any relevant details about the sale. When posted, the source asset is reduced and the financial entries are generated for the accounting system.</p>
+
+    <h2>6. Approval Chain for Removals</h2>
+
+    <p>Every removal — whether a write-off of a Rs. 500 keyboard or disposal of a Rs. 50 lakh vehicle — goes through the same approval matrix used for procurement. The routing engine selects the approval chain based on the asset's classification, department, and value. This means:</p>
+
+    <ul>
+      <li>High-value write-offs require senior approval — an employee cannot unilaterally write off expensive equipment</li>
+      <li>The approval chain is specific to the asset type and department — different departments can have different authority limits</li>
+      <li>Every approval or rejection is recorded with the approver's identity and timestamp</li>
+    </ul>
+
+    <p>The approval chain for a negative PR works identically to a positive PR: the same levels, the same routing logic, the same lifecycle states (DRAFT, SUBMITTED, PARTIALLY_APPROVED, APPROVED). The only difference is the register effect when posted.</p>
+
+    <h2>7. Audit Trail</h2>
+
+    <p>Every removal creates a complete audit trail:</p>
+
+    <ul>
+      <li>Who raised the requisition and when</li>
+      <li>Which asset was referenced and its state at the time of the request</li>
+      <li>Each approval or rejection — by whom, at what time, with what remarks</li>
+      <li>The posting event — what changed in the register, what financial entries were created</li>
+      <li>For SCRAP: the tracking asset created, its ID, and its financial values</li>
+    </ul>
+
+    <p>When an auditor asks "why was this asset removed from the register?", the answer is a structured record — not an email thread or a physical memo that may or may not be findable.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>What is the difference between a write-off and a disposal?</h3>
+    <p>A write-off reduces the asset's value to zero with no recovery. The asset is acknowledged as having no further economic value — damaged beyond repair, obsolete, or lost. A disposal involves removing the asset from use while recovering some value through sale or auction. Disposal tracks the proceeds and the buyer. In accounting terms, a write-off creates a loss equal to the remaining book value, while a disposal creates a gain or loss depending on whether sale proceeds exceed or fall below the book value. Both require formal approval before the register is updated.</p>
+
+    <h3>Why does SCRAP create a new asset record instead of just reducing the source?</h3>
+    <p>When an asset is scrapped, the physical material does not disappear — it sits in a scrap yard or storage area until sold or disposed of. The scrap has residual value that must be tracked. Creating a separate tracking asset with classification SCRAP and a derived ID (for example, IT-EQ-2026-0042-S001) serves two purposes: it reduces the source asset on the original register, and it creates a visible record of the scrap material with its proportional financial value. This prevents scrapped items from accumulating physically but remaining invisible in the books.</p>
+
+    <h3>How does inheritance work for negative PRs?</h3>
+    <p>When you create a negative PR (write-off, scrap, disposal, movement, or consumption), you reference an existing asset. The system automatically inherits the asset's metadata — item name, description, classification, category hierarchy, location, department, financial values, and other identity fields. These inherited fields are locked in inherit_only mode, meaning the requester cannot override or modify them. If a value is supplied for an inherited field, the system rejects it with a validation error. The requester only provides the asset reference and the quantity to be removed.</p>
+
+    <h3>Can an asset removal be reversed after posting?</h3>
+    <p>Once a negative PR is posted, the register change is permanent in the forward direction — there is no undo for posted transactions. This is a deliberate governance choice: every register change must go through the full approval cycle. To reverse a write-off or disposal, the organisation would create a new positive PR (procurement) to re-add the asset, going through standard approval. For SCRAP, the tracking asset exists independently and can itself be disposed of through its own negative PR. The audit trail preserves the complete history of all changes.</p>
+
+    <h3>How does asset removal affect depreciation calculations?</h3>
+    <p>When an asset is removed from the register — whether through write-off, scrap, disposal, or consumption — depreciation stops from the date of posting. The remaining book value at the time of removal determines the financial impact. For a write-off, the entire remaining book value becomes a loss. For disposal, the difference between sale proceeds and book value is a gain or loss. For SCRAP, the tracking asset inherits proportional financials from the source, and depreciation on the source stops for the removed quantity. Partial removals reduce the depreciable base proportionally.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/asset-management" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Asset Management</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Fixed Asset Register</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If asset write-offs and disposals are handled through memos and manual register edits, share a brief overview of your current process and we will evaluate how governed asset removal may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

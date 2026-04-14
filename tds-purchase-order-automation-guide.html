@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDS Deduction on Purchase Orders — Automating Tax Compliance in Procurement | Oparc</title>
+  <meta name="description" content="How TDS is applied per-line on purchase orders, linked to vendor TDS section. Covers admin-configurable section master, approver overrides, Income Tax Act 2025 payment codes, TDS_ENABLED toggle, and Tally integration.">
+  <meta name="keywords" content="TDS on purchase order software, TDS deduction purchase order automation, TDS section 194C purchase order, TDS compliance procurement India, purchase order TDS calculation software, TDS at approval purchase order, TDS Tally integration purchase order">
+  <link rel="canonical" href="https://oparc.in/tds-purchase-order-automation-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/tds-purchase-order-automation-guide">
+  <meta property="og:title" content="TDS Deduction on Purchase Orders — Automating Tax Compliance in Procurement">
+  <meta property="og:description" content="How TDS is applied per-line on purchase orders. Admin-configurable section master, approver overrides, Income Tax Act 2025 codes, TDS_ENABLED toggle, Tally integration.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TDS Deduction on Purchase Orders — Automating Tax Compliance in Procurement">
+  <meta name="twitter:description" content="Per-line TDS on purchase orders. Section master, approver overrides, Income Tax Act 2025 codes, independent TDS toggle, Tally posting.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "TDS Deduction on Purchase Orders — Automating Tax Compliance in Procurement",
+    "description": "How TDS is applied per-line on purchase orders, linked to vendor TDS section. Covers section master, approver overrides, Income Tax Act 2025 codes, TDS_ENABLED toggle, and Tally integration.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/tds-purchase-order-automation-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "TDS on Purchase Orders", "item": "https://oparc.in/tds-purchase-order-automation-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can TDS be different for each line on a purchase order?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. TDS is applied per-line, not per-PO. Each PO line can have a different TDS section and rate. This is necessary because a single purchase order may include items that fall under different TDS provisions — for example, one line for equipment (no TDS) and another for installation services (TDS under Section 194C/1024). The default TDS section is inherited from the vendor's TDS configuration, but it can be overridden at the line level during PO creation. This per-line granularity ensures the correct TDS treatment is applied to each item rather than forcing a blanket rate across the entire order."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the approver TDS override work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When an approver reviews a purchase order, they can modify the TDS treatment on any line — change the TDS section, adjust the rate, or remove TDS entirely. This override happens during the approval action itself, not as a separate edit. The rationale is that the approver may have information the PO creator did not — for example, the vendor may have submitted a lower deduction certificate, or the nature of the service may require a different section. The override is recorded in the audit trail, showing who changed the TDS, from what to what, and when. The PO creator's original TDS selection is preserved in the history."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if the TDS section changes mid-year due to a regulatory update?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The TDS section master is admin-configurable — when a regulatory change occurs (such as the Income Tax Act 2025 replacing Section 194C with payment code 1024), the administrator updates the section master with the new code and rate. Existing purchase orders that were already created and approved retain their original TDS section — they are not retroactively changed. New purchase orders created after the master update will default to the new section. This approach is consistent with tax law: TDS is determined at the time of credit or payment, so POs created before the change use the applicable rate at the time they were created."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is TDS mandatory on every purchase order?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. TDS applicability depends on the nature of the payment, the vendor's registration status, and the transaction value. Purchases of goods below the threshold, payments to government entities, and certain exempt categories do not attract TDS. The system does not force TDS on every PO — it defaults the TDS section from the vendor's configuration, but the PO creator can leave TDS blank if it does not apply. The approver can also remove TDS during approval. The TDS_ENABLED toggle controls whether TDS functionality is active at all — organisations that do not need TDS (or handle it outside the procurement system) can disable the feature entirely."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does TDS flow from the purchase order to Tally?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When a PO with TDS is posted, the Tally integration generates separate ledger entries for the TDS payable amount. The purchase voucher in Tally shows the gross amount credited to the vendor, with the TDS amount separated into a TDS payable ledger (mapped to the specific section). This means the vendor's payable balance in Tally reflects the net amount (after TDS deduction), and the TDS payable ledger accumulates the amounts due for deposit with the government. The TDS_ENABLED toggle operates independently of the Tally integration toggle — TDS calculations and approver overrides work even if Tally posting is disabled."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/tds-purchase-order-automation-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/tds-purchase-order-automation-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>TDS Deduction on Purchase Orders — Automating Tax Compliance in Procurement</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>The accounts team processes 40 purchase orders this month. Each one needs a TDS calculation — which section applies, what rate, whether the vendor has a lower deduction certificate, whether the transaction exceeds the threshold. The procurement team does not know TDS rules. The accounts team does not see the POs until payment. By the time the error is caught — wrong section, wrong rate, no deduction at all — the payment has been made and the correction involves revised returns and interest.</p>
+
+    <p>TDS compliance in procurement is not conceptually difficult. The rules are well-defined: specific sections apply to specific types of payments, at prescribed rates, above prescribed thresholds. The difficulty is operational — ensuring the correct section and rate are applied to every purchase order, across every vendor, every time. Manual calculation at the payment stage is too late in the process to be reliable.</p>
+
+    <p>This article explains how TDS is embedded into the purchase order workflow — applied at creation, verified at approval, and posted to the accounting system — so that compliance is addressed at the point of commitment, not at the point of payment.</p>
+
+    <h2>1. The Problem: TDS Calculated Manually, After the Fact</h2>
+
+    <p>In most organisations, TDS enters the picture only at payment processing. The purchase order is created without any TDS information. The invoice arrives. The accounts team manually looks up the vendor's TDS section, calculates the deduction, and adjusts the payment. This creates several problems:</p>
+
+    <ul>
+      <li><strong>Wrong section applied.</strong> A payment for professional services (Section 194J / payment code 1094) is deducted under the contractor rate (Section 194C / payment code 1024). The rate difference — 10% vs 1% or 2% — results in short deduction, interest, and potential disallowance.</li>
+      <li><strong>Threshold not tracked.</strong> TDS is applicable only above certain thresholds. Without tracking cumulative payments to a vendor, individual invoices may fall below the threshold while the aggregate exceeds it.</li>
+      <li><strong>No deduction certificate on file.</strong> A vendor has a lower deduction certificate but nobody told the accounts team. TDS is deducted at the full rate, the vendor complains, and a refund process begins.</li>
+      <li><strong>Late discovery.</strong> Errors are found during quarterly return filing — weeks or months after the payment. Correction requires revised returns, interest under Section 201(1A), and potential penalty.</li>
+    </ul>
+
+    <h2>2. TDS Section Master — Admin Setup</h2>
+
+    <p>The foundation is a configurable TDS section master maintained by the administrator. Each entry specifies:</p>
+
+    <table>
+      <tr><th>Field</th><th>Purpose</th></tr>
+      <tr><td>Section Code</td><td>The Income Tax Act section or payment code (e.g., 1024, 1094)</td></tr>
+      <tr><td>Description</td><td>Human-readable name (e.g., "Payment to Contractors")</td></tr>
+      <tr><td>Rate (%)</td><td>The applicable TDS rate</td></tr>
+      <tr><td>Threshold</td><td>The amount below which TDS is not applicable</td></tr>
+    </table>
+
+    <p>When the Income Tax Act 2025 introduced new 4-digit payment codes — replacing the familiar Section 194C, 194J, and others — the section master was updated to reflect the new codes. Existing POs retained their original section references; new POs default to the updated codes. This is consistent with the legal position: TDS is determined at the time of credit or payment.</p>
+
+    <blockquote>
+      <p>The section master is a configuration table, not hardcoded logic. When regulations change — new sections, revised rates, updated thresholds — the administrator updates the master. No code deployment is required. This separation between tax rules and application logic is essential for a system that must adapt to annual budget changes.</p>
+    </blockquote>
+
+    <h2>3. TDS on PO Lines</h2>
+
+    <p>When a purchase order is created against a vendor, the TDS section and rate are defaulted from the vendor's TDS configuration. This default is applied per-line, not per-PO — because a single purchase order may contain items with different TDS treatments.</p>
+
+    <p>For example, a PO to an IT vendor might include:</p>
+
+    <ul>
+      <li>Line 1: Hardware purchase (laptops) — no TDS applicable</li>
+      <li>Line 2: Installation and configuration services — TDS under payment code 1024 at 2%</li>
+      <li>Line 3: Annual maintenance contract — TDS under payment code 1024 at 2%</li>
+    </ul>
+
+    <p>The PO creator can override the default TDS on any line — removing it where it does not apply, or changing the section if the nature of the specific line item differs from the vendor's default. The system calculates the TDS amount automatically based on the line value and the selected rate.</p>
+
+    <h2>4. Approver TDS Override</h2>
+
+    <p>A distinctive feature of the workflow is that the approver can modify TDS during the approval action. When reviewing a PO for approval, the approver sees the TDS section and rate on each line and can:</p>
+
+    <ul>
+      <li><strong>Change the TDS section</strong> — if the PO creator selected the wrong section</li>
+      <li><strong>Adjust the TDS rate</strong> — if the vendor has a lower deduction certificate or a concessional rate applies</li>
+      <li><strong>Remove TDS entirely</strong> — if the line does not attract TDS (for example, a reimbursement)</li>
+    </ul>
+
+    <p>This override is recorded in the audit trail — showing the original TDS selection, the override, who made the change, and when. The rationale is practical: the approver (typically a manager or finance head) may have information the PO creator does not — a lower deduction certificate received by email, a revised rate notification from the vendor, or knowledge that the specific payment is exempt.</p>
+
+    <h2>5. TDS in the Expense Register</h2>
+
+    <p>For expense-type purchase orders (OPEX rather than CAPEX), TDS flows into the expense register alongside the base amount and GST. The expense register shows:</p>
+
+    <ul>
+      <li>Base amount of the expense</li>
+      <li>GST (CGST + SGST or IGST)</li>
+      <li>TDS deducted — section, rate, and amount</li>
+      <li>Net payable to vendor (base + GST - TDS)</li>
+    </ul>
+
+    <p>This gives the finance team a consolidated view of the tax impact of each expense — not just the gross cost, but the actual cash outflow after TDS deduction.</p>
+
+    <h2>6. TDS_ENABLED Toggle — Independent of Tally</h2>
+
+    <p>TDS functionality is controlled by a dedicated feature toggle: <code>TDS_ENABLED</code>. This toggle operates independently of the Tally integration toggle. The practical implications:</p>
+
+    <table>
+      <tr><th>TDS_ENABLED</th><th>TALLY_ENABLED</th><th>Behaviour</th></tr>
+      <tr><td>On</td><td>On</td><td>TDS calculated on POs, approver can override, entries posted to Tally</td></tr>
+      <tr><td>On</td><td>Off</td><td>TDS calculated on POs, approver can override, no Tally posting</td></tr>
+      <tr><td>Off</td><td>On</td><td>No TDS fields on POs, Tally posts without TDS entries</td></tr>
+      <tr><td>Off</td><td>Off</td><td>TDS and Tally both inactive</td></tr>
+    </table>
+
+    <p>This separation exists because TDS compliance is valuable even without Tally integration. An organisation may use a different accounting system or handle Tally entries manually — but still benefit from having TDS calculated, verified, and documented at the PO stage.</p>
+
+    <h2>7. Income Tax Act 2025 — New Payment Codes</h2>
+
+    <p>The Income Tax Act 2025 replaced the familiar section numbers with new 4-digit payment codes. Key mappings relevant to procurement:</p>
+
+    <table>
+      <tr><th>Old Section</th><th>New Code</th><th>Nature of Payment</th></tr>
+      <tr><td>194C</td><td>1024</td><td>Payment to contractors</td></tr>
+      <tr><td>194J</td><td>1094</td><td>Professional / technical fees</td></tr>
+      <tr><td>194H</td><td>1084</td><td>Commission or brokerage</td></tr>
+      <tr><td>194I(a)</td><td>1091</td><td>Rent — plant and machinery</td></tr>
+      <tr><td>194I(b)</td><td>1092</td><td>Rent — land, building, furniture</td></tr>
+    </table>
+
+    <p>The section master accommodates both old and new codes. Organisations transitioning to the new Act can update their master as the codes become effective, and existing POs retain their original section references for historical accuracy.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>Can TDS be different for each line on a purchase order?</h3>
+    <p>Yes. TDS is applied per-line, not per-PO. Each line can have a different TDS section and rate. This is necessary because a single purchase order may include items under different TDS provisions — one line for equipment (no TDS) and another for installation services (TDS under payment code 1024). The default TDS section is inherited from the vendor's configuration but can be overridden at the line level during PO creation. This per-line granularity ensures the correct treatment is applied to each item rather than forcing a blanket rate across the entire order.</p>
+
+    <h3>How does the approver TDS override work?</h3>
+    <p>When an approver reviews a purchase order, they can modify the TDS treatment on any line — change the section, adjust the rate, or remove TDS entirely. This override happens during the approval action, not as a separate edit. The approver may have information the PO creator did not — a lower deduction certificate, a revised rate notification, or knowledge that the payment is exempt. The override is recorded in the audit trail showing who changed the TDS, the original and new values, and when the change was made. The PO creator's original selection is preserved in the history.</p>
+
+    <h3>What happens if the TDS section changes mid-year due to a regulatory update?</h3>
+    <p>The TDS section master is admin-configurable. When a regulatory change occurs — such as the Income Tax Act 2025 replacing Section 194C with payment code 1024 — the administrator updates the master with the new code and rate. Existing purchase orders retain their original TDS section; they are not retroactively changed. New purchase orders created after the update default to the new section. This is consistent with tax law: TDS is determined at the time of credit or payment, so POs created before the change use the rate applicable at the time of creation.</p>
+
+    <h3>Is TDS mandatory on every purchase order?</h3>
+    <p>No. TDS applicability depends on the nature of the payment, the vendor's registration status, and the transaction value. Purchases of goods below the threshold, payments to government entities, and exempt categories do not attract TDS. The system does not force TDS on every PO — it defaults the TDS section from the vendor's configuration, but the creator can leave it blank if TDS does not apply. The approver can also remove TDS during approval. The TDS_ENABLED toggle controls whether TDS functionality is active at all — organisations that handle TDS outside the procurement system can disable the feature.</p>
+
+    <h3>How does TDS flow from the purchase order to Tally?</h3>
+    <p>When a PO with TDS is posted, the Tally integration generates separate ledger entries for the TDS payable amount. The purchase voucher shows the gross amount credited to the vendor, with TDS separated into a TDS payable ledger mapped to the specific section. The vendor's payable balance in Tally reflects the net amount after TDS deduction, and the TDS payable ledger accumulates amounts due for government deposit. The TDS_ENABLED toggle operates independently of the Tally integration — TDS calculations and approver overrides work even if Tally posting is disabled.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a>
+        <a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Statutory Compliance</a>
+        <a href="/purchase-order-approval" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Purchase Order Approval</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If TDS rates are manually calculated on each purchase order and errors are discovered only at the time of return filing, share a brief overview and we will evaluate how automated TDS compliance in procurement may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

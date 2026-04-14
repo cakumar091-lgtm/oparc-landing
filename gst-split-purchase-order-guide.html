@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CGST, SGST, IGST Split on Purchase Orders — Automated GST Compliance in Procurement | Oparc</title>
+  <meta name="description" content="How CGST, SGST, and IGST are automatically split on purchase orders based on vendor GSTIN and organisation state code. Covers multi-state vendor addresses, HSN/SAC validation, ITC tracking, and Tally voucher generation for Indian GST compliance.">
+  <meta name="keywords" content="CGST SGST IGST split purchase order, GST on purchase order software, GST compliance procurement software India, purchase order GST calculation, vendor GSTIN purchase order, HSN SAC purchase order validation, GST ITC tracking procurement">
+  <link rel="canonical" href="https://oparc.in/gst-split-purchase-order-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/gst-split-purchase-order-guide">
+  <meta property="og:title" content="CGST, SGST, IGST Split on Purchase Orders — Automated GST Compliance in Procurement">
+  <meta property="og:description" content="How CGST/SGST/IGST are automatically split on purchase orders based on vendor GSTIN and org state code. Multi-state addresses, HSN validation, ITC tracking.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CGST, SGST, IGST Split on Purchase Orders — Automated GST Compliance in Procurement">
+  <meta name="twitter:description" content="How CGST/SGST/IGST are automatically split on purchase orders. Multi-state vendor addresses, HSN validation, ITC tracking, Tally integration.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "CGST, SGST, IGST Split on Purchase Orders — Automated GST Compliance in Procurement",
+    "description": "How CGST/SGST/IGST are automatically split on purchase orders based on vendor GSTIN and organisation state code.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/gst-split-purchase-order-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "GST Split on Purchase Orders", "item": "https://oparc.in/gst-split-purchase-order-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the system decide between CGST+SGST and IGST on a purchase order?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The decision is based on comparing the vendor's GSTIN state code (first two digits of the 15-character GSTIN) with the organisation's GST state code (configured in system settings). If both state codes match — for example, vendor GSTIN starts with 29 (Karnataka) and the organisation is also in Karnataka — the transaction is intrastate and GST is split into CGST (Central) and SGST (State), each at half the total GST rate. If the state codes differ — vendor in Karnataka (29) but organisation in Maharashtra (27) — the transaction is interstate and the full GST is charged as IGST (Integrated). This split is computed automatically based on the GSTIN frozen on the purchase order."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when a vendor has GSTINs in multiple states?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vendors with branches in multiple states have a different GSTIN for each state. In the vendor master, each address carries its own GSTIN. When creating a purchase order, the buyer selects which vendor address to use — typically the address closest to the delivery location for logistics, or a specific state address for tax optimisation. The selected address's GSTIN is frozen on the PO as the supplier_gstin. This frozen GSTIN — not the vendor's default GSTIN — determines the CGST/SGST vs IGST split for the entire PO and flows through to GRN, vendor debit notes, and Tally vouchers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is HSN/SAC validation handled on purchase orders?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HSN (Harmonised System of Nomenclature) codes for goods and SAC (Services Accounting Code) codes for services are validated against a master table that the admin maintains. The validation is soft — it warns when an invalid or unrecognised code is entered but does not block the transaction. This is a deliberate design choice: blocking on HSN validation would create friction when codes are updated by the government or when the master table is incomplete. The HSN/SAC module is itself a feature toggle — organisations that do not need HSN tracking can disable it entirely."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the GST ITC toggle and when would you disable it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GST ITC (Input Tax Credit) toggle controls how GST amounts are recorded in accounting. When ITC is enabled (default), GST is posted to separate CGST/SGST/IGST input tax credit ledgers — these are claimable against output tax. When ITC is disabled, the GST amount is rolled into the purchase or expense amount as a single figure — no separate tax ledger entries. Organisations that do not claim ITC (such as those under the composition scheme, or those purchasing for exempt supplies) disable this toggle. The toggle affects Tally voucher generation — when disabled, purchase vouchers include GST in the item amount rather than creating separate tax ledger entries."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does GST mismatch detection work at goods receipt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When a GRN is created, the invoice's GST amounts (per line) are compared against the PO's GST amounts. If the invoice shows a different CGST, SGST, or IGST amount than what the PO specified, the system flags a GST mismatch. This is separate from price mismatches and quantity mismatches — each type is tracked independently. GST mismatches are particularly important because they affect ITC claims: if the organisation claims ITC based on the PO amount but the invoice shows a different GST figure, the ITC claim will be incorrect. The mismatch must be resolved before the GRN can be posted."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/gst-split-purchase-order-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/gst-split-purchase-order-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav"><div class="container nav-inner"><a href="/" class="logo"></a><div class="nav-links"><a href="/">Home</a><a href="/procurement">Procurement</a><a href="/asset-management">Assets</a><a href="/tally-integration">Tally</a><a href="/vendor-management">Vendors</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/#contact">Contact</a><a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a></div><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+  <div class="article container">
+    <h1>CGST, SGST, IGST Split on Purchase Orders — Automated GST Compliance in Procurement</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>A purchase order is raised for a vendor in Telangana. The organisation is in Karnataka. The accountant processes the invoice and splits the GST as CGST + SGST — the same way they split it for the local vendor last week. The ITC claim is filed. Months later, the GST return shows a mismatch: the vendor filed IGST (because it is an interstate supply), but the buyer claimed CGST + SGST. The ITC is denied. Interest is levied.</p>
+
+    <p>This error — applying the wrong GST split — happens because the split decision was made manually. The accountant looked at the invoice, saw a GST amount, and split it the same way they always do. They did not check whether the vendor's GSTIN state code matched the organisation's state code. In a system where GST handling is embedded in the procurement workflow, this decision is automated: the GSTIN on the purchase order determines the split, and the split flows through to every downstream document — GRN, vendor debit note, and Tally voucher.</p>
+
+    <h2>1. How the Split Decision Works</h2>
+
+    <p>The GST split is determined by one comparison:</p>
+
+    <table>
+      <tr><th>Vendor GSTIN State Code</th><th>Org State Code</th><th>Result</th><th>Split</th></tr>
+      <tr><td>29 (Karnataka)</td><td>29 (Karnataka)</td><td>Intrastate</td><td>CGST (half) + SGST (half)</td></tr>
+      <tr><td>36 (Telangana)</td><td>29 (Karnataka)</td><td>Interstate</td><td>IGST (full)</td></tr>
+      <tr><td>27 (Maharashtra)</td><td>29 (Karnataka)</td><td>Interstate</td><td>IGST (full)</td></tr>
+    </table>
+
+    <p>The first two digits of the 15-character GSTIN encode the state code. The organisation's state code is configured once in system settings. The comparison is automatic — the buyer does not need to decide or even know the rule. They select a vendor address, and the system determines the split.</p>
+
+    <h2>2. Multi-State Vendors — The Address-Level GSTIN</h2>
+
+    <p>Many vendors operate from multiple states. A furniture supplier headquartered in Bangalore (Karnataka, 29) may have a warehouse in Hyderabad (Telangana, 36). Each location has its own GST registration and its own GSTIN.</p>
+
+    <p>In a structured system, GSTINs are stored at the address level, not the vendor level. When the vendor has multiple addresses, each with a different GSTIN, the buyer chooses which address to use when creating the purchase order. The GSTIN from the selected address is frozen on the PO as the <code>supplier_gstin</code>.</p>
+
+    <p>This frozen GSTIN — not the vendor's "primary" GSTIN — determines the tax split for the entire purchase order. It flows through unchanged to:</p>
+
+    <ul>
+      <li><strong>GRN:</strong> The goods receipt inherits the PO's supplier_gstin for invoice matching</li>
+      <li><strong>Vendor Debit Notes:</strong> Debit notes use the PO-level GSTIN for the tax debit note PDF</li>
+      <li><strong>Tally Vouchers:</strong> Purchase vouchers use the PO-level GSTIN to determine which tax ledgers (CGST/SGST vs IGST) to post to</li>
+    </ul>
+
+    <blockquote>
+      <p>The GSTIN is frozen at PO creation for a reason: if the vendor updates their GSTIN later (perhaps due to a re-registration or an amendment), the existing PO should not retroactively change its tax treatment. The tax split is locked to the GSTIN that was valid when the order was placed.</p>
+    </blockquote>
+
+    <h2>3. GST at the Line Level</h2>
+
+    <p>Each purchase order line carries its own GST calculation:</p>
+
+    <ul>
+      <li><strong>Unit GST amount:</strong> The GST per unit of the item</li>
+      <li><strong>Line GST amount:</strong> Unit GST multiplied by quantity</li>
+      <li><strong>GST split:</strong> Broken into CGST + SGST or IGST based on the PO-level supplier_gstin</li>
+    </ul>
+
+    <p>The SGST amount is calculated as the floor of half the total GST, and the CGST is the total GST minus the SGST. This deterministic rounding ensures the split always sums exactly to the total — no rounding discrepancy, even on odd-rupee GST amounts.</p>
+
+    <h2>4. HSN and SAC Codes</h2>
+
+    <p>Each line can optionally carry an HSN code (for goods) or SAC code (for services). These codes determine the applicable GST rate under the GST law and are required for GST return filing.</p>
+
+    <p>The system maintains an HSN/SAC master — an admin-configurable table of valid codes with descriptions and effective date ranges. Validation against this master is soft: invalid codes generate a warning but do not block the transaction. This pragmatic approach avoids blocking procurement when the code master is incomplete or when the government has recently updated code classifications.</p>
+
+    <p>The HSN/SAC module is itself a feature toggle — organisations that do not need code-level tracking can disable it entirely.</p>
+
+    <h2>5. ITC Toggle — Not Every Organisation Claims Input Credit</h2>
+
+    <p>The GST ITC (Input Tax Credit) toggle controls how GST flows to accounting:</p>
+
+    <table>
+      <tr><th>ITC Enabled (Default)</th><th>ITC Disabled</th></tr>
+      <tr><td>GST posted to separate CGST/SGST/IGST input credit ledgers</td><td>GST rolled into purchase/expense amount</td></tr>
+      <tr><td>Tax ledger entries in Tally for ITC reconciliation</td><td>Single amount in Tally, no tax ledgers</td></tr>
+      <tr><td>GST mismatch at GRN affects ITC claim accuracy</td><td>GST mismatch is a cost difference, not a compliance issue</td></tr>
+    </table>
+
+    <p>Organisations under the composition scheme, educational institutions exempt from GST, or those purchasing exclusively for exempt supplies may not claim ITC. For these organisations, the ITC toggle simplifies accounting — GST is just part of the cost.</p>
+
+    <h2>6. GST Mismatch Detection at Goods Receipt</h2>
+
+    <p>When the vendor's invoice arrives with the goods, three types of mismatches can occur:</p>
+
+    <ol>
+      <li><strong>Quantity mismatch:</strong> Invoice says 100, GRN shows 90 accepted</li>
+      <li><strong>Price mismatch:</strong> Invoice unit rate differs from PO unit rate</li>
+      <li><strong>GST mismatch:</strong> Invoice GST amount differs from PO GST amount</li>
+    </ol>
+
+    <p>Each type is tracked independently. GST mismatches are particularly critical when ITC is enabled: if the organisation claims ITC based on the PO amount but the invoice shows a different GST figure, the claim will be incorrect and may be flagged during GST return reconciliation (GSTR-2B matching).</p>
+
+    <p>GST mismatches must be resolved — via acceptance or dispute — before the GRN can be posted. This prevents incorrect tax entries from reaching the books.</p>
+
+    <h2>7. From PO to Tally — The GST Chain</h2>
+
+    <p>When the Tally integration is enabled, the GST split on the purchase order flows through to the Tally purchase voucher automatically:</p>
+
+    <ol>
+      <li><strong>Intrastate PO:</strong> Tally voucher debits the expense/asset ledger, credits the vendor ledger, and creates separate CGST and SGST input credit entries</li>
+      <li><strong>Interstate PO:</strong> Tally voucher debits the expense/asset ledger, credits the vendor ledger, and creates a single IGST input credit entry</li>
+    </ol>
+
+    <p>The ledger names are derived from the ledger mapping configuration — the system maps each vendor, asset classification, and tax type to specific Tally ledger names. This mapping is configured once during setup and applied automatically to every voucher.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>How does the system decide between CGST+SGST and IGST on a purchase order?</h3>
+    <p>The decision compares the vendor's GSTIN state code (first two digits) with the organisation's GST state code. Same state = intrastate = CGST + SGST (each half the total GST). Different states = interstate = IGST (full amount). This is computed automatically based on the GSTIN frozen on the purchase order.</p>
+
+    <h3>What happens when a vendor has GSTINs in multiple states?</h3>
+    <p>Each vendor address carries its own GSTIN. When creating a PO, the buyer selects which address to use. The selected address's GSTIN is frozen on the PO as the supplier_gstin. This frozen GSTIN — not the vendor's default — determines the tax split for the entire PO and flows through to GRN, debit notes, and Tally vouchers.</p>
+
+    <h3>How is HSN/SAC validation handled on purchase orders?</h3>
+    <p>HSN/SAC codes are validated against an admin-maintained master table. Validation is soft — it warns on invalid codes but does not block the transaction. The HSN/SAC module is a feature toggle; organisations that do not need code tracking can disable it entirely.</p>
+
+    <h3>What is the GST ITC toggle and when would you disable it?</h3>
+    <p>The ITC toggle controls whether GST is posted to separate input tax credit ledgers (enabled) or rolled into the purchase amount (disabled). Organisations under the composition scheme or those purchasing for exempt supplies disable ITC. The toggle affects Tally voucher generation — when disabled, GST is included in the item amount.</p>
+
+    <h3>How does GST mismatch detection work at goods receipt?</h3>
+    <p>Invoice GST amounts are compared against PO GST amounts line by line. Mismatches are tracked separately from price and quantity mismatches. GST mismatches must be resolved before GRN posting to prevent incorrect ITC claims.</p>
+
+  </div>
+
+  <section style="padding: 48px 0 0;"><div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;"><p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p><div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;"><a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Tally Integration</a><a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Compliance</a><a href="/invoice-matching-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Invoice Matching Guide</a><a href="/vendor-management" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Vendor Management</a></div></div></section>
+
+  <section class="contact" style="padding: 64px 0;"><div class="container" style="text-align: center;"><h2 class="section-title">Assess How This Applies to Your Organisation</h2><p class="section-sub">If GST splits are handled manually and ITC mismatches surface during return filing, share a brief overview and we will evaluate how automated GST compliance may apply.</p><div style="margin-top: 32px;"><a href="/#contact" class="btn btn-lg">Book a Consultation</a></div></div></section>
+
+  <footer class="footer"><div class="container footer-inner"><div class="footer-brand"><p>Procurement & asset management — delivered as a professional service.</p></div><div class="footer-links"><div class="footer-col"><h4>Services</h4><a href="/procurement">Procurement</a><a href="/asset-management">Asset Management</a><a href="/tally-integration">Tally Integration</a><a href="/vendor-management">Vendor Management</a></div><div class="footer-col"><h4>More</h4><a href="/invoice-matching">Invoice Matching</a><a href="/data-migration">Data Migration</a><a href="/fixed-asset-register">Fixed Asset Register</a><a href="/purchase-order-approval">Purchase Order Approval</a><a href="/grn-goods-receipt">Goods Receipt</a><a href="/vendor-debit-note">Vendor Debit Notes</a><a href="/asset-tagging-verification">Asset Tagging</a><a href="/education-procurement">Education</a><a href="/compliance">Compliance</a><a href="/reports">Reports</a><a href="/how-it-works">How We Work</a><a href="/demo">Demo</a><a href="/guides">Guides</a><a href="/#contact">Contact</a></div><div class="footer-col"><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a></div></div></div></footer>
+
+  <script src="script.js"></script>
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999; align-items:center; justify-content:space-between; font-size:14px;"><span id="cookie-text"></span><div><button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button><button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc; padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button></div></div>
+  <script src="cookie-consent.js"></script>
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+</body>
+</html>

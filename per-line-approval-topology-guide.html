@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Per-Line vs Collective Approval in Procurement — Choosing the Right Topology | Oparc</title>
+  <meta name="description" content="How per-line and collective approval topologies work in procurement. Covers LINE_LEVEL independent approval, COLLECTIVE all-or-nothing approval, COMBINED and INDIVIDUAL PO progression modes, and when to use each.">
+  <meta name="keywords" content="per line purchase order approval, line level approval procurement, collective vs individual approval purchase requisition, per item approval purchase order, purchase requisition approval topology, line by line purchase approval software">
+  <link rel="canonical" href="https://oparc.in/per-line-approval-topology-guide">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://oparc.in/per-line-approval-topology-guide">
+  <meta property="og:title" content="Per-Line vs Collective Approval in Procurement — Choosing the Right Topology">
+  <meta property="og:description" content="How per-line and collective approval topologies work. LINE_LEVEL independent approval, COLLECTIVE all-or-nothing, PO progression modes, and when to use each.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Per-Line vs Collective Approval in Procurement — Choosing the Right Topology">
+  <meta name="twitter:description" content="Per-line vs collective approval in procurement. Independent line approval, all-or-nothing mode, PO progression modes, practical guidance on choosing the right approach.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Per-Line vs Collective Approval in Procurement — Choosing the Right Topology",
+    "description": "How per-line and collective approval topologies work in procurement. Covers LINE_LEVEL, COLLECTIVE, PO progression modes, and when to use each.",
+    "author": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "publisher": { "@type": "Organization", "name": "Oparc", "url": "https://oparc.in" },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "mainEntityOfPage": "https://oparc.in/per-line-approval-topology-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://oparc.in/guides" },
+      { "@type": "ListItem", "position": 3, "name": "Per-Line vs Collective Approval", "item": "https://oparc.in/per-line-approval-topology-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can the approval topology be changed after a requisition is submitted?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The approval topology is set at the time of requisition creation and locked at submission. Once submitted, the topology cannot be changed because the approval chain has already been seeded based on the selected mode. In LINE_LEVEL topology, each line has its own approval status. In COLLECTIVE topology, approvals are recorded at the header level. Switching between these after submission would invalidate the existing approval records. If a different topology is needed, the requisition must be rejected (or cancelled if still in draft) and recreated with the correct topology. This is a deliberate governance constraint — the rules of approval are fixed before the first approver acts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if one line is rejected in LINE_LEVEL topology?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In LINE_LEVEL topology, each line is independent. If an approver rejects one line, only that line moves to REJECTED status. The remaining lines continue through the approval chain unaffected. A requisition with 10 lines might end up with 9 approved and 1 rejected. The approved lines can proceed to PO creation (depending on the PO progression mode), while the rejected line is excluded. This is the primary advantage of LINE_LEVEL topology: one contentious item does not block the entire requisition. The approver can approve the items they agree with and reject only the specific item they object to, with remarks explaining the rejection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does INDIVIDUAL PO progression mode create multiple purchase orders?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In INDIVIDUAL mode, each approved line can be converted to a PO independently, without waiting for all lines to be approved. If a 10-line requisition has 7 lines approved and 3 still pending, the 7 approved lines can be grouped into one or more POs immediately. The remaining 3 lines can be converted to POs later when they are approved. This creates multiple POs from a single requisition — each traceable back to the original PR. INDIVIDUAL mode is useful when some items are urgent and others can wait, or when different lines go to different vendors. COMBINED mode, by contrast, requires all lines to reach a final status before any PO can be created."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should COLLECTIVE topology be used instead of LINE_LEVEL?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "COLLECTIVE topology is appropriate when the lines on a requisition are interdependent — approving some but rejecting others would not make practical sense. For example, a requisition for a classroom setup might include desks, chairs, a projector, and a screen. Approving desks but rejecting the projector defeats the purpose. COLLECTIVE topology ensures the approver evaluates the requisition as a package and makes a single approve/reject decision for all lines. It is also simpler for requisitions where all items are of similar nature and value — a batch of identical items, for instance, where line-level granularity adds complexity without benefit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the approval topology affect how GRN works?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The approval topology applies to the purchase requisition stage. By the time goods are received (GRN), the PR has already been approved and a PO has been issued. The GRN workflow has its own approval chain, which operates at the GRN level — not at the PR line level. However, the topology's downstream effect is felt through PO creation. In LINE_LEVEL with INDIVIDUAL progression, a PR might produce multiple POs (each covering different approved lines), and each PO gets its own GRN. In COLLECTIVE with COMBINED progression, one PR produces one PO, which gets one GRN sequence. The topology shapes the document chain, which in turn shapes how goods receipt is structured."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/per-line-approval-topology-guide">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/per-line-approval-topology-guide">
+
+  <style>
+    .article { padding: 120px 0 80px; max-width: 720px; margin: 0 auto; }
+    .article h1 { font-size: 2rem; margin-bottom: 8px; line-height: 1.3; }
+    .article .date { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 32px; }
+    .article h2 { font-size: 1.25rem; margin-top: 40px; margin-bottom: 12px; }
+    .article h3 { font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px; }
+    .article p, .article li { color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
+    .article ul, .article ol { padding-left: 24px; margin-bottom: 16px; }
+    .article table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+    .article th, .article td { border: 1px solid var(--border); padding: 10px 14px; text-align: left; }
+    .article th { background: var(--bg-subtle, #f8f9fa); font-weight: 600; }
+    .article blockquote { border-left: 3px solid var(--primary); padding: 12px 20px; margin: 20px 0; background: var(--bg-subtle, #f8f9fa); border-radius: 4px; }
+    .article blockquote p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="article container">
+    <h1>Per-Line vs Collective Approval in Procurement — Choosing the Right Topology</h1>
+    <p class="date">Published: April 14, 2026</p>
+
+    <p>A department submits a purchase requisition with 10 line items. Nine are standard supplies that everyone agrees on. The tenth is a piece of equipment that the approver has questions about — the specification seems wrong, the quantity seems high, or the budget allocation is unclear. In most procurement systems, the approver has two choices: approve all 10 lines (including the questionable one) or reject the entire requisition (blocking the 9 items that are needed immediately).</p>
+
+    <p>This is a common source of procurement delays. The approver does not want to approve something they have concerns about. But they also do not want to delay the 9 items that are clearly needed. So they approve everything — and the governance purpose of the approval step is undermined. Or they reject everything — and the requester resubmits the same 9 items in a new requisition, wasting time for both parties.</p>
+
+    <p>This article explains two approval topologies that address this problem differently, and how they interact with PO creation modes to give organisations flexibility in how requisitions flow through the procurement cycle.</p>
+
+    <h2>1. The Problem: One Bad Line Blocks the Entire Requisition</h2>
+
+    <p>All-or-nothing approval is the default in most procurement workflows. The approver sees a requisition and can either approve it or reject it — as a whole. This creates predictable problems:</p>
+
+    <ul>
+      <li><strong>Delayed procurement.</strong> Nine needed items wait while one item is debated. The debate may take days. The items that were needed last week are still waiting.</li>
+      <li><strong>Governance compromise.</strong> Approvers learn to approve everything to avoid being the bottleneck. The approval step becomes a formality — stamp it through, deal with problems later.</li>
+      <li><strong>Resubmission overhead.</strong> After rejection, the requester removes the problematic line and resubmits. The same 9 items go through the same approval chain again. The approver reviews items they already approved last time.</li>
+      <li><strong>Split-and-resubmit workarounds.</strong> Requesters learn to submit separate requisitions for each item to avoid the blocking problem. This defeats the purpose of multi-line requisitions and creates document sprawl.</li>
+    </ul>
+
+    <h2>2. LINE_LEVEL Topology — Independent Line Approval</h2>
+
+    <p>In LINE_LEVEL topology, each line on a requisition has its own approval status. The approver can approve Line 1, approve Line 2, reject Line 3, and approve Line 4 — all in the same action. Each line progresses through the approval chain independently.</p>
+
+    <p>The practical effect:</p>
+
+    <ul>
+      <li>A 10-line requisition can have 9 lines approved and 1 rejected</li>
+      <li>The approved lines proceed to PO creation without waiting for the rejected line</li>
+      <li>The requester can address the rejected line separately — revise the specification, provide justification, or simply accept the rejection</li>
+      <li>The approval chain tracks each line's status independently — who approved it, who rejected it, and when</li>
+    </ul>
+
+    <p>LINE_LEVEL is the default topology. It provides the most granular control and prevents the one-bad-line-blocks-everything problem.</p>
+
+    <blockquote>
+      <p>When an approver rejects a line in LINE_LEVEL topology, they must provide remarks explaining the rejection. These remarks are recorded against the specific line, not against the requisition as a whole. This means the requester knows exactly which item was objected to and why — not just that "the requisition was rejected."</p>
+    </blockquote>
+
+    <h2>3. COLLECTIVE Topology — All-or-Nothing Approval</h2>
+
+    <p>In COLLECTIVE topology, all lines on a requisition are treated as a single unit. The approver approves or rejects the entire requisition — there is no option to approve some lines and reject others. Line-level approval endpoints return a 403 error in this mode.</p>
+
+    <p>This sounds like the problem described above — so why would anyone choose it? COLLECTIVE is appropriate when the lines are interdependent:</p>
+
+    <ul>
+      <li><strong>Bundled requirements.</strong> A classroom setup requires desks, chairs, a projector, and a screen. Approving desks but rejecting the projector does not make sense — the items are needed as a set.</li>
+      <li><strong>Uniform batches.</strong> A requisition for 50 identical lab kits. There is no meaningful distinction between lines — either the batch is approved or it is not.</li>
+      <li><strong>Simplified workflow.</strong> For small, straightforward requisitions (2-3 lines of similar items), COLLECTIVE reduces the approver's decision to a single action rather than per-line evaluation.</li>
+    </ul>
+
+    <h2>4. PO Progression Modes — COMBINED vs INDIVIDUAL</h2>
+
+    <p>Approval topology determines how lines are approved. PO progression mode determines when approved lines can become purchase orders. These are independent settings:</p>
+
+    <table>
+      <tr><th>Mode</th><th>Rule</th><th>When to Use</th></tr>
+      <tr><td>COMBINED</td><td>All lines must reach a final status (approved or rejected) before any PO can be created</td><td>When the PO should cover the complete requisition</td></tr>
+      <tr><td>INDIVIDUAL</td><td>Approved lines can be converted to POs independently, without waiting for remaining lines</td><td>When some items are urgent and others can wait</td></tr>
+    </table>
+
+    <p>The interaction between topology and progression creates four combinations:</p>
+
+    <table>
+      <tr><th>Topology</th><th>Progression</th><th>Behaviour</th></tr>
+      <tr><td>LINE_LEVEL</td><td>COMBINED</td><td>Each line approved independently, but PO waits until all lines are resolved</td></tr>
+      <tr><td>LINE_LEVEL</td><td>INDIVIDUAL</td><td>Each line approved independently, approved lines can create POs immediately</td></tr>
+      <tr><td>COLLECTIVE</td><td>COMBINED</td><td>All lines approved/rejected together, PO created after approval</td></tr>
+      <tr><td>COLLECTIVE</td><td>INDIVIDUAL</td><td>All lines approved/rejected together — INDIVIDUAL has no practical effect since lines move as a unit</td></tr>
+    </table>
+
+    <p>The most flexible combination is LINE_LEVEL + INDIVIDUAL: each line is evaluated on its own merit, and approved lines do not wait for pending or rejected lines before PO creation.</p>
+
+    <h2>5. Choosing the Right Topology</h2>
+
+    <p>The choice depends on the nature of the requisition, not on a global preference:</p>
+
+    <ul>
+      <li><strong>Mixed requisitions</strong> (different categories, different urgencies, different vendors) — LINE_LEVEL with INDIVIDUAL progression. This gives maximum flexibility.</li>
+      <li><strong>Bundled requirements</strong> (interdependent items that must be procured together) — COLLECTIVE with COMBINED progression. This ensures the package is evaluated as a whole.</li>
+      <li><strong>Standard procurement</strong> (similar items, similar urgency, same vendor likely) — LINE_LEVEL with COMBINED progression. Line-level granularity at approval, but a single PO covering everything.</li>
+    </ul>
+
+    <p>The topology is set at the requisition level, not at the organisation level. Different requisitions can use different topologies depending on what is being procured.</p>
+
+    <h2>6. Bypass PO Mode</h2>
+
+    <p>Some requisitions do not need a purchase order — internal transfers, expense claims, or items procured through petty cash. The bypass PO flag on a requisition allows it to skip the PO step entirely: once approved, the requisition moves directly to the posting stage without creating a purchase order.</p>
+
+    <p>This interacts with topology in a straightforward way: the approval topology (LINE_LEVEL or COLLECTIVE) controls how the requisition is approved. The bypass PO flag controls what happens after approval. Both settings are independent — a LINE_LEVEL requisition can bypass PO, and a COLLECTIVE requisition can bypass PO.</p>
+
+    <h2>7. How This Works Across PR, PO, and GRN</h2>
+
+    <p>The approval topology applies at the purchase requisition stage. The downstream effects flow through the document chain:</p>
+
+    <ol>
+      <li><strong>PR Stage:</strong> Topology determines whether lines are approved independently (LINE_LEVEL) or as a unit (COLLECTIVE).</li>
+      <li><strong>PO Stage:</strong> Progression mode determines when approved lines can become POs. In INDIVIDUAL mode, a single PR might produce multiple POs. Each PO has its own approval chain.</li>
+      <li><strong>GRN Stage:</strong> Each PO has its own goods receipt sequence. If a PR produced three POs (via INDIVIDUAL mode), each PO is received independently — the GRN for PO-1 does not depend on PO-2 or PO-3.</li>
+    </ol>
+
+    <p>The result is a document chain that adapts to the organisation's operational needs: tight coupling when items are interdependent, loose coupling when they are not.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>Can the approval topology be changed after a requisition is submitted?</h3>
+    <p>No. The topology is set at creation and locked at submission. Once submitted, the approval chain has been seeded based on the selected mode — LINE_LEVEL seeds per-line statuses, COLLECTIVE seeds at the header level. Switching after submission would invalidate existing approval records. If a different topology is needed, the requisition must be rejected or cancelled and recreated with the correct setting. This is a deliberate governance constraint: the rules of approval are fixed before the first approver acts.</p>
+
+    <h3>What happens if one line is rejected in LINE_LEVEL topology?</h3>
+    <p>In LINE_LEVEL topology, each line is independent. If an approver rejects one line, only that line moves to REJECTED status. The remaining lines continue through the approval chain unaffected. A requisition with 10 lines might end up with 9 approved and 1 rejected. The approved lines can proceed to PO creation depending on the progression mode, while the rejected line is excluded. The approver can approve the items they agree with and reject only the specific item they object to, with remarks explaining the rejection.</p>
+
+    <h3>How does INDIVIDUAL PO progression mode create multiple purchase orders?</h3>
+    <p>In INDIVIDUAL mode, each approved line can be converted to a PO independently without waiting for all lines to be approved. If a 10-line requisition has 7 lines approved and 3 still pending, the 7 approved lines can be grouped into one or more POs immediately. The remaining 3 can be converted later when approved. This creates multiple POs from a single requisition, each traceable back to the original PR. INDIVIDUAL mode is useful when some items are urgent, or when different lines go to different vendors. COMBINED mode requires all lines to reach a final status first.</p>
+
+    <h3>When should COLLECTIVE topology be used instead of LINE_LEVEL?</h3>
+    <p>COLLECTIVE topology is appropriate when the lines on a requisition are interdependent — approving some but rejecting others would not make practical sense. A classroom setup requiring desks, chairs, a projector, and a screen is a package deal. COLLECTIVE ensures the approver evaluates the requisition as a whole. It is also simpler for requisitions where all items are of similar nature and value — a batch of identical items, for instance, where line-level granularity adds complexity without benefit. The approver makes one decision for the entire requisition.</p>
+
+    <h3>Does the approval topology affect how GRN works?</h3>
+    <p>The approval topology applies at the PR stage. By the time goods are received, the PR has been approved and a PO issued. The GRN workflow has its own approval chain at the GRN level. However, the topology's downstream effect is felt through PO creation. In LINE_LEVEL with INDIVIDUAL progression, a PR might produce multiple POs covering different approved lines, and each PO gets its own GRN. In COLLECTIVE with COMBINED progression, one PR produces one PO with one GRN sequence. The topology shapes the document chain, which in turn shapes goods receipt structure.</p>
+
+  </div>
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center; max-width: 720px; margin: 0 auto;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/procurement" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Procurement</a>
+        <a href="/purchase-approval-workflow-guide" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Approval Workflow</a>
+        <a href="/purchase-order-approval" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Purchase Order Approval</a>
+        <a href="/reports" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem;">Reports</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">If one contentious line item regularly blocks your entire purchase requisition from proceeding, share a brief overview of your current approval process and we will evaluate how topology-based approval may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
