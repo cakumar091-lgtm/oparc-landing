@@ -168,11 +168,11 @@
 
     <h2>4. From Gate to GRN</h2>
 
-    <p>When gate entry is enabled, GRN creation does not start from scratch. The GRN form is pre-populated with gate entry data:</p>
+    <p>When gate entry is enabled, GRN creation does not start from scratch. The <a href="/grn-goods-receipt">GRN</a> form is pre-populated with gate entry data:</p>
 
     <ol>
       <li><strong>Quantities flow forward:</strong> The accepted, rejected, and damaged quantities from gate entry become the starting values in the GRN.</li>
-      <li><strong>Invoice matching begins:</strong> The stores or procurement team adds the invoice number, invoice quantities, and invoice rates. The system compares these against the PO and the gate entry data.</li>
+      <li><strong>Invoice matching begins:</strong> The stores or procurement team adds the invoice number, invoice quantities, and invoice rates. The system compares these against the PO and the gate entry data — this is where <a href="/invoice-matching-guide">three-way matching</a> begins.</li>
       <li><strong>Mismatches surface immediately:</strong> If the invoice says 100 but the gate accepted 90, the mismatch is flagged before the GRN is submitted for approval.</li>
     </ol>
 
@@ -186,7 +186,7 @@
     <p>When the entire delivery is rejected (wrong goods, wrong vendor, no PO match), the security team can reject all lines in a single action. Each line gets a rejection reason and an informed user. The rejection is recorded against the PO — the procurement team can see that a delivery was attempted and rejected.</p>
 
     <h3>5.2 Damage Documentation</h3>
-    <p>Damaged goods are received (they physically enter the premises) but flagged. The damage count flows through to the GRN and from there to the vendor debit note workflow. A debit note of type DAMAGE is created, referencing the specific gate entry line, PO line, and damage quantity. The vendor receives a formal debit note — not an email complaint.</p>
+    <p>Damaged goods are received (they physically enter the premises) but flagged. The damage count flows through to the GRN and from there to the vendor debit note workflow. A <a href="/vendor-debit-note-process-guide">debit note</a> of type DAMAGE is created, referencing the specific gate entry line, PO line, and damage quantity. The vendor receives a formal debit note — not an email complaint.</p>
 
     <h3>5.3 Under-Receipt</h3>
     <p>If the vendor delivers 80 units against a PO for 100, the gate entry records 80 (split into accepted/rejected/damaged). The remaining 20 are not yet delivered. For PIECEMEAL delivery mode POs, the vendor can deliver the remaining 20 in a subsequent delivery — a new gate entry is created for the second delivery. The cumulative received quantity is tracked against the ordered quantity.</p>

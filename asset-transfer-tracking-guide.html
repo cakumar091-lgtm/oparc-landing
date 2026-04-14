@@ -143,7 +143,7 @@
     <h1>Asset Transfer Between Departments — Tracking Movements with Governance</h1>
     <p class="date">Published: April 14, 2026</p>
 
-    <p>A projector was purchased for the Conference Room. Six months later, it is in the Training Department. The asset register still shows it in the Conference Room. The Training Department did not request it formally — someone carried it over because they needed it for a workshop. When the auditor asks about it during physical verification, the Conference Room says "we gave it to Training" and Training says "it was always here." The asset register is wrong, nobody knows when it moved, and there is no documentation of the transfer.</p>
+    <p>A projector was purchased for the Conference Room. Six months later, it is in the Training Department. The <a href="/fixed-asset-register">asset register</a> still shows it in the Conference Room. The Training Department did not request it formally — someone carried it over because they needed it for a workshop. When the auditor asks about it during physical verification, the Conference Room says "we gave it to Training" and Training says "it was always here." The asset register is wrong, nobody knows when it moved, and there is no documentation of the transfer.</p>
 
     <p>This is the most common way asset registers become unreliable. Assets move between departments, locations, and custodians constantly — but most organisations have no process for recording these movements. The asset stays on the source department's books while physically residing elsewhere. Over time, the asset register drifts from reality.</p>
 
@@ -178,7 +178,7 @@
 
     <p>The destination department is automatically derived from the destination user's department — it cannot be set independently. This prevents mismatches where an asset is assigned to a user in one department but the transfer is tagged to a different department.</p>
 
-    <p>The requisition is submitted and routed to the source department's approval chain — the same approval matrix used for procurement, but applied to the source department and the asset's classification. The source approvers are being asked: "Do you authorise releasing this asset from your department?"</p>
+    <p>The requisition is submitted and routed to the source department's approval chain — the same <a href="/purchase-approval-workflow-guide">approval matrix</a> used for procurement, but applied to the source department and the asset's classification. The source approvers are being asked: "Do you authorise releasing this asset from your department?"</p>
 
     <p>When all levels of source approval are complete, the requisition moves to a special status: SOURCE_APPROVED.</p>
 
@@ -270,7 +270,7 @@
 
     <h3>7.3 Transfers and Tally</h3>
 
-    <p>When the Tally integration is enabled, posting a MOVEMENT requisition enqueues the appropriate accounting entries: a reduction on the source department's cost centre and a corresponding addition on the destination department's cost centre. The Tally vouchers are generated automatically, ensuring the books reflect the transfer without manual journal entries.</p>
+    <p>When the Tally integration is enabled, posting a MOVEMENT requisition enqueues the appropriate <a href="/tally-integration">Tally accounting entries</a>: a reduction on the source department's cost centre and a corresponding addition on the destination department's cost centre. The Tally vouchers are generated automatically, ensuring the books reflect the transfer without manual journal entries.</p>
 
     <h2>8. Frequently Asked Questions</h2>
 

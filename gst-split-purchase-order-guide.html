@@ -143,7 +143,7 @@
 
     <p>Many vendors operate from multiple states. A furniture supplier headquartered in Bangalore (Karnataka, 29) may have a warehouse in Hyderabad (Telangana, 36). Each location has its own GST registration and its own GSTIN.</p>
 
-    <p>In a structured system, GSTINs are stored at the address level, not the vendor level. When the vendor has multiple addresses, each with a different GSTIN, the buyer chooses which address to use when creating the purchase order. The GSTIN from the selected address is frozen on the PO as the <code>supplier_gstin</code>.</p>
+    <p>In a structured system, GSTINs are stored at the address level in the <a href="/vendor-management">vendor master</a>, not the vendor level. When the vendor has multiple addresses, each with a different GSTIN, the buyer chooses which address to use when creating the purchase order. The GSTIN from the selected address is frozen on the PO as the <code>supplier_gstin</code>.</p>
 
     <p>This frozen GSTIN — not the vendor's "primary" GSTIN — determines the tax split for the entire purchase order. It flows through unchanged to:</p>
 
@@ -192,7 +192,7 @@
 
     <h2>6. GST Mismatch Detection at Goods Receipt</h2>
 
-    <p>When the vendor's invoice arrives with the goods, three types of mismatches can occur:</p>
+    <p>When the vendor's invoice arrives with the goods, three types of <a href="/invoice-matching-guide">mismatches</a> can occur:</p>
 
     <ol>
       <li><strong>Quantity mismatch:</strong> Invoice says 100, GRN shows 90 accepted</li>
@@ -206,7 +206,7 @@
 
     <h2>7. From PO to Tally — The GST Chain</h2>
 
-    <p>When the Tally integration is enabled, the GST split on the purchase order flows through to the Tally purchase voucher automatically:</p>
+    <p>When the Tally integration is enabled, the GST split on the purchase order flows through to the <a href="/tally-asset-integration-guide">Tally purchase voucher</a> automatically:</p>
 
     <ol>
       <li><strong>Intrastate PO:</strong> Tally voucher debits the expense/asset ledger, credits the vendor ledger, and creates separate CGST and SGST input credit entries</li>

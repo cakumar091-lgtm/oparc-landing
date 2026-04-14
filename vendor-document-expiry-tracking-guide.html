@@ -58,7 +58,7 @@
         "name": "What vendor documents should be tracked for expiry?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "At minimum: GST registration certificate (renewed annually for composition scheme vendors), trade licences, MSME registration (valid for the registration period), insurance policies, and any industry-specific certifications (ISO, FSSAI, drug licence, pollution control board clearance). Additionally, contracts — annual maintenance contracts (AMC), rate contracts, and service agreements — all have expiry dates that directly affect procurement eligibility. The key principle is: if the document affects whether you should be transacting with the vendor, its expiry date needs to be tracked."
+          "text": "At minimum: GST registration certificate (renewed annually for composition scheme vendors), trade licences, MSME registration (valid for the registration period), insurance policies, and any industry-specific certifications (ISO, FSSAI, drug licence, pollution control board clearance). Additionally, contracts — <a href="/asset-management">annual maintenance contracts (AMC)</a>, rate contracts, and service agreements — all have expiry dates that directly affect procurement eligibility. The key principle is: if the document affects whether you should be transacting with the vendor, its expiry date needs to be tracked."
         }
       },
       {
@@ -143,7 +143,7 @@
     <h1>Vendor Document Expiry Tracking — Preventing Compliance Gaps Before They Happen</h1>
     <p class="date">Published: April 14, 2026</p>
 
-    <p>A vendor's GST registration was cancelled three months ago. Nobody noticed. The organisation continued issuing purchase orders, receiving goods, and claiming Input Tax Credit on those invoices. When the statutory auditor catches it — and they will — the ITC for those three months must be reversed, with interest. The vendor is asked for updated documents. They say they have applied for re-registration and it will come "soon." The organisation has no documentation of when the lapse started, what was procured during the gap, or how much ITC is at risk.</p>
+    <p>A vendor's GST registration was cancelled three months ago. Nobody noticed. The organisation continued issuing purchase orders, receiving goods, and claiming Input Tax Credit on those invoices. When the statutory auditor catches it — and they will — the ITC for those three months must be reversed, with interest. The <a href="/gst-split-purchase-order-guide">GST split on every purchase order</a> depends on a valid vendor GSTIN. The vendor is asked for updated documents. They say they have applied for re-registration and it will come "soon." The organisation has no documentation of when the lapse started, what was procured during the gap, or how much ITC is at risk.</p>
 
     <p>This is not a rare scenario. In organisations with 50 or more active vendors, document expiry is a predictable compliance risk that happens continuously — not once, but across multiple vendors, multiple document types, and multiple timelines. This article explains how structured document expiry tracking works, why urgency-based monitoring matters, and how linking compliance to spend data transforms vendor risk from a surprise into a manageable process.</p>
 
@@ -232,7 +232,7 @@
 
     <p>Many vendors operate from multiple states, each with a different GSTIN. A vendor headquartered in Karnataka (29XXXXX) may have a branch in Telangana (36XXXXX). The GSTIN determines whether the transaction is interstate (IGST) or intrastate (CGST + SGST) — which affects both the tax split and the ITC claim.</p>
 
-    <p>In a structured system, GSTINs are tracked at the address level — each vendor address carries its own GSTIN. When a purchase order is created, the buyer selects which vendor address to use, and the corresponding GSTIN is frozen on the PO. This frozen GSTIN flows through to GRN, vendor debit notes, and Tally vouchers — ensuring the tax split is consistent from order to accounting entry.</p>
+    <p>In a structured system, GSTINs are tracked at the address level — each vendor address carries its own GSTIN. When a purchase order is created, the buyer selects which vendor address to use, and the corresponding GSTIN is frozen on the PO. This frozen GSTIN flows through to <a href="/grn-goods-receipt">GRN</a>, <a href="/vendor-debit-note">vendor debit notes</a>, and <a href="/tally-integration">Tally vouchers</a> — ensuring the tax split is consistent from order to accounting entry.</p>
 
     <p>The compliance report tracks GSTIN validity per address, not just per vendor — because a vendor may have a valid GSTIN in one state and a cancelled one in another.</p>
 

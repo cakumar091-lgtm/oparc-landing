@@ -145,7 +145,7 @@
 
     <p>The fixed asset register says the organisation has assets worth Rs 2.4 crore. Tally says Rs 2.35 crore. The difference is Rs 5 lakh. Nobody knows where it comes from.</p>
 
-    <p>This is not unusual. In most Indian organisations, the fixed asset register and the accounting books are maintained separately — the asset register tracks what was bought, where it is, and what condition it is in, while Tally tracks the financial entries: purchase vouchers, depreciation journals, and write-off entries. Over time, these two records drift apart. A purchase is entered in Tally but the asset is not added to the register. An asset is scrapped in the register but the write-off entry is not posted to Tally. A reversal is processed in one system but not the other.</p>
+    <p>This is not unusual. In most Indian organisations, the fixed asset register and the accounting books are maintained separately — the <a href="/fixed-asset-register">asset register</a> tracks what was bought, where it is, and what condition it is in, while <a href="/tally-integration">Tally</a> tracks the financial entries: purchase vouchers, depreciation journals, and write-off entries. Over time, these two records drift apart. A purchase is entered in Tally but the asset is not added to the register. An asset is scrapped in the register but the write-off entry is not posted to Tally. A reversal is processed in one system but not the other.</p>
 
     <p>Reconciliation is the process of comparing these two records, identifying differences, and resolving them. This article explains how structured reconciliation works when the asset management system and Tally are connected, what causes drift, and how to prevent it.</p>
 
@@ -155,7 +155,7 @@
 
     <ul>
       <li><strong>Manual Tally entries.</strong> The accountant enters a purchase voucher directly in Tally because the GRN has not been processed yet. The asset is capitalised in the books but does not exist in the asset register.</li>
-      <li><strong>Silent sync failures.</strong> The system generates a Tally XML voucher and sends it, but Tally was offline or the company was in a different financial year. The system marks the item as "sent" but Tally never received it.</li>
+      <li><strong>Silent sync failures.</strong> The system generates a <a href="/tally-asset-integration-guide">Tally XML voucher</a> and sends it, but Tally was offline or the company was in a different financial year. The system marks the item as "sent" but Tally never received it.</li>
       <li><strong>Timing differences.</strong> An asset posted in the register on 31 March but the Tally voucher created on 1 April ends up in different financial years.</li>
       <li><strong>Partial reversals.</strong> A GRN is reversed in the asset system (which removes the asset from the register), but the corresponding reversal voucher in Tally fails or is skipped.</li>
       <li><strong>Rounding.</strong> GST calculations in the asset system use one rounding method; Tally uses another. The difference is typically a few rupees per transaction, but across hundreds of transactions, it accumulates.</li>
