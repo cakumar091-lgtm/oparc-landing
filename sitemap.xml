@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://oparc.in/</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://oparc.in/procurement</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://oparc.in/vendor-management</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -37,7 +37,7 @@
   </url>
   <url>
     <loc>https://oparc.in/how-it-works</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -47,7 +47,7 @@
   </url>
   <url>
     <loc>https://oparc.in/invoice-matching</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -72,7 +72,7 @@
   </url>
   <url>
     <loc>https://oparc.in/grn-goods-receipt</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://oparc.in/asset-tagging-verification</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -96,18 +96,28 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oparc.in/procurement-governance-software</loc>
+    <lastmod>2026-04-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/what-goes-wrong-without-governance</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/fixed-asset-register-companies-act</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://oparc.in/procurement-workflow-india</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://oparc.in/caro-ifc-compliance-guide</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -117,7 +127,7 @@
   </url>
   <url>
     <loc>https://oparc.in/erp-alternative-guide</loc>
-    <lastmod>2026-04-05</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -132,17 +142,17 @@
   </url>
   <url>
     <loc>https://oparc.in/asset-verification-guide</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://oparc.in/invoice-matching-guide</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://oparc.in/purchase-approval-workflow-guide</loc>
-    <lastmod>2026-04-10</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -152,7 +162,7 @@
   </url>
   <url>
     <loc>https://oparc.in/approval-bottleneck-tracking-guide</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -182,7 +192,7 @@
   </url>
   <url>
     <loc>https://oparc.in/asset-write-off-scrap-disposal-guide</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -256,11 +266,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://oparc.in/what-goes-wrong-without-governance</loc>
-    <lastmod>2026-04-14</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://oparc.in/why-separate-procurement-asset-management-tool</loc>
     <lastmod>2026-04-14</lastmod>
     <priority>0.7</priority>
@@ -272,7 +277,7 @@
   </url>
   <url>
     <loc>https://oparc.in/guides</loc>
-    <lastmod>2026-04-14</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
