@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Register — Service Expenses with GST & TDS Tracking | Oparc</title>
+  <meta name="description" content="Dedicated expense register for service-related costs. Three entry types (forward, correction, reversal), per-line GST split, TDS tracking, period summaries, and 16+ filter dimensions.">
+  <meta name="keywords" content="expense register software India, service expense tracking, GST expense register, TDS expense tracking, expense management software, service acceptance register, expense audit trail">
+  <link rel="canonical" href="https://oparc.in/expense-register">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oparc.in/expense-register">
+  <meta property="og:title" content="Expense Register — Service Expenses with GST & TDS Tracking | Oparc">
+  <meta property="og:description" content="Dedicated expense register for service-related costs. GST split, TDS tracking, period summaries, and full audit trail.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Expense Register — Service Expenses with GST & TDS Tracking | Oparc">
+  <meta name="twitter:description" content="Dedicated expense register for service-related costs. GST split, TDS tracking, and period summaries.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Expense Register",
+    "description": "Dedicated expense register for service-related costs with GST split, TDS tracking, period summaries, and audit trail.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
+    "serviceType": "Expense Management"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Expense Register", "item": "https://oparc.in/expense-register" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the expense register used for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The expense register tracks all service-related costs that flow through the Service Acceptance workflow. Each entry records GST split (CGST/SGST/IGST), TDS deductions, HSN/SAC codes, and links back to the originating purchase requisition, purchase order, and service acceptance document."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does this differ from the asset register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The asset register tracks capitalised assets (goods procured via the GRN workflow). The expense register tracks operating expenses (services accepted via the SA workflow). Both are populated automatically on posting — no manual entry required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I track TDS deductions in the expense register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Each expense line captures the TDS section code, applicable rate, and deducted amount. Period summaries calculate net TDS (forward postings minus reversals) for the current month, quarter, and financial year."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/expense-register">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/expense-register">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/guides">Guides</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Expense<br><span class="highlight">Register</span></h1>
+        <p class="hero-sub">Service-related expenses tracked with GST split, TDS deductions, and full document traceability</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Service expenses are recorded in spreadsheets or general ledgers with no link to the purchase order or service acceptance that authorised them. When auditors ask for the trail, it takes days to reconstruct.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>GST is captured as a single amount per invoice. At return filing time, splitting CGST, SGST, and IGST across hundreds of service entries becomes a manual exercise prone to error.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>TDS deductions are tracked separately from the expenses they relate to. Reconciling section-wise TDS with actual service payments requires cross-referencing multiple sources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How We Address This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          </div>
+          <h3>Three Entry Types</h3>
+          <p>Every expense is categorised by how it entered the register. Forward entries record the original service acceptance. Correction entries capture debit note adjustments. Reversal entries undo a previously posted acceptance. Each type links back to the originating requisition, purchase order, and service acceptance document.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
+          </div>
+          <h3>GST Split per Line</h3>
+          <p>Each expense line records CGST, SGST, and IGST amounts at both unit and line level. The HSN or SAC code is captured per entry. No aggregation — the data is ready for GST return preparation without manual reclassification.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg>
+          </div>
+          <h3>TDS Tracking</h3>
+          <p>TDS section code, applicable rate, and deducted amount are recorded per expense line. Period summaries calculate net TDS — forward postings minus reversals — for the current month, quarter, and financial year. Section-wise breakdowns support TDS return preparation.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3>Period Summaries</h3>
+          <p>Aggregated statistics across four time windows: all-time, current month, current quarter, and current financial year. Each period shows service acceptance count, debit note count, reversal count, net expense amount, and net TDS withheld. Financial year quarters are aligned to the organisation's configured FY start month.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+          </div>
+          <h3>16+ Filter Dimensions</h3>
+          <p>Search and filter by expense ID, department, requester, vendor, classification, category, location, entry type, date range, amount range, and financial year. Global search spans expense ID, item name, supplier name, service acceptance number, and purchase order number. Results sortable by five columns.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>CSV Export</h3>
+          <p>Export the full register with all fields including GST split and TDS details. Optional financial year filter narrows the export to a specific period. Standard CSV format for auditors, accountants, or migration to other systems.</p>
+        </div>
+
+      </div>
+
+      <div class="why-grid" style="margin-top: 48px;">
+        <div class="why-item">
+          <h3>Automatic Population</h3>
+          <p>Expenses are created automatically when a service acceptance is posted — no manual entry. Reversals and debit note corrections flow through the same automation. The register is always current with the procurement workflow.</p>
+        </div>
+        <div class="why-item">
+          <h3>Full Traceability</h3>
+          <p>Every expense line links back to the service acceptance line, purchase order line, and purchase requisition line that authorised it. Supplier name, document numbers, and invoice details are stored directly on the expense record for fast querying without joins.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Entry types</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">16+</div>
+          <div class="stat-label">Filter dimensions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Per-line</div>
+          <div class="stat-label">GST split</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">Section-wise</div>
+          <div class="stat-label">TDS tracking</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/reports" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Reports & Dashboard</a>
+        <a href="/invoice-matching" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Invoice Matching</a>
+        <a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Tally Integration</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Statutory Compliance</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Further Reading -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Further Reading</h2>
+      <a href="/tds-purchase-order-automation-guide" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">TDS on Purchase Orders</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">Section-wise TDS deduction from purchase order through to expense posting.</p>
+      </a>
+      <a href="/gst-split-purchase-order-guide" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">GST Split on Purchase Orders</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">Automatic CGST/SGST/IGST determination based on vendor and organisation location.</p>
+      </a>
+      <a href="/vendor-debit-note-process-guide" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Vendor Debit Note Process</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">From rejected services to formal recovery — correction entries flow into the expense register.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your setup and we will evaluate how our services may apply.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement & asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/expense-register">Expense Register</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button onclick="acceptCookies()" style="background:#f0c040; color:#1a1a2e; border:none; padding:8px 18px; border-radius:4px; cursor:pointer; font-weight:600; margin-left:12px;">Accept</button>
+      <button onclick="declineCookies()" style="background:transparent; color:#fff; border:1px solid #fff; padding:8px 18px; border-radius:4px; cursor:pointer; margin-left:8px;">Decline</button>
+    </div>
+  </div>
+  <script src="cookie-consent.js"></script>
+</body>
+</html>

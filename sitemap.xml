@@ -56,6 +56,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oparc.in/expense-register</loc>
+    <lastmod>2026-04-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/fixed-asset-register</loc>
     <lastmod>2026-04-03</lastmod>
     <priority>0.8</priority>
