@@ -173,11 +173,28 @@ just commit separately whenever convenient.
 ## 6. Results log
 
 ### 18-Apr-2026 — P1 shipped
-- Commit: _TBD after commit_
+- Commit: `746fd75`
 - File: `asset-write-off-scrap-disposal-guide.html`
 - Changes: title, og:title, twitter:title, schema headline, H1 — all rewritten to
   "Write-Off vs Scrap vs Disposal — The Difference and When to Use Each".
 - Baseline snapshot: 72 imps, 0 clicks, 0% CTR, position 5.72.
+
+### 18-Apr-2026 — Stage B shipped (internal links for asset-verification-guide)
+- Existing inbound links (15 pages) use good keyword-rich anchors
+  ("physical verification", "verification campaigns") — no rewrites needed.
+- Added 3 new inbound links from the three high-authority pages that were
+  missing links:
+  - `index.html` — inline link on "Physical asset verification campaigns" in
+    the "Start Simple, Grow As You Need / Full Governance" column.
+  - `asset-management.html` — "Read: how structured physical asset verification
+    works →" appended to the Verification Campaigns feature card paragraph.
+  - `compliance.html` — inline link on "Physical verification at reasonable
+    intervals" in the CARO 2020 Clause 3(i) compliance card.
+- Baseline snapshot for `asset-verification-guide`: 120 imps, 2 clicks, 1.67%
+  CTR, position 23.07.
+- Stage B is a ranking play — success bar at T+14 (02-May): position ≤ 15 and
+  impressions on the "physical asset verification" cluster queries climbing
+  out of pos 40+ into pos 20–30.
 
 ### 21-Apr-2026 — T+3 check
 _To be filled in._
