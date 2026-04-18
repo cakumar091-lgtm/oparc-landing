@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oparc.in/audit-ready-procurement</loc>
+    <lastmod>2026-04-18</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/reports</loc>
     <lastmod>2026-04-03</lastmod>
     <priority>0.8</priority>
