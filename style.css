@@ -674,7 +674,7 @@ a:hover { color: var(--primary); }
   flex-direction: column;
   gap: 10px;
 }
-.footer-col h4 {
+.footer-col h3 {
   color: var(--primary);
   font-size: 0.813rem;
   font-weight: 600;
