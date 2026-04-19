@@ -74,6 +74,14 @@
       },
       {
         "@type": "Question",
+        "name": "How can I tell if a software vendor's release discipline is strong enough to avoid integration risk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Software with many concurrent feature streams and rapid team growth carries elevated integration risk during the transition window — new engineers don't yet know the codebase, coordination overhead spikes, and regressions become more likely. Ask the vendor: how frequently do you ship releases, how often do you roll back after release, what is your automated test coverage on the core modules, and how do you regression-test integrations like Tally and accounting before each release? Also ask whether the engineering team has grown more than 50% in the last 12 months — rapid growth combined with active platform changes is a window where quality typically dips before stabilising. Strong vendors answer these questions clearly with specific numbers; vendors that deflect are telling you something."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Why does the depth vs breadth question matter when choosing software?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -251,6 +259,9 @@
 
     <h3>How do I evaluate the technology foundation of a SaaS vendor without being technical?</h3>
     <p>Ask capability questions instead: scale to 10× current data volume, multi-user collaboration without conflicts, non-technical user accessibility, complex workflow handling without workarounds, bulk operation behaviour with error handling. Well-architected software passes these tests naturally; software on dated foundations struggles. The answers tell you what the technology is capable of without you needing to know the technology itself.</p>
+
+    <h3>How can I tell if a software vendor's release discipline is strong enough to avoid integration risk?</h3>
+    <p>Software with many concurrent feature streams and rapid team growth carries elevated integration risk during the transition window — new engineers don't yet know the codebase, coordination overhead spikes, and regressions become more likely. Ask the vendor: how often do you ship releases, how often do you roll back, what is your automated test coverage on the core modules, and how do you regression-test integrations like Tally and accounting before each release? Also ask whether the engineering team has grown more than 50% in the last 12 months — rapid growth combined with active platform changes is a window where quality typically dips before stabilising. Strong vendors answer with specific numbers; vendors that deflect are telling you something.</p>
 
     <h3>Why does the depth vs breadth question matter when choosing software?</h3>
     <p>If you're early in your governance journey, a shallow-but-growing tool is fine. If you're already behind — auditor findings, GST notices, capital expenditure not reconciling — you don't have the eighteen months it takes a shallow tool to mature into your needs. Stretching a deep tool into more headroom is easier than waiting for breadth to develop.</p>
