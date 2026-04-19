@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Asset Tagging & Physical Verification Campaigns | Oparc</title>
-  <meta name="description" content="Tag every asset with a unique QR code. Verify with a phone. Run verification campaigns by department or location. Assets that cannot be found are flagged — not ignored. Bulk tag generation, mobile scanning, discrepancy tracking, and custodian self-declaration.">
+  <title>Asset Tagging and Physical Verification — QR Campaigns | Oparc</title>
+  <meta name="description" content="Tag every asset with a unique QR code. Verify with a phone. Run campaigns by department. Missing assets flagged — not ignored. Discrepancy tracking included.">
   <meta name="keywords" content="QR code asset tagging software, asset tagging software India, physical verification fixed assets, asset verification campaign software, asset audit software India, barcode asset tracking, asset management with tagging, procurement asset tagging, asset management physical verification India">
   <link rel="canonical" href="https://oparc.in/asset-tagging-verification">
   <link rel="stylesheet" href="style.css">
@@ -12,7 +12,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://oparc.in/asset-tagging-verification">
-  <meta property="og:title" content="QR Asset Tagging & Physical Verification Campaigns | Oparc">
+  <meta property="og:title" content="Asset Tagging and Physical Verification — QR Campaigns">
   <meta property="og:description" content="Bulk QR tag generation, PWA mobile scanner, 3-tier scan resolution, physical verification campaigns with discrepancy tracking.">
   <meta property="og:site_name" content="Oparc">
   <meta property="og:locale" content="en_IN">
@@ -20,7 +20,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="QR Asset Tagging & Physical Verification Campaigns | Oparc">
+  <meta name="twitter:title" content="Asset Tagging and Physical Verification — QR Campaigns | Oparc">
   <meta name="twitter:description" content="Bulk QR tag generation, PWA mobile scanner, 3-tier scan resolution, and physical verification campaigns.">
   <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
 
@@ -47,6 +47,46 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
       { "@type": "ListItem", "position": 2, "name": "Asset Tagging & Verification", "item": "https://oparc.in/asset-tagging-verification" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between asset tagging and asset verification?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Asset tagging is the one-time act of attaching a unique, scannable identifier — typically a QR code — to a physical asset, and recording that identifier against the asset's record in the fixed asset register. Asset verification is the recurring exercise of physically locating each tagged asset to confirm it still exists, is in the recorded location, and is in working condition. Tagging makes verification possible at scale: without a tag, the verifier has no way to deterministically link the physical object back to the register entry. The two are usually treated as separate workflows but they fail without each other."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you tag fixed assets with QR codes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "QR-based asset tagging follows four steps. First, generate a globally unique tag identifier for each asset record in the fixed asset register — this should be a deterministic format that encodes both a tag sequence number and the asset ID, so the tag can be regenerated if the original is lost. Second, print the tags as adhesive labels with the QR code, the human-readable identifier, and the organisation name. Third, physically affix each tag to the corresponding asset — and record the affixation in the system, so 'tagged' is a tracked status, not an assumption. Fourth, verify the affixation by scanning the tag and confirming the system resolves it back to the same asset record."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can asset verification be done with a smartphone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A Progressive Web App opened in the phone's browser uses the camera to scan QR tags — no app store install, no dedicated scanner hardware. Each scan records the tag identifier, timestamp, GPS coordinates (if permitted), and the verifier's user ID. When the device is online, the scans sync to the central register and the asset's verification status updates in real time. For organisations with hundreds or thousands of assets, smartphone-based verification cuts the per-asset verification time from minutes to seconds."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should asset tags be audited?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The asset tag audit — confirming that tags are still affixed, legible, and resolve to the correct asset — should run on the same cycle as physical verification: annually for high-value or movable assets, rotationally over three years for fixed-location items. The audit produces three outcomes per asset: tag intact and resolves correctly (no action), tag damaged or unreadable (re-tag using the same identifier), or tag missing (investigate whether the asset was moved, replaced, or lost, then re-tag or write off). Without a tag audit, missing tags accumulate silently and the next physical verification campaign produces false 'not found' results."
+        }
+      }
     ]
   }
   </script>

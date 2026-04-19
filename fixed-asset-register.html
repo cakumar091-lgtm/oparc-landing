@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asset Register Software — Fixed Assets, Depreciation & Tracking | Oparc</title>
-  <meta name="description" content="Automated asset register — assets created automatically on goods receipt posting. SLM/WDV depreciation, year-end snapshots, financial year locking, 40+ filters, and Tally integration. Designed around Companies Act 2013 and CARO 2020.">
+  <meta name="description" content="Asset register that builds itself from goods receipts. SLM/WDV depreciation, year-end locking, Tally integration. Designed around Companies Act 2013 and CARO 2020.">
   <meta name="keywords" content="asset register software, fixed asset management software, fixed asset software, fixed asset tracking software, fixed asset register software India, asset register Companies Act 2013, fixed asset depreciation software, SLM WDV depreciation calculator, asset register CARO 2020, automated asset register, automated depreciation calculation, procurement to asset register, asset register from GRN, procurement traceability asset register">
   <link rel="canonical" href="https://oparc.in/fixed-asset-register">
   <link rel="stylesheet" href="style.css">
@@ -55,6 +55,22 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a fixed asset register?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A fixed asset register is the master list of every long-lived asset a company owns — buildings, plant and machinery, vehicles, IT equipment, furniture — together with the financial and physical attributes of each: cost, date of acquisition, location, custodian, depreciation method, accumulated depreciation, current written-down value, and disposal status. It is not a free-form spreadsheet — under the Companies Act 2013 and CARO 2020, it is a statutory record. Auditors will sample the register, ask to physically locate each sampled asset, and reconcile the book value to the depreciation schedule. A register that cannot be reconciled to the general ledger is a CARO finding by itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you reconcile a fixed asset register to the general ledger?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The reconciliation runs in three steps. First, take the closing gross block in the asset register and compare it to the closing balance of the fixed asset GL accounts — any variance is either an asset booked in the GL but missing from the register, or vice versa. Second, take the depreciation expense for the year from the register and compare it to the depreciation charge in the P&L — variances usually trace to assets capitalised mid-year with incorrect start dates. Third, list disposals (write-offs, scrap, sale) and confirm the corresponding GL entries: removal of cost, removal of accumulated depreciation, and recognition of any gain or loss. Each unreconciled item should be investigated individually, not net-settled, because net-settling hides offsetting errors that auditors will eventually find."
+        }
+      },
       {
         "@type": "Question",
         "name": "Does this fixed asset register support Companies Act 2013 requirements?",

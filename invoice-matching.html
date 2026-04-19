@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invoice Matching & Mismatch Resolution — Quantity, Price, GST | Oparc</title>
-  <meta name="description" content="Small mismatches slip through. Large ones get paid anyway because nobody catches them in time. Automatic 3-way matching at goods receipt — quantity, price, and GST verified against the PO. Within tolerance? Auto-accepted. Above? Flagged for approval.">
+  <meta name="description" content="Auto-match every vendor invoice against the PO and GRN — quantity, price, GST. Within tolerance? Auto-accepted. Above? Flagged for approval, with full audit trail.">
   <meta name="keywords" content="invoice matching software India, 3-way matching procurement, invoice mismatch resolution, GRN invoice reconciliation, invoice price variance, GST mismatch, vendor debit note software, purchase order matching, goods receipt matching, three way matching">
   <link rel="canonical" href="https://oparc.in/invoice-matching">
   <link rel="stylesheet" href="style.css">
@@ -47,6 +47,46 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
       { "@type": "ListItem", "position": 2, "name": "Invoice Matching", "item": "https://oparc.in/invoice-matching" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does invoice matching work in GST-compliant procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GST-compliant invoice matching adds a fourth check on top of the standard quantity and price match: the GST split on the vendor invoice (CGST + SGST or IGST) must equal the GST computed on the PO at the same rate, and the vendor's GSTIN on the invoice must match the GSTIN frozen on the PO when the order was placed. If the rate has changed between PO date and invoice date, or the vendor has switched GSTIN (e.g. moved from one state's registration to another), the system flags the invoice for review before any input tax credit is claimed. This prevents both ITC reversals at the GSTR-2B reconciliation stage and incorrect ledger postings to Tally."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the tolerance for auto-acceptance in invoice matching?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tolerance is configured per organisation, typically as a percentage band (e.g. ±1% on price) plus an absolute floor (e.g. ±₹100). An invoice that falls within both the percentage and the absolute band is auto-accepted and moved to the payment queue. An invoice that breaches either threshold is flagged as a mismatch and routed through the approval chain — small breaches usually get a single approver, large breaches get the full chain. Tolerance is intentionally not zero: rounding differences, freight allocations, and minor GST recalculations would otherwise generate noise on every invoice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when an invoice fails 3-way matching?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A failed match doesn't block the invoice — it routes it. The invoice goes to a mismatch queue with the variance type pre-classified: quantity short, quantity excess, price up, price down, GST mismatch, or GSTIN mismatch. The approver sees the PO, GRN, and invoice side by side and decides one of three outcomes: accept the variance and pay the full invoice (with audit reason), partially accept and raise a vendor debit note for the difference, or reject and return the invoice. Each decision is logged with timestamp, approver, and reason — so an auditor can later see why each variance was paid."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can invoice matching detect GSTIN mismatches between PO and invoice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. When the PO is placed, the vendor's active GSTIN for the billing address is frozen onto the PO header. When the invoice is later received, the GSTIN on the invoice is compared against the frozen GSTIN — not the vendor's current GSTIN, which may have changed in the meantime. A mismatch flags the invoice immediately, before any ITC is claimed. This catches three real scenarios: the vendor sent the invoice from a different state's GSTIN than the PO was placed against, the vendor's GSTIN was suspended between PO and invoice (which would block ITC entirely), and clerical errors where the AP team has the wrong GSTIN on file."
+        }
+      }
     ]
   }
   </script>

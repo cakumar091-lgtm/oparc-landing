@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Goods Receipt Note (GRN) Software — Gate Entry, 3-Way Matching | Oparc</title>
-  <meta name="description" content="The vendor says they delivered 100 units. Did anyone actually count? Gate entry inspection, 3-bucket tracking (accepted, rejected, damaged), multi-level GRN approval, invoice mismatch detection, and automatic asset register entry on posting.">
+  <meta name="description" content="Vendor delivered 100 units — did anyone count? Gate entry inspection, 3-bucket tracking (accepted/rejected/damaged), multi-level GRN approval, asset register entry.">
   <meta name="keywords" content="GRN software India, goods receipt note software, goods receipt management, GRN approval workflow, gate entry software, three way matching GRN, GRN to asset register, GRN Tally integration, goods receipt asset creation, GRN posting asset register">
   <link rel="canonical" href="https://oparc.in/grn-goods-receipt">
   <link rel="stylesheet" href="style.css">
@@ -47,6 +47,46 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
       { "@type": "ListItem", "position": 2, "name": "Goods Receipt", "item": "https://oparc.in/grn-goods-receipt" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Goods Receipt Note (GRN) in procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Goods Receipt Note is the document that records the physical receipt of goods from a vendor against a purchase order. It captures what was actually delivered — quantity received, quantity accepted, quantity rejected, quantity damaged — together with the gate entry reference, the inspector's identity, and the date/time of receipt. The GRN becomes the bridge between the procurement chain and the financial books: it is the trigger for invoice matching, vendor liability creation, and (for capitalised items) the entry into the fixed asset register. Without a GRN, there is no auditable proof that the goods the vendor invoiced for were ever received."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the PR, PO, and GRN process work together?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The three documents form a sequential procurement chain. Step one: a Purchase Requisition (PR) is raised by the requester and approved through a department-and-amount-based authority chain — this is the internal authorisation. Step two: an approved PR is converted into a Purchase Order (PO) which is sent to the vendor and creates the external commitment. Step three: when goods arrive, a Goods Receipt Note (GRN) is recorded against the PO at the gate. Each link references the previous one, so the auditor can trace any payment back to the GRN that received it, the PO that authorised it, and the PR that requested it — without manual reconciliation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is gate entry and how is it different from a GRN?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gate entry is the first record made when a vendor's vehicle arrives at the premises — typically at the security gate. It captures the vendor name, vehicle number, driver, time of arrival, and the PO or delivery challan reference, but it does not yet confirm what was inside the boxes. The GRN is created later, after the boxes are opened, the items counted, and any quality inspection completed. The two-step model matters because it separates 'arrived at gate' from 'accepted into inventory' — and gives finance a defensible record of when liability actually crystallised."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does GRN posting create the asset register entry automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For capitalised line items, yes. When a GRN is posted (i.e. moved from approved to final, irreversible state), the system automatically generates one or more rows in the fixed asset register — one per asset, with a unique deterministic asset ID derived from the location and the year. The asset record carries the full procurement trail: the PR ID, PO ID, GRN ID, vendor, cost components, and ownership/custodian fields. This eliminates the manual asset creation step that, in spreadsheet-based asset registers, accounts for most of the discrepancies between book records and physical reality."
+        }
+      }
     ]
   }
   </script>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Duplicate Vendor Payments — How They Happen and How to Stop Them | Oparc</title>
-  <meta name="description" content="Your accounts payable team paid the same vendor invoice twice — or paid two invoices for the same delivery. Understand why duplicate payments happen without 3-way matching, and how to prevent them with structured PO-GRN-Invoice verification.">
+  <title>Duplicate Vendor Payments — How to Detect, Prevent, and Recover | Oparc</title>
+  <meta name="description" content="Same vendor invoice paid twice. Why duplicate payments happen, how to detect them in accounts payable, prevent them with 3-way matching, and recover from vendors.">
   <meta name="keywords" content="duplicate vendor payment, duplicate invoice payment prevention, same vendor paid twice, vendor duplicate payment detection, prevent double payment vendor India, accounts payable duplicate payment, invoice matching prevent duplicate payment">
   <link rel="canonical" href="https://oparc.in/duplicate-vendor-payment-prevention">
   <link rel="stylesheet" href="style.css">
@@ -12,16 +12,16 @@
 
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://oparc.in/duplicate-vendor-payment-prevention">
-  <meta property="og:title" content="Duplicate Vendor Payments — How They Happen and How to Stop Them">
-  <meta property="og:description" content="Paid the same vendor invoice twice? Here's why duplicate payments happen and how structured 3-way matching prevents them.">
+  <meta property="og:title" content="Duplicate Vendor Payments — How to Detect, Prevent, and Recover">
+  <meta property="og:description" content="Same vendor invoice paid twice. How to detect duplicate payments in accounts payable, prevent them with 3-way matching, and recover from vendors.">
   <meta property="og:site_name" content="Oparc">
   <meta property="og:locale" content="en_IN">
   <meta property="og:image" content="https://oparc.in/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Duplicate Vendor Payments — How They Happen and How to Stop Them">
-  <meta name="twitter:description" content="Paid the same vendor invoice twice? Here's why and how to prevent it with structured matching.">
+  <meta name="twitter:title" content="Duplicate Vendor Payments — How to Detect, Prevent, and Recover">
+  <meta name="twitter:description" content="Same vendor invoice paid twice. How to detect, prevent, and recover from duplicate payments using structured 3-way matching.">
   <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
 
   <script type="application/ld+json">
@@ -53,6 +53,30 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a duplicate payment in accounts payable?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A duplicate payment is when accounts payable settles the same liability more than once. It happens in two main forms: (1) the same vendor invoice is processed twice — usually because the vendor sent a reminder copy that got booked as a fresh invoice, or the original was entered against two different purchase orders; and (2) two different invoices are paid for the same underlying delivery — a tax invoice and a proforma, or a re-issued invoice with a different number for the same goods. Both produce an overpayment to the vendor that the books treat as a valid expense until reconciliation surfaces it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you detect duplicate vendor payments?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Detection runs along three signals. First, exact matches — same vendor, same invoice number, same amount, paid more than once. These are the easiest to catch and any AP system should block them at entry. Second, fuzzy matches — same vendor, same amount, similar invoice number (different suffix, different formatting), paid within a short window. These need a query report, not an automated block. Third, GRN reuse — the same goods receipt note matched to more than one invoice. The third signal is the most valuable because it catches the case where the vendor issues two genuinely different invoice numbers for the same physical delivery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you recover a duplicate payment from a vendor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The fastest route is to issue a vendor debit note for the duplicate amount and adjust it against the next legitimate invoice from the same vendor — most cooperative vendors accept this immediately. If the vendor disputes the duplicate, the recovery file should include: the two payment vouchers showing the same vendor and amount, the bank statement entries, the underlying invoice and GRN documents proving only one delivery occurred, and a reconciliation note. For non-cooperative vendors or where the relationship has ended, the file becomes a legal recovery matter — and recovery rates drop sharply. The lesson: detect and recover within 90 days while the vendor relationship is still active."
+        }
+      },
       {
         "@type": "Question",
         "name": "How does 3-way matching prevent duplicate vendor payments?",
