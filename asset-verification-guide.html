@@ -66,6 +66,30 @@
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "What is physical asset verification?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Physical asset verification is the process of inspecting each asset listed in the fixed asset register at its actual physical location to confirm the asset exists, is in working condition, and is in the possession of the assigned custodian. Under CARO 2020 Clause 3(i)(b), the statutory auditor must comment on whether the company conducted physical asset verification at reasonable intervals and whether discrepancies were properly dealt with in the books of account. Most organisations run quarterly or annual verification campaigns using QR scanning on a smartphone to create dated, tamper-evident evidence. Without physical asset verification, the fixed asset register is just a ledger entry with no connection to physical reality — a common root cause of qualified audit opinions and CARO 2020 findings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is fixed asset physical verification conducted?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fixed asset physical verification is typically conducted as a scoped campaign: the administrator identifies the asset population to verify (by classification, location, department, or custodian), assigns verifiers, gives each verifier a scoped list of assets with their expected locations, and the verifier physically visits each asset and scans its QR tag using a smartphone browser. Each scan records the asset's canonical identity, GPS coordinates (if enabled), timestamp, verifier ID, and operational condition. Assets that are not scanned by the campaign close date are automatically flagged as discrepancies for follow-up investigation. Structured fixed asset physical verification — where every scan is logged immutably and every discrepancy is investigated — is what auditors look for when they test CARO 2020 Clause 3(i)(b) compliance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does CARO 2020 require for asset physical verification?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CARO 2020 Clause 3(i)(b) requires the statutory auditor to comment on three things about asset physical verification: (1) whether the company has physically verified its property, plant and equipment at reasonable intervals; (2) whether any material discrepancies were identified during verification; and (3) whether any identified discrepancies were properly dealt with in the books of account. The term 'reasonable intervals' is not defined in the Companies Act — the board-approved verification policy must state the frequency (typically annual for high-value or mobile assets, and a rotational three-year cycle for lower-value fixed-location assets). Missing the verification entirely, or doing it without documented evidence of what was checked and by whom, typically results in a qualified audit opinion under CARO Clause 3(i)(b)."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "What is physical verification of fixed assets?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -351,6 +375,15 @@
     <p>The first cycle will inevitably surface data quality issues — assets in the register that do not exist physically, physical assets that are not in the register, location data that is outdated. This is expected. The value of the structured approach is that these issues are surfaced systematically rather than discovered accidentally.</p>
 
     <h2>8. Frequently Asked Questions</h2>
+
+    <h3>What is physical asset verification?</h3>
+    <p>Physical asset verification is the process of inspecting each asset listed in the fixed asset register at its actual physical location to confirm the asset exists, is in working condition, and is in the possession of the assigned custodian. Under <a href="/caro-ifc-compliance-guide">CARO 2020 Clause 3(i)(b)</a>, the statutory auditor must comment on whether the company conducted physical asset verification at reasonable intervals and whether discrepancies were properly dealt with in the books of account. Most organisations run quarterly or annual verification campaigns using QR scanning on a smartphone to create dated, tamper-evident evidence. Without physical asset verification, the fixed asset register is just a ledger entry with no connection to physical reality — a common root cause of qualified audit opinions and CARO 2020 findings.</p>
+
+    <h3>How is fixed asset physical verification conducted?</h3>
+    <p>Fixed asset physical verification is typically conducted as a scoped campaign: the administrator identifies the asset population to verify (by classification, location, department, or custodian), assigns verifiers, gives each verifier a scoped list of assets with their expected locations, and the verifier physically visits each asset and scans its QR tag using a smartphone browser. Each scan records the asset's canonical identity, GPS coordinates (if enabled), timestamp, verifier ID, and operational condition. Assets that are not scanned by the campaign close date are automatically flagged as discrepancies for follow-up investigation. Structured fixed asset physical verification — where every scan is logged immutably and every discrepancy is investigated — is what auditors look for when they test CARO 2020 Clause 3(i)(b) compliance.</p>
+
+    <h3>What does CARO 2020 require for asset physical verification?</h3>
+    <p>CARO 2020 Clause 3(i)(b) requires the statutory auditor to comment on three things about asset physical verification: (1) whether the company has physically verified its property, plant and equipment at reasonable intervals; (2) whether any material discrepancies were identified during verification; and (3) whether any identified discrepancies were properly dealt with in the books of account. The term "reasonable intervals" is not defined in the Companies Act — the board-approved verification policy must state the frequency (typically annual for high-value or mobile assets, and a rotational three-year cycle for lower-value fixed-location assets). Missing the verification entirely, or doing it without documented evidence of what was checked and by whom, typically results in a qualified audit opinion under CARO Clause 3(i)(b). For the full compliance framing, see the <a href="/caro-ifc-compliance-guide">CARO + IFC guide</a>.</p>
 
     <h3>How is QR tagging different from barcode tagging?</h3>
     <p>Traditional barcodes store a single string — typically an asset number — and require a dedicated barcode scanner. QR codes store richer data, can encode the asset's canonical tag identifier, and are scannable using any smartphone camera or a lightweight PWA. QR codes also survive partial damage better than barcodes. From a governance perspective, the key difference is that a QR-based system can link to a structured tag identity with three resolution tiers — canonical, shadow, and legacy — which means even assets with old barcode labels can be resolved through the same scan workflow.</p>
