@@ -315,4 +315,16 @@
     <lastmod>2026-04-19</lastmod>
     <priority>0.3</priority>
   </url>
+
+  <!-- ProcureTrail application (cross-subdomain — both subdomains verified in Bing/GSC) -->
+  <url>
+    <loc>https://procuretrail.oparc.in/signup</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://procuretrail.oparc.in/login</loc>
+    <lastmod>2026-04-23</lastmod>
+    <priority>0.7</priority>
+  </url>
 </urlset>
