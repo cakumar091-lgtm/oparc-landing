@@ -59,6 +59,46 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the PR, PO, GRN process in procurement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PR (purchase requisition) is an internal request to buy something — it triggers an approval workflow. PO (purchase order) is the approved commitment sent to the vendor. GRN (goods receipt note) records what actually arrived. Together, the three documents create an auditable chain from request to delivery to payment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do purchase requisition, purchase order, and goods receipt note connect?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A purchase requisition is approved, then converted to a purchase order sent to the vendor. When goods arrive, a goods receipt note is raised against the PO to record what was received. Three-way matching compares PO, GRN, and vendor invoice before payment is authorised."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do Indian organisations need a PR to PO to GRN workflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Companies Act 2013 and CARO 2020 require documented internal financial controls over procurement. A structured PR to PO to GRN workflow produces the audit trail that proves who approved what, what was ordered, and what was received — evidence the statutory auditor asks for under Section 143(3)(i)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a purchase requisition and a purchase order?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A purchase requisition is an internal document requesting authorisation to buy something; it does not commit the organisation to any vendor. A purchase order is the approved external document sent to the vendor as a legal commitment. The requisition must be approved before the order can be issued."
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="alternate" hreflang="en-IN" href="https://oparc.in/procurement-workflow-india">
   <link rel="alternate" hreflang="x-default" href="https://oparc.in/procurement-workflow-india">
 
@@ -214,6 +254,20 @@
     </ol>
 
     <p><a href="/procurement">ProcureTrail</a> supports this complete workflow — from <a href="/procurement">PR creation and multi-level approval</a>, through <a href="/purchase-order-approval">PO approval with GST/TDS handling</a>, to <a href="/grn-goods-receipt">GRN with gate entry and three-way matching</a>. <a href="/vendor-debit-note">Vendor debit notes</a> handle the mismatches. <a href="/tally-integration">Tally integration</a> handles the accounting.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
+
+    <h3>What is the PR, PO, GRN process in procurement?</h3>
+    <p>PR (purchase requisition) is an internal request to buy something — it triggers an approval workflow. PO (purchase order) is the approved commitment sent to the vendor. GRN (goods receipt note) records what actually arrived. Together, the three documents create an auditable chain from request to delivery to payment.</p>
+
+    <h3>How do purchase requisition, purchase order, and goods receipt note connect?</h3>
+    <p>A purchase requisition is approved, then converted to a purchase order sent to the vendor. When goods arrive, a goods receipt note is raised against the PO to record what was received. Three-way matching compares PO, GRN, and vendor invoice before payment is authorised.</p>
+
+    <h3>Why do Indian organisations need a PR → PO → GRN workflow?</h3>
+    <p>Companies Act 2013 and CARO 2020 require documented internal financial controls over procurement. A structured PR → PO → GRN workflow produces the audit trail that proves who approved what, what was ordered, and what was received — evidence the statutory auditor asks for under Section 143(3)(i).</p>
+
+    <h3>What is the difference between a purchase requisition and a purchase order?</h3>
+    <p>A purchase requisition is an internal document requesting authorisation to buy something; it does not commit the organisation to any vendor. A purchase order is the approved external document sent to the vendor as a legal commitment. The requisition must be approved before the order can be issued.</p>
 
   </div>
 
