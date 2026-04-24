@@ -58,6 +58,22 @@
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "What is an approval bottleneck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An approval bottleneck is a stage in a purchase workflow where requisitions or orders stall because the approver is unavailable, the routing is unclear, or no one is tracking aging. Bottlenecks become visible only when the system reports which approver is holding what document and for how many days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What causes purchase approval delays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The three most common causes are approvers away from their queue (travel, leave, overload), no SLA tracking so delays stay invisible, and routing rules that send every purchase through the same chain regardless of amount or risk. Measuring time-per-level separates the causes and points to the fix."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "How do you measure how long a purchase order has been stuck in approval?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -286,6 +302,12 @@
     </table>
 
     <h2>7. Frequently Asked Questions</h2>
+
+    <h3>What is an approval bottleneck?</h3>
+    <p>An approval bottleneck is a stage in a purchase workflow where requisitions or orders stall because the approver is unavailable, the routing is unclear, or no one is tracking aging. Bottlenecks become visible only when the system reports which approver is holding what document and for how many days.</p>
+
+    <h3>What causes purchase approval delays?</h3>
+    <p>The three most common causes are approvers away from their queue (travel, leave, overload), no SLA tracking so delays stay invisible, and routing rules that send every purchase through the same chain regardless of amount or risk. Measuring time-per-level separates the causes and points to the fix.</p>
 
     <h3>How do you measure how long a purchase order has been stuck in approval?</h3>
     <p>Approval aging is measured from the moment the document enters a specific approval level. When a PO is submitted, it arrives at Level 1. The system records the timestamp. If the Level 1 approver has not acted after 3 days, the aging report shows that PO as "3 days pending at Level 1." When Level 1 approves and it moves to Level 2, the clock resets for that level. This per-level measurement pinpoints exactly where the delay is — it is not enough to know a PO has been pending for 10 days; you need to know it spent 2 days at Level 1 and has been stuck at Level 2 for 8 days.</p>

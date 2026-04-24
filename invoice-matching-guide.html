@@ -66,6 +66,22 @@
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "How does invoice matching work under GST?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GST invoice matching has two layers. The three-way match at receipt (PO vs GRN vs invoice) checks quantity, price, and tax before payment. The GSTR-2B match at return filing compares vendor-reported invoices against your purchase records. A mismatch at either layer blocks payment or triggers an input tax credit reversal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I handle mismatches between PO, invoice, and receipt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compare quantity, unit price, and GST across all three documents. A quantity mismatch reduces the payable amount to the received quantity. A price mismatch triggers approval at the PO owner's level with a variance reason. A GST mismatch blocks payment until the vendor issues a corrected invoice."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "What is 3-way matching in procurement?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -305,6 +321,12 @@
     </blockquote>
 
     <h2>8. Frequently Asked Questions</h2>
+
+    <h3>How does invoice matching work under GST?</h3>
+    <p>GST invoice matching has two layers. The three-way match at receipt (PO vs GRN vs invoice) checks quantity, price, and tax before payment. The GSTR-2B match at return filing compares vendor-reported invoices against your purchase records. A mismatch at either layer blocks payment or triggers an input tax credit reversal.</p>
+
+    <h3>How do I handle mismatches between PO, invoice, and receipt?</h3>
+    <p>Compare quantity, unit price, and GST across all three documents. A quantity mismatch reduces the payable amount to the received quantity. A price mismatch triggers approval at the PO owner's level with a variance reason. A GST mismatch blocks payment until the vendor issues a corrected invoice.</p>
 
     <h3>What is 3-way matching in procurement?</h3>
     <p>Three-way matching is the process of comparing three documents before approving a vendor payment: the purchase order (what was agreed), the goods receipt note or service acceptance (what was actually received), and the vendor's invoice (what the vendor is billing). The comparison checks quantity, unit price, and tax amounts. When all three documents align within acceptable tolerances, the invoice is cleared for payment. When they do not, the mismatch must be investigated and resolved before payment proceeds.</p>
