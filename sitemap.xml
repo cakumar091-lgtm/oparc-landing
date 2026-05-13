@@ -202,7 +202,7 @@
   </url>
   <url>
     <loc>https://oparc.in/asset-write-off-scrap-disposal-guide</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-05-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -326,6 +326,11 @@
     <loc>https://procuretrail.oparc.in/login</loc>
     <lastmod>2026-04-23</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/glossary/</loc>
+    <lastmod>2026-05-13</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://oparc.in/glossary/write-off-vs-disposal</loc>
