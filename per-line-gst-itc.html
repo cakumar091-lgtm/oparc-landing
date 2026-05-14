@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Per-Line GST ITC — Block One Item, Not the Whole Invoice | Oparc</title>
+  <meta name="description" content="Decide GST Input Tax Credit per PO and GRN line with an eleven-value statutory block-reason enum, audit-logged edits, domestic post-approval lock, import GRN override, and a GSTR-3B reconciliation CSV.">
+  <meta name="keywords" content="per line GST ITC, GST input tax credit India, Section 17(5) ITC blocked, GSTR-3B reconciliation, ITC eligibility per line, ITC blocked reason enum, import GRN ITC override, PO PDF safety, Combo D guard, Cess requires GST, GSTR-2B reconciliation">
+  <link rel="canonical" href="https://oparc.in/per-line-gst-itc">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oparc.in/per-line-gst-itc">
+  <meta property="og:title" content="Per-Line GST ITC — Block One Item, Not the Whole Invoice | Oparc">
+  <meta property="og:description" content="Per-line ITC eligibility with an eleven-value statutory block-reason enum, audit-logged edits, domestic post-approval lock, import GRN override, and a GSTR-3B reconciliation CSV.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Per-Line GST ITC — Eleven-Value Block-Reason Enum | Oparc">
+  <meta name="twitter:description" content="Block ITC on one line without losing the other four. Audit-logged edits, post-approval lock, import override, GSTR-3B-tuned CSV.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Per-Line GST Input Tax Credit Governance",
+    "description": "Decide GST ITC eligibility at the line level — PO line, GRN line, and asset cost component — with an eleven-value statutory block-reason enum, separate cess flag, audit-logged edits through PO approval, domestic post-approval lock, import GRN override endpoint, and a GSTR-3B Table 4(B) reconciliation CSV report.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
+    "serviceType": "Per-Line GST ITC Governance"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Per-Line GST ITC", "item": "https://oparc.in/per-line-gst-itc" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is GST ITC eligibility decided per line, not per invoice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Section 17(5) of the CGST Act blocks Input Tax Credit on ten categories of supplies — motor vehicles, food and beverages, immovable construction, gifts and samples, CSR contributions, club and health, composition-dealer supplies, invalid invoice GST, place-of-supply blocks, and personal consumption. None of these are invoice-level categories — all are item-level. A single supplier invoice can carry one ineligible line and four eligible lines, and claiming ITC on the four while disclosing the one in GSTR-3B Table 4(B) is the statutorily correct answer. An invoice-level Boolean cannot represent this."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the eleven block reasons in the enum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MOTOR_VEHICLE (Section 17(5)(a) and (b)), FOOD_BEVERAGE (17(5)(b)(i)), CONSTRUCTION_IMMOVABLE (17(5)(c) and (d)), GIFT_SAMPLE_WELFARE (17(5)(g) and (h)), CSR (17(5)(b)(iii)), CLUB_HEALTH_LTA (17(5)(b)(ii)), COMPOSITION_DEALER (Sections 10 and 17(5)(e)), INVOICE_GST_INVALID (operational — invoice fails GSTIN or format check), POS_BLOCKED (place-of-supply block under IGST Act Sections 12/13), PERSONAL_CONSUMPTION (17(5)(g)), and OTHER (documented exception, free-text note mandatory). Ad-hoc block strings are not accepted — the enumeration is the contract between the procurement team's tax decision and the GSTR-3B filing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can ITC be changed after PO approval?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For domestic POs, ITC is decided and locked at PO approval. The approver passes an itc_overrides payload alongside the approve call; the system records PO_ITC_EDITED_AT_APPROVAL with before-and-after deltas per changed line. Once approved, attempts to mutate ITC via GRN endpoints return HTTP 409 ITC_LOCKED_POST_APPROVAL. For imports — where the Bill of Entry with actual IGST and Cess often lands after physical receipt — POST /grn/{id}/itc-override allows per-line ITC override on the GRN itself up to (but not including) POSTED. The endpoint is allowed only when the parent PO is flagged is_import=true; POSTED GRNs return 409 ITC_LOCKED_POST_POSTING."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the GSTR-3B reconciliation CSV report work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GET /reports/itc-blocked-purchases streams a CSV designed for GSTR-3B Table 4(B) — ineligible ITC reporting. Two row types: PO_LINE (every PO line with itc_eligible=false) and COMPONENT (every asset cost component with itc_eligible=false). Each row carries PO number and date, vendor name and GSTIN, invoice number and date, GRN number, line description, basic amount, GST amount, block reason, block reason note, and asset ID. Filterable by date range on PO date, block reason code, and vendor. The CSV is the working file for the GSTR-3B preparer — every line that should NOT appear in Table 4(A) and SHOULD appear in Table 4(B), with documentation per block."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/per-line-gst-itc">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/per-line-gst-itc">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo" aria-label="ProcureTrail home"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/advisory">Advisory</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/guides">Guides</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Per-Line GST ITC — <span class="highlight">Block One Item, Not the Whole Invoice</span></h1>
+        <p class="hero-sub">Decide Input Tax Credit eligibility per PO line, per GRN line, and per asset cost component — with eleven statutory block reasons, a separate cess flag, audit-logged edits through approval, and a CSV report tuned for GSTR-3B Table 4(B) reconciliation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Section 17(5) of the CGST Act blocks ITC on ten categories of supplies — motor vehicles, food and beverages, immovable construction, gifts and samples, CSR contributions, club and health, composition-dealer supplies, invalid GST, place-of-supply blocks, personal consumption. Every one of these is item-level, not invoice-level.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Most procurement systems hold ITC eligibility as an invoice-level Boolean — or, worse, as a free-text remarks field. That model forces an all-or-nothing decision at invoice booking, blurs the audit trail when one line is ineligible, and turns GSTR-3B reconciliation into a manual exercise of grep-and-sum across notes.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Tax auditors flag this under Section 17(5) (mis-claim of ineligible ITC) and GSTR-3B Table 4(B) (ineligible ITC reporting). Statutory auditors flag it under SA 250 — Consideration of Laws and Regulations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How ProcureTrail Addresses This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          </div>
+          <h3>Four ITC Columns at Three Levels</h3>
+          <p>Every PO line, every GRN line, and every asset cost component carries four ITC columns — itc_eligible (Boolean, is GST ITC claimable), itc_blocked_reason (eleven-value statutory enum), itc_blocked_reason_note (free text, required when reason=OTHER), and cess_itc_eligible (Boolean, independent of itc_eligible so a cess-only block is expressible). Requisitions intentionally do not carry these columns — ITC is a procurement decision (at PO approval) and a receipt decision (for imports, on the GRN), not a requisition decision.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>Eleven-Value Statutory Block-Reason Enum</h3>
+          <p>The block-reason enumeration mirrors Section 17(5) plus three operational categories — MOTOR_VEHICLE, FOOD_BEVERAGE, CONSTRUCTION_IMMOVABLE, GIFT_SAMPLE_WELFARE, CSR, CLUB_HEALTH_LTA, COMPOSITION_DEALER, INVOICE_GST_INVALID, POS_BLOCKED, PERSONAL_CONSUMPTION, OTHER. Ad-hoc block strings are not accepted. The enumeration is the contract between the procurement team's tax decision and the GSTR-3B filing — every block ties to a specific statutory or operational reference.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3>Audit-Logged Edits at PO Approval</h3>
+          <p>ITC values on a domestic PO line are decided at PO approval. The approver can pass an itc_overrides payload alongside the approve call; the system records PO_ITC_EDITED_AT_APPROVAL with before-and-after deltas for every changed line. Once approved, ITC values are locked through to posting — attempts to mutate via GRN endpoints return HTTP 409 ITC_LOCKED_POST_APPROVAL. The GRN inherits the PO's ITC posture line by line.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+          </div>
+          <h3>Import GRN Override — Pre-POSTED</h3>
+          <p>Imports are different. The Bill of Entry with the actual IGST and Cess levied often lands after physical receipt. ProcureTrail allows ITC override on the GRN up to (but not including) POSTED: POST /grn/{grn_id}/itc-override accepts per-line overrides with grn_line_id, itc_eligible, itc_blocked_reason, itc_blocked_reason_note and cess_itc_eligible. Allowed only when the parent PO is flagged is_import=true AND the GRN is not yet POSTED. Audit action GRN_IMPORT_ITC_EDITED records every change. 409 envelopes: ITC_LOCKED_POST_APPROVAL (domestic), ITC_LOCKED_POST_POSTING (GRN already posted).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>GSTR-3B Reconciliation CSV</h3>
+          <p>GET /reports/itc-blocked-purchases streams a CSV designed specifically for GSTR-3B Table 4(B). Two row types: PO_LINE (every PO line with itc_eligible=false) and COMPONENT (every asset cost component with itc_eligible=false). Each row carries PO number, vendor name, vendor GSTIN, invoice number, GRN number, line description, basic amount, GST amount, block reason, reason note, and asset ID. Filters: date range on PO date, block-reason code, vendor. The CSV is the working file for the GSTR-3B preparer — every line that should NOT appear in Table 4(A) and SHOULD appear in Table 4(B), with documentation per block.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h3>PO PDF Safety — ITC Stance Never Leaks to the Vendor</h3>
+          <p>The vendor receives the PO; the vendor must not see the buyer's internal ITC stance on the line. The PO PDF builder explicitly excludes every ITC field name (itc_eligible, itc_blocked_reason, itc_blocked_reason_note, cess_itc_eligible), all eleven block-reason enum values, the free-text reason note, and the human labels ("ITC not claimed", "Claim GST ITC"). A regression test pins the absence — a future copy-paste cannot silently leak the field by accident.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional Note -->
+  <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container" style="text-align: center; max-width: 780px;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">Optional — Opt In Per Organisation</h3>
+      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">Per-line ITC is governed by a per-organisation flag, default off. While off, every per-line read site falls through to the legacy batch-level path — byte-identical Tally payloads, depreciation base, landed cost. Flipping the flag on per organisation requires a 48-hour bake period before re-enablement is treated as stable. AssetCostComponent rows automatically carry their own copy of the four ITC columns at goods receipt posting, so the per-line posture is traceable from PO line through GRN line to the asset cost component ledger.</p>
+    </div>
+  </section>
+
+  <!-- Cross-Flag Invariants -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Cross-Flag Invariants — Unreachable Combinations</h2>
+      <p class="section-sub">Two ITC-related configuration flags interact in ways that the system enforces as invariants. Three of the four combinations are valid; one is structurally unreachable — and two more are statutorily incoherent.</p>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Combo D — Unreachable</h3>
+          <p>The combination GST_ITC_ENABLED=false plus PER_LINE_ITC_ENABLED=false would mean no ITC governance anywhere. Setting GST_ITC_ENABLED=false auto-flips PER_LINE_ITC_ENABLED=true (idempotent). Setting PER_LINE_ITC_ENABLED=false while GST_ITC_ENABLED is already false raises HTTP 422 PER_LINE_ITC_REQUIRED_WHEN_ORG_ITC_DISABLED.</p>
+        </div>
+        <div class="why-item">
+          <h3>Cess Requires GST</h3>
+          <p>Compensation Cess ITC can only be set off against output cess liability (Section 11(2), GST Compensation Cess Act 2017). An org with GST_ITC_ENABLED=false cannot claim cess ITC either — the credit would be stranded. Setting GST_ITC_ENABLED=false auto-disables CESS_ITC_ELIGIBLE=false. Setting CESS_ITC_ELIGIBLE=true while GST_ITC_ENABLED=false raises HTTP 422 CESS_ITC_REQUIRES_GST_ITC.</p>
+        </div>
+        <div class="why-item">
+          <h3>Migration Retrofit</h3>
+          <p>A migration retrofitted existing organisations at feature ship — every org with GST_ITC_ENABLED=false was flipped to PER_LINE_ITC_ENABLED=true so no pre-existing organisation is sitting in the unreachable combination by accident.</p>
+        </div>
+        <div class="why-item">
+          <h3>Audit Action Coverage</h3>
+          <p>PO_ITC_EDITED_AT_APPROVAL, GRN_IMPORT_ITC_EDITED, and every SystemConfig flip that touches GST_ITC_ENABLED, PER_LINE_ITC_ENABLED, CESS_ITC_ELIGIBLE writes to the audit log. The chain from organisation-level switch to line-level decision is fully traceable.</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:32px; color:var(--text-muted); font-size:0.938rem;">
+        The invariants exist so a misconfigured organisation cannot accidentally claim cess ITC after disabling regular ITC, and cannot accidentally leave ITC ungoverned at both the org and line level. Both checks live on the SystemConfig setter — there is no path that bypasses them.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">11</div>
+          <div class="stat-label">Statutory block reasons</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">ITC columns per line</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Levels carry ITC posture (PO / GRN / component)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0</div>
+          <div class="stat-label">ITC fields in the vendor PO PDF</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Compliance Mapping</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>CGST Act 2017</h3>
+          <p class="compliance-ref">Section 17(5)</p>
+          <p>Blocked ITC categories enumerated as an eleven-value enum on every line. Audit-logged edits through PO approval, locked through to posting — auditor can trace every blocked ITC decision to an approval event.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>GST Compensation Cess Act 2017</h3>
+          <p class="compliance-ref">Section 11(2)</p>
+          <p>Cess ITC set-off restriction. Separate cess_itc_eligible flag; Cess-Requires-GST invariant enforced at the SystemConfig setter — cess credit cannot be retained when regular GST ITC is disabled at the org level.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>GSTR-3B Table 4(B)</h3>
+          <p class="compliance-ref">Ineligible ITC Reporting</p>
+          <p>/reports/itc-blocked-purchases CSV streams every PO line and asset cost component with itc_eligible=false, with vendor name, vendor GSTIN, invoice and reason. The working file for the GSTR-3B preparer — Table 4(B) is just a sum.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Companies Act 2013</h3>
+          <p class="compliance-ref">Section 143(3)(i)</p>
+          <p>Internal financial controls. PO PDF safety guard prevents the buyer's internal ITC stance leaking to vendor-facing documents; SA 250 (laws and regulations) covered by audit-logged edits + post-approval lock + GSTR-3B-tuned report.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/import-accounting" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Import Accounting</a>
+        <a href="/landed-cost" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Landed Cost</a>
+        <a href="/grn-goods-receipt" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Goods Receipt</a>
+        <a href="/vendor-debit-note" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Vendor Debit Notes</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Compliance</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Further Reading -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Further Reading</h2>
+      <a href="/import-accounting" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Import Accounting — Bill of Entry &amp; Five-Bucket Receipts</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">Where the GRN ITC override sits in the broader import-accounting flow — Bill of Entry, five-bucket receipts, customs duty journal routing.</p>
+      </a>
+      <a href="/landed-cost" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Landed Cost Capitalisation</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">How the four ITC columns mirror onto the AssetCostComponent ledger — the GST and cess portion of every landed cost head is independently traceable.</p>
+      </a>
+      <a href="/gst-itc-reversed-vendor-gstin" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">GST ITC Reversed Due to Vendor GSTIN Change</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">How per-line ITC posture protects credit when a downstream vendor master change would otherwise reverse a whole invoice.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief on your typical ITC profile — blocked-ITC volume, mix of domestic and import procurement, GSTR-3B reconciliation effort — and we will evaluate how per-line ITC governance fits your books.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement &amp; asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h3>Services</h3>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+          <a href="/advisory">Advisory</a>
+        </div>
+        <div class="footer-col">
+          <h3>More</h3>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/expense-register">Expense Register</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/import-accounting">Import Accounting</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landed Cost Capitalisation — Freight, CHA, Insurance &amp; Customs Duty to the Asset | Oparc</title>
+  <meta name="description" content="Capitalise freight, CHA, insurance and customs duty to the underlying asset with a per-component cost ledger, basic/GST/cess split, GRN allocation links, and SA approval routed to the goods receiver.">
+  <meta name="keywords" content="landed cost software India, asset capitalisation, freight capitalisation, CHA capitalisation, asset cost components, fixed asset book value, landed cost allocation, capitalize to asset, AssetCostComponent ledger, basic GST cess split, depreciable base">
+  <link rel="canonical" href="https://oparc.in/landed-cost">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oparc.in/landed-cost">
+  <meta property="og:title" content="Landed Cost Capitalisation — Freight, CHA, Insurance &amp; Customs Duty to the Asset | Oparc">
+  <meta property="og:description" content="Per-component asset cost ledger with basic / GST / cess split, GRN allocation links, and SA approval routed to the goods receiver — depreciable base built from every cost head.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Landed Cost Capitalisation — Per-Component Asset Cost Ledger | Oparc">
+  <meta name="twitter:description" content="Capitalise freight, CHA, insurance and customs duty per asset with a per-component ledger, basic / GST / cess split and SA approval routed to the goods receiver.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Landed Cost Capitalisation — Per-Component Asset Cost Ledger",
+    "description": "Capitalise every cost head — freight, CHA, insurance, customs duty, installation — to the underlying asset with a per-component cost ledger, basic / GST / cess split per component, GRN allocation linkage to the source PO or SA line, and SA approval routed to the goods receiver.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
+    "serviceType": "Landed Cost Capitalisation"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Landed Cost", "item": "https://oparc.in/landed-cost" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is landed cost in the context of asset capitalisation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Landed cost is the total cost added to an asset's book value beyond the basic invoice price of the underlying item — freight, CHA charges, in-transit insurance, customs duty heads (BCD, SWS, IGST, Cess on imports), and installation. ProcureTrail captures each cost head as its own AssetCostComponent row tied to its source PO, SA, GRN and vendor invoice, with a basic / GST / cess split per component. The total landed cost is automatically recomputed after every GRN post or reversal — never edited manually."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the capitalize_to_asset flag decide between expense and capital treatment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every PO line carries a Boolean capitalize_to_asset. When true, the line is paired with a landed cost category (Freight, CHA, Insurance, etc.) and linked at GRN posting to one or more goods GRN lines via a GRNLandedCostLink record. The line does not enter the period expense register — it instead writes an AssetCostComponent row against the receiving asset. When false, the line behaves as a normal expense PO and posts to the period expense register."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the SA approval for capitalisable expense POs route to the GRN final approver?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When every line on a Service Acceptance belongs to expense POs marked capitalize_to_asset=true AND at least one GRNLandedCostLink exists on those lines, the SA approval routes to the final approver of the linked GRN — not the expense PO's normal matrix. The person who received the goods (and is on the hook for the asset's book value being right) is the appropriate authority to sign off on what gets added to its base. This closes a common failure mode where a freight invoice routes for approval to the operations head while the goods receiver never sees it. If multiple GRNs are linked, the GRN with the highest cumulative linked amount wins; mixed SAs fall through to standard expense-PO routing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are customs duty heads handled on imports?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For imports under the v2 import accounting flow, customs duty (BCD, SWS, IGST, Cess) is capitalised directly from the Bill of Entry line — not from any landed cost category. The customs duty journal voucher and the asset capitalisation read the same per-HSN-line BoE figures, so the total landed cost on the asset matches the Fixed Assets debit total in Tally byte for byte. Category names that resemble customs duty heads (\"customs duty\", \"BCD\", \"SWS\", \"compensation cess\", \"IGST on import\") are rejected at create time with a CUSTOMS_DUTY_PATTERN_RESERVED guard to prevent double-capitalisation. An org-admin override is available for documented exceptions."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/landed-cost">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/landed-cost">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo" aria-label="ProcureTrail home"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/advisory">Advisory</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/guides">Guides</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Landed Cost — <span class="highlight">Freight, CHA, Insurance &amp; Customs Duty to the Asset</span></h1>
+        <p class="hero-sub">Build the depreciable base of an asset from every cost head with a per-component ledger, document linkage to source, and a basic / GST / cess split per component that keeps Input Tax Credit traceable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>An imported asset's invoice value is rarely its true cost. By the time it reaches the user, the cost has picked up freight (a separate vendor invoice), CHA charges (a third vendor), in-transit insurance (a fourth), customs duty (a Bill of Entry payment to customs), and installation (a fifth invoice).</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Entering a single "asset cost" number on the fixed asset register and capturing the cost components in a spreadsheet or in narrative notes leaves no audit trail. The accounting treatment differs by component — capitalise, expense, recover as ITC — and that treatment cannot be reconstructed from a single number.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Auditors flag this under CARO 2020 Clause 3(i) (proper records of fixed assets including quantitative details and situation) and under Schedule II of the Companies Act 2013 — depreciable amount must be based on actual cost, evidenced not asserted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How ProcureTrail Addresses This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2H7a2 2 0 00-2 2v2m14 0V9m-14 2V9m9-4a3 3 0 00-3 3v2h6V8a3 3 0 00-3-3z"/></svg>
+          </div>
+          <h3>Landed Cost Categories — Governance-Enforced</h3>
+          <p>Every cost head — Freight, CHA, Insurance, Installation, Customs Brokerage — is a LandedCostCategory master record, scoped to the organisation, with a unique name. Reserved-name guard rejects categories that resemble customs duty heads ("customs duty", "BCD", "SWS", "compensation cess", "IGST on import") with HTTP 422 CUSTOMS_DUTY_PATTERN_RESERVED — duties are captured on the Bill of Entry, never as a category, so double-capitalisation is impossible. Categories referenced by any PO line cannot be hard-deleted — soft-delete only, preserves the historical linkage.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h3>capitalize_to_asset — Expense or Capital, Decided at PO</h3>
+          <p>Every PO line carries a Boolean capitalize_to_asset. When set, the line is paired with a landed cost category and at GRN posting linked to one or more goods GRN lines via a GRNLandedCostLink record with an explicit allocated amount. The line does not enter the period expense register — it writes an AssetCostComponent row to the asset receiving the cost. Allocation guards: cumulative allocations cannot exceed the source line's basic value × ordered quantity; self-referential links rejected at validation; soft-reversible on GRN reversal.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>AssetCostComponent Ledger — The Audit Trail</h3>
+          <p>Every contribution to the asset's landed cost is its own row. The ledger carries category, vendor invoice (number, date, amount), source documents (PO, SA, GRN with line references), basic / GST / cess split for ITC traceability, per-component ITC posture (itc_eligible, itc_blocked_reason, cess_itc_eligible) mirroring the parent line, and a reversed flag. GET /asset-register/{id}/cost-breakdown returns the full component ledger for any asset — when an auditor asks "what is the freight component of this asset's book value?", the answer is one query.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h3>Total Landed Cost — Always Derived, Never Edited</h3>
+          <p>After every GRN post and every GRN reversal, recalculate_landed_cost(asset_id) re-sums the active (non-reversed) components and writes the total back to AssetRegister.total_landed_cost. The total is never edited manually — it is always derived from the component ledger. Drift between the components and the headline total is structurally impossible. Reversal cascades through automatically: a soft-reversed component is excluded from the next recompute.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </div>
+          <h3>SA D6 Routing Override — The Goods Receiver Signs Off</h3>
+          <p>When every line of a Service Acceptance belongs to expense POs marked capitalize_to_asset=true AND at least one GRNLandedCostLink exists, the SA approval routes to the final approver of the linked GRN — not to the expense PO's normal approval matrix. The person who received the asset (and is on the hook for its book value) approves the cost that gets added to its base. If multiple GRNs are linked, the GRN with the highest cumulative linked amount wins. Mixed SAs (any non-capitalise line) fall through to standard routing.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3>Imports — Bill of Entry as the Source of Duty</h3>
+          <p>For imports under the v2 Import Accounting flow, customs duty (BCD, SWS, IGST, Cess) is capitalised directly from the Bill of Entry line — not from header-level proportional allocation across landed cost categories. The customs duty journal voucher and the asset capitalisation read the same per-HSN-line BoE figures, so the total landed cost on the asset matches the Fixed Assets debit total in Tally byte for byte. See <a href="/import-accounting" style="color:var(--primary); text-decoration:underline;">Import Accounting</a> for the recovery-path matrix and per-bucket duty routing.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional Note -->
+  <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container" style="text-align: center; max-width: 780px;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">Three Source Documents Per Cost Component</h3>
+      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">Every AssetCostComponent row carries up to three source-document references — the PO line that authorised the cost, the SA line that accepted the service (where applicable), and the GRN line that received the underlying goods. The triple-linkage answers three audit questions in one query: who authorised the spend, who accepted delivery of the cost head, and which physical receipt did it attach to. The basic / GST / cess split keeps the capitalised portion and the ITC-claimable portion independently reconstructable per component.</p>
+    </div>
+  </section>
+
+  <!-- Cost Composition Matrix -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Cost Composition Behind Each Asset</h2>
+      <p class="section-sub">Every cost head reaches the asset through one of two paths — domestic landed cost categories or the imports Bill of Entry. Both write the same AssetCostComponent ledger.</p>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Basic Asset Cost</h3>
+          <p>The primary goods PO line — unit basic rate × ordered quantity, written to AssetCostComponent at GRN post with the GRN as source. The first row in every asset's cost breakdown.</p>
+        </div>
+        <div class="why-item">
+          <h3>Domestic Landed Costs</h3>
+          <p>Freight, CHA, Insurance, Installation, Customs Brokerage — every category that the org defines. Each captured on its own expense PO (capitalize_to_asset=true), allocated at GRN to one or more goods GRN lines.</p>
+        </div>
+        <div class="why-item">
+          <h3>Customs Duty (Imports Only)</h3>
+          <p>BCD, SWS, IGST on import, Compensation Cess — captured per-HSN-line on the Bill of Entry. Capitalised portion written directly to AssetCostComponent; ITC-eligible portion routed to Input IGST. No category needed.</p>
+        </div>
+        <div class="why-item">
+          <h3>Reversals</h3>
+          <p>GRN reversal soft-flags every AssetCostComponent it wrote. The recompute excludes soft-reversed rows. The total landed cost on the asset moves back to its prior value automatically — no manual adjustment.</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:32px; color:var(--text-muted); font-size:0.938rem;">
+        Auditors asking "show me how this asset reached its book value" get a chronological component ledger — basic + every landed cost head + every customs duty head — each row linked to its source document and vendor invoice. The cost-breakdown endpoint is the working evidence behind Schedule II depreciable amount.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Cost heads typical to a capitalised asset</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Source documents per component</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Total landed cost — always derived</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Drift between components and headline total</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Compliance Mapping</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>Companies Act 2013</h3>
+          <p class="compliance-ref">Schedule II</p>
+          <p>Depreciable amount based on actual cost. Component ledger captures every contribution; total_landed_cost derived, not entered. The depreciable base is reconstructable per asset on demand.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>CARO 2020</h3>
+          <p class="compliance-ref">Clause 3(i)</p>
+          <p>Proper records of fixed assets including quantitative details and situation. Per-asset cost-breakdown endpoint surfaces every cost component with PO, SA, GRN and vendor invoice linkage.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Ind AS 16 / AS 10</h3>
+          <p class="compliance-ref">Cost of Acquisition</p>
+          <p>Directly attributable costs at cost of acquisition. The capitalize_to_asset flag pairs each cost head with its target asset; GRNLandedCostLink records the allocation amount and source line.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>CGST Act 2017</h3>
+          <p class="compliance-ref">Section 17</p>
+          <p>ITC on capital goods. Basic / GST / cess split on each component; per-component ITC fields (itc_eligible, cess_itc_eligible) preserve eligibility through capitalisation to the asset cost component level.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/import-accounting" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Import Accounting</a>
+        <a href="/per-line-gst-itc" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Per-Line GST ITC</a>
+        <a href="/grn-goods-receipt" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Goods Receipt &amp; Gate Entry</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Fixed Asset Register</a>
+        <a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Tally Integration</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Further Reading -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Further Reading</h2>
+      <a href="/import-accounting" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Import Accounting — Bill of Entry &amp; Five-Bucket Receipts</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">How customs duty heads (BCD, SWS, IGST, Cess) reach the asset cost component on imports without going through landed cost categories.</p>
+      </a>
+      <a href="/per-line-gst-itc" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Per-Line GST ITC — Block One Item, Not the Whole Invoice</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">Why the GST and cess portions of each landed cost component carry their own ITC posture all the way to the asset cost ledger.</p>
+      </a>
+      <a href="/tally-asset-integration-guide" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Tally Asset Integration — From PO to Asset Master</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">How the AssetCostComponent ledger maps to the Tally Fixed Assets debit at goods receipt posting.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your typical landed cost composition — domestic freight versus imports, single-vendor versus multi-vendor — and we will evaluate how the per-component asset cost ledger fits your books.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement &amp; asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h3>Services</h3>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+          <a href="/advisory">Advisory</a>
+        </div>
+        <div class="footer-col">
+          <h3>More</h3>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/expense-register">Expense Register</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/import-accounting">Import Accounting</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>

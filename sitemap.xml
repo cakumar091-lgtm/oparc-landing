@@ -91,6 +91,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oparc.in/landed-cost</loc>
+    <lastmod>2026-05-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://oparc.in/per-line-gst-itc</loc>
+    <lastmod>2026-05-14</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oparc.in/vendor-debit-note</loc>
     <lastmod>2026-04-19</lastmod>
     <priority>0.8</priority>
