@@ -218,6 +218,17 @@
     </div>
   </section>
 
+  <!-- Edit and Withdraw -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Edit and withdraw before approval</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">Mistakes happen at the requisition stage. ProcureTrail lets the creator correct them without re-keying.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;"><strong>Edit a DRAFT requisition</strong> &mdash; <code>PATCH /requisitions/{id}</code>. The creator can edit any field. The field rules engine re-validates the requisition against its requisition type before save, so an edit cannot leave the requisition in an invalid state.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;"><strong>Withdraw an in-flight requisition back to DRAFT</strong> &mdash; <code>POST /requisitions/{id}/withdraw</code>. Walks a SUBMITTED, PARTIALLY_APPROVED or APPROVED requisition back to DRAFT for re-edit, provided no purchase order has yet been raised against it. A 1&ndash;500 character <code>withdraw_reason</code> is mandatory and is preserved in the audit trail. Active POs block the withdraw with a structured 409.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">Both endpoints are restricted to the original creator. The audit trail records every edit and every withdraw event with before/after state.</p>
+    </div>
+  </section>
+
   <!-- Optional Modules Note -->
   <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container" style="text-align: center; max-width: 720px;">

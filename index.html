@@ -187,6 +187,58 @@
     </div>
   </section>
 
+  <!-- What's new since April 2026 -->
+  <section class="features" style="background: #fff;">
+    <div class="container">
+      <h2 class="section-title">What's new &mdash; shipped since April 2026</h2>
+      <p class="section-sub">Six capabilities have shipped since the April release. Each is governance-grade and ready to use.</p>
+      <div style="overflow-x:auto; margin-top:48px;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.875rem; min-width:600px;">
+          <thead>
+            <tr style="background:var(--navy); color:#fff;">
+              <th style="padding:12px 16px; text-align:left; font-weight:600;">Capability</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:600;">What it does</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:600;">Read more</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">Quantity-split PO</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Multiple POs can claim parts of the same requisition line, with live remaining-quantity tracking and a 409 envelope that blocks over-claiming at server commit.</td>
+              <td style="padding:12px 16px;"><a href="/purchase-order-approval.html">Purchase order approval</a></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border); background:var(--bg-warm);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">Per-line GST ITC</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Input Tax Credit eligibility decided per PO/GRN line &mdash; not per invoice &mdash; with eleven statutory block reasons and a CSV report wired to GSTR-3B reconciliation.</td>
+              <td style="padding:12px 16px;"><a href="/per-line-gst-itc.html">Per-line GST ITC</a></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">Import accounting v2</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Bill of Entry as source of truth for customs duty; five-bucket goods receipts (accepted / normal loss / rejected / damaged / short-landed) with recovery-path routing for Tally.</td>
+              <td style="padding:12px 16px;"><a href="/import-accounting.html">Import accounting</a></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border); background:var(--bg-warm);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">Landed cost management</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Capitalise freight, CHA, insurance and customs duty to the underlying asset with a per-component cost ledger and Service Acceptance approval routed to the goods receiver.</td>
+              <td style="padding:12px 16px;"><a href="/landed-cost.html">Landed cost</a></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">Pickup log</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Dual-layer collection tracking &mdash; gate-first with goods-receipt fallback &mdash; answering &ldquo;who took the rejected items?&rdquo; with append-only audit.</td>
+              <td style="padding:12px 16px;"><a href="/grn-goods-receipt.html">Goods receipt &mdash; pickup tracking</a></td>
+            </tr>
+            <tr style="background:var(--bg-warm);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">Tally wizard v2 + multi-currency</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Discovery-driven setup (scan &rarr; pick existing / create new / skip), foreign-currency vendor ledgers with inline forex grammar, and journal-flipped reversals.</td>
+              <td style="padding:12px 16px;"><a href="/tally-integration.html">Tally integration</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align:center; margin-top:24px; color:var(--text-muted); font-size:0.875rem;">All six are progressive &mdash; your existing flows keep working unchanged until you opt in.</p>
+    </div>
+  </section>
+
   <!-- Common Challenges -->
   <section class="problems">
     <div class="container">

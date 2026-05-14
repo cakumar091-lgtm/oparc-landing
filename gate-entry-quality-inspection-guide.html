@@ -171,6 +171,8 @@
 
     <p>The security team sees a list of approved purchase orders pending delivery — so they know what to expect. When a vendor arrives, the guard matches the delivery against a specific PO, inspects the goods, and records the 3-bucket split.</p>
 
+    <p>The gate-entry surface is now split into two role capabilities: <code>gate_entry</code> (view-only &mdash; anyone in the receipt chain can see what's been inspected) and <code>gate_entry_operate</code> (write &mdash; only security personnel and admins record inspections and record pickups). The split lets you keep visibility wide without widening the operating surface.</p>
+
     <h2>4. From Gate to GRN</h2>
 
     <p>When gate entry is enabled, GRN creation does not start from scratch. The <a href="/grn-goods-receipt">GRN</a> form is pre-populated with gate entry data:</p>
@@ -195,6 +197,9 @@
 
     <h3>5.3 Under-Receipt</h3>
     <p>If the vendor delivers 80 units against a PO for 100, the gate entry records 80 (split into accepted/rejected/damaged). The remaining 20 are not yet delivered. For PIECEMEAL delivery mode POs, the vendor can deliver the remaining 20 in a subsequent delivery — a new gate entry is created for the second delivery. The cumulative received quantity is tracked against the ordered quantity.</p>
+
+    <h3>5.4 Who Collected the Rejected Items?</h3>
+    <p>For physical disposition &mdash; who collected the rejected items, when, and against what challan &mdash; ProcureTrail tracks this in an append-only pickup log. <code>POST /gate-entry/lines/{id}/record-pickup</code> captures the collector (vendor, transporter, or other), phone, challan, vehicle and remarks; <code>POST /gate-entry/lines/{id}/scrap</code> records a scrap event with a 10&ndash;2,000 character reason and a PO-approver-or-admin authorisation. Corrections flow through a soft-delete void rather than an edit-in-place, so the audit trail stays forensic.</p>
 
     <h2>6. Correction Workflow</h2>
 

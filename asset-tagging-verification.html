@@ -183,7 +183,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
           </div>
           <h3>PWA Mobile Scanner</h3>
-          <p>Scan QR codes using a phone camera. No app installation required — works in any mobile browser. Supports manual entry and RFID batch upload for high-volume scanning. Condition reporting (Good/Fair/Poor/Damaged/Not Found) at scan time.</p>
+          <p>Scan QR codes using a phone camera. No app installation required &mdash; works in any mobile browser. Supports manual entry and RFID batch upload for high-volume scanning. Condition reporting (Good/Fair/Poor/Damaged/Not Found) at scan time via <code>POST /tags/scan</code>, or without a scan at all via the dedicated <code>POST /tags/condition-report</code> &mdash; the latter records condition directly against the asset (useful for annual custodian reviews) without requiring a scan event. Both endpoints feed the same audit log.</p>
         </div>
 
         <div class="feature-card">

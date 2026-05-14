@@ -210,8 +210,8 @@
           <p>Every organisation's data is completely isolated. Your procurement records, asset register, and audit trails are never shared with or visible to any other organisation on the platform.</p>
         </div>
         <div class="why-item">
-          <h3>Module Toggles</h3>
-          <p>Enable only what you need. Gate entry, Tally integration, HSN validation, GRN posting — each module can be toggled independently based on your requirements.</p>
+          <h3>Configuration is Data, Not Code</h3>
+          <p>The system configuration registry now holds 40+ keys &mdash; every toggle and every threshold is a config row, editable by the org admin without a deployment. Recent additions include <code>PER_LINE_ITC_ENABLED</code> (turn on per-line GST ITC governance), <code>IMPORT_ACCOUNTING_ENABLED</code> (Bill-of-Entry-sourced customs duty and five-bucket receipts), <code>AUTO_CREATE_VDN_AT_GRN_POST_ENABLED</code> (auto-raise vendor debit notes on rejection at post), <code>INVOICE_DUTY_REQUIRED_AT_POST</code> and <code>INVOICE_COMPLETE_REQUIRED_AT_POST</code> (invoice-document gates before GRN post), <code>ALLOW_CUSTOMS_DUTY_LCC_NAMES</code> (admin override of the reserved-name guard on landed-cost categories), <code>EMAIL_DOMAIN_RESTRICTION_ENABLED</code> with <code>ALLOWED_EMAIL_DOMAIN</code> (lock signups to a corporate domain), and <code>PRICE_TOLERANCE_PERCENT</code> (mismatch auto-resolution threshold). Every change is audit-logged. Defaults are conservative &mdash; new behaviour ships off, ready to enable per organisation after a documented review.</p>
         </div>
       </div>
     </div>

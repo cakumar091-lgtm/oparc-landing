@@ -226,27 +226,48 @@
   <section class="why-us">
     <div class="container">
       <h2 class="section-title">Vendor Debit Notes</h2>
-      <p class="section-sub">Unresolved variances that require financial adjustment result in vendor debit notes — each with correct GST treatment and a compliant PDF.</p>
-      <div class="why-grid">
-        <div class="why-item">
-          <h3>Rejection</h3>
-          <p>Goods rejected at receipt or gate entry. Debit amount calculated with GST split.</p>
-        </div>
-        <div class="why-item">
-          <h3>Under-Received</h3>
-          <p>Quantity shortfall against invoice. The difference between invoiced and accepted quantities drives the debit.</p>
-        </div>
-        <div class="why-item">
-          <h3>Damage</h3>
-          <p>Goods received in damaged condition. Documented at gate entry or GRN with condition remarks.</p>
-        </div>
-        <div class="why-item">
-          <h3>Price Excess</h3>
-          <p>Invoice rate exceeds the agreed PO rate. The unit price variance is applied across the accepted quantity.</p>
-        </div>
+      <p class="section-sub">Unresolved variances that require financial adjustment result in vendor debit notes &mdash; each with correct GST treatment and a compliant PDF.</p>
+      <div style="overflow-x:auto; margin-top:32px;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.875rem; min-width:600px;">
+          <thead>
+            <tr style="background:var(--navy); color:#fff;">
+              <th style="padding:12px 16px; text-align:left; font-weight:600;">VDN Type</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:600;">Trigger</th>
+              <th style="padding:12px 16px; text-align:left; font-weight:600;">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">REJECTION</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Goods rejected at receipt or gate entry</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">&mdash;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border); background:var(--bg-warm);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">UNDER_RECEIVED</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Quantity shortfall against invoice</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">&mdash;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">DAMAGE</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Goods received in damaged condition</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">&mdash;</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border); background:var(--bg-warm);">
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">PRICE_EXCESS</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Invoice rate exceeds agreed PO rate</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">&mdash;</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 16px; font-weight:600; color:var(--navy);">SHORT_LANDED</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Import shipment short-landed at port</td>
+              <td style="padding:12px 16px; color:var(--text-muted);">Captures <code>debit_foreign_amount</code>, <code>fx_rate_at_grn</code>, <code>debit_duty_amount</code> so the recovery is denominated in the vendor's billing currency</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <p style="text-align:center; margin-top:32px; color:var(--text-muted); font-size:0.938rem;">
-        Each VDN generates a GST-compliant PDF — titled "Tax Debit Note" when the organisation's GSTIN is configured, or "Debit Note" otherwise. The PDF includes organisation and vendor identity blocks, item table, tax breakdown, amount in words, and approval stamps. VDN posting enqueues the corresponding Tally journal entry.
+      <p style="margin-top:24px; color:var(--text-muted); font-size:0.938rem; line-height:1.7;">Each VDN computes the debit amount with correct GST treatment (CGST/SGST or IGST). For SHORT_LANDED VDNs against foreign-currency vendors, the debit lines carry inline forex (<code>&lt;FOREIGNAMOUNT&gt;</code> and <code>&lt;RATEOFEXCHANGE&gt;</code>) so the journal posts cleanly against the foreign-currency vendor balance &mdash; no manual reclassification needed.</p>
+      <p style="text-align:center; margin-top:24px; color:var(--text-muted); font-size:0.938rem;">
+        Each VDN generates a GST-compliant PDF &mdash; titled "Tax Debit Note" when the organisation's GSTIN is configured, or "Debit Note" otherwise. The PDF includes organisation and vendor identity blocks, item table, tax breakdown, amount in words, and approval stamps. VDN posting enqueues the corresponding Tally journal entry.
       </p>
     </div>
   </section>
@@ -264,7 +285,7 @@
           <div class="stat-label">Resolution tiers</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">4</div>
+          <div class="stat-number">5</div>
           <div class="stat-label">Debit note types</div>
         </div>
         <div class="stat-item">

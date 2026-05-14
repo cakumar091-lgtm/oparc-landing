@@ -214,6 +214,14 @@
     </div>
   </section>
 
+  <!-- Withdraw before approval -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Withdraw a goods receipt back to DRAFT</h2>
+      <p style="color: var(--text-muted); line-height: 1.8;"><code>POST /grn/{id}/withdraw</code> is the receipt-side mirror of the requisition withdraw flow. The GRN creator can walk a SUBMITTED, PARTIALLY_APPROVED or APPROVED goods receipt back to DRAFT for re-edit, provided a 1&ndash;500 character <code>withdraw_reason</code> is supplied. The endpoint is blocked once the goods receipt is POSTED. Every withdraw event is audit-logged with before/after state.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">

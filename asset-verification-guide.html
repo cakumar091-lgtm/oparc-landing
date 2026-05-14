@@ -273,6 +273,10 @@
 
     <p>This three-tier approach is important for organisations transitioning from an older tagging system. Assets do not need to be re-tagged immediately — the system can resolve old tags while new canonical tags are rolled out gradually.</p>
 
+    <h3>3.4 Condition Reporting &mdash; With or Without a Scan</h3>
+
+    <p>Condition is reported through one of two endpoints. <code>POST /tags/scan</code> records condition as part of a tag scan and auto-resolves the asset reference through the three-tier lookup above (P1 canonical &rarr; shadow &rarr; legacy). <code>POST /tags/condition-report</code> records condition directly against the asset without requiring a scan event &mdash; useful for annual custodian reviews where the asset reference is already known and a physical scan is not the workflow. Both endpoints feed the same audit log, and where a scanned value is captured a SHA-256 hash of the input is stored alongside the asset reference for tamper evidence.</p>
+
     <h2>4. Verification Campaigns</h2>
 
     <p>A verification campaign is a structured exercise with defined scope, assignments, and deadlines.</p>

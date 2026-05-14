@@ -126,8 +126,8 @@
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 14l2 2 4-4"/></svg>
           </div>
-          <h3>Four VDN Types</h3>
-          <p>REJECTION (goods rejected at gate or GRN), UNDER_RECEIVED (quantity shortfall vs invoice), DAMAGE (goods received damaged), PRICE_EXCESS (invoice rate exceeds PO rate). Each calculates debit amount with correct GST split.</p>
+          <h3>Five VDN Types</h3>
+          <p>REJECTION (goods rejected at gate or GRN), UNDER_RECEIVED (quantity shortfall vs invoice), DAMAGE (goods received damaged), PRICE_EXCESS (invoice rate exceeds PO rate), and SHORT_LANDED (import shipment short-landed at port &mdash; captures <code>debit_foreign_amount</code>, <code>fx_rate_at_grn</code> and <code>debit_duty_amount</code> so recovery is denominated in the vendor's billing currency). Each calculates debit amount with correct GST split; SHORT_LANDED additionally carries inline forex so the journal posts against the foreign-currency vendor balance natively.</p>
         </div>
 
         <div class="feature-card">
@@ -179,7 +179,7 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-number">4</div>
+          <div class="stat-number">5</div>
           <div class="stat-label">Debit note types</div>
         </div>
         <div class="stat-item">
