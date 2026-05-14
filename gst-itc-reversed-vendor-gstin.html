@@ -192,6 +192,9 @@
     <h3>GST mismatch detection at goods receipt</h3>
     <p>When the vendor's invoice arrives, the <a href="/invoice-matching-guide">invoice matching process</a> compares the invoice's GST amounts against the PO's GST amounts. If there is a discrepancy — different CGST/SGST/IGST amounts, or a different GSTIN on the invoice versus the PO — the mismatch is flagged before the GRN is posted. This catches problems before they reach the books and before ITC is claimed on incorrect amounts.</p>
 
+    <h3>Per-line ITC posture — block one line, not the whole invoice</h3>
+    <p>The scenarios above all assume that ITC eligibility is a yes/no decision at the invoice level. In practice, a single invoice often mixes capitalisable goods with employee-welfare items, vehicle parts, or other inputs that fall under <a href="/per-line-gst-itc">Section 17(5) of the CGST Act</a>. ProcureTrail captures ITC eligibility per line at PO approval, against an eleven-value statutory enum that mirrors the Section 17(5) categories with an <code>OTHER</code> slot for free-text reasons. The eligibility decision is frozen at PO approval — every subsequent edit produces a <code>PO_ITC_EDITED_AT_APPROVAL</code> audit entry with before/after values — and survives mismatch resolution and vendor debit notes. For imports, the posture is editable on the GRN before posting via a documented override path; once posted, it locks. The result is that an ineligible line never enters the ITC pool in the first place — it never has to be reversed through DRC-03 later.</p>
+
     <blockquote>
       <p>The cost of reversing ITC is not just the tax amount. It includes interest at 18 percent per annum, the administrative effort of identifying affected invoices, filing correction statements, and the reputational risk of repeated compliance failures during assessment proceedings. Prevention through structured vendor monitoring costs a fraction of what remediation costs.</p>
     </blockquote>

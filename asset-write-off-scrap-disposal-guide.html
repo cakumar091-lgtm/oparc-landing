@@ -211,6 +211,10 @@
 
     <p>This design exists because scrapped items have residual value. A condemned printer has metal, plastic, and electronic components. An old air conditioner has copper and aluminium. This material sits in the scrap yard until it is sold — and that sale needs a reference in the register. Without a tracking asset, scrap revenue appears in the books with no corresponding asset to link it to.</p>
 
+    <h3>Two paths to SCRAP — register removal vs gate-side rejection</h3>
+    <p>The SCRAP path described above is for items <em>already in the asset register</em>. The asset was procured, received, capitalised, and used — then condemned at end of life or after damage in service. The negative-PR governance described in this guide is what walks it off the register.</p>
+    <p>There is a second SCRAP path for items that <em>never reach the register</em>. When goods are rejected at the gate or found damaged on receipt, they are captured against the gate entry or the GRN, not against an asset record. The disposition is recorded via <code>POST /gate-entry/lines/&lt;id&gt;/scrap</code> (pre-GRN) or <code>POST /grn/&lt;id&gt;/record-pickup</code> with <code>disposition_type=SCRAP</code> (post-GRN). A 10&ndash;2,000 character <code>scrap_reason</code> is mandatory, an <code>authorized_by</code> reference records who from the PO approval chain authorised the scrap, and a void is admin-only and soft-deletes the entry with its own reason. No tracking asset is created — there was no source asset to derive one from. See the <a href="/gate-entry-quality-inspection-guide">gate entry and quality inspection guide</a> for that flow.</p>
+
     <h2>5. DISPOSAL with Proceeds</h2>
 
     <p>Disposal records the removal of an asset through sale or auction. Unlike a <a href="/glossary/write-off-vs-disposal">write-off (where the value goes to zero)</a>, disposal captures what was recovered. The financial impact depends on the relationship between the sale proceeds and the book value:</p>

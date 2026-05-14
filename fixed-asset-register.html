@@ -230,6 +230,15 @@
     </div>
   </section>
 
+  <!-- Cost composition behind each asset -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Cost composition behind each asset</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">An asset's book value rarely comes from a single line on a single invoice. Freight, customs duty, CHA charges, insurance, installation cost &mdash; each of these adds to the capitalised value. ProcureTrail records every contribution as its own <code>AssetCostComponent</code> row, tagged with the source vendor, the source document (PO, SA or GRN), the landed-cost category, the amount, and a basic / GST / cess split. The <code>/asset-register/{id}/cost-breakdown</code> endpoint returns the full component ledger for any asset on demand.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">This is what makes the depreciable base auditable line by line. An auditor can ask &ldquo;what built up the freight component of this asset's cost?&rdquo; and the answer is a list of source documents with full approval lineage &mdash; not a manually reconciled spreadsheet. See <a href="/landed-cost">Landed cost</a> for the capitalisation rules that drive it.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">

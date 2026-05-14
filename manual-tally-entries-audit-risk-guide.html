@@ -389,6 +389,7 @@
 
     <h3>Reversal entries</h3>
     <p>When a GRN is reversed or a service acceptance is cancelled, the reversal entry must mirror the original exactly — same ledgers, same amounts, opposite direction. Manual reversal entries are prone to partial reversal (forgetting to reverse the GST component) or incorrect amounts. System-generated reversals mirror the original entry automatically.</p>
+    <p>The reversal model is itself worth noting. Reversals now ship to Tally as Journal vouchers with the original debits and credits flipped, and Tally's <em>Against Reference</em> field preserves the forward voucher number so the original and the reversal stay paired in Outstandings and in audit trails. The earlier <code>ISOPTIONAL=Yes</code> pattern has been retired — it kept reversed amounts out of Outstandings and made the audit trail harder to read — and now appears only on PO-cancellation forwards. See <a href="/tally-integration">Tally integration</a> for how the pairing is rendered.</p>
 
     <h2>10. Frequently asked questions</h2>
 
