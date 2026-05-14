@@ -192,6 +192,29 @@
     </div>
   </section>
 
+  <!-- GST per-line ITC posture and reporting -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">GST &mdash; per-line ITC posture and reporting</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">Section 17(5) of the CGST Act lists ten categories of supplies on which Input Tax Credit is ineligible: motor vehicles, food and beverage, immovable construction, gifts and samples, CSR, club and health expenses, supplies from composition dealers, invalid-GST invoices, place-of-supply blocks, and personal consumption. ProcureTrail captures the ITC decision per PO line &mdash; not per invoice &mdash; using an eleven-value enumeration that mirrors these statutory categories (plus an <code>OTHER</code> slot for documented edge cases with a free-text note).</p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 22px; margin: 0 0 16px;">
+        <li style="margin-bottom: 10px;">Domestic ITC is decided at PO approval and locked through to posting. Audit action <code>PO_ITC_EDITED_AT_APPROVAL</code> records every change with before/after deltas.</li>
+        <li style="margin-bottom: 10px;">Import ITC remains editable on the goods receipt until posting via <code>POST /grn/{id}/itc-override</code> &mdash; necessary because customs documents often arrive after the goods land.</li>
+        <li>A CSV report (<code>GET /reports/itc-blocked-purchases</code>) lists every PO line and every asset cost component where ITC was blocked, with vendor, invoice, line description, basic value, GST, block reason and note. The report is filterable by date, reason and vendor and is designed for GSTR-3B reconciliation.</li>
+      </ul>
+      <p style="color: var(--text-muted); line-height: 1.8;">See <a href="/per-line-gst-itc">Per-line GST ITC</a>.</p>
+    </div>
+  </section>
+
+  <!-- Customs — Bill of Entry as the source document -->
+  <section style="padding: 48px 0; background: var(--bg-warm);">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Customs &mdash; Bill of Entry as the source document</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">The Customs Act, 1962 (and the Foreign Trade (Development &amp; Regulation) Act, 1992) make the Bill of Entry the statutory document of import. Customs duty (BCD, SWS, IGST, Cess) is assessed per BoE line &mdash; different items at different HSN codes attract different rates within the same shipment. ProcureTrail captures the BoE as a first-class entity: header (<code>BillOfEntry</code>) with port, CHA, shipping bill and exchange rate; lines (<code>BillOfEntryLine</code>) with per-line assessable value and per-head duty. Customs duty capitalisation on the receiving goods receipt reads from BoE lines &mdash; not from a header proportional allocation &mdash; preserving the per-HSN duty attribution required for an import audit.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">See <a href="/import-accounting">Import accounting</a>.</p>
+    </div>
+  </section>
+
   <!-- Internal Controls -->
   <section class="why-us">
     <div class="container">

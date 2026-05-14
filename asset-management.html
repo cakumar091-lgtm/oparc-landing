@@ -206,6 +206,15 @@
     </div>
   </section>
 
+  <!-- Asset cost breakdown -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Asset cost breakdown &mdash; what built the book value?</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">Every asset's book value is the sum of multiple cost components: the basic invoice value, freight, customs duty, CHA charges, insurance, installation cost. ProcureTrail records each component as its own <code>AssetCostComponent</code> row with vendor, source document (PO/SA/GRN), category, amount, and a basic / GST / cess split. The <code>/asset-register/{id}/cost-breakdown</code> endpoint returns the full component ledger for any asset &mdash; every contribution traceable to the originating invoice and approval.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">This makes the depreciable base auditable line by line: an auditor can ask "what is the freight component of this asset's cost?" and get the answer with full document linkage. See <a href="/landed-cost">Landed cost</a> for the capitalisation rules that drive it.</p>
+    </div>
+  </section>
+
   <!-- Optional Modules Note -->
   <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container" style="text-align: center; max-width: 720px;">

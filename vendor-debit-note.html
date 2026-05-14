@@ -174,6 +174,36 @@
     </div>
   </section>
 
+  <!-- SHORT_LANDED — short-landing recovery on imports -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 760px; margin: 0 auto;">
+      <h2 class="section-title">SHORT_LANDED &mdash; short-landing recovery on imports</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">When an import shipment lands short of the invoiced quantity at port, the recovery counterparty depends on the cause: customs (where a drawback applies), the cargo insurer (where insurance covers transit loss), the vendor (where the contract places transit risk on the seller), the transporter, or the customs house agent (CHA). For the vendor-recovery case, ProcureTrail raises a SHORT_LANDED Vendor Debit Note.</p>
+      <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">Foreign-currency vendor recovery</h3>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">The SHORT_LANDED VDN carries three import-specific fields on top of the standard VDN payload:</p>
+      <div style="overflow-x: auto; margin-bottom: 20px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem;">
+          <thead>
+            <tr style="background: var(--navy); color: #fff;">
+              <th style="padding: 10px 12px; text-align: left;">Field</th>
+              <th style="padding: 10px 12px; text-align: left;">Captures</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px 12px;"><code>debit_foreign_amount</code></td><td style="padding: 10px 12px;">Basic recovery in the vendor's billing currency</td></tr>
+            <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px 12px;"><code>fx_rate_at_grn</code></td><td style="padding: 10px 12px;">Exchange rate locked at GRN &mdash; the rate the original purchase posted at</td></tr>
+            <tr><td style="padding: 10px 12px;"><code>debit_duty_amount</code></td><td style="padding: 10px 12px;">Customs duty share recoverable from the vendor (used when the contract is DDP or includes a landed-cost warranty)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">The PDF mirrors the four other types but adds a "Short-landing details" block citing the Bill of Entry number, port code and shortfall quantity. The Tally journal carries the forex trio inline so the debit posts against the foreign-currency vendor balance directly.</p>
+      <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">Insurer recovery</h3>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">Where the cargo insurance policy covers short-landing, the recovery routes to the insurer instead of (or alongside) the vendor. The shortfall posts to a <code>Cargo Insurance Receivable</code> ledger; the customs duty share routes per the <code>insurance_covers_duty</code> flag on the linked Bill of Entry. See <a href="/import-accounting">Import accounting</a> for the recovery-path matrix.</p>
+      <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">Transporter and CHA recovery</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;">Recovery from the inland transporter or the customs house agent is recognised in the design as a distinct counterparty path &mdash; for example, where the loss occurred on the inland leg under the transporter's bailment, or where the CHA's error caused the assessment shortfall. The implementation of dedicated transporter / CHA recovery counterparties is deferred to v2.2 of Import Accounting and needs a counterparty-taxonomy design session before it ships; today these cases are accommodated by routing through the vendor or insurer path with a free-text note.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">

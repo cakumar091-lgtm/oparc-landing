@@ -222,6 +222,55 @@
     </div>
   </section>
 
+  <!-- Import GRN — five-bucket receipts -->
+  <section style="padding: 48px 0; background: var(--bg-warm);">
+    <div class="container" style="max-width: 760px; margin: 0 auto;">
+      <h2 class="section-title">Import goods receipts &mdash; five-bucket model</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">For import POs (where the org has opted into Import Accounting v2), the receipt model expands beyond the domestic three-bucket layout. Each GRN line carries five quantity buckets:</p>
+      <div style="overflow-x: auto; margin-bottom: 20px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem;">
+          <thead>
+            <tr style="background: var(--navy); color: #fff;">
+              <th style="padding: 10px 12px; text-align: left;">Bucket</th>
+              <th style="padding: 10px 12px; text-align: left;">Meaning</th>
+              <th style="padding: 10px 12px; text-align: left;">Typical recovery path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px 12px;"><code>accepted_qty</code></td><td style="padding: 10px 12px;">Received and accepted into stock or as asset</td><td style="padding: 10px 12px;">n/a</td></tr>
+            <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px 12px;"><code>normal_loss_qty</code></td><td style="padding: 10px 12px;">Permissible transit loss within tolerance</td><td style="padding: 10px 12px;">Absorbed or written off (ITC pairing enforced)</td></tr>
+            <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px 12px;"><code>rejected_qty</code></td><td style="padding: 10px 12px;">Material rejected at receipt</td><td style="padding: 10px 12px;">Recover from vendor (basic + optionally duty) or write off</td></tr>
+            <tr style="border-bottom: 1px solid var(--border);"><td style="padding: 10px 12px;"><code>damaged_qty</code></td><td style="padding: 10px 12px;">Material damaged in transit</td><td style="padding: 10px 12px;">Recover from insurer or from vendor</td></tr>
+            <tr><td style="padding: 10px 12px;"><code>short_landed_qty</code></td><td style="padding: 10px 12px;">Quantity invoiced but never landed (port shortage)</td><td style="padding: 10px 12px;">Recover from customs (drawback) or from insurer</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color: var(--text-muted); line-height: 1.8;">At post, <code>&Sigma; buckets &le; received_qty</code> is enforced &mdash; over-allocation is rejected with a structured 422. Each non-accepted bucket carries its own <code>*_recovery_path</code>, and the recovery path drives where customs duty and basic value route in Tally. Customs duties (BCD, SWS, IGST, Cess) are read from the linked Bill of Entry line &mdash; not allocated proportionally from a header total. See <a href="/import-accounting">Import accounting</a> for the full flow.</p>
+    </div>
+  </section>
+
+  <!-- Pickup and scrap after receipt -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Pickup and scrap &mdash; who collected the rejected items?</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">When goods are rejected at receipt or at the gate, the question of physical disposition (who collected them, when, against what challan and vehicle) lives outside the GRN quantity book. ProcureTrail tracks this in an append-only <strong>pickup log</strong> with two complementary endpoints:</p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 22px; margin: 0 0 16px;">
+        <li style="margin-bottom: 10px;"><code>POST /gate-entry/lines/{id}/record-pickup</code> (when gate entry is enabled) &mdash; records a <code>VENDOR_PICKUP</code> event with seven structured capture fields: collected-by person and company, collector type (vendor / transporter / other), phone, challan number, vehicle number, and remarks.</li>
+        <li><code>POST /gate-entry/lines/{id}/scrap</code> (or the GRN-line fallback for orgs without gate workflow) &mdash; records a <code>SCRAP</code> event with a 10&ndash;2,000 character <code>scrap_reason</code> and an <code>authorized_by</code> user reference. Only PO approvers and admins may authorise a scrap.</li>
+      </ul>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">Every pickup or scrap is one row. Corrections flow through a soft-delete <code>void</code> (admin-only, with reason captured) that re-aggregates the denormalised collected totals on the source line &mdash; never an edit-in-place. The audit trail is forensic.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">A unified <code>/collections/pending</code> register lists every receipt that still has rejected or damaged quantity uncollected, with <code>days_pending</code> ageing and a deep-link back to the originating gate entry or GRN line. See the <a href="/gate-entry-quality-inspection-guide">gate entry and quality inspection guide</a> for the operational walkthrough.</p>
+    </div>
+  </section>
+
+  <!-- Landed cost capitalisation -->
+  <section style="padding: 48px 0; background: var(--bg-warm);">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Landed cost capitalisation at posting</h2>
+      <p style="color: var(--text-muted); line-height: 1.8;">When a goods GRN is posted, ProcureTrail allocates the appropriate share of any linked expense PO lines (freight, CHA, insurance, customs handling, etc.) to the goods lines and writes an <code>AssetCostComponent</code> row per allocation. The component carries the source PO/SA/GRN reference, the vendor invoice, and a basic / GST / cess split so each cost head's ITC posture is independently traceable. The asset's <code>total_landed_cost</code> field is recomputed from the surviving (non-reversed) components. See <a href="/landed-cost">Landed cost</a>.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">

@@ -229,6 +229,37 @@
     </div>
   </section>
 
+  <!-- Quantity-split purchase orders -->
+  <section style="padding: 48px 0; background: var(--bg-warm);">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Quantity-split purchase orders</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">A requisition line can be split across multiple POs to different vendors &mdash; for example, a 1,000-unit indent supplied 600 by one vendor and 400 by another. ProcureTrail tracks this at the line level.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">The approved-lines endpoint that feeds PO Create returns a live <code>qty_remaining</code> per requisition line &mdash; total quantity minus the sum already claimed by any non-rejected, non-cancelled PO. The PO Create form caps the input to this remaining quantity.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">On PO commit, the server re-validates. If the requested quantity exceeds the remaining (because a parallel user claimed first), a structured 409 envelope rejects the save with per-line context: <code>total_quantity</code>, <code>ordered_quantity</code> already claimed, <code>remaining_quantity</code>, and the offending <code>pr_item_id</code>. The form parses this envelope and shows the error inline on the affected line.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">A PR-line PO-usage drill-down shows the full claim history per requisition line: every PO that consumed quantity, status, claiming line, ordered quantity, and timestamps. Available to the requester, any approver of the parent requisition, or any user with <code>po.create</code> permission.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">Quantity returns to the available pool the moment a claiming PO is rejected or cancelled &mdash; no manual release step.</p>
+    </div>
+  </section>
+
+  <!-- Import procurement and direct POs -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Import procurement and direct POs</h2>
+      <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">Import procurement</h3>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">Import POs carry their own header fields: <code>is_import</code>, <code>currency</code>, <code>exchange_rate</code>, and <code>foreign_currency_amount</code>. The vendor ledger in Tally is created in the vendor's billing currency (8-currency whitelist &mdash; INR, USD, EUR, GBP, CNY, JPY, SGD, AED) and every posting against that vendor carries the foreign amount and rate inline so Tally handles forex math, settlement gain/loss, and period-end revaluation natively. See <a href="/import-accounting">Import accounting</a> for the full receipt and duty flow.</p>
+      <h3 style="color: var(--navy); font-size: 1.1rem; margin-bottom: 12px;">Direct POs without a requisition</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;">For organisations that approve specific PO types without requiring a prior requisition, the <code>skip_pr</code> flag on PO create bypasses the requisition link entirely. The PO still routes through the standard approval matrix &mdash; only the requisition prerequisite is relaxed. Governance is preserved; data entry is reduced.</p>
+    </div>
+  </section>
+
+  <!-- Per-line GST ITC at PO approval -->
+  <section style="padding: 48px 0; background: var(--bg-warm);">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">ITC eligibility decided per line at PO approval</h2>
+      <p style="color: var(--text-muted); line-height: 1.8;">For organisations that have opted into per-line GST ITC, the approver decides per PO line whether to claim Input Tax Credit and &mdash; where blocked &mdash; which of eleven statutory reasons applies (Section 17(5) ineligibility categories, composition-dealer supply, invalid invoice GST, place-of-supply blocks, personal consumption, and so on). The decision is audit-logged with before/after deltas; once the PO is approved, domestic ITC is locked through to posting. Import lines retain the override option on the GRN until POSTED. See <a href="/per-line-gst-itc">Per-line GST ITC</a>.</p>
+    </div>
+  </section>
+
   <!-- Optional Modules Note -->
   <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container" style="text-align: center; max-width: 720px;">

@@ -217,6 +217,17 @@
     </div>
   </section>
 
+  <!-- When an expense line is actually a capital cost -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">When an expense line is actually a capital cost</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">Some expense PO lines &mdash; freight on a new asset, CHA fees on an import, transit insurance &mdash; are not period expenses at all. They are part of the landed cost of the asset they support, and capitalising them to the right asset is the difference between an asset register that matches reality and one that doesn't.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">ProcureTrail makes that decision explicit. Every expense PO line carries a <code>capitalize_to_asset</code> flag plus a landed-cost category (Freight, CHA, Insurance, etc.). When the flag is set, the line does not appear in the expense register at posting &mdash; instead, an <code>AssetCostComponent</code> row is written to the asset it is linked to via a <code>GRNLandedCostLink</code>. The total landed cost on the asset is recomputed automatically.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">The Service Acceptance approval for a landed-cost line is routed to the goods receiver (the final approver of the linked GRN), not to the expense PO's normal approval matrix. The person who took delivery of the asset signs off on the cost that gets added to its book value.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">See <a href="/landed-cost">Landed cost</a> for the full flow.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">

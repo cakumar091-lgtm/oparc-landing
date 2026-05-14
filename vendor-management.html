@@ -189,6 +189,17 @@
     </div>
   </section>
 
+  <!-- Multi-currency vendors -->
+  <section style="padding: 48px 0; background: #fff;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 class="section-title">Multi-currency vendors</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">For organisations that purchase from foreign suppliers, every vendor carries a billing currency code on the vendor master record. The supported currencies are: INR, USD, EUR, GBP, CNY, JPY, SGD, AED. The default is INR; the field is required and is part of the vendor master, not a per-transaction override.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">The vendor master is the single source of truth for currency. When the vendor ledger is created in Tally, it is created in the vendor's billing currency. Every PO, GRN and VDN posting against that vendor carries the foreign amount and the exchange rate inline, so Tally handles the forex math, settlement gain or loss on payment, and period-end revaluation natively &mdash; using its built-in workflow.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">One vendor record holds one currency. If a supplier bills you in both INR and USD, you maintain two vendor records (one per currency). This mirrors a constraint Tally enforces on its own ledger: a single ledger holds a single currency for its lifetime.</p>
+      <p style="color: var(--text-muted); line-height: 1.8;">The vendor's billing currency flows downstream into the procurement chain automatically. Approvers, mismatch resolvers and PDF templates all see amounts in the vendor's billing currency where appropriate &mdash; no manual conversion at any step.</p>
+    </div>
+  </section>
+
   <!-- Stats -->
   <section class="stats-bar">
     <div class="container">
