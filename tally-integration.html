@@ -103,7 +103,7 @@
   <!-- Optional Note -->
   <section style="padding: 40px 0; background: var(--bg-warm); border-bottom: 1px solid var(--border);">
     <div class="container" style="text-align: center; max-width: 720px;">
-      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">Tally integration is a <strong style="color: var(--navy);">master switch — off by default</strong>. The procurement and asset management workflows function fully without it. Turn it on when your Tally ledger mapping is ready. TDS tracking, GST ITC ledger separation, and HSN/SAC validation are each independent toggles within the integration.</p>
+      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">Tally integration is a <strong style="color: var(--navy);">master switch — off by default</strong>. The procurement and asset management workflows function fully without it. Setup is one screen, three phases — Discovery scans your EAM side and your Tally master in one read, presents a colour-coded reconciliation, and lets you map per row or in bulk. Tax Deducted at Source (TDS) tracking, GST Input Tax Credit (ITC) ledger separation, and HSN/SAC validation are each independent toggles within the integration.</p>
     </div>
   </section>
 
@@ -154,8 +154,8 @@
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/></svg>
           </div>
-          <h3>Ledger Mapping</h3>
-          <p>10 mapping types connect system values to Tally ledger names. A setup wizard with fuzzy-match helps configure mappings. Missing ledgers are identified and can be auto-created in Tally during sync.</p>
+          <h3>Discovery Setup</h3>
+          <p>Six mapping types connect EAM references to Tally ledgers, groups and cost centres. A single Discovery surface scans both sides, colour-codes the unmapped rows, and lets you Pick Existing, Create New, or Skip per row — with bulk variants for the obvious cases. Every decision writes an audit record.</p>
         </div>
 
         <div class="feature-card">
@@ -183,6 +183,74 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- Discovery — three-phase Tally setup -->
+  <section style="padding: 64px 0; background: var(--bg-warm); border-top: 1px solid var(--border);">
+    <div class="container" style="max-width: 860px; margin: 0 auto;">
+      <h2 class="section-title">Discovery — Three-Phase Tally Setup</h2>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">ProcureTrail's Tally integration is set up through Discovery, a single admin surface that maps every EAM reference (system configuration values, system ledger keys, asset and expense categories, departments) to a corresponding Tally ledger, group or cost centre. There are three phases, and the surface is the same throughout — only the buttons change.</p>
+
+      <h3 style="color: var(--navy); font-size: 1.125rem; margin-top: 32px; margin-bottom: 12px;">Phase A — Scan</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;"><code>GET /setup-wizard/discovery</code> mines the EAM side (system configuration keys, SystemLedgerMap rows, active asset and expense categories, department references), pulls the corresponding Tally master state (ledgers, groups, cost centres), and presents a single table. Each row carries a current state — <em>unmapped</em>, <em>mapped</em>, or <em>orphan</em> — and a flag indicating whether a name match was found on the Tally side. The scan is read-only: no writes to either EAM or Tally.</p>
+
+      <h3 style="color: var(--navy); font-size: 1.125rem; margin-top: 32px; margin-bottom: 12px;">Phase B — Per-Row Decisions</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;">Three buttons per row. Each writes an audit record:</p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li><strong>Pick Existing</strong> — stores the chosen Tally name on the EAM mapping. No Tally write. Audit action <code>TALLY_SETUP_PICK_EXISTING</code>.</li>
+        <li><strong>Create New</strong> — calls Tally to create the ledger, group or cost centre with the admin-confirmed name, then stores the mapping. Pre-flights Tally connectivity (503 if unreachable), 422 if Tally rejects (duplicate name, invalid parent group). Audit action <code>TALLY_SETUP_CREATE_NEW</code>.</li>
+        <li><strong>Skip</strong> — records the decision with an explicit reason. Posting-flow validation still fires if the skipped object is later needed — Skip is not silent suppression. Audit action <code>TALLY_SETUP_SKIP</code>.</li>
+      </ul>
+
+      <h3 style="color: var(--navy); font-size: 1.125rem; margin-top: 32px; margin-bottom: 12px;">Phase C — Bulk Actions</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;">Two bulk endpoints clear the most common buckets in one click:</p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li><code>POST /setup-wizard/discovery/pick-all-matching</code> picks the existing Tally match for every row where a name coincidence exists. One click maps every blue row.</li>
+        <li><code>POST /setup-wizard/discovery/create-all-missing</code> creates the missing Tally object for every red and orange row where no name match was found. Groups are excluded — they need an admin-specified parent. Per-row failures don't block subsequent rows.</li>
+      </ul>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-top: 16px;">Both bulk endpoints emit per-row audit records, so a five-second mass setup retains the same forensic trail as fifty manual clicks. Manual edit and soft-delete operations live in the same surface — there is now one Tally setup screen, not two.</p>
+    </div>
+  </section>
+
+  <!-- Multi-currency vendor ledgers -->
+  <section style="padding: 64px 0; background: #fff; border-top: 1px solid var(--border);">
+    <div class="container" style="max-width: 860px; margin: 0 auto;">
+      <h2 class="section-title">Multi-Currency Vendor Ledgers</h2>
+      <p style="color: var(--text-muted); line-height: 1.8;">Foreign vendors get foreign-currency ledgers in Tally — automatically. Every vendor master record in ProcureTrail carries a billing currency code (whitelist: INR, USD, EUR, GBP, CNY, JPY, SGD, AED). When the vendor ledger is created in Tally:</p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li>The Tally ledger master carries <code>&lt;CURRENCYNAME&gt;</code> with the vendor's currency symbol.</li>
+        <li>Every transaction posting against that vendor — purchase voucher, vendor debit note journal — carries forex inline on each debit and credit line: <code>&lt;AMOUNT&gt;5000.00 $ @ 85.0000/$ = 425000.00&lt;/AMOUNT&gt;</code>.</li>
+      </ul>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-top: 16px;">Tally then handles the forex math, settlement gain or loss on payment, and period-end revaluation natively using its built-in workflow. ProcureTrail sends source data only — there is no parallel rupee-conversion in EAM code that could drift from Tally's own forex math.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-top: 16px;">Customs duty journals and basic-recovery journals on imports do not currently emit inline forex (they post the equivalent rupee adjustment). For most organisations this is the desired behaviour — customs duty is settled in rupees with the customs authority — but foreign-currency journal vouchers are on the roadmap.</p>
+    </div>
+  </section>
+
+  <!-- Reversal mechanism -->
+  <section style="padding: 64px 0; background: var(--bg-warm); border-top: 1px solid var(--border);">
+    <div class="container" style="max-width: 860px; margin: 0 auto;">
+      <h2 class="section-title">Reversals — Journal-Flipped, Not Optional</h2>
+      <p style="color: var(--text-muted); line-height: 1.8;">When a posted GRN, service acceptance, customs duty journal or basic-recovery journal needs to be reversed, ProcureTrail emits a reversal voucher with the original debits and credits swapped. The reversal is a Journal voucher with debit/credit flipped — not a Purchase voucher with <code>ISOPTIONAL=Yes</code>. The earlier optional-voucher approach has been retired because it hid reversed amounts from Tally's Outstandings report. It survives only for the <code>PO_REJECTED</code> forward case, where the PO never created an obligation and an Optional voucher is appropriate.</p>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-top: 16px;">Each reversal carries:</p>
+      <ul style="color: var(--text-muted); line-height: 1.8; padding-left: 20px;">
+        <li>The forward voucher number in <code>bill_name</code> — Tally's "Against Reference" field — pairing the reversal to the forward in the Outstandings report.</li>
+        <li>The reversal kind (data correction, or operational) in metadata, distinguishing routine reverses from corrections.</li>
+        <li>For foreign-currency vendors, the forex trio (foreign amount, exchange rate, currency name) preserved across the debit/credit swap so the reversal posts at the same rate as the original.</li>
+      </ul>
+      <p style="color: var(--text-muted); line-height: 1.8; margin-top: 16px;">The reversal mechanism is the same for every voucher type.</p>
+    </div>
+  </section>
+
+  <!-- Voucher scope notes -->
+  <section style="padding: 64px 0; background: #fff; border-top: 1px solid var(--border);">
+    <div class="container" style="max-width: 860px; margin: 0 auto;">
+      <h2 class="section-title">Voucher Scope — Financial Only</h2>
+      <h3 style="color: var(--navy); font-size: 1.125rem; margin-top: 16px; margin-bottom: 12px;">PO vouchers post the financial portion only</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;">ProcureTrail is the asset register; Tally is the accounting general ledger. PO XML emitted to Tally no longer carries inventory entries. PO lines mix asset, service and expense items (for example, "Office Cleaning Service") that do not fit Tally's stock-items model, and Tally was silently dropping the inventory portion on every post. Removing the dead XML closes a latent failure on Tally setups where "Allow stock items in vouchers" is disabled. Stock-module integration in Tally (unit-of-measure master, stock groups, HSN mapping) is a larger integration than the financial-only post and is not part of the current pipeline.</p>
+
+      <h3 style="color: var(--navy); font-size: 1.125rem; margin-top: 32px; margin-bottom: 12px;">Asset master auto-create</h3>
+      <p style="color: var(--text-muted); line-height: 1.8;">When an asset of a new classification or category is posted to Tally for the first time, ProcureTrail ensures the corresponding parent group exists in Tally's group namespace before the asset ledger is created. The group is created idempotently — if it already exists, the call is a no-op. This closes a Tally-side namespace mismatch where the asset master XML references a sub-group that Discovery's ledger iteration would never have surfaced.</p>
     </div>
   </section>
 
@@ -225,7 +293,7 @@
           <div class="stat-label">Event types</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">10</div>
+          <div class="stat-number">6</div>
           <div class="stat-label">Mapping types</div>
         </div>
         <div class="stat-item">

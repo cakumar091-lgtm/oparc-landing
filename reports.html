@@ -98,42 +98,44 @@
   <!-- Dashboard -->
   <section class="features">
     <div class="container">
-      <h2 class="section-title">Dashboard</h2>
+      <h2 class="section-title">Dashboard — Four Scoped Endpoints</h2>
+      <p class="section-sub" style="text-align:center; max-width:720px; margin:0 auto 32px;">The dashboard surface is not one composite endpoint. It is four scoped endpoints, each tuned for a specific role's first-screen needs.</p>
       <div class="features-grid">
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
           </div>
-          <h3>Pending Actions</h3>
-          <p>PR, PO, GRN, and SA counts by status, scoped to the current user. Each user sees only the items awaiting their action, with direct links to the relevant approval screen.</p>
+          <h3>Org Summary</h3>
+          <p><code>GET /dashboard/summary</code> — organisation-wide counts across purchase requisition (PR), purchase order (PO), goods receipt note (GRN) and service acceptance (SA). Used on the admin home screen.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg>
+          </div>
+          <h3>Activity Stats</h3>
+          <p><code>GET /dashboard/stats</code> — time-windowed activity totals across today, this week, and this month. Posting volumes, approval counts, value totals.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>My PO Queue</h3>
+          <p><code>GET /dashboard/po-pending</code> — user-scoped. POs awaiting <em>this user's</em> approval, ordered by service level agreement (SLA) breach risk.</p>
         </div>
 
         <div class="feature-card">
           <div class="feature-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
           </div>
-          <h3>PO Flags</h3>
-          <p>Pending rejection, damage, and price mismatch flags are highlighted for immediate attention. Flags are resolved through the standard workflow — no separate queue to manage.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-          </div>
-          <h3>Notifications</h3>
-          <p>In-app alerts with unread count, polled every 60 seconds. Approval requests, status changes, and flag alerts are delivered without requiring email or external notification systems.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
-          </div>
-          <h3>CAPEX / OPEX</h3>
-          <p>Summary and breakdown by department, classification, and supplier. Monthly trend visualization. Tracks capital and operational expenditure across the procurement pipeline.</p>
+          <h3>My Mismatch Queue</h3>
+          <p><code>GET /dashboard/mismatch-pending</code> — user-scoped. GRNs and SAs with mismatch resolutions awaiting <em>this user's</em> review.</p>
         </div>
 
       </div>
+      <p style="text-align:center; margin-top:24px; color:var(--text-muted); font-size:0.875rem; max-width:720px; margin-left:auto; margin-right:auto;">The split keeps approver views user-specific (you see only what is pending with you), and keeps admin views global, without one endpoint trying to be both.</p>
     </div>
   </section>
 
@@ -141,7 +143,7 @@
   <section class="problems">
     <div class="container">
       <h2 class="section-title">Analytical Reports</h2>
-      <p class="section-sub">11 reports covering procurement, asset, and compliance dimensions</p>
+      <p class="section-sub">14 reports covering procurement, asset, GST and import dimensions</p>
       <div class="features-grid">
 
         <div class="feature-card">
@@ -197,6 +199,21 @@
         <div class="feature-card">
           <h3>Compliance Trend</h3>
           <p>Verification completion rates, document expiry status, and control violation frequency over time.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>ITC-Blocked Purchases</h3>
+          <p><code>GET /reports/itc-blocked-purchases</code> — CSV of every PO line and asset cost component where Input Tax Credit (ITC) is ineligible, with vendor, invoice, line description, basic and Goods and Services Tax (GST) amounts, block reason and free-text note. Filterable by date range, block-reason code, and vendor. Designed for GSTR-3B reconciliation.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>Import Receivables</h3>
+          <p><code>GET /import/receivables</code> with CSV and XLSX export — every import GRN line where a non-accepted bucket is routed to a recovery receivable (short-landing claim, cargo insurance, vendor duty reimbursement, vendor recovery), with ageing in days, Bill of Entry (BoE) reference, vendor and amount. Chases customs drawback, insurance claims, and vendor settlements before they go stale.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>PR-Line PO Usage</h3>
+          <p><code>GET /requisitions/pr-lines/{pr_line_id}/po-usage</code> — every PO that has claimed quantity from a requisition line: PO number, status, claiming PO line, ordered quantity, timestamp. Plus computed totals (total, ordered, remaining). Answers "where did the remaining 400 units go?" when a requisition line was split across multiple POs.</p>
         </div>
 
       </div>
@@ -260,7 +277,7 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-number">11</div>
+          <div class="stat-number">14</div>
           <div class="stat-label">Reports</div>
         </div>
         <div class="stat-item">
