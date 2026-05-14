@@ -254,7 +254,19 @@
       <li><strong>After year-end:</strong> Run reconciliation one final time after books are closed. The numbers should match. If they do not, the specific discrepancies from the reconciliation report tell you exactly where to look.</li>
     </ol>
 
-    <h2>7. Frequently Asked Questions</h2>
+    <h2>7. Recent Updates — Reversed Vouchers and Foreign-Currency Assets</h2>
+
+    <p>Two structural changes to the underlying Tally integration materially affect how reconciliation reads. They are summarised below.</p>
+
+    <h3>7.1 Reconciling Reversed Vouchers</h3>
+
+    <p>Reversals are now paired to their forwards via Tally's "Agst Ref" field — the original voucher number is stored on the reversal's bill reference. In the Outstandings report this surfaces the pair under the same reference. A reversed asset acquisition therefore shows up in the asset register reconciliation as two paired entries with net-zero effect on Tally's fixed-asset group — exactly the reconciliation behaviour that the previous <code>ISOPTIONAL</code> reversal pattern obscured. See <a href="/tally-asset-integration-guide#8-recent-updates-discovery-multi-currency-and-reversals">Tally integration guide — reversals</a> for the underlying mechanism.</p>
+
+    <h3>7.2 Foreign-Currency Assets and Forex Revaluation</h3>
+
+    <p>For assets acquired from foreign vendors, the original purchase voucher posts against a foreign-currency vendor ledger. Tally handles the forex revaluation and settlement gain / loss internally — the asset side of the entry is booked in the reporting currency at the GRN-locked rate. When you reconcile the asset register to Tally, the asset value matches the Fixed Asset group at booked-rate; the currency exposure shows on the vendor ledger and on Tally's forex revaluation entries. Reconciliation comparisons should therefore be made on the asset ledger group (INR-only) rather than the vendor ledger group, which legitimately carries forex movements not reflected in the asset register.</p>
+
+    <h2>8. Frequently Asked Questions</h2>
 
     <h3>Why do Tally and the fixed asset register show different numbers?</h3>
     <p>The most common cause is that entries are made in one system but not the other. A purchase voucher may be entered in Tally directly without going through the procurement workflow, or a GRN may be posted in the asset system but the Tally sync failed silently. Other causes include timing differences, manual Tally entries that bypass the integration, reversed transactions where only one system was updated, and rounding differences in GST calculations. Reconciliation identifies these gaps so they can be investigated and corrected.</p>

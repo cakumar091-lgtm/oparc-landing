@@ -355,7 +355,23 @@
 
     <p>This point bears emphasis: the Tally integration is a module that can be enabled or disabled without affecting the core procurement and asset management workflows. An organisation can run the full PR, PO, GRN, approval, and asset register workflow and never enable Tally integration. When the finance team is ready — when ledger mappings are configured and tested — the integration is switched on.</p>
 
-    <h2>8. Frequently Asked Questions</h2>
+    <h2>8. Recent Updates — Discovery, Multi-Currency, and Reversals</h2>
+
+    <p>Three changes since this guide was first published materially affect how Tally setup and posting work. They are summarised below; the linked pages have the full description.</p>
+
+    <h3>8.1 Discovery — How the Tally Integration Is Set Up</h3>
+
+    <p>The legacy four-endpoint setup wizard (<code>/setup-wizard</code> preview + <code>/apply</code> + <code>/required-ledgers</code> + <code>/create-ledgers</code>) has been retired. Tally setup is now done through Discovery in three phases: a read-only scan, per-row pick / create / skip, and two bulk actions for the obvious cases (pick all name-matches, create all missing). The surface also folds in manual edit and soft-delete. See <a href="/tally-integration#discovery">Tally integration</a> for the full description.</p>
+
+    <h3>8.2 Multi-Currency Vendor Ledgers</h3>
+
+    <p>The vendor master record now carries a billing currency code (eight-currency whitelist — INR, USD, EUR, GBP, CNY, JPY, SGD, AED). Foreign vendors get foreign-currency ledgers in Tally, and every posting carries forex inline so Tally handles forex math, settlement gain / loss and revaluation natively. The asset master itself remains in the organisation's reporting currency (INR); only the vendor side and the procurement vouchers carry forex.</p>
+
+    <h3>8.3 Reversals Are Now Journal-Flipped, Not Optional</h3>
+
+    <p>Reversals of GRN, service acceptance and customs duty journals are emitted as Journal vouchers with debit / credit swapped (preserving the forward voucher number in Tally's "Agst Ref" field). The earlier pattern of using <code>ISOPTIONAL=Yes</code> on a reversal voucher has been retired — it kept reversed amounts out of Outstandings, which obscured the audit trail. <code>ISOPTIONAL</code> now appears only on <code>PO_REJECTED</code> forwards.</p>
+
+    <h2>9. Frequently Asked Questions</h2>
 
     <h3>Can I use ProcureTrail without enabling Tally integration?</h3>
     <p>Yes. Tally integration is a master switch that is off by default. The procurement and asset management workflows — PR, PO, GRN, service acceptance, approvals, asset register — all function fully without it. You enable the Tally module only when your ledger mappings are configured and you are ready to generate vouchers.</p>
