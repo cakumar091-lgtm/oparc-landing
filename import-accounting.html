@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Import Accounting — Bill of Entry, Five-Bucket Receipts &amp; Customs Duty Capitalisation | Oparc</title>
+  <meta name="description" content="Bill-of-Entry-sourced customs duty (BCD/SWS/IGST/Cess) per HSN line, five-bucket goods receipt (accepted / normal loss / rejected / damaged / short-landed), recovery-path routing to vendor / customs / insurer, and audit-grade Tally posting.">
+  <meta name="keywords" content="import accounting software India, bill of entry accounting, customs duty capitalisation, import GRN, short-landing recovery, GSTR-3B import ITC, five-bucket import receipt, cargo insurance claim, customs drawback, vendor duty reimbursement, BCD SWS IGST cess">
+  <link rel="canonical" href="https://oparc.in/import-accounting">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oparc.in/import-accounting">
+  <meta property="og:title" content="Import Accounting — Bill of Entry, Five-Bucket Receipts &amp; Customs Duty Capitalisation | Oparc">
+  <meta property="og:description" content="Bill-of-Entry-sourced customs duty per HSN line, five-bucket goods receipt, recovery-path routing for short-landed / damaged / rejected imports, and audit-grade Tally posting.">
+  <meta property="og:site_name" content="Oparc">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://oparc.in/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Import Accounting — Bill of Entry &amp; Five-Bucket Receipts | Oparc">
+  <meta name="twitter:description" content="Bill-of-Entry-sourced customs duty per HSN line, five-bucket goods receipt, recovery-path routing, audit-grade Tally posting.">
+  <meta name="twitter:image" content="https://oparc.in/og-image.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Import Accounting — Bill of Entry & Five-Bucket Receipts",
+    "description": "Capture customs duty at source per HSN line via the Bill of Entry, split the goods receipt into five buckets (accepted, normal loss, rejected, damaged, short-landed), route recovery to the right counterparty (vendor, customs, insurer), and post to Tally with the duty attribution intact.",
+    "provider": {
+      "@type": "ProfessionalService",
+      "name": "Oparc",
+      "url": "https://oparc.in",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bangalore", "addressRegion": "Karnataka", "addressCountry": "IN" }
+    },
+    "areaServed": { "@type": "Country", "name": "India" },
+    "serviceType": "Import Accounting"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://oparc.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Import Accounting", "item": "https://oparc.in/import-accounting" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Bill-of-Entry-sourced customs duty mean in practice?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every customs duty head (Basic Customs Duty, Social Welfare Surcharge, IGST on import, Compensation Cess) is captured at the per-HSN-line level on a first-class Bill of Entry record, not as a header total proportionally allocated across goods receipt lines. The asset capitalisation, the customs duty journal voucher posted to Tally, and the GSTR-3B reconciliation all read the same per-line duty figures. For multi-HSN consignments where lines attract different duty rates, this preserves the per-line attribution that header-level allocation cannot."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does an import GRN have five buckets instead of three?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A domestic GRN typically splits received quantity into accepted, rejected, and damaged. An import shipment adds two physical realities that the domestic model cannot represent: normal loss (permissible transit loss within tolerance — evaporation, dust, hygroscopic loss) and short-landed (quantity invoiced and declared on the Bill of Entry but never landed at port). Each non-accepted bucket carries its own recovery path because the counterparty differs — short-landing may be recovered from customs as drawback or from the cargo insurer, damage from the vendor or insurer, and normal loss is absorbed or written off. Conflating them loses the recovery trail."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is a short-landing claim recovered from customs as drawback?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When a short-landed quantity uses the RECOVER_FROM_CUSTOMS recovery path, the customs duty journal voucher routes both the basic value share and the customs duty heads to a Short-Landing Claim Receivable ledger in Tally, with the Bill of Entry number and date carried through as the narration. The receivable then sits on the books as an open item until the customs drawback is realised under Section 27 of the Customs Act 1962. The /import/receivables endpoint surfaces every such open claim with days-outstanding so the finance team can chase recoveries without touching the goods receipt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What changes in the Tally posting when import accounting is enabled?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With the per-organisation flag IMPORT_ACCOUNTING_ENABLED on, two additional journal vouchers post alongside the standard purchase voucher: a v2 customs duty journal that routes each duty head to its bucket-and-recovery-path-specific ledger (asset, Input IGST, Customs Duty Loss, Short-Landing Claim Receivable, Cargo Insurance Receivable, Vendor Duty Reimbursement Receivable), and a basic-recovery journal that closes the vendor credit gap on non-accepted buckets. While the flag is off, the goods receipt post uses the legacy header-proportional duty allocation — byte-identical to pre-feature behaviour. Flipping the flag on requires four mandatory SystemLedgerMap rows to be filled."
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="alternate" hreflang="en-IN" href="https://oparc.in/import-accounting">
+  <link rel="alternate" hreflang="x-default" href="https://oparc.in/import-accounting">
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="logo" aria-label="ProcureTrail home"></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/procurement">Procurement</a>
+        <a href="/asset-management">Assets</a>
+        <a href="/tally-integration">Tally</a>
+        <a href="/vendor-management">Vendors</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/reports">Reports</a>
+        <a href="/advisory">Advisory</a>
+        <a href="/how-it-works">How We Work</a>
+        <a href="/demo">Demo</a>
+        <a href="/guides">Guides</a>
+        <a href="/#contact">Contact</a>
+        <a href="https://procuretrail.oparc.in" class="btn btn-sm" target="_blank" rel="noopener">Client Login</a>
+      </div>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Import Accounting — <span class="highlight">Bill of Entry &amp; Five-Bucket Receipts</span></h1>
+        <p class="hero-sub">Capture customs duty at source per HSN line, split the goods receipt into the five buckets that match physical reality, route recovery to the right counterparty — vendor, customs, insurer — and post to Tally with the duty attribution intact.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Challenge -->
+  <section class="problems">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Import receipts don't fit a domestic three-bucket model. A single shipment can land partly accepted, partly short of invoiced quantity, partly damaged in transit, and partly rejected on inspection — and customs duty has already been paid on every declared unit.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Proportionally allocating header-level customs duty across line items at goods receipt breaks for mixed-HSN consignments where different lines attract different duty rates — and leaves no audit trail for short-landing claims or insurance recoveries.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">&ldquo;</div>
+          <p>Auditors flag these gaps under the Customs Act 1962 (Section 17 assessment, Section 27 refund) and under SA 580 when management cannot evidence the duty attribution behind imported asset values.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Address This -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">How ProcureTrail Addresses This</h2>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3>Bill of Entry as Source Document</h3>
+          <p>Every import receipt is anchored to a first-class Bill of Entry record — BoE number and date, port code and name, CHA, shipping bill, transport mode, notified exchange rate, assessable value, total duty, and an import scheme code (advance authorisation, EPCG, EOU, SEZ). Per-line records carry HSN, assessable value, BCD, SWS, IGST and Cess. Goods receipt lines link to BoE lines so duty attribution survives all the way to the Tally posting.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+          </div>
+          <h3>Five-Bucket Goods Receipt</h3>
+          <p>Each import goods receipt line carries five quantity buckets — accepted, normal loss, rejected, damaged, short-landed. The sum of buckets cannot exceed received quantity; over-allocation is rejected at post with a structured 422. Normal loss with treatment WRITE_OFF forces ITC reversal at submit — an asset that was never received cannot retain Input Tax Credit.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h18M3 14h18m-5-4v8m-4-8v8M5 18l-2-4 2-4m14 8l2-4-2-4"/></svg>
+          </div>
+          <h3>Customs Duty Journal — Per-Bucket Routing</h3>
+          <p>At post, ProcureTrail emits a v2 customs duty journal where every duty head routes to the ledger that matches the bucket and recovery path: asset capitalisation for accepted, Input IGST for retained ITC, Abnormal Stock Loss for normal-loss write-off, Customs Duty Loss for damage and rejection, Short-Landing Claim Receivable for customs drawback, Cargo Insurance Receivable for insurer recovery, Vendor Duty Reimbursement Receivable for DDP contracts. Credits net to Customs Authority Payable.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Basic-Recovery Journal — Closes the Vendor-Credit Gap</h3>
+          <p>The standard purchase voucher debits stock or asset for accepted quantity only. For non-accepted buckets the vendor was credited for the full invoiced quantity — a gap exists between vendor credit and physical receipt. ProcureTrail emits a basic-recovery journal that closes the gap: debits the loss or receivable account, credits the vendor for the differential. RECOVER_FROM_VENDOR lines are skipped here (settled via vendor debit note when raised — no double-recovery). Foreign-currency vendor credits carry inline forex.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+          <h3>Preview Before You Post</h3>
+          <p>POST /grn/{id}/preview-posting returns the exact set of vouchers that the real post will emit — purchase voucher, customs duty journal, basic-recovery journal, bucket breakdown, and any warnings or errors. The preview is side-effect-free (no database writes, no Tally enqueue) and shares the same builder code as the real post. What you see in the preview is what posts.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Recovery Ageing — Track Every Open Claim</h3>
+          <p>GET /import/receivables lists every import receivable awaiting settlement — short-landing claims, cargo insurance claims, vendor duty reimbursements, vendor recoveries. Filterable by ledger, vendor, Bill of Entry, date range, and days-outstanding threshold. CSV and XLSX export. Read-only — no state actions — so finance can chase recoveries without touching the goods receipt or its postings.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Optional Note -->
+  <section style="padding: 48px 0; background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container" style="text-align: center; max-width: 780px;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 12px;">Optional — Opt In Per Organisation</h3>
+      <p style="color: var(--text-muted); font-size: 0.938rem; line-height: 1.7;">Import accounting is governed by a per-organisation flag, default off. While off, goods receipt posting uses the legacy header-proportional duty allocation — byte-identical to pre-feature behaviour. Flipping the flag on requires four SystemLedgerMap rows to be filled with Tally ledger names (Short-Landing Claim Receivable, Cargo Insurance Receivable, Customs Duty Loss, Abnormal Stock Loss — Imports). Two more ledgers are lazy and mapped only when an organisation actually uses DDP contracts or per-bucket vendor overrides. Flipping the flag off is instant rollback.</p>
+    </div>
+  </section>
+
+  <!-- Recovery-Path Matrix -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Recovery-Path Matrix</h2>
+      <p class="section-sub">Every non-accepted bucket carries its own recovery path — who is on the hook for this loss. Mismatched combinations are rejected at submit.</p>
+      <div class="why-grid">
+        <div class="why-item">
+          <h3>Normal Loss</h3>
+          <p>Write-off (ITC reversal forced), absorb-and-retain (ITC retained), or absorb-and-reverse (basic capitalised, IGST reversed). Permissible transit loss within tolerance.</p>
+        </div>
+        <div class="why-item">
+          <h3>Rejected</h3>
+          <p>Write-off to loss account, recover-from-vendor (vendor debit note for basic), or recover-from-vendor-with-duty when the contract places customs duty on the vendor too.</p>
+        </div>
+        <div class="why-item">
+          <h3>Damaged</h3>
+          <p>Write-off, recover-from-vendor, recover-from-vendor-with-duty, or recover-from-insurer when in-transit damage is covered by the cargo insurance policy.</p>
+        </div>
+        <div class="why-item">
+          <h3>Short-Landed</h3>
+          <p>Write-off, vendor recovery (basic or basic+duty), insurer recovery, or recover-from-customs — the drawback path under Customs Act Section 27.</p>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:32px; color:var(--text-muted); font-size:0.938rem;">
+        Insurance policies vary on what they cover. A Boolean on the Bill of Entry — <code>insurance_covers_duty</code> — captures the policy posture. When true, both basic and duty route to Cargo Insurance Receivable; when false, basic goes to insurance but duty routes to Customs Duty Loss. Setting the flag right keeps the claim aligned with the policy.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">GRN buckets</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Customs duty heads</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">7</div>
+          <div class="stat-label">Recovery paths</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Duty drift between asset and Tally</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="compliance">
+    <div class="container">
+      <h2 class="section-title">Compliance Mapping</h2>
+      <div class="compliance-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="compliance-card">
+          <h3>Customs Act 1962</h3>
+          <p class="compliance-ref">Sections 17 &amp; 27</p>
+          <p>Bill of Entry captured as a first-class entity per HSN line; duty attribution preserved through to Tally. Short-landed recover-from-customs path routes to a Drawback Receivable with BoE reference for Section 27 refund claims.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>CGST Act 2017</h3>
+          <p class="compliance-ref">Sections 17(5) &amp; 18(4)</p>
+          <p>Per-line ITC eligibility with eleven-value statutory block-reason enum carries through goods receipt to asset cost components. Normal-loss write-off forces ITC reversal — cannot retain credit on stock never received.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>Companies Act 2013</h3>
+          <p class="compliance-ref">Section 143(3)(i)</p>
+          <p>Bucket sum-bound at post, recovery-path matrix enforced at submit, setter-gate on the import accounting flag with four mandatory ledgers — internal financial controls over imported asset valuation.</p>
+        </div>
+        <div class="compliance-card">
+          <h3>SA 580</h3>
+          <p class="compliance-ref">Written Representations</p>
+          <p>Per-asset cost-breakdown endpoint exposes per-component duty attribution traceable to the Bill of Entry line — management representations on asset cost are evidenced, not asserted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Related Pages -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="text-align: center;">
+      <p style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 16px;">Related</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+        <a href="/grn-goods-receipt" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Goods Receipt &amp; Gate Entry</a>
+        <a href="/vendor-debit-note" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Vendor Debit Notes</a>
+        <a href="/tally-integration" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Tally Integration</a>
+        <a href="/fixed-asset-register" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Fixed Asset Register</a>
+        <a href="/compliance" style="display:inline-block; padding:8px 16px; border:1px solid var(--border); border-radius:6px; color:var(--navy); text-decoration:none; font-size:0.9rem; transition:background 0.2s;">Compliance</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Further Reading -->
+  <section style="padding: 48px 0 0;">
+    <div class="container" style="max-width: 720px; margin: 0 auto;">
+      <h2 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 20px; text-align: center;">Further Reading</h2>
+      <a href="/tally-asset-integration-guide" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Tally Asset Integration — From PO to Asset Master</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">How import duties flow from the Bill of Entry through to the Tally Fixed Assets debit.</p>
+      </a>
+      <a href="/asset-write-off-scrap-disposal-guide" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">Asset Write-Off, Scrap and Disposal</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">Where normal-loss write-offs and damaged-stock losses settle in the accounting flow.</p>
+      </a>
+      <a href="/gst-itc-reversed-vendor-gstin" style="display:block; padding:16px 20px; border:1px solid var(--border); border-radius:8px; text-decoration:none; color:inherit; margin-bottom:12px;">
+        <strong style="color:var(--navy); font-size:0.95rem;">GST ITC Reversed Due to Vendor GSTIN Change</strong>
+        <p style="color:var(--text-muted); font-size:0.85rem; margin:4px 0 0; line-height:1.5;">How per-line ITC posture protects credit on imports when domestic vendor reconciliation fails.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="contact" style="padding: 64px 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Assess How This Applies to Your Organisation</h2>
+      <p class="section-sub">Share a brief overview of your import volumes and the customs duty heads typical to your trade, and we will evaluate how the Bill-of-Entry-sourced accounting flow may apply to your setup.</p>
+      <div style="margin-top: 32px;">
+        <a href="/#contact" class="btn btn-lg">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <p>Procurement &amp; asset management — delivered as a professional service.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h3>Services</h3>
+          <a href="/procurement">Procurement</a>
+          <a href="/asset-management">Asset Management</a>
+          <a href="/tally-integration">Tally Integration</a>
+          <a href="/vendor-management">Vendor Management</a>
+          <a href="/advisory">Advisory</a>
+        </div>
+        <div class="footer-col">
+          <h3>More</h3>
+          <a href="/invoice-matching">Invoice Matching</a>
+          <a href="/data-migration">Data Migration</a>
+          <a href="/expense-register">Expense Register</a>
+          <a href="/fixed-asset-register">Fixed Asset Register</a>
+          <a href="/purchase-order-approval">Purchase Order Approval</a>
+          <a href="/grn-goods-receipt">Goods Receipt</a>
+          <a href="/vendor-debit-note">Vendor Debit Notes</a>
+          <a href="/asset-tagging-verification">Asset Tagging</a>
+          <a href="/import-accounting">Import Accounting</a>
+          <a href="/education-procurement">Education</a>
+          <a href="/compliance">Compliance</a>
+          <a href="/reports">Reports</a>
+          <a href="/how-it-works">How We Work</a>
+          <a href="/demo">Demo</a>
+          <a href="/guides">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="https://procuretrail.oparc.in" target="_blank" rel="noopener">Client Login</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:0; left:0; right:0;
+    background:#1a1a2e; color:#fff; padding:16px 24px; z-index:9999;
+    align-items:center; justify-content:space-between; font-size:14px;">
+    <span id="cookie-text"></span>
+    <div>
+      <button id="cookie-accept" style="background:#4CAF50; color:#fff; border:none;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:12px;">Accept</button>
+      <button id="cookie-decline" style="background:transparent; color:#ccc; border:1px solid #ccc;
+        padding:8px 20px; border-radius:4px; cursor:pointer; margin-left:8px; display:none;">Decline</button>
+    </div>
+  </div>
+
+  <script src="cookie-consent.js"></script>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/919845810385" target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style="display:block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</body>
+</html>
